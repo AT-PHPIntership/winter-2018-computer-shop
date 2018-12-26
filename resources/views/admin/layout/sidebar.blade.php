@@ -9,18 +9,18 @@
   </div>
   <!-- Sidebar Navidation Menus-->
   <ul class="list-unstyled">
-    <li><a href="/admin/home"><i class="fa fa-home"></i>Home</a></li>
-    <li><a href="/admin"><i class="fa fa-users"></i>User Management</a></li>
-    <li><a href="{{ route('role.index') }}"><i class="fa fa-universal-access"></i>Role Management</a></li>
-    <li><a href="login.html"> <i class="fa fa-align-justify"></i>Categories Management</a></li>
-    <li><a href="login.html"> <i class="fa fa-industry"></i>Products Management</a></li>
-    <li><a href="#exampledropdownDropdown" aria-expanded="false" data-toggle="collapse"><i class="fa fa-image"></i>Images Management</a>
+    <li><a href="/admin/home"><i class="fa fa-home"></i>@lang('master.sidebar.home')</a></li>
+    <li><a href="/admin"><i class="fa fa-users"></i>@lang('master.sidebar.user')</a></li>
+    <li><a href="{{ route('role.index') }}"><i class="fa fa-universal-access"></i>@lang('master.sidebar.role')</a></li>
+    <li><a href="login.html"> <i class="fa fa-align-justify"></i>@lang('master.sidebar.category')</a></li>
+    <li><a href="login.html"> <i class="fa fa-industry"></i>@lang('master.sidebar.product')</a></li>
+    <li><a href="#exampledropdownDropdown" aria-expanded="false" data-toggle="collapse"><i class="fa fa-image"></i>@lang('master.sidebar.image')</a>
       <ul id="exampledropdownDropdown" class="collapse list-unstyled ">
-        <li><a href="#">Categories</a></li>
-        <li><a href="#">Products</a></li>
+        <li><a href="#">@lang('master.sidebar.img_category')</a></li>
+        <li><a href="#">@lang('master.sidebar.img_product')</a></li>
       </ul>
     </li>
-    <li><a href="login.html"><i class="fa fa-comments"></i>Comments Management</a></li>
-    <li><a href="login.html"><i class="fa fa-shopping-cart"></i>Orders Management</a></li>
+    <li><a href="login.html"><i class="fa fa-comments"></i>@lang('master.sidebar.comment')</a></li>
+    <li><a href="login.html"><i class="fa fa-shopping-cart"></i>@lang('master.sidebar.order')</a></li>
   </ul>
 </nav>
