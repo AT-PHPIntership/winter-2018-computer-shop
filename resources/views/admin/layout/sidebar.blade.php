@@ -11,7 +11,7 @@
   <ul class="list-unstyled">
     <li><a href="/admin/home"><i class="fa fa-home"></i>Home</a></li>
     <li><a href="/admin"><i class="fa fa-users"></i>User Management</a></li>
-    <li><a href="/admin"><i class="fa fa-universal-access"></i>Role Management</a></li>
+    <li><a href="{{ route('role.create') }}"><i class="fa fa-universal-access"></i>Role Management</a></li>
     <li><a href="login.html"> <i class="fa fa-align-justify"></i>Categories Management</a></li>
     <li><a href="login.html"> <i class="fa fa-industry"></i>Products Management</a></li>
     <li><a href="#exampledropdownDropdown" aria-expanded="false" data-toggle="collapse"><i class="fa fa-image"></i>Images Management</a>
