@@ -15,8 +15,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::group(['prefix' => 'admin'], function(){
-    Route::get('/home', 'AdminController@home');
+    Route::get('/home', 'AdminController@home')->name('admin.home');
     Route::group(['prefix' => 'role'], function(){
         Route::get('/create', 'RoleController@create')->name('role.create');
+    });
+    Route::group(['prefix' => 'users'], function(){
+        Route::get('/', 'UserController@index')->name('users.index');
     });
 });

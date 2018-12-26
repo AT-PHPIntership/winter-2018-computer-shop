@@ -30,6 +30,21 @@ return [
         'comment' => 'Comments Management',
         'order' => 'Orders Management',
     ],
+    'content' => [
+        'action' => [
+            'add' => 'Add New :attribute',
+            'detail' => 'View Details',
+            'edit' => 'Edit :attribute',
+            'delete' => 'Delete :attribute',
+        ],
+        'table' => [
+            'email' => 'Email',
+            'action' => 'Actions',
+            'role' => 'Role',
+            'id' => '#',
+            'active' => 'Actived',
+        ],
+    ],
     'footer' => [
         'design' => 'Design by',
         'year' => '2017-2019',
