@@ -3,10 +3,10 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-sm-6">
-        <p>Computer Shop &copy; 2017-2019</p>
+        <p>@lang('master.header.title') &copy; @lang('master.footer.year')</p>
       </div>
       <div class="col-sm-6 text-right">
-        <p>Design by <a href="https://bootstrapious.com/admin-templates" class="external">Bootstrapious</a></p>
+        <p>@lang('master.footer.design') <a href="https://bootstrapious.com/admin-templates" class="external">@lang('master.footer.author')</a></p>
         <!-- Please do not remove the backlink to us unless you support further theme's development at https://bootstrapious.com/donate. It is part of the license conditions. Thank you for understanding :)-->
       </div>
     </div>
