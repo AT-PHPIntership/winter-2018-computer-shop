@@ -17,6 +17,6 @@ Route::get('/', function () {
 Route::group(['prefix' => 'admin'], function(){
     Route::get('/home', 'AdminController@home');
     Route::group(['prefix' => 'role'], function(){
-    	Route::get('/create', 'RoleController@create')->name('role.create');
+        Route::get('/create', 'RoleController@create')->name('role.create');
     });
 });

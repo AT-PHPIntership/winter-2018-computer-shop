@@ -1,10 +1,10 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Role extends Model
+class UserProfile extends Model
 {
     /**
      * The attributes that are mass assignable.
@@ -12,6 +12,6 @@ class Role extends Model
      * @var array
      */
     protected $fillable = [
-        'name'
+        'name', 'address', 'phone', 'avatar'
     ];
 }
