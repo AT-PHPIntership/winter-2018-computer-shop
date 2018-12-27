@@ -2,21 +2,21 @@
 @section('content')       
   <div class="col-lg-12">
     <div class="card">
-      <div class="card-close">
-        <div class="dropdown">
-          <button type="button" id="closeCard2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-ellipsis-v"></i></button>
-          <div aria-labelledby="closeCard2" class="dropdown-menu dropdown-menu-right has-shadow"><a href="#" class="dropdown-item remove"> <i class="fa fa-times"></i>Close</a><a href="#" class="dropdown-item edit"> <i class="fa fa-gear"></i>Edit</a></div>
-        </div>
-      </div>
       <div class="card-header d-flex align-items-center">
         <h3 class="h4">Role Form</h3>
       </div>
       <div class="card-body">
-        <form class="form-horizontal">
+        <form class="form-horizontal" method="POST" action="{{ route('role.store') }}">
+          @csrf
           <div class="form-group row">
             <label class="col-sm-3 form-control-label">Role Name</label>
             <div class="col-sm-9">
-              <input id="inputHorizontalWarning" type="text" placeholder="Role Name" class="form-control form-control-warning">
+              <input id="inputHorizontalWarning" type="text" name="name" placeholder="Role Name" class="form-control">
+              @if ($errors->has('name'))
+                <span class="help-block col-sm-12">
+                    <strong style='color:red' class="col-xs-12 col-sm-12">{{ $errors->first('name') }}</strong>
+                </span>
+              @endif
             </div>
           </div>
           <div class="form-group row">       

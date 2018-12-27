@@ -34,5 +34,5 @@ return [
         'design' => 'Design by',
         'year' => '2017-2019',
         'author' => 'Bootstrapious',
-    ]
+    ],
 ];
