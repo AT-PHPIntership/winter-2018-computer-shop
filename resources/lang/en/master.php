@@ -55,6 +55,10 @@ return [
            'address' => 'Address',
            'phone' => 'Phone',
            'avatar' => 'Avatar',
+       ],
+       'message' => [
+            'create' =>'Created a :attribute successfuly',
        ]
-   ],
+    ]
+
 ];

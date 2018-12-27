@@ -6,7 +6,7 @@
    </div>
 </header>
 <!-- Breadcrumb-->
-<div class="breadcrumb-holder container-fluid">
+<div  class="breadcrumb-holder container-fluid">
    <ul class="breadcrumb">
        <li class="breadcrumb-item"><a href="{{route('admin.home')}}">@lang('master.sidebar.home')</a></li>
        <li class="breadcrumb-item active">@lang('master.sidebar.role')</li>
@@ -26,7 +26,9 @@
            <div class="col-lg-12">
                <div class="card">
                    <div class="card-header d-flex align-items-center">
-                       <button type="button" class="btn btn-primary"><a href="{{route('role.create')}}" style="text-decoration:none; color:#fff ">@lang('master.content.action.add', ['attribute' => 'Role'])</a></button>
+                       <a href="{{route('role.create')}}">
+                          <button type="button" class="btn btn-primary">@lang('master.content.action.add', ['attribute' => 'Role'])</button>
+                        </a>
                    </div>
                    <div class="card-body">
                        <div class="table-responsive">
