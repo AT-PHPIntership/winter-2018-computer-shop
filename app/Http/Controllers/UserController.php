@@ -15,4 +15,13 @@ class UserController extends Controller
     {
         return view('admin.users.index');
     }
+    /**
+     * Display a form to create new user
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        return view('admin.users.create');
+    }
 }

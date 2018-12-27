@@ -44,6 +44,13 @@ return [
             'id' => '#',
             'active' => 'Actived',
         ],
+        'form' => [
+            'password' => 'Password',
+            'name' => 'Name',
+            'address' => 'Address',
+            'phone' => 'Phone',
+            'avatar' => 'Avatar',
+        ]
     ],
     'footer' => [
         'design' => 'Design by',

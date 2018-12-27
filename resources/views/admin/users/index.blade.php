@@ -8,7 +8,7 @@
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-header d-flex align-items-center">
-                        <button type="button" class="btn btn-primary">@lang('master.content.action.add', ['attribute' => 'User'])</button>
+                        <button type="button" class="btn btn-primary"><a href="{{route('users.create')}}" style="text-decoration:none; color:#fff ">@lang('master.content.action.add', ['attribute' => 'User'])</a></button>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">   

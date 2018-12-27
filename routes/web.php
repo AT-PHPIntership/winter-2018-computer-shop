@@ -21,5 +21,6 @@ Route::group(['prefix' => 'admin'], function(){
     });
     Route::group(['prefix' => 'users'], function(){
         Route::get('/', 'UserController@index')->name('users.index');
+        Route::get('create', 'UserController@create')->name('users.create');
     });
 });
