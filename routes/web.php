@@ -15,7 +15,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::group(['prefix' => 'admin'], function(){
-    Route::get('/home', 'AdminController@home');
+    Route::get('/home', 'AdminController@home')->name('admin.home');
   	Route::get('role/index', 'RoleController@index')->name('role.index');
     Route::get('role/create', 'RoleController@create')->name('role.create');
   	Route::post('role/', 'RoleController@store')->name('role.store');
