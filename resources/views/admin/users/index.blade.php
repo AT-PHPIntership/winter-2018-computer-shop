@@ -1,7 +1,7 @@
 @extends('admin.layout.master')
 @section('content')
 <!-- Page Header-->
-@include('admin.partials.header', ['title' => "Users Management"])
+@include('admin.partials.header', ['title' => trans('master.sidebar.user')])
 <section class="tables">  
     <div class="container-fluid">
         <div class="row">

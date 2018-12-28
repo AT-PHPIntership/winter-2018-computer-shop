@@ -49,5 +49,34 @@ return [
         'design' => 'Design by',
         'year' => '2017-2019',
         'author' => 'Bootstrapious',
+    ],
+    'content' => [
+       'action' => [
+           'add' => 'Add New :attribute',
+           'detail' => 'View Details',
+           'edit' => 'Edit :attribute',
+           'delete' => 'Delete :attribute',
+       ],
+       'table' => [
+           'email' => 'Email',
+           'action' => 'Actions',
+           'role' => 'Role',
+           'id' => '#',
+           'active' => 'Actived',
+       ],
+       'form' => [
+           'password' => 'Password',
+           'name' => 'Name',
+           'address' => 'Address',
+           'phone' => 'Phone',
+           'avatar' => 'Avatar',
+       ],
+       'message' => [
+            'create' =>'Created a :attribute successfuly',
+       ],
+       'button' => [
+            'create' =>'Create',
+       ]
     ]
+
 ];

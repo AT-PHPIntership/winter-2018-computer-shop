@@ -7,7 +7,6 @@
       </div>
       <div class="col-sm-6 text-right">
         <p>@lang('master.footer.design') <a href="https://bootstrapious.com/admin-templates" class="external">@lang('master.footer.author')</a></p>
-        <!-- Please do not remove the backlink to us unless you support further theme's development at https://bootstrapious.com/donate. It is part of the license conditions. Thank you for understanding :)-->
       </div>
     </div>
   </div>
