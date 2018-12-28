@@ -25,9 +25,9 @@ class RoleService
      *
      * @return object [object]
      */
-    public function index()
-    {
-        $roles = Role::paginate(5);
-        return $roles;
-    }
+    // public function index()
+    // {
+    //     $roles = Role::paginate(5);
+    //     return $roles;
+    // }
 }
