@@ -18,7 +18,7 @@
     <div class="col-lg-12">
       <div class="card">
         <div class="card-body">
-          <form class="form-horizontal" method="POST" action="{{ route('role.store') }}">
+          <form class="form-horizontal" method="POST" action="{{ route('roles.store') }}">
             @csrf
             <div class="form-group row">
               <label class="col-sm-3 form-control-label">@lang('master.content.form.name')</label>
@@ -33,7 +33,7 @@
             </div>
             <div class="form-group row">       
               <div class="col-sm-9 offset-sm-3">
-                <input type="submit" value="Create" class="btn btn-primary">
+                <input type="submit" value="@lang('master.content.button.create')" class="btn btn-primary">
               </div>
             </div>
           </form>

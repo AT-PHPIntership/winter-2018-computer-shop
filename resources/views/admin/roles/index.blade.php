@@ -26,7 +26,7 @@
            <div class="col-lg-12">
                <div class="card">
                    <div class="card-header d-flex align-items-center">
-                       <a href="{{route('role.create')}}">
+                       <a href="{{route('roles.create')}}">
                           <button type="button" class="btn btn-primary">@lang('master.content.action.add', ['attribute' => 'Role'])</button>
                         </a>
                    </div>
@@ -45,10 +45,10 @@
                <th scope="row">1</th>
                <td>Admin</td>
                <td>
-                 <a href="{{route('role.create')}}" class="btn btn-sm btn-warning">
+                 <a href="{{route('roles.create')}}" class="btn btn-sm btn-warning">
                  @lang('master.content.action.edit', ['attribute' => 'Role'])
                  </a>
-                 <a href="{{route('role.create')}}" class="btn btn-sm btn-danger">
+                 <a href="{{route('roles.create')}}" class="btn btn-sm btn-danger">
                  @lang('master.content.action.delete', ['attribute' => 'Role'])
                  </a>
                </td>
