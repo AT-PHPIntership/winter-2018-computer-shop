@@ -42,41 +42,30 @@ return [
             'action' => 'Actions',
             'role' => 'Role',
             'id' => '#',
-            'active' => 'Actived',
         ],
+        'form' => [
+            'password' => 'Password',
+            'confirm_pw' => 'Confirm Password',
+            'name' => 'Name',
+            'address' => 'Address',
+            'phone' => 'Phone',
+            'avatar' => 'Avatar',
+        ],
+        'message' => [
+            'create' => 'Created a :attribute successfully',
+            'update' => 'Updated the :attribute successfully',
+            'delete' => 'Deleted the :attribute successfully',
+            'error' => 'The :attribute happens',
+        ],
+        'button' => [
+            'create' => 'Create',
+            'update' => 'Update',
+            'cancel' => 'Cancel',
+        ]
     ],
     'footer' => [
         'design' => 'Design by',
         'year' => '2017-2019',
         'author' => 'Bootstrapious',
-    ],
-    'content' => [
-       'action' => [
-           'add' => 'Add New :attribute',
-           'detail' => 'View Details',
-           'edit' => 'Edit :attribute',
-           'delete' => 'Delete :attribute',
-       ],
-       'table' => [
-           'email' => 'Email',
-           'action' => 'Actions',
-           'role' => 'Role',
-           'id' => '#',
-           'active' => 'Actived',
-       ],
-       'form' => [
-           'password' => 'Password',
-           'name' => 'Name',
-           'address' => 'Address',
-           'phone' => 'Phone',
-           'avatar' => 'Avatar',
-       ],
-       'message' => [
-            'create' =>'Created a :attribute successfuly',
-       ],
-       'button' => [
-            'create' =>'Create',
-       ]
     ]
-
 ];
