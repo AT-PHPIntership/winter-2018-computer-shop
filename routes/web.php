@@ -15,5 +15,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::group(['prefix' => 'admin'], function(){
-    Route::get('/home', 'AdminController@home');
+    Route::get('/home', 'AdminController@home')->name('admin.home');
+    Route::resource('roles', 'RoleController');
 });
