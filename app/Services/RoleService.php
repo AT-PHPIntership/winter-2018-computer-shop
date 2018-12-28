@@ -19,4 +19,15 @@ class RoleService
             $request->all()
         );
     }
+
+    /**
+     * Get data form roles table return role index page
+     *
+     * @return object [object]
+     */
+    public function index()
+    {
+        $roles = Role::paginate(5);
+        return $roles;
+    }
 }
