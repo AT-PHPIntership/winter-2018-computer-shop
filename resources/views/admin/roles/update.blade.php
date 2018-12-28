@@ -18,7 +18,7 @@
     <div class="col-lg-12">
       <div class="card">
         <div class="card-body">
-          <form class="form-horizontal" method="POST" action="{{ route('roles.store') }}">
+          <form class="form-horizontal" method="POST" action="{{ route('role.update') }}">
             @csrf
             <div class="form-group row">
               <label class="col-sm-3 form-control-label">@lang('master.content.form.name')</label>
