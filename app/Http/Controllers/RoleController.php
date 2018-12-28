@@ -61,6 +61,33 @@ class RoleController extends Controller
     public function store(RoleRequest $request)
     {
         $this->roleService->create($request);
-        return redirect()->route('role.index')->with('message', Lang::get('master.content.message.create', ['attribute' => 'role']));
+        return redirect()->route('roles.index')->with('message', Lang::get('master.content.message.create', ['attribute' => 'role']));
+    }
+
+    /**
+     * Show the form for editing the specified resource
+     *
+     * @param [int] $id [id role]
+     *
+     * @return [view]     [update page]
+     */
+    public function edit($id)
+    {
+        $role = $this->roleService->edit($id);
+        return view('admin.roles.update', compact('role'));
+    }
+
+    /**
+     * Update the specified resource in storage
+     *
+     * @param [int]         $id      [id role
+     * @param [RoleRequest] $request [object]
+     *
+     * @return [view]               [role index page]
+     */
+    public function update($id, RoleRequest $request)
+    {
+        $this->roleService->update($id, $request);
+        return redirect()->route('roles.index')->with('message', Lang::get('master.content.message.update', ['attribute' => 'role']));
     }
 }
