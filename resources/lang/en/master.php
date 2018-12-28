@@ -42,14 +42,25 @@ return [
             'action' => 'Actions',
             'role' => 'Role',
             'id' => '#',
-            'active' => 'Actived',
         ],
         'form' => [
             'password' => 'Password',
+            'confirm_pw' => 'Confirm Password',
             'name' => 'Name',
             'address' => 'Address',
             'phone' => 'Phone',
             'avatar' => 'Avatar',
+        ],
+        'message' => [
+            'create' => 'Created a :attribute successfully',
+            'update' => 'Updated the :attribute successfully',
+            'delete' => 'Deleted the :attribute successfully',
+            'error' => 'The :attribute happens',
+        ],
+        'button' => [
+            'create' => 'Create',
+            'update' => 'Update',
+            'cancel' => 'Cancel',
         ]
     ],
     'footer' => [

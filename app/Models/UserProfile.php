@@ -12,6 +12,17 @@ class UserProfile extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'address', 'phone', 'avatar'
+        'address', 'phone', 'avatar', 'user_id'
     ];
+    /**
+     * The function display relationship between userprofile and user
+     *
+     * @var array
+     *
+     * @return \App\Models\User
+     */
+    public function users()
+    {
+        return $this->belongsTo('App\Models\User');
+    }
 }
