@@ -16,12 +16,10 @@ Route::get('/', function () {
 });
 Route::group(['prefix' => 'admin'], function(){
     Route::get('/home', 'AdminController@home')->name('admin.home');
-    Route::group(['prefix' => 'role'], function(){
-        Route::get('/create', 'RoleController@create')->name('role.create');
-    });
     Route::group(['prefix' => 'users'], function(){
         Route::get('/', 'UserController@index')->name('users.index');
         Route::get('create', 'UserController@create')->name('users.create');
         Route::post('/', 'UserController@store')->name('users.store');
     });
+    Route::resource('roles', 'RoleController');
 });
