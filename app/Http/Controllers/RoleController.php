@@ -32,6 +32,16 @@ class RoleController extends Controller
     }
 
     /**
+     * The function return role index of admin page
+     *
+     * @return void
+     */
+    public function show()
+    {
+        return 0;
+    }
+
+    /**
      * The function return role create of admin page
      *
      * @return void
@@ -51,7 +61,6 @@ class RoleController extends Controller
     public function store(RoleRequest $request)
     {
         $this->roleService->create($request);
-
         return redirect()->route('role.index')->with('message', Lang::get('master.content.message.create', ['attribute' => 'role']));
     }
 }
