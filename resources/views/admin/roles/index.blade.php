@@ -32,30 +32,37 @@
                    </div>
                    <div class="card-body">
                        <div class="table-responsive">
-         <table class="table table-striped table-hover">
-           <thead>
-             <tr>
-               <th>@lang('master.content.table.id')</th>
-               <th>@lang('master.content.form.name')</th>
-               <th>@lang('master.content.table.action')</th>
-             </tr>
-           </thead>
-           <tbody>
-             <tr>
-               <th scope="row">1</th>
-               <td>Admin</td>
-               <td>
-                 <a href="{{route('roles.create')}}" class="btn btn-sm btn-warning">
-                 @lang('master.content.action.edit', ['attribute' => 'Role'])
-                 </a>
-                 <a href="{{route('roles.create')}}" class="btn btn-sm btn-danger">
-                 @lang('master.content.action.delete', ['attribute' => 'Role'])
-                 </a>
-               </td>
-             </tr>
-           </tbody>
-         </table>
+               <table class="table table-striped table-hover">
+                 <thead>
+                   <tr>
+                     <th>@lang('master.content.table.id')</th>
+                     <th>@lang('master.content.form.name')</th>
+                     <th>@lang('master.content.table.action')</th>
+                   </tr>
+                 </thead>
+                 <tbody>
+                  @foreach($roles as $role)
+                  <tr>
+                     <th scope="row">{{ $role->id }}</th>
+                     <td>{{ $role->name }}</td>
+                     <td>
+                       <a href="" class="btn btn-sm btn-warning">
+                       @lang('master.content.action.edit', ['attribute' => 'Role'])
+                       </a>
+                       <a href="" class="btn btn-sm btn-danger">
+                       @lang('master.content.action.delete', ['attribute' => 'Role'])
+                       </a>
+                     </td>
+                   </tr>
+                   @endforeach
+                 </tbody>
+               </table>
              </div>
+             <div class="row">
+                <div class="col-md-12">
+                {{$roles->links()}}
+                </div>
+              </div>
            </div>
          </div>
         </div>
