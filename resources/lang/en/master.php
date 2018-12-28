@@ -58,6 +58,9 @@ return [
        ],
        'message' => [
             'create' =>'Created a :attribute successfuly',
+       ],
+       'button' => [
+            'create' =>'Create',
        ]
     ]
 
