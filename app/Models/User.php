@@ -35,7 +35,7 @@ class User extends Authenticatable
      */
     public function roles()
     {
-        return $this->hasOne('App\Models\Role');
+        return $this->hasOne('App\Models\Role', 'id', 'role_id');
     }
     /**
      * The function display relationship between userprofile and user

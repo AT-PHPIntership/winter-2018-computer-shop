@@ -27,7 +27,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        return view('admin.users.index');
+        return view('admin.users.index', ['users' => $this->userService->getAllData()]);
     }
     /**
      * Display a form to create new user

@@ -3,10 +3,21 @@
 namespace App\Services;
 
 use App\Models\User;
+use App\Models\Role;
 use App\Models\UserProfile;
 
 class UserService
 {
+    /**
+     * Get data form users table return user index page
+     *
+     * @return object [object]
+     */
+    public function getAllData()
+    {
+        $users = User::orderBy('id', \Config::get('define.user.order_by_desc'))->paginate(\Config::get('define.user.limit_rows'));
+        return $users;
+    }
    /**
     * Handle add user to database
     *
