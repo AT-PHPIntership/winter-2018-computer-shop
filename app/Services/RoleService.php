@@ -49,7 +49,8 @@ class RoleService
     /**
      * Delete Role
      *
-     * @param  int $id id role
+     * @param int $id id role
+     *
      * @return void     Delete Role
      */
     public function delete($id)

@@ -84,7 +84,7 @@ class RoleController extends Controller
     /**
      * Delete Role
      *
-     * @param  int $id Id Role
+     * @param int $id Id Role
      *
      * @return void     Delete Role
      */
@@ -104,5 +104,4 @@ class RoleController extends Controller
     {
         return 0;
     }
-
 }
