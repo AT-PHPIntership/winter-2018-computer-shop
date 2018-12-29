@@ -97,14 +97,16 @@ class PromotionController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Delete promotion
      *
-     * @param \App\Models\Promotion $promotion asdf
+     * @param [int] $id [Id promotion]
      *
-     * @return \Illuminate\Http\Response
+     * @return void
      */
-    // public function destroy(Promotion $promotion)
-    // {
-    //     //
-    // }
+    public function destroy($id)
+    {
+        $this->promotionService->delete($id);
+        return redirect()->route('promotions.index')->with('message', Lang::get('master.content.message.delete', [
+            'attribute' => 'promotion']));
+    }
 }

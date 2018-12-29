@@ -64,4 +64,16 @@ class PromotionService
             'end_at' => $request->end_at
         ]);
     }
+
+    /**
+     * Delete promotion
+     *
+     * @param [int] $id Id Promotion
+     *
+     * @return void
+     */
+    public function delete($id)
+    {
+        Promotion::where('id', $id)->delete();
+    }
 }
