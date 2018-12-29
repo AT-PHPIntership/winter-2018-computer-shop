@@ -32,16 +32,6 @@ class RoleController extends Controller
     }
 
     /**
-     * The function return role index of admin page
-     *
-     * @return void
-     */
-    // public function show()
-    // {
-    //     return 0;
-    // }
-
-    /**
      * The function return role create of admin page
      *
      * @return void
