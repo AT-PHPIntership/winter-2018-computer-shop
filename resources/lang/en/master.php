@@ -29,6 +29,7 @@ return [
         'img_product' => 'Products',
         'comment' => 'Comments Management',
         'order' => 'Orders Management',
+        'promotion' => 'Promotions Management',
     ],
     'footer' => [
         'design' => 'Design by',
@@ -48,6 +49,9 @@ return [
            'role' => 'Role',
            'id' => '#',
            'active' => 'Actived',
+           'percent' => 'Percent',
+           'start_at' => 'Start At',
+           'end_at' => 'End At',
        ],
        'form' => [
            'password' => 'Password',
