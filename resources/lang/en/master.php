@@ -36,6 +36,7 @@ return [
             'detail' => 'View Details',
             'edit' => 'Edit :attribute',
             'delete' => 'Delete :attribute',
+            'show' => 'Details about :attribute',
         ],
         'table' => [
             'email' => 'Email',
@@ -56,6 +57,7 @@ return [
             'update' => 'Updated the :attribute successfully',
             'delete' => 'Deleted the :attribute successfully',
             'error' => 'The :attribute happens',
+            'img' => "doesn't have any avatar",
         ],
         'button' => [
             'create' => 'Create',

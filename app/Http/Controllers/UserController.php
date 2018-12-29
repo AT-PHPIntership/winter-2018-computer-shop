@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Lang;
 use App\Services\UserService;
 use App\Http\Requests\UserRequest;
+use App\Models\User;
 
 class UserController extends Controller
 {
@@ -49,5 +50,16 @@ class UserController extends Controller
     {
         $this->userService->create($request);
         return redirect()->route('users.index')->with('message', Lang::get('master.content.message.create', ['attribute' => 'user']));
+    }
+    /**
+     * View detail the user
+     *
+     * @param object $user [binding user]
+     *
+     * @return View user show
+     */
+    public function show(User $user)
+    {
+        return view('admin.users.show', compact('user'));
     }
 }
