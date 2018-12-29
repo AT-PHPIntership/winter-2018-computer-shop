@@ -45,4 +45,15 @@ class RoleService
     {
         Role::where('id', $id)->update(['name' => $request->name]);
     }
+
+    /**
+     * Delete Role
+     *
+     * @param  int $id id role
+     * @return void     Delete Role
+     */
+    public function delete($id)
+    {
+        Role::where('id', $id)->delete();
+    }
 }

@@ -80,4 +80,29 @@ class RoleController extends Controller
         $this->roleService->update($id, $request);
         return redirect()->route('roles.index')->with('message', Lang::get('master.content.message.update', ['attribute' => 'role']));
     }
+
+    /**
+     * Delete Role
+     *
+     * @param  int $id Id Role
+     *
+     * @return void     Delete Role
+     */
+    public function destroy($id)
+    {
+        $this->roleService->delete($id);
+        return redirect()->route('roles.index')->with('message', Lang::get('master.content.message.delete', ['attribute' => 'role']));
+    }
+
+
+    /**
+     * The function return role index of admin page
+     *
+     * @return void
+     */
+    public function show()
+    {
+        return 0;
+    }
+
 }
