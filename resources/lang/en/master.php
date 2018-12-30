@@ -30,6 +30,7 @@ return [
         'comment' => 'Comments Management',
         'order' => 'Orders Management',
         'promotion' => 'Promotions Management',
+        'code' => 'Codes Management',
     ],
     'footer' => [
         'design' => 'Design by',
@@ -52,6 +53,7 @@ return [
            'percent' => 'Percent',
            'start_at' => 'Start At',
            'end_at' => 'End At',
+           'amount' => 'Amount',
        ],
        'form' => [
            'password' => 'Password',
