@@ -55,8 +55,6 @@ class CodeController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param \App\Models\Code $code asdf
-     *
      * @return \Illuminate\Http\Response
      */
     public function show()
