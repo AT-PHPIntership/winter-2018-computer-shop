@@ -69,7 +69,7 @@
              </div>
              <div class="row">
                 <div class="col-md-12">
-                  
+                  {{ $codes->links() }}
                 </div>
               </div>
            </div>
