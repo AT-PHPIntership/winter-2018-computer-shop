@@ -51,12 +51,12 @@ class PromotionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function store(PromotionRequest $request)
-    {
-        $this->promotionService->create($request);
-        return redirect()->route('promotions.index')->with('message', Lang::get('master.content.message.create', [
-            'attribute' => 'promotion']));
-    }
+    // public function store(PromotionRequest $request)
+    // {
+    //     $this->promotionService->create($request);
+    //     return redirect()->route('promotions.index')->with('message', Lang::get('master.content.message.create', [
+    //         'attribute' => 'promotion']));
+    // }
 
     /**
      * Display the specified resource.
