@@ -66,28 +66,33 @@ class CodeController extends Controller
         //
     }
 
-    // *
-    //  * Show the form for editing the specified resource.
-    //  *
-    //  * @param  \App\Models\Code  $code
-    //  * @return \Illuminate\Http\Response
-     
-    // public function edit(Code $code)
-    // {
-    //     //
-    // }
+    /**
+     * Code edit view
+     *
+     * @param [int] $id [Id code]
+     *
+     * @return view
+     */
+    public function edit($id)
+    {
+        $code = $this->codeService->edit($id);
+        return view('admin.codes.update', compact('code'));
+    }
 
-    // /**
-    //  * Update the specified resource in storage.
-    //  *
-    //  * @param  \Illuminate\Http\Request  $request
-    //  * @param  \App\Models\Code  $code
-    //  * @return \Illuminate\Http\Response
-    //  */
-    // public function update(Request $request, Code $code)
-    // {
-    //     //
-    // }
+    /**
+     * Update code
+     *
+     * @param [imnt]      $id      [Id code]
+     * @param CodeRequest $request [Request from form]
+     *
+     * @return void
+     */
+    public function update($id, CodeRequest $request)
+    {
+        $this->codeService->update($id, $request);
+        return redirect()->route('codes.index')->with('message', Lang::get('master.content.message.update', [
+            'attribute' => 'code']));
+    }
 
     // /**
     //  * Remove the specified resource from storage.

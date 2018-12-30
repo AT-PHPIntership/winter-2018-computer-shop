@@ -33,4 +33,35 @@ class CodeService
             'end_at' => $request->end_at
         ]);
     }
+
+    /**
+     * Edit code
+     *
+     * @param [int] $id [Id code]
+     *
+     * @return object
+     */
+    public function edit($id)
+    {
+        $code = Code::where('id', $id)->first();
+        return $code;
+    }
+
+    /**
+     * Update code
+     *
+     * @param [int]  $id      [Id code]
+     * @param [type] $request [Request from form
+     *
+     * @return void
+     */
+    public function update($id, $request)
+    {
+        Code::where('id', $id)->update([
+            'name' => $request->name,
+            'amount' => $request->amount,
+            'start_at' => $request->start_at,
+            'end_at' => $request->end_at
+        ]);
+    }
 }
