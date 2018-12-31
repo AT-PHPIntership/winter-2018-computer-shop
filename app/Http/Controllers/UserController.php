@@ -62,4 +62,16 @@ class UserController extends Controller
     {
         return view('admin.users.show', compact('user'));
     }
+    /**
+     * Handle delete user to database
+     *
+     * @param object $user [request to delete the user]
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(User $user)
+    {
+        $this->userService->destroy($user);
+        return redirect()->route('users.index')->with('message', Lang::get('master.content.message.delete', ['attribute' => 'user']));
+    }
 }

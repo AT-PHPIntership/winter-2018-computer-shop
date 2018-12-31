@@ -58,4 +58,15 @@ class UserService
         }
         return null;
     }
+    /**
+    * Handle delete user out of database
+    *
+    * @param object $user [request delete a user]
+    *
+    * @return object [object]
+    */
+    public function destroy($user)
+    {
+        return $user->delete();
+    }
 }

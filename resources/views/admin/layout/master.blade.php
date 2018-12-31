@@ -45,5 +45,7 @@
     <script src="admin_asset/vendor/chart.js/Chart.min.js"></script>
        <!-- Main File-->
     <script src="admin_asset/js/front.js"></script>
+     <!----Custom file--->
+     <script src="admin_asset/js/custom.js"></script>
   </body>
 </html>
