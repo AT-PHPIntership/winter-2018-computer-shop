@@ -51,6 +51,7 @@ return [
             'address' => 'Address',
             'phone' => 'Phone',
             'avatar' => 'Avatar',
+            'parent' => 'Parent Category',
         ],
         'message' => [
             'create' => 'Created a :attribute successfully',
