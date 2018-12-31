@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\User;
 use App\Models\Role;
 use App\Models\UserProfile;
+use Illuminate\Support\Facades\Lang;
 
 class UserService
 {
@@ -52,10 +53,33 @@ class UserService
     public function handleUploadedImage($image)
     {
         if (!is_null($image)) {
-            $imageName = $image->getClientOriginalName();
+            $imageName = time() . '_' . $image->getClientOriginalName();
             $image->move('upload/avatar', $imageName);
             return $imageName;
-        }
+        } 
         return null;
+    }
+    /**
+    * Handle update user to database
+    *
+    * @param object $request request from form Add role
+    *
+    * @return void
+    */
+    public function update($request, $user)
+    {
+        try {
+            \DB::transaction(function () use ($request, $user) {
+             $user->profiles->update([
+                'address' => request('address'),
+                'phone' => request('phone'),
+                'avatar' => $this->handleUploadedImage($request->file('avatar'))
+             ]);
+            $user = $user->update($request->all());
+            });
+            } catch (\Exception $ex) {
+                \DB::rollback();
+                return redirect()->back()->with('warning', Lang::get('master.content.message.error', ['attribute' => $ex]));
+            }        
     }
 }

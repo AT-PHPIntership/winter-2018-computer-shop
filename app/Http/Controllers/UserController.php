@@ -62,4 +62,27 @@ class UserController extends Controller
     {
         return view('admin.users.show', compact('user'));
     }
+    /**
+     * Display a form to edit new user
+     *
+     * @param object $user [binding user]
+     * 
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(User $user)
+    {
+        return view('admin.users.edit', compact('user'));
+    }
+    /**
+     * Handle update user to database
+     *
+     * @param object $request [request to create a new user]
+     *
+     * @return user
+     */
+    public function update(UserRequest $request, User $user)
+    {
+        $this->userService->update($request, $user);
+        return redirect()->route('users.index')->with('message', Lang::get('master.content.message.update', ['attribute' => 'user']));
+    }
 }
