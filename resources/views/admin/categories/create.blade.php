@@ -32,7 +32,7 @@
                 </div>
               </div>
               <div class="form-group">    
-                <a href="{{route('users.index')}}" class="btn btn-danger">@lang('master.content.button.cancel')</a>
+                <a href="{{route('categories.index')}}" class="btn btn-danger">@lang('master.content.button.cancel')</a>
                 <input type="submit" value="@lang('master.content.button.create')" class="btn btn-primary">
               </div>
             </form>

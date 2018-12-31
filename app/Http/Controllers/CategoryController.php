@@ -19,7 +19,15 @@ class CategoryController extends Controller
     {
         $this->categoryService = $categoryService;
     }
-
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        return view('admin.categories.index', ['categories' => $this->categoryService->getAllData()]);
+    }
     /**
      * Show the form for creating a new resource.
      *
