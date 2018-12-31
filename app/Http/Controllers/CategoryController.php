@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\CategoryRequest;
 use App\Services\CategoryService;
+use App\Models\Category;
+use Illuminate\Support\Facades\Lang;
 
 class CategoryController extends Controller
 {
@@ -49,6 +51,15 @@ class CategoryController extends Controller
         $this->categoryService->create($request);
         return redirect()->route('categories.index')->with('message', Lang::get('master.content.message.create', ['attribute' => 'category']));
     }
-
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Category $category)
+    {
+        return view('admin.categories.show', ['categories' => $this->categoryService->getEachCategory($category)]);
+    }
     
 }
