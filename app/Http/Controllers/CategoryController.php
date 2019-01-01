@@ -61,5 +61,27 @@ class CategoryController extends Controller
     {
         return view('admin.categories.show', ['categories' => $this->categoryService->getEachCategory($category)]);
     }
-    
+    /**
+     * Display a form to edit category
+     *
+     * @param object $category [binding category]
+     * 
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(Category $category)
+    {
+        return view('admin.categories.edit', compact('category'));
+    }
+    /**
+     * Handle update category to database
+     *
+     * @param object $request [request to update the category]
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function update(CategoryRequest $request, Category $category)
+    {
+        $this->categoryService->update($request, $category);
+        return redirect()->route('categories.index')->with('message', Lang::get('master.content.message.update', ['attribute' => 'category']));
+    }
 }

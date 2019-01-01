@@ -35,4 +35,15 @@ class CategoryService
     {
          return $categories = Category::where('parent_id', $category->id)->orderBy('id', \Config::get('define.user.order_by_desc'))->paginate(\Config::get('define.user.limit_rows'));
     }
+    /**
+     * Handle update category to data
+     *
+     * @param object $request request from form add category
+     *
+     * @return void
+     */
+    public function update($request, $category)
+    {
+        return $category->update($request->all());
+    }
 }

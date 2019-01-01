@@ -64,6 +64,10 @@ return [
             'create' => 'Create',
             'update' => 'Update',
             'cancel' => 'Cancel',
+        ],
+        'select' => [
+            'choose' => 'Choose here',
+            'parent' => 'Become parent category',
         ]
     ],
     'footer' => [
