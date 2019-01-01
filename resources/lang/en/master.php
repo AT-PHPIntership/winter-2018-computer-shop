@@ -58,6 +58,7 @@ return [
             'update' => 'Updated the :attribute successfully',
             'delete' => 'Deleted the :attribute successfully',
             'error' => 'The :attribute happens',
+            'warning' => "You can't delete the category because it's has sub-category",
             'img' => "doesn't have any avatar",
         ],
         'button' => [

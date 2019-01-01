@@ -61,5 +61,15 @@ class CategoryController extends Controller
     {
         return view('admin.categories.show', ['categories' => $this->categoryService->getEachCategory($category)]);
     }
-    
+    /**
+     * Delete the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Category $category)
+    {
+        $this->categoryService->delete($category);
+        return redirect()->route('categories.index');
+    }
 }
