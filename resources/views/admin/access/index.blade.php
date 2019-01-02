@@ -52,10 +52,10 @@
                      <td>No</td>
                      @endif
                      <td>
-                       <a href="{{ route('roles.edit', $acces->id) }}" class="btn btn-sm btn-warning">
+                       <a href="{{ route('access.edit', $acces->id) }}" class="btn btn-sm btn-warning">
                        @lang('master.content.action.edit', ['attribute' => 'acces'])
                        </a>
-                       <form action="{{ route('roles.destroy', $acces->id) }}" method="POST" class="d-inline">
+                       <form action="{{ route('access.destroy', $acces->id) }}" method="POST" class="d-inline">
                           @csrf
                           @method('DELETE')
                           <input type="submit" value="@lang('master.content.action.delete', ['attribute' => 'Role'])" class="btn btn-sm btn-danger">

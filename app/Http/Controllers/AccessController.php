@@ -67,28 +67,33 @@ class AccessController extends Controller
         //
     }
 
-    // *
-    //  * Show the form for editing the specified resource.
-    //  *
-    //  * @param  \App\Models\Access  $access
-    //  * @return \Illuminate\Http\Response
-     
-    // public function edit(Access $access)
-    // {
-    //     //
-    // }
+    /**
+     * Show view edit
+     *
+     * @param [integer] $id [Id access]
+     *
+     * @return void
+     */
+    public function edit($id)
+    {
+        $acces = $this->accessService->edit($id);
+        return view('admin.access.update', compact('acces'));
+    }
 
-    // /**
-    //  * Update the specified resource in storage.
-    //  *
-    //  * @param  \Illuminate\Http\Request  $request
-    //  * @param  \App\Models\Access  $access
-    //  * @return \Illuminate\Http\Response
-    //  */
-    // public function update(Request $request, Access $access)
-    // {
-    //     //
-    // }
+    /**
+     * Update accessory
+     *
+     * @param [int]         $id      [Id accessory]
+     * @param AccessRequest $request [Request from form]
+     *
+     * @return void
+     */
+    public function update($id, AccessRequest $request)
+    {
+
+        $this->accessService->update($id, $request);
+        return redirect()->route('access.index')->with('message', Lang::get('master.content.message.update', ['attribute' => 'Accessory']));
+    }
 
     // /**
     //  * Remove the specified resource from storage.
