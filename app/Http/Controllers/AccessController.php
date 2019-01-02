@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Access;
 use Illuminate\Http\Request;
 use App\Services\AccessService;
+use App\Http\Requests\AccessRequest;
+use Illuminate\Support\Facades\Lang;
 
 class AccessController extends Controller
 {
@@ -32,26 +34,28 @@ class AccessController extends Controller
         return view('admin.access.index', compact('access'));
     }
 
-    // /**
-    //  * Show the form for creating a new resource.
-    //  *
-    //  * @return \Illuminate\Http\Response
-    //  */
-    // public function create()
-    // {
-    //     //
-    // }
+    /**
+     * Show page create
+     *
+     * @return void
+     */
+    public function create()
+    {
+        return view('admin.access.create');
+    }
 
-    // /**
-    //  * Store a newly created resource in storage.
-    //  *
-    //  * @param  \Illuminate\Http\Request  $request
-    //  * @return \Illuminate\Http\Response
-    //  */
-    // public function store(Request $request)
-    // {
-    //     //
-    // }
+    /**
+     * Create accessory
+     *
+     * @param AccessRequest $request [Request from form]
+     *
+     * @return void
+     */
+    public function store(AccessRequest $request)
+    {
+        $this->accessService->create($request);
+        return redirect()->route('access.index')->with('message', Lang::get('master.content.message.create', ['attribute' => 'Accessory']));
+    }
 
     /**
      * Display the specified resource.
