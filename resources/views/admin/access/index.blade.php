@@ -53,12 +53,12 @@
                      @endif
                      <td>
                        <a href="{{ route('access.edit', $acces->id) }}" class="btn btn-sm btn-warning">
-                       @lang('master.content.action.edit', ['attribute' => 'acces'])
+                       @lang('master.content.action.edit', ['attribute' => 'accessory'])
                        </a>
                        <form action="{{ route('access.destroy', $acces->id) }}" method="POST" class="d-inline">
                           @csrf
                           @method('DELETE')
-                          <input type="submit" value="@lang('master.content.action.delete', ['attribute' => 'Role'])" class="btn btn-sm btn-danger">
+                          <input type="submit" value="@lang('master.content.action.delete', ['attribute' => 'accessory'])" class="btn btn-sm btn-danger">
                         </form> 
                        </a>
                      </td>

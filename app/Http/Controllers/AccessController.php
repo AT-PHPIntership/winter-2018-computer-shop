@@ -95,14 +95,16 @@ class AccessController extends Controller
         return redirect()->route('access.index')->with('message', Lang::get('master.content.message.update', ['attribute' => 'Accessory']));
     }
 
-    // /**
-    //  * Remove the specified resource from storage.
-    //  *
-    //  * @param  \App\Models\Access  $access
-    //  * @return \Illuminate\Http\Response
-    //  */
-    // public function destroy(Access $access)
-    // {
-    //     //
-    // }
+    /**
+     * Delete accessory
+     *
+     * @param  [int] $id [Id accessory]
+     *
+     * @return void
+     */
+    public function destroy($id)
+    {
+        $this->accessService->delete($id);
+        return redirect()->route('access.index')->with('message', Lang::get('master.content.message.delete', ['attribute' => 'Accessory']));
+    }
 }

@@ -84,4 +84,10 @@ class AccessService
             ]);
         }
     }
+
+
+    public function delete($id)
+    {
+        Access::where('id', $id)->delete();
+    }
 }
