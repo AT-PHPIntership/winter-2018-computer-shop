@@ -31,6 +31,7 @@ return [
         'order' => 'Orders Management',
         'promotion' => 'Promotions Management',
         'code' => 'Codes Management',
+        'access' => 'Accessories Management',
     ],
     'footer' => [
         'design' => 'Design by',
@@ -54,6 +55,7 @@ return [
            'start_at' => 'Start At',
            'end_at' => 'End At',
            'amount' => 'Amount',
+           'parent_id' => 'Parent name',
        ],
        'form' => [
            'password' => 'Password',
