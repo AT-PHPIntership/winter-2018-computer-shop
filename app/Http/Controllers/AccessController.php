@@ -98,7 +98,7 @@ class AccessController extends Controller
     /**
      * Delete accessory
      *
-     * @param  [int] $id [Id accessory]
+     * @param [int] $id [Id accessory]
      *
      * @return void
      */

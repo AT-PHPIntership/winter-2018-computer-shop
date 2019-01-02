@@ -85,7 +85,13 @@ class AccessService
         }
     }
 
-
+    /**
+     * Delete accessory
+     *
+     * @param [int] $id [Id accessory]
+     *
+     * @return void
+     */
     public function delete($id)
     {
         Access::where('id', $id)->delete();
