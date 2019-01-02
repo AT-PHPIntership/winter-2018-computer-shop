@@ -21,13 +21,28 @@ class RoleService
     }
 
     /**
-     * Get data form roles table return role index page
+     * Get role have id = $id form roles table return role update page
      *
-     * @return object [object]
+     * @param [int] $id [id role]
+     *
+     * @return [object]     [description]
      */
-    // public function index()
-    // {
-    //     $roles = Role::paginate(5);
-    //     return $roles;
-    // }
+    public function edit($id)
+    {
+        $role = Role::where('id', $id)->first();
+        return $role;
+    }
+
+    /**
+     * Update role.
+     *
+     * @param int    $id      id role
+     * @param object $request request from form update page
+     *
+     * @return void
+     */
+    public function update($id, $request)
+    {
+        Role::where('id', $id)->update(['name' => $request->name]);
+    }
 }
