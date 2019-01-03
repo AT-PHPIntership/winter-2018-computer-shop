@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Role;
+use League\Flysystem\Exception;
 
 class RoleService
 {
@@ -43,7 +44,13 @@ class RoleService
      */
     public function update($id, $request)
     {
-        Role::where('id', $id)->update(['name' => $request->name]);
+        try {
+            $message = Role::where('id', $id)->update(['name' => $request->name]);
+            return $message;
+        } catch (Exception $e) {
+            return $message = $e->getMessage();
+        }
+        
     }
 
     /**
@@ -55,6 +62,11 @@ class RoleService
      */
     public function delete($id)
     {
-        Role::where('id', $id)->delete();
+        try {
+            $message = Role::where('id', $id)->delete();
+            return $message;
+        } catch (Exception $e) {
+            return $message = $e->getMessage();
+        }
     }
 }
