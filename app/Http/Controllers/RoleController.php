@@ -78,12 +78,11 @@ class RoleController extends Controller
     public function update($id, RoleRequest $request)
     {
         $message = $this->roleService->update($id, $request);
-        if($message === 1) {
+        if ($message === 1) {
             return redirect()->route('roles.index')->with('message', Lang::get('master.content.message.update', ['attribute' => 'role']));
         } else {
             return redirect()->route('roles.index')->with('message', Lang::get('master.content.message.error'));
         }
-        
     }
 
     /**
@@ -96,7 +95,7 @@ class RoleController extends Controller
     public function destroy($id)
     {
         $message = $this->roleService->delete($id);
-        if($message === 1) {
+        if ($message === 1) {
             return redirect()->route('roles.index')->with('message', Lang::get('master.content.message.delete', ['attribute' => 'role']));
         } else {
             return redirect()->route('roles.index')->with('message', Lang::get('master.content.message.error'));
