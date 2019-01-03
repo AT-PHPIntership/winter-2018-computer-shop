@@ -18,5 +18,7 @@ Route::group(['prefix' => 'admin'], function(){
     Route::get('/home', 'AdminController@home')->name('admin.home');
     Route::resource('users', 'UserController');
     Route::resource('roles', 'RoleController');
+    Route::get('categories/sub-category', 'CategoryController@getChildren');
     Route::resource('categories', 'CategoryController');
+    Route::resource('products', 'ProductController');
 }); 

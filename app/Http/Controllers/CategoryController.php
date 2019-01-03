@@ -43,7 +43,8 @@ class CategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param object $request [request store new category]
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(CategoryRequest $request)
@@ -54,28 +55,32 @@ class CategoryController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param object $category [binding model category]
+     *
      * @return \Illuminate\Http\Response
      */
     public function show(Category $category)
     {
         return view('admin.categories.show', ['categories' => $this->categoryService->getEachCategory($category)]);
     }
+
     /**
      * Display a form to edit category
      *
      * @param object $category [binding category]
-     * 
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit(Category $category)
     {
         return view('admin.categories.edit', compact('category'));
     }
+
     /**
      * Handle update category to database
      *
-     * @param object $request [request to update the category]
+     * @param object $request  [request to update the category]
+     * @param object $category [binding model category]
      *
      * @return \Illuminate\Http\Response
      */
@@ -83,5 +88,18 @@ class CategoryController extends Controller
     {
         $this->categoryService->update($request, $category);
         return redirect()->route('categories.index')->with('message', Lang::get('master.content.message.update', ['attribute' => 'category']));
+    }
+
+    /**
+     * Get children category from ajax request
+     *
+     * @param object $request [request to get children category]
+     *
+     * @return json()
+     */
+    public function getChildren(Request $request)
+    {
+        $response = $this->categoryService->getSubCategory($request->get('id'));
+        return response()->json($response);
     }
 }

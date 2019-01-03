@@ -43,6 +43,7 @@ return [
             'action' => 'Actions',
             'role' => 'Role',
             'id' => '#',
+            'product' => 'Product',
         ],
         'form' => [
             'password' => 'Password',
@@ -52,6 +53,10 @@ return [
             'phone' => 'Phone',
             'avatar' => 'Avatar',
             'parent' => 'Parent Category',
+            'category' => 'Category',
+            'description' => 'Description',
+            'price' => 'Price',
+            'quantity' => 'Quantity',
         ],
         'message' => [
             'create' => 'Created a :attribute successfully',
@@ -68,7 +73,7 @@ return [
         'select' => [
             'choose' => 'Choose here',
             'parent' => 'Become parent category',
-        ]
+        ],
     ],
     'footer' => [
         'design' => 'Design by',
