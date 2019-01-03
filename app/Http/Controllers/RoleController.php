@@ -77,7 +77,39 @@ class RoleController extends Controller
      */
     public function update($id, RoleRequest $request)
     {
-        $this->roleService->update($id, $request);
-        return redirect()->route('roles.index')->with('message', Lang::get('master.content.message.update', ['attribute' => 'role']));
+        $message = $this->roleService->update($id, $request);
+        if ($message === 1) {
+            return redirect()->route('roles.index')->with('message', Lang::get('master.content.message.update', ['attribute' => 'role']));
+        } else {
+            return redirect()->route('roles.index')->with('message', Lang::get('master.content.message.error'));
+        }
+    }
+
+    /**
+     * Delete Role
+     *
+     * @param int $id Id Role
+     *
+     * @return void     Delete Role
+     */
+    public function destroy($id)
+    {
+        $message = $this->roleService->delete($id);
+        if ($message === 1) {
+            return redirect()->route('roles.index')->with('message', Lang::get('master.content.message.delete', ['attribute' => 'role']));
+        } else {
+            return redirect()->route('roles.index')->with('message', Lang::get('master.content.message.error'));
+        }
+    }
+
+
+    /**
+     * The function return role index of admin page
+     *
+     * @return void
+     */
+    public function show()
+    {
+        return 0;
     }
 }
