@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Promotion;
+use League\Flysystem\Exception;
 
 class PromotionService
 {
@@ -13,7 +14,7 @@ class PromotionService
      */
     public function index()
     {
-        $promotions = Promotion::all();
+        $promotions = Promotion::paginate(config('define.numberPaginate'));
         return $promotions;
     }
 
@@ -57,11 +58,17 @@ class PromotionService
      */
     public function update($id, $request)
     {
-        Promotion::where('id', $id)->update([
-            'name' => $request->name,
-            'percent' => $request->percent,
-            'start_at' => $request->start_at,
-            'end_at' => $request->end_at
-        ]);
+        try {
+            $message = Promotion::where('id', $id)->update([
+                            'name' => $request->name,
+                            'percent' => $request->percent,
+                            'start_at' => $request->start_at,
+                            'end_at' => $request->end_at
+                        ]);
+            return $message;
+        } catch (Exception $e) {
+            return $message = $e->getMessage();
+        }
+        
     }
 }
