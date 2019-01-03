@@ -1,5 +1,12 @@
 <?php
 
 return [
-    'number_paginate' => '3'
+    'role' => [
+        'number_paginate' => '2'
+    ],
+
+    'promotion' => [
+        'number_paginate' => '3'
+    ]
+    
 ];
