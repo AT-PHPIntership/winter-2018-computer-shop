@@ -8,6 +8,16 @@ use League\Flysystem\Exception;
 class RoleService
 {
     /**
+     * Get list roles
+     *
+     * @return void
+     */
+    public function index()
+    {
+        $roles = Role::paginate(5);
+        return $roles;
+    }
+    /**
      * Handle add role to data
      *
      * @param object $request request from form Add role
