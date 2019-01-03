@@ -14,7 +14,7 @@ class RoleService
      */
     public function index()
     {
-        $roles = Role::paginate(5);
+        $roles = Role::paginate(config('define.numberPaginate'));
         return $roles;
     }
     /**
