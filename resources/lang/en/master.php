@@ -29,6 +29,7 @@ return [
         'img_product' => 'Products',
         'comment' => 'Comments Management',
         'order' => 'Orders Management',
+        'promotion' => 'Promotions Management',
     ],
     'content' => [
         'action' => [
@@ -42,6 +43,10 @@ return [
             'action' => 'Actions',
             'role' => 'Role',
             'id' => '#',
+            'active' => 'Actived',
+            'percent' => 'Percent',
+            'start_at' => 'Start At',
+            'end_at' => 'End At',
         ],
         'form' => [
             'password' => 'Password',
@@ -61,6 +66,10 @@ return [
             'create' => 'Create',
             'update' => 'Update',
             'cancel' => 'Cancel',
+        ],
+        'attribute' => [
+            'user' => 'user',
+            'User' => 'User',
         ]
     ],
     'footer' => [

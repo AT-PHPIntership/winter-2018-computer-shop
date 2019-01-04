@@ -4,6 +4,8 @@ namespace App\Services;
 
 use App\Models\User;
 use App\Models\UserProfile;
+use DB;
+use League\Flysystem\Exception;
 
 class UserService
 {
@@ -14,23 +16,24 @@ class UserService
     *
     * @return void
     */
-    public function create($request)
+    public function store($request)
     {
+        DB::beginTransaction();
         try {
-             \DB::transaction(function () use ($request) {
-                $user = User::create($request->all());
-                UserProfile::create([
-                     'address' => request('address'),
-                     'phone' => request('phone'),
-                     'avatar' => $this->handleUploadedImage($request->file('avatar')),
-                     'user_id' => $user->id
-                     ]);
-             });
-        } catch (\Exception $ex) {
-            \DB::rollback();
-            return redirect()->back()->with('warning', Lang::get('master.content.message.error', ['attribute' => $ex]));
+            $user = User::create($request->all());
+            $profile = $request->only('address', 'phone', 'avatar');
+            $profile['user_id'] = $user->id;
+            $profile['avatar'] = $this->handleUploadedImage($request->file('avatar'));
+            UserProfile::create($profile);
+            DB::commit();
+            session()->flash('message', __('master.content.message.create', ['attribute' => trans('master.content.attribute.user')]));
+        } catch (Exception $ex) {
+            DB::rollback();
+            session()->flash('warning', __('master.content.message.error', ['attribute' => $ex->getMessage]));
+            return redirect()->back();
         }
     }
+
    /**
     * Handle add image to database
     *
@@ -42,7 +45,7 @@ class UserService
     {
         if (!is_null($image)) {
             $imageName = $image->getClientOriginalName();
-            $image->move('upload/avatar', $imageName);
+            $image->move('storage/avatar', $imageName);
             return $imageName;
         }
         return null;
