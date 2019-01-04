@@ -112,6 +112,5 @@ class PromotionController extends Controller
         } else {
             return redirect()->route('promotions.index')->with('message', Lang::get('master.content.message.error'));
         }
-        
     }
 }
