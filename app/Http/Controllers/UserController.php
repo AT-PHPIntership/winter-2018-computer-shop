@@ -20,6 +20,7 @@ class UserController extends Controller
     {
         $this->userService = $userService;
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -27,8 +28,20 @@ class UserController extends Controller
      */
     public function index()
     {
-        return view('admin.users.index', ['users' => $this->userService->getAllData()]);
+        return view('admin.users.index');
     }
+
+    /**
+     * Get data for datatable
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getData()
+    {
+        
+        return $this->userService->dataTable();
+    }
+
     /**
      * Display a form to create new user
      *
@@ -38,6 +51,7 @@ class UserController extends Controller
     {
         return view('admin.users.create');
     }
+
     /**
      * Handle store user to database
      *

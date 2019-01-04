@@ -5,19 +5,28 @@ namespace App\Services;
 use App\Models\User;
 use App\Models\Role;
 use App\Models\UserProfile;
+use Yajra\Datatables\Datatables;
 
 class UserService
 {
     /**
-     * Get data form users table return user index page
+     * Get data for datatable
      *
      * @return object [object]
      */
-    public function getAllData()
+    public function dataTable()
     {
-        $users = User::orderBy('id', \Config::get('define.user.order_by_desc'))->paginate(\Config::get('define.user.limit_rows'));
-        return $users;
+        $users = User::select(['id', 'name', 'email', 'role_id']);
+        return Datatables::of($users)
+                ->addColumn('role', function (User $user) {
+                    return $user->roles->name;
+                })
+                ->addColumn('action', function ($data) {
+                    return view('admin.users.action', ['id' => $data->id]);
+                })
+                ->make(true);
     }
+    
    /**
     * Handle add user to database
     *

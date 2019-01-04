@@ -46,11 +46,14 @@
                      <th scope="row">{{ $role->id }}</th>
                      <td>{{ $role->name }}</td>
                      <td>
-                       <a href="" class="btn btn-sm btn-warning">
+                       <a href="{{ route('roles.edit', $role->id) }}" class="btn btn-sm btn-warning">
                        @lang('master.content.action.edit', ['attribute' => 'Role'])
                        </a>
-                       <a href="" class="btn btn-sm btn-danger">
-                       @lang('master.content.action.delete', ['attribute' => 'Role'])
+                       <form action="{{ route('roles.destroy', $role->id) }}" method="POST" class="d-inline">
+                          @csrf
+                          @method('DELETE')
+                          <input type="submit" value="@lang('master.content.action.delete', ['attribute' => 'Role'])" class="btn btn-sm btn-danger">
+                        </form> 
                        </a>
                      </td>
                    </tr>

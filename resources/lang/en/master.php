@@ -42,6 +42,8 @@ return [
             'action' => 'Actions',
             'role' => 'Role',
             'id' => '#',
+            'active' => 'Actived',
+            'user' => 'User',
         ],
         'form' => [
             'password' => 'Password',
@@ -52,20 +54,22 @@ return [
             'avatar' => 'Avatar',
         ],
         'message' => [
-            'create' => 'Created a :attribute successfully',
-            'update' => 'Updated the :attribute successfully',
-            'delete' => 'Deleted the :attribute successfully',
-            'error' => 'The :attribute happens',
+             'create' => 'Created a :attribute successfuly',
+             'update' => 'Update a :attribute successfuly',
+             'delete' => 'Delete a :attribute successfuly',
+        ],
+        'attribute' => [
+             'user' => 'user',
+             'role' => 'role',
         ],
         'button' => [
-            'create' => 'Create',
-            'update' => 'Update',
-            'cancel' => 'Cancel',
+             'create' => 'Create',
+             'cancel' => 'Cancel',
         ]
     ],
     'footer' => [
         'design' => 'Design by',
         'year' => '2017-2019',
         'author' => 'Bootstrapious',
-    ]
+    ],
 ];
