@@ -13,7 +13,7 @@ class PromotionService
      */
     public function index()
     {
-        $promotions = Promotion::all();
+        $promotions = Promotion::paginate(config('constants.promotion.number_paginate'));
         return $promotions;
     }
 
