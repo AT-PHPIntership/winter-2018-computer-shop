@@ -14,7 +14,8 @@ class RoleService
      */
     public function getAll()
     {
-        return Role::select('id', 'name')->get();
+        $roles = Role::paginate(config('constants.role.number_paginate'));
+        return $roles;
     }
     /**
      * Handle add role to data

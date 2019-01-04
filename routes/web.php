@@ -19,4 +19,5 @@ Route::group(['prefix' => 'admin'], function(){
     Route::get('users/data', 'UserController@getData');
     Route::resource('users', 'UserController');
     Route::resource('roles', 'RoleController');
+    Route::resource('promotions', 'PromotionController');
 }); 

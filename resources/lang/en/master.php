@@ -29,6 +29,7 @@ return [
         'img_product' => 'Products',
         'comment' => 'Comments Management',
         'order' => 'Orders Management',
+        'promotion' => 'Promotions Management',
     ],
     'content' => [
         'action' => [
@@ -43,6 +44,9 @@ return [
             'role' => 'Role',
             'id' => '#',
             'active' => 'Actived',
+            'percent' => 'Percent',
+            'start_at' => 'Start At',
+            'end_at' => 'End At',
             'user' => 'User',
         ],
         'form' => [
@@ -57,6 +61,7 @@ return [
              'create' => 'Created a :attribute successfuly',
              'update' => 'Update a :attribute successfuly',
              'delete' => 'Delete a :attribute successfuly',
+             'error' =>'Have error',
         ],
         'attribute' => [
              'user' => 'user',
