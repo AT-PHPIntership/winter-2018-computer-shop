@@ -69,6 +69,5 @@ class PromotionService
         } catch (Exception $e) {
             return $message = $e->getMessage();
         }
-        
     }
 }
