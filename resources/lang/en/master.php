@@ -68,6 +68,7 @@ return [
             'create' =>'Created a :attribute successfuly',
             'update' =>'Update a :attribute successfuly',
             'delete' =>'Delete a :attribute successfuly',
+            'error' =>'Have error',
        ],
        'button' => [
             'create' =>'Create',
