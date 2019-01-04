@@ -105,8 +105,13 @@ class PromotionController extends Controller
      */
     public function destroy($id)
     {
-        $this->promotionService->delete($id);
-        return redirect()->route('promotions.index')->with('message', Lang::get('master.content.message.delete', [
+        $message = $this->promotionService->delete($id);
+        if ($message === 1) {
+            return redirect()->route('promotions.index')->with('message', Lang::get('master.content.message.delete', [
             'attribute' => 'promotion']));
+        } else {
+            return redirect()->route('promotions.index')->with('message', Lang::get('master.content.message.error'));
+        }
+        
     }
 }

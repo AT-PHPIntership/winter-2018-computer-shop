@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Promotion;
+use League\Flysystem\Exception;
 
 class PromotionService
 {
@@ -74,6 +75,11 @@ class PromotionService
      */
     public function delete($id)
     {
-        Promotion::where('id', $id)->delete();
+        try {
+            $message = Promotion::where('id', $id)->delete();
+            return $message;
+        } catch (Exception $e) {
+            return $message = $e->getMessage();
+        }
     }
 }
