@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Lang;
 use App\Services\UserService;
 use App\Http\Requests\UserRequest;
+use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
+use Illuminate\Support\Facades\Lang ;
 
 class UserController extends Controller
 {
@@ -21,6 +22,7 @@ class UserController extends Controller
     {
         $this->userService = $userService;
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -30,6 +32,7 @@ class UserController extends Controller
     {
         return view('admin.users.index', ['users' => $this->userService->getAllData()]);
     }
+
     /**
      * Display a form to create new user
      *
@@ -39,6 +42,7 @@ class UserController extends Controller
     {
         return view('admin.users.create');
     }
+
     /**
      * Handle store user to database
      *
@@ -51,6 +55,7 @@ class UserController extends Controller
         $this->userService->create($request);
         return redirect()->route('users.index')->with('message', Lang::get('master.content.message.create', ['attribute' => 'user']));
     }
+
     /**
      * View detail the user
      *
@@ -62,27 +67,30 @@ class UserController extends Controller
     {
         return view('admin.users.show', compact('user'));
     }
+
     /**
      * Display a form to edit new user
      *
      * @param object $user [binding user]
-     * 
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit(User $user)
     {
         return view('admin.users.edit', compact('user'));
     }
+    
     /**
      * Handle update user to database
      *
      * @param object $request [request to create a new user]
+     * @param object $user    [binding user model alongside id]
      *
      * @return user
      */
-    public function update(UserRequest $request, User $user)
+    public function update(UpdateUserRequest $request, User $user)
     {
         $this->userService->update($request, $user);
-        return redirect()->route('users.index')->with('message', Lang::get('master.content.message.update', ['attribute' => 'user']));
+        return redirect()->route('users.index');
     }
 }
