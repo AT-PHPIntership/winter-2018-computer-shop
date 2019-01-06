@@ -21,6 +21,7 @@ class UserController extends Controller
     {
         $this->userService = $userService;
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -30,6 +31,7 @@ class UserController extends Controller
     {
         return view('admin.users.index', ['users' => $this->userService->getAllData()]);
     }
+
     /**
      * Display a form to create new user
      *
@@ -39,6 +41,7 @@ class UserController extends Controller
     {
         return view('admin.users.create');
     }
+
     /**
      * Handle store user to database
      *
@@ -51,6 +54,7 @@ class UserController extends Controller
         $this->userService->create($request);
         return redirect()->route('users.index')->with('message', Lang::get('master.content.message.create', ['attribute' => 'user']));
     }
+
     /**
      * View detail the user
      *
@@ -62,8 +66,9 @@ class UserController extends Controller
     {
         return view('admin.users.show', compact('user'));
     }
+
     /**
-     * Handle delete user to database
+     * Handle delete user out of  database
      *
      * @param object $user [request to delete the user]
      *
@@ -72,6 +77,6 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         $this->userService->destroy($user);
-        return redirect()->route('users.index')->with('message', Lang::get('master.content.message.delete', ['attribute' => 'user']));
+        return redirect()->route('users.index');
     }
 }

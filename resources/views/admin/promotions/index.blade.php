@@ -2,14 +2,14 @@
 @section('content')
 <header class="page-header">
    <div class="container-fluid">
-       <h2 class="no-margin-bottom">@lang('master.sidebar.role')</h2>
+       <h2 class="no-margin-bottom">@lang('master.sidebar.promotion')</h2>
    </div>
 </header>
 <!-- Breadcrumb-->
 <div  class="breadcrumb-holder container-fluid">
    <ul class="breadcrumb">
        <li class="breadcrumb-item"><a href="{{route('admin.home')}}">@lang('master.sidebar.home')</a></li>
-       <li class="breadcrumb-item active">@lang('master.sidebar.role')</li>
+       <li class="breadcrumb-item active">@lang('master.sidebar.promotion')</li>
    </ul>
 </div>
 @if(session('message'))
@@ -26,8 +26,8 @@
            <div class="col-lg-12">
                <div class="card">
                    <div class="card-header d-flex align-items-center">
-                       <a href="{{route('roles.create')}}">
-                          <button type="button" class="btn btn-primary">@lang('master.content.action.add', ['attribute' => 'Role'])</button>
+                       <a href="{{route('promotions.create')}}">
+                          <button type="button" class="btn btn-primary">@lang('master.content.action.add', ['attribute' => 'Promotion'])</button>
                         </a>
                    </div>
                    <div class="card-body">
@@ -37,22 +37,29 @@
                    <tr>
                      <th>@lang('master.content.table.id')</th>
                      <th>@lang('master.content.form.name')</th>
+                     <th>@lang('master.content.table.percent')</th>
+                     <th>@lang('master.content.table.start_at')</th>
+                     <th>@lang('master.content.table.end_at')</th>
                      <th>@lang('master.content.table.action')</th>
                    </tr>
                  </thead>
                  <tbody>
-                  @foreach($roles as $role)
+
+                  @foreach($promotions as $promotion)
                   <tr>
-                     <th scope="row">{{ $role->id }}</th>
-                     <td>{{ $role->name }}</td>
+                     <th scope="row">{{ $promotion->id }}</th>
+                     <td>{{ $promotion->name }}</td>
+                     <td>{{ $promotion->percent }}</td>
+                     <td>{{ $promotion->start_at }}</td>
+                     <td>{{ $promotion->end_at }}</td>
                      <td>
-                       <a href="{{ route('roles.edit', $role->id) }}" class="btn btn-sm btn-warning">
-                       @lang('master.content.action.edit', ['attribute' => 'Role'])
+                       <a href="{{ route('promotions.edit', $promotion->id) }}" class="btn btn-sm btn-warning">
+                       @lang('master.content.action.edit', ['attribute' => 'Promotion'])
                        </a>
-                       <form action="{{ route('roles.destroy', $role->id) }}" method="POST" class="d-inline">
+                       <form action="{{ route('promotions.destroy', $promotion->id) }}" method="POST" class="d-inline">
                           @csrf
                           @method('DELETE')
-                          <input type="submit" value="@lang('master.content.action.delete', ['attribute' => 'Role'])" class="btn btn-sm btn-danger">
+                          <input type="submit" value="@lang('master.content.action.delete', ['attribute' => 'Promotion'])" class="btn btn-sm btn-danger">
                         </form> 
                        </a>
                      </td>
@@ -63,7 +70,7 @@
              </div>
              <div class="row">
                 <div class="col-md-12">
-                {{$roles->links()}}
+                {{ $promotions->links() }}
                 </div>
               </div>
            </div>

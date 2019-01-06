@@ -10,7 +10,7 @@
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-header d-flex align-items-center">
-                        <a href="{{route('users.create')}}" class="btn btn-primary">@lang('master.content.action.add', ['attribute' => 'User'])</a>
+                        <a href="{{route('users.create')}}" class="btn btn-primary">@lang('master.content.action.add', ['attribute' => trans('master.content.attribute.User')])</a>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">   
@@ -32,12 +32,12 @@
                                         <td>{{$user->name}}</td>
                                         <td>{{$user->roles->name}}</td>
                                         <td>
-                                            <a href="{{route('users.show', $user->id)}}" class="btn btn-info btn-sm">@lang('master.content.action.detail', ['attribute' => 'User'])</a>
-                                            <a href="" class="btn btn-warning btn-sm">@lang('master.content.action.edit', ['attribute' => 'User'])</a>
+                                            <a href="{{route('users.show', $user->id)}}" class="btn btn-info btn-sm">@lang('master.content.action.detail', ['attribute' => trans('master.content.attribute.User')])</a>
+                                            <a href="" class="btn btn-warning btn-sm">@lang('master.content.action.edit', ['attribute' => trans('master.content.attribute.User')])</a>
                                             <form action="{{route('users.destroy', $user->id)}}" method="POST" class="d-inline" onsubmit="return ConfirmDelete()">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn btn-danger btn-sm">@lang('master.content.action.delete', ['attribute' => 'User'])</button>
+                                                <button type="submit" class="btn btn-danger btn-sm">@lang('master.content.action.delete', ['attribute' => trans('master.content.attribute.User')])</button>
                                             </form>
                                         </td>
                                     </tr>

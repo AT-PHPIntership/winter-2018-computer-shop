@@ -18,6 +18,7 @@ class UserService
         $users = User::orderBy('id', \Config::get('define.user.order_by_desc'))->paginate(\Config::get('define.user.limit_rows'));
         return $users;
     }
+
    /**
     * Handle add user to database
     *
@@ -42,6 +43,7 @@ class UserService
             return redirect()->back()->with('warning', Lang::get('master.content.message.error', ['attribute' => $ex]));
         }
     }
+
    /**
     * Handle add image to database
     *
@@ -58,6 +60,7 @@ class UserService
         }
         return null;
     }
+    
     /**
     * Handle delete user out of database
     *
@@ -67,6 +70,7 @@ class UserService
     */
     public function destroy($user)
     {
-        return $user->delete();
+        $user->delete();
+        session()->flash('message', __('master.content.message.delete', ['attribute' => trans('master.content.attribute.user')]));
     }
 }
