@@ -39,6 +39,7 @@
     </div>
     <!-- JavaScript files-->
     <script type='text/javascript'src="admin_asset/vendor/jquery/jquery.min.js"></script>
+    <script src="admin_asset/vendor/ckeditor/ckeditor.js"> </script>
     <script src="admin_asset/vendor/popper.js/umd/popper.min.js"> </script>
     <script src="admin_asset/vendor/bootstrap/js/bootstrap.min.js"></script>
     <script src="admin_asset/vendor/jquery.cookie/jquery.cookie.js"> </script>

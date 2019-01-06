@@ -23,8 +23,7 @@
               </div>
               <div class="form-group">
                 <label class="form-control-label">@lang('master.content.form.description')</label>
-                <input name="description" type="text" placeholder="Enter product description" class="form-control" value="{{ old('description') }}">
-                @include('admin.partials.error', ['err' => 'description'])
+                <textarea name='description' id='demo' class="form-control ckeditor" rows="4" value="">{{old('description')}}</textarea>
               </div>
               <div class="form-group">
                 <label class="form-control-label">@lang('master.content.form.price')<span class="ml-1 text-danger">*<span></label>
