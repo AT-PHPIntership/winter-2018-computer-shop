@@ -29,6 +29,7 @@ return [
         'img_product' => 'Products',
         'comment' => 'Comments Management',
         'order' => 'Orders Management',
+        'promotion' => 'Promotions Management',
     ],
     'content' => [
         'action' => [
@@ -43,6 +44,10 @@ return [
             'action' => 'Actions',
             'role' => 'Role',
             'id' => '#',
+            'active' => 'Actived',
+            'percent' => 'Percent',
+            'start_at' => 'Start At',
+            'end_at' => 'End At',
         ],
         'form' => [
             'password' => 'Password',
@@ -60,6 +65,10 @@ return [
             'error' => 'The :attribute happens',
             'img' => "doesn't have any avatar",
         ],
+        'attribute' => [
+            'category' => 'category',
+            'Category' => 'Category',
+        ],
         'button' => [
             'create' => 'Create',
             'update' => 'Update',
@@ -70,5 +79,5 @@ return [
         'design' => 'Design by',
         'year' => '2017-2019',
         'author' => 'Bootstrapious',
-    ]
+    ],
 ];

@@ -10,7 +10,7 @@
       <div class="col-lg-12">
         <div class="card">
           <div class="card-header d-flex align-items-center">
-            <h3 class="h4">@lang('master.content.action.add', ['attribute' => 'Category'])</h3>
+            <h3 class="h4">@lang('master.content.action.add', ['attribute' => trans('master.content.attribute.Category')])</h3>
           </div>
           <div class="card-body">
             <form action="{{route('categories.store')}}" method="POST" enctype="multipart/form-data">

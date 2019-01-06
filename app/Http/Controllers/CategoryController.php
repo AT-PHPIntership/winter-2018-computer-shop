@@ -33,14 +33,13 @@ class CategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param object $request [request store category]
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(CategoryRequest $request)
     {
-        $this->categoryService->create($request);
-        return redirect()->route('categories.index')->with('message', Lang::get('master.content.message.create', ['attribute' => 'category']));
+        $this->categoryService->store($request);
+        return redirect()->route('categories.index');
     }
-
-    
 }
