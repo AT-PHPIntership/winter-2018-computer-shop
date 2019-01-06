@@ -29,6 +29,7 @@ return [
         'img_product' => 'Products',
         'comment' => 'Comments Management',
         'order' => 'Orders Management',
+        'promotion' => 'Promotions Management',
     ],
     'content' => [
         'action' => [
@@ -60,6 +61,10 @@ return [
             'error' => 'The :attribute happens',
             'warning' => "You can't delete the category because it's has sub-category",
             'img' => "doesn't have any avatar",
+        ],
+        'attribute' => [
+            'category' => 'category',
+            'Category' => 'Category',
         ],
         'button' => [
             'create' => 'Create',

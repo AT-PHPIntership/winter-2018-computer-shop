@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use App\Http\Requests\CategoryRequest;
 use App\Services\CategoryService;
 use App\Models\Category;
-use Illuminate\Support\Facades\Lang;
 
 class CategoryController extends Controller
 {
@@ -21,6 +20,7 @@ class CategoryController extends Controller
     {
         $this->categoryService = $categoryService;
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -30,6 +30,7 @@ class CategoryController extends Controller
     {
         return view('admin.categories.index', ['categories' => $this->categoryService->getAllData()]);
     }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -43,7 +44,8 @@ class CategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param object $request [request create a new category]
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(CategoryRequest $request)
@@ -51,20 +53,24 @@ class CategoryController extends Controller
         $this->categoryService->create($request);
         return redirect()->route('categories.index')->with('message', Lang::get('master.content.message.create', ['attribute' => 'category']));
     }
+
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param object $category [binding category model]
+     *
      * @return \Illuminate\Http\Response
      */
     public function show(Category $category)
     {
         return view('admin.categories.show', ['categories' => $this->categoryService->getEachCategory($category)]);
     }
+    
     /**
      * Delete the specified resource.
      *
-     * @param  int  $id
+     * @param object $category [binding category model]
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy(Category $category)
