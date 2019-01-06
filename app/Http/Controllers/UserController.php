@@ -66,7 +66,7 @@ class UserController extends Controller
      * Display a form to edit new user
      *
      * @param object $user [binding user]
-     * 
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit(User $user)
@@ -77,6 +77,7 @@ class UserController extends Controller
      * Handle update user to database
      *
      * @param object $request [request to create a new user]
+     * @param object $user    [binding user models]
      *
      * @return user
      */

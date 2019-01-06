@@ -20,7 +20,7 @@ class Category extends Model
      * The function to take all parent category
      *
      * @param Builder $builder help take all parent category
-     * 
+     *
      * @return \App\Models\User
      */
     public function scopeParents(Builder $builder)

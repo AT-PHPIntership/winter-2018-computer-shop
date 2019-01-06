@@ -19,6 +19,7 @@ class CategoryController extends Controller
     {
         $this->categoryService = $categoryService;
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -26,8 +27,20 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return view('admin.categories.index', ['categories' => $this->categoryService->getAllData()]);
+        return view('admin.categories.index');
     }
+
+    /**
+     * Get data for category datatable
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getData()
+    {
+        
+        return $this->categoryService->dataTable();
+    }
+    
     /**
      * Show the form for creating a new resource.
      *
@@ -41,7 +54,8 @@ class CategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param object $request [request create a new category]
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(CategoryRequest $request)
@@ -49,6 +63,4 @@ class CategoryController extends Controller
         $this->categoryService->create($request);
         return redirect()->route('categories.index')->with('message', Lang::get('master.content.message.create', ['attribute' => 'category']));
     }
-
-    
 }

@@ -56,13 +56,14 @@ class UserService
             $imageName = time() . '_' . $image->getClientOriginalName();
             $image->move('upload/avatar', $imageName);
             return $imageName;
-        } 
+        }
         return null;
     }
     /**
     * Handle update user to database
     *
-    * @param object $request request from form Add role
+    * @param object $request [request update a user]
+    * @param object $user    [binding user model]
     *
     * @return void
     */
@@ -70,16 +71,16 @@ class UserService
     {
         try {
             \DB::transaction(function () use ($request, $user) {
-             $user->profiles->update([
+                $user->profiles->update([
                 'address' => request('address'),
                 'phone' => request('phone'),
                 'avatar' => $this->handleUploadedImage($request->file('avatar'))
-             ]);
-            $user = $user->update($request->all());
+                ]);
+                $user = $user->update($request->all());
             });
-            } catch (\Exception $ex) {
-                \DB::rollback();
-                return redirect()->back()->with('warning', Lang::get('master.content.message.error', ['attribute' => $ex]));
-            }        
+        } catch (\Exception $ex) {
+            \DB::rollback();
+            return redirect()->back()->with('warning', Lang::get('master.content.message.error', ['attribute' => $ex]));
+        }
     }
 }

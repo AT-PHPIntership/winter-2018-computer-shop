@@ -3,19 +3,25 @@
 namespace App\Services;
 
 use App\Models\Category;
+use Yajra\Datatables\Datatables;
 
 class CategoryService
 {
     /**
-     * Get data form users table return user index page
+     * Get data for category datatable
      *
      * @return object [object]
      */
-    public function getAllData()
+    public function dataTable()
     {
-        $category = Category::parents()->orderBy('id', \Config::get('define.user.order_by_desc'))->paginate(\Config::get('define.user.limit_rows'));
-        return $category;
+        $categories = Category::parents()->select(['id', 'name'])->get();
+        return Datatables::of($categories)
+                ->addColumn('action', function ($data) {
+                    return view('admin.categories.action', ['id' => $data->id]);
+                })
+                ->make(true);
     }
+
     /**
      * Handle add category to data
      *
