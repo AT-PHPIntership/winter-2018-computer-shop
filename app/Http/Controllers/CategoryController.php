@@ -43,7 +43,8 @@ class CategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param object $request [request create a new category]
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(CategoryRequest $request)
@@ -54,12 +55,13 @@ class CategoryController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param object $category [get children category]
+     *
      * @return \Illuminate\Http\Response
      */
     public function show(Category $category)
     {
-        return view('admin.categories.show', ['categories' => $this->categoryService->getEachCategory($category)]);
+        $categories = $this->categoryService->getChildren($category);
+        return view('admin.categories.show', compact('categories'));
     }
-    
 }

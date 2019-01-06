@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Category;
+
 class CategoryService
 {
     /**
@@ -29,10 +30,12 @@ class CategoryService
     /**
      * Get data form users table return user index page
      *
+     * @param object $category [request get children category]
+     *
      * @return object [object]
      */
-    public function getEachCategory($category)
+    public function getChildren($category)
     {
-         return $categories = Category::where('parent_id', $category->id)->orderBy('id', \Config::get('define.user.order_by_desc'))->paginate(\Config::get('define.user.limit_rows'));
+         return $category = Category::where('parent_id', $category->id)->latest()->paginate(\Config::get('define.user.limit_rows'));
     }
 }
