@@ -3,7 +3,8 @@
 namespace App\Services;
 
 use App\Models\Product;
-use Illuminate\Support\Facades\Lang;
+use DB;
+use League\Flysystem\Exception;
 
 class ProductService
 {
@@ -16,15 +17,17 @@ class ProductService
     */
     public function store($request)
     {
-        \DB::beginTransaction();
+        DB::beginTransaction();
         try {
             $input = $request->all();
             $input['unit_price'] = (int) str_replace(',', '', $request->unit_price);
             Product::create($input);
-            \DB::commit();
-        } catch (\Exception $ex) {
-            \DB::rollback();
-            return back()->with('warning', Lang::get('master.content.message.error', ['attribute' => $ex]));
+            DB::commit();
+            session()->flash('message', __('master.content.message.create', ['attribute' => trans('master.content.attribute.product')]));
+        } catch (Exception $ex) {
+            DB::rollback();
+             session()->flash('warning', __('master.content.message.error', ['attribute' => $ex->getMessage()]));
+            return redirect()->back();
         }
     }
 }

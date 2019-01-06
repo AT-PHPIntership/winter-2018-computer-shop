@@ -27,7 +27,6 @@ class ProductRequest extends FormRequest
             'name' => 'required|min:3|unique:products',
             'unit_price' => 'required|regex:/\d{1,3}(,\d{3})*/',
             'quantity' => 'required|numeric',
-            'quantity' => 'required|numeric',
         ];
     }
 

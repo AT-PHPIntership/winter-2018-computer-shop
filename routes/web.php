@@ -21,4 +21,5 @@ Route::group(['prefix' => 'admin'], function(){
     Route::get('categories/sub-category', 'CategoryController@getChildren');
     Route::resource('categories', 'CategoryController');
     Route::resource('products', 'ProductController');
+    Route::resource('promotions', 'PromotionController');
 }); 

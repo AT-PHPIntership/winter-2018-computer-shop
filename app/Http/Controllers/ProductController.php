@@ -40,5 +40,6 @@ class ProductController extends Controller
     public function store(ProductRequest $request)
     {
         $this->productService->store($request);
+        return redirect()->route('products.index');
     }
 }
