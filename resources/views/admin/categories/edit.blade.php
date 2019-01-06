@@ -27,8 +27,8 @@
                   <select name="parent_id" class="form-control mb-3">
                     @if($category->parent_id == null)
                         <option value="" <?php echo 'selected' ?> disabled hidden>@lang('master.content.select.choose')</option>
-                    @foreach($categories as $category_main)
-                        <option value="{{$category_main->id}}">{{$category_main->name}}</option>
+                    @foreach($categories as $main_category)
+                        <option value="{{$main_category->id}}">{{$main_category->name}}</option>
                     @endforeach
                     @else
                       <option value="">@lang('master.content.select.parent')</option>

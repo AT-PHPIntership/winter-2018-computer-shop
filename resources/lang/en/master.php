@@ -29,6 +29,7 @@ return [
         'img_product' => 'Products',
         'comment' => 'Comments Management',
         'order' => 'Orders Management',
+        'promotion' => 'Promotions Management',
     ],
     'content' => [
         'action' => [
@@ -59,6 +60,10 @@ return [
             'delete' => 'Deleted the :attribute successfully',
             'error' => 'The :attribute happens',
             'img' => "doesn't have any avatar",
+        ],
+        'attribute' => [
+            'category' => 'category',
+            'Category' => 'Category',
         ],
         'button' => [
             'create' => 'Create',

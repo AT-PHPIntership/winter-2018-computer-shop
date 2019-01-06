@@ -21,6 +21,7 @@ class CategoryController extends Controller
     {
         $this->categoryService = $categoryService;
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -30,6 +31,7 @@ class CategoryController extends Controller
     {
         return view('admin.categories.index', ['categories' => $this->categoryService->getAllData()]);
     }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -43,7 +45,8 @@ class CategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param object $request [request create a new category]
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(CategoryRequest $request)
@@ -51,37 +54,42 @@ class CategoryController extends Controller
         $this->categoryService->create($request);
         return redirect()->route('categories.index')->with('message', Lang::get('master.content.message.create', ['attribute' => 'category']));
     }
+
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param object $category [binding category model]
+     *
      * @return \Illuminate\Http\Response
      */
     public function show(Category $category)
     {
         return view('admin.categories.show', ['categories' => $this->categoryService->getEachCategory($category)]);
     }
+
     /**
      * Display a form to edit category
      *
      * @param object $category [binding category]
-     * 
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit(Category $category)
     {
         return view('admin.categories.edit', compact('category'));
     }
+    
     /**
      * Handle update category to database
      *
-     * @param object $request [request to update the category]
+     * @param object $request  [request to update the category]
+     * @param object $category [binding category model]
      *
      * @return \Illuminate\Http\Response
      */
     public function update(CategoryRequest $request, Category $category)
     {
         $this->categoryService->update($request, $category);
-        return redirect()->route('categories.index')->with('message', Lang::get('master.content.message.update', ['attribute' => 'category']));
+        return redirect()->route('categories.index');
     }
 }

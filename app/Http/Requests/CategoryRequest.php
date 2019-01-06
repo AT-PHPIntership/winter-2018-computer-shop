@@ -25,18 +25,14 @@ class CategoryRequest extends FormRequest
     {
         switch ($this->method()) {
             case 'POST':
-            {
                 $id = '';
                 break;
-            }
             case 'PUT':
-            {
-                $id = $this->category->id;;
+                $id = $this->category->id;
                 break;
-            }
         }
             return [
-                'name' => 'required|min:3|unique:categories,name,' . $id 
+                'name' => 'required|min:2|unique:categories,name,' . $id
             ];
     }
 }

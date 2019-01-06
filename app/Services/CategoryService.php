@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Category;
+
 class CategoryService
 {
     /**
@@ -15,6 +16,7 @@ class CategoryService
         $category = Category::parents()->orderBy('id', \Config::get('define.user.order_by_desc'))->paginate(\Config::get('define.user.limit_rows'));
         return $category;
     }
+
     /**
      * Handle add category to data
      *
@@ -26,24 +28,30 @@ class CategoryService
     {
         return Category::create($request->all());
     }
+
     /**
      * Get data form users table return user index page
+     *
+     * @param object $category [binding category model]
      *
      * @return object [object]
      */
     public function getEachCategory($category)
     {
-         return $categories = Category::where('parent_id', $category->id)->orderBy('id', \Config::get('define.user.order_by_desc'))->paginate(\Config::get('define.user.limit_rows'));
+         return $category = Category::where('parent_id', $category->id)->orderBy('id', \Config::get('define.user.order_by_desc'))->paginate(\Config::get('define.user.limit_rows'));
     }
+
     /**
      * Handle update category to data
      *
-     * @param object $request request from form add category
+     * @param object $request  [request update category]
+     * @param object $category [binding category  model]
      *
      * @return void
      */
     public function update($request, $category)
     {
-        return $category->update($request->all());
+        $category->update($request->all());
+        session()->flash('message', __('master.content.message.update', ['attribute' => trans('master.content.attribute.category')]));
     }
 }

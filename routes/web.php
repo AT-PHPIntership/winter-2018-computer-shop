@@ -19,4 +19,5 @@ Route::group(['prefix' => 'admin'], function(){
     Route::resource('users', 'UserController');
     Route::resource('roles', 'RoleController');
     Route::resource('categories', 'CategoryController');
+    Route::resource('promotions', 'PromotionController');
 }); 
