@@ -26,11 +26,6 @@ class CodeService
      */
     public function create($request)
     {
-        Code::create([
-            'name' => $request->name,
-            'amount' => $request->amount,
-            'start_at' => $request->start_at,
-            'end_at' => $request->end_at
-        ]);
+        Code::create($request->all());
     }
 }
