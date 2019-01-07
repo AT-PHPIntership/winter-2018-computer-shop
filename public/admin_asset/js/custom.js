@@ -43,3 +43,19 @@ $('#formatCurrency').on('input', function(e){
     }
 });
 
+//Function to conduct use datatable for product
+$(function() {
+      $('#product-table').DataTable({
+      processing: true,
+      serverSide: true,
+      ajax: 'admin/products/data',
+      columns: [
+              { data: 'id', name: 'id' },
+              { data: 'name', name: 'name' },
+              { data: 'category', name: 'category' },
+              { data: 'unit_price', name: 'unit_price' },
+              { data: 'quantity', name: 'quantity' },
+              { data: 'action', name: 'action' },
+            ]
+      });
+});

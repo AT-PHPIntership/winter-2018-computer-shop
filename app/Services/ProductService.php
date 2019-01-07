@@ -5,9 +5,28 @@ namespace App\Services;
 use App\Models\Product;
 use DB;
 use League\Flysystem\Exception;
+use Yajra\Datatables\Datatables;
 
 class ProductService
 {
+    /**
+     * Get data for datatable
+     *
+     * @return object [object]
+     */
+    public function dataTable()
+    {
+        $products = Product::select(['id', 'name', 'quantity', 'unit_price', 'category_id']);
+        return Datatables::of($products)
+                ->addColumn('category', function (Product $product) {
+                    return $product->category->name;
+                })
+                ->addColumn('action', function ($data) {
+                    return view('admin.products.action', ['id' => $data->id]);
+                })
+                ->make(true);
+    }
+
    /**
     * Handle store a product to database
     *

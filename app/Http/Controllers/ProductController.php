@@ -21,6 +21,26 @@ class ProductController extends Controller
     }
 
     /**
+     * Display the index page
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        return view('admin.products.index');
+    }
+
+    /**
+     * Get data for product datatable
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getData()
+    {
+        return $this->productService->dataTable();
+    }
+
+    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
