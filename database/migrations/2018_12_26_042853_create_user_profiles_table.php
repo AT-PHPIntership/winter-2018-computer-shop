@@ -32,6 +32,6 @@ class CreateUserProfilesTable extends Migration
      */
     public function down()
     {
-        Schema::dropColumnIfExists('user_profiles');
+        Schema::dropIfExists('user_profiles');
     }
 }
