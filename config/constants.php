@@ -14,7 +14,8 @@ return [
             'pending' => 0,
             'approve' => 1,
             'cancel' => 2
-        ]
+        ],
+        'number_paginate' => '3'
     ]
     
 ];

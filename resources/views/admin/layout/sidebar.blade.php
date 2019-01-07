@@ -21,7 +21,7 @@
       </ul>
     </li>
     <li><a href="login.html"><i class="fa fa-comments"></i>@lang('master.sidebar.comment')</a></li>
-    <li><a href="login.html"><i class="fa fa-shopping-cart"></i>@lang('master.sidebar.order')</a></li>
+    <li><a href="{{ route('orders.index') }}"><i class="fa fa-shopping-cart"></i>@lang('master.sidebar.order')</a></li>
     <li><a href="{{ route('promotions.index') }}"><i class="fa fa-snowflake-o"></i>@lang('master.sidebar.promotion')</a></li>
     <li><a href="{{ route('codes.index') }}"><i class="fa fa-money"></i>@lang('master.sidebar.code')</a></li>
     <li><a href="{{ route('access.index') }}"><i class="fa fa-money"></i>@lang('master.sidebar.access')</a></li>

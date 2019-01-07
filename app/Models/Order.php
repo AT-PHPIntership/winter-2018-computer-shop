@@ -3,9 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\User;
+use App\Models\OrderDetail;
 
 class Order extends Model
 {
+    protected $table = 'orders';
     const PENDING_STATUS = 'Pending';
     const APPROVE_STATUS = 'Approve';
     const CANCEL_STATUS = 'Cancel';
@@ -19,15 +22,15 @@ class Order extends Model
         'id', 'date_order', 'status', 'note', 'user_id', 'address', 'phone'
     ];
 
-    // *
-    //  * Get OrderDestail of Order
-    //  *
-    //  * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     
-    // public function orderDetails()
-    // {
-    //     return $this->hasMany(OrderDetail::class);
-    // }
+    /**
+     * Get OrderDestail of Order
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function orderDetails()
+    {
+        return $this->hasMany(OrderDetail::class);
+    }
 
     /**
      * Get User Object
@@ -36,7 +39,7 @@ class Order extends Model
      */
     public function user()
     {
-        return $this->belongsTo(User::class, 'user_id', 'id');
+        return $this->belongsTo(User::class);
     }
 
     /**
@@ -56,5 +59,4 @@ class Order extends Model
             default:
         }
     }
-    
 }
