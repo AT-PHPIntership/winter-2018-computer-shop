@@ -20,6 +20,7 @@ Route::group(['prefix' => 'admin'], function(){
     Route::resource('roles', 'RoleController');
     Route::get('categories/sub-category', 'CategoryController@getChildren');
     Route::resource('categories', 'CategoryController');
+    Route::get('products/data', 'ProductController@getData');
     Route::resource('products', 'ProductController');
     Route::resource('promotions', 'PromotionController');
 }); 

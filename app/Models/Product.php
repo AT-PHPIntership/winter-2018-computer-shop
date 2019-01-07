@@ -19,10 +19,22 @@ class Product extends Model
     /**
      * The function display relationship between category and product
      *
-     * @return \App\Models\Role
+     * @return array
      */
     public function category()
     {
         return $this->belongsTo('App\Models\Category');
+    }
+
+    /**
+     * The function get unit price attribute
+     *
+     * @param object $unitPrice [pass attribute to fucntion]
+     *
+     * @return array
+     */
+    public function getUnitPriceAttribute($unitPrice)
+    {
+        return number_format($unitPrice, 0, ",", ".");
     }
 }

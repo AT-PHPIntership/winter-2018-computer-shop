@@ -56,7 +56,7 @@ return [
             'parent' => 'Parent Category',
             'category' => 'Category',
             'description' => 'Description',
-            'price' => 'Price',
+            'price' => 'Price(đ)',
             'quantity' => 'Quantity',
         ],
         'message' => [
@@ -68,6 +68,7 @@ return [
         ],
         'attribute' => [
             'product' => 'product',
+            'Product' => 'Product',
         ],
         'button' => [
             'create' => 'Create',
