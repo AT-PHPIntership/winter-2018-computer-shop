@@ -53,7 +53,6 @@ class PromotionController extends Controller
      */
     public function store(PromotionRequest $request)
     {
-        // dd($request);
         $this->promotionService->create($request);
         return redirect()->route('promotions.index')->with('message', Lang::get('master.content.message.create', [
             'attribute' => 'promotion']));
