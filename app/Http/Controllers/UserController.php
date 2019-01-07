@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Lang;
 use App\Services\UserService;
-use App\Http\Requests\UserRequest;
+use App\Http\Requests\CreateUserRequest;
 
 class UserController extends Controller
 {
@@ -38,7 +38,6 @@ class UserController extends Controller
      */
     public function getData()
     {
-        
         return $this->userService->dataTable();
     }
 
@@ -59,9 +58,9 @@ class UserController extends Controller
      *
      * @return user.index
      */
-    public function store(UserRequest $request)
+    public function store(CreateUserRequest $request)
     {
-        $this->userService->create($request);
+        $this->userService->create($request->all());
         return redirect()->route('users.index')->with('message', Lang::get('master.content.message.create', ['attribute' => 'user']));
     }
 }

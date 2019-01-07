@@ -19,7 +19,7 @@ class UserService
         $users = User::select(['id', 'name', 'email', 'role_id']);
         return Datatables::of($users)
                 ->addColumn('role', function (User $user) {
-                    return $user->roles->name;
+                    return $user->role->name;
                 })
                 ->addColumn('action', function ($data) {
                     return view('admin.users.action', ['id' => $data->id]);
@@ -36,13 +36,14 @@ class UserService
     */
     public function create($request)
     {
+        // dd($request);
         try {
              \DB::transaction(function () use ($request) {
-                $user = User::create($request->all());
+                $user = User::create($request);
                 UserProfile::create([
                      'address' => request('address'),
                      'phone' => request('phone'),
-                     'avatar' => $this->handleUploadedImage($request->file('avatar')),
+                     'avatar' => $this->handleUploadedImage(request('avatar')),
                      'user_id' => $user->id
                      ]);
              });
