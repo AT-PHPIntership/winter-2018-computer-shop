@@ -29,7 +29,10 @@ return [
         'img_product' => 'Products',
         'comment' => 'Comments Management',
         'order' => 'Orders Management',
+        'order_details' => 'Orders Details Management',
         'promotion' => 'Promotions Management',
+        'code' => 'Codes Management',
+        'access' => 'Accessories Management',
     ],
     'footer' => [
         'design' => 'Design by',
@@ -42,6 +45,7 @@ return [
            'detail' => 'View Details',
            'edit' => 'Edit :attribute',
            'delete' => 'Delete :attribute',
+           'back' => 'Back',
        ],
        'table' => [
            'email' => 'Email',
@@ -52,6 +56,18 @@ return [
            'percent' => 'Percent',
            'start_at' => 'Start At',
            'end_at' => 'End At',
+           'amount' => 'Amount',
+           'parent_id' => 'Parent name',
+           'details' => 'Details',
+           'user' => 'User',
+           'address' => 'Address',
+           'phone' => 'Phone',
+           'note' => 'Note',
+           'date_order' => 'Date order',
+           'status' => 'Status',
+           'product_name' => 'Product name',
+           'quantity' => 'Quantity',
+           'price' => 'Price',
        ],
        'form' => [
            'password' => 'Password',
@@ -68,6 +84,7 @@ return [
        ],
        'button' => [
             'create' =>'Create',
+            'update' =>'Update',
        ]
     ]
 

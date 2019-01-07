@@ -15,6 +15,7 @@ class ViewServiceProvider extends ServiceProvider
     public function boot()
     {
         view()->composer('admin.roles.index', 'App\Http\ViewComposers\RoleComposer');
+        view()->composer(['admin.access.update','admin.access.create'], 'App\Http\ViewComposers\AccessComposer');
     }
 
     /**
