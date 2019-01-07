@@ -5,13 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\Promotion;
 use Illuminate\Http\Request;
 use App\Services\PromotionService;
+use App\Http\Requests\PromotionRequest;
+use Illuminate\Support\Facades\Lang;
 
 class PromotionController extends Controller
 {
 
 
     private $promotionService;
-
     /**
      * Constructer Promotions
      *
@@ -38,10 +39,10 @@ class PromotionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    // public function create()
-    // {
-    //     //
-    // }
+    public function create()
+    {
+        return view('admin.promotions.create');
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -50,10 +51,12 @@ class PromotionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    // public function store(Request $request)
-    // {
-    //     //
-    // }
+    public function store(PromotionRequest $request)
+    {
+        $this->promotionService->create($request);
+        return redirect()->route('promotions.index')->with('message', Lang::get('master.content.message.create', [
+            'attribute' => 'promotion']));
+    }
 
     /**
      * Display the specified resource.
