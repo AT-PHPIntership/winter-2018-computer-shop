@@ -1,6 +1,5 @@
 <?php
-
-namespace App;
+namespace App\Models;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -10,13 +9,15 @@ class User extends Authenticatable
 {
     use Notifiable;
 
+    protected $table = 'users';
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-         'email', 'password'
+         'name', 'email', 'password', 'role_id'
     ];
 
     /**
@@ -27,4 +28,33 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+    /**
+     * The function display relationship between role and user
+     *
+     * @return \App\Models\Role
+     */
+    public function roles()
+    {
+        return $this->hasOne('App\Models\Role', 'id', 'role_id');
+    }
+    /**
+     * The function display relationship between userprofile and user
+     *
+     * @return \App\Models\UserProfile
+     */
+    public function profiles()
+    {
+        return $this->hasOne('App\Models\UserProfile');
+    }
+    /**
+     * The function help encrypt the password when user enter into
+     *
+     * @param string $password [input password to hash]
+     *
+     * @return \Illuminate\Support\Facades\Hash;
+     */
+    public function setPasswordAttribute($password)
+    {
+        $this->attributes['password'] = bcrypt($password);
+    }
 }

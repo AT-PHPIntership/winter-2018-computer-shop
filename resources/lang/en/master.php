@@ -31,44 +31,57 @@ return [
         'order' => 'Orders Management',
         'promotion' => 'Promotions Management',
     ],
+    'content' => [
+        'action' => [
+            'add' => 'Add New :attribute',
+            'detail' => 'View Details',
+            'edit' => 'Edit :attribute',
+            'delete' => 'Delete :attribute',
+            'show' => 'Details about :attribute',
+        ],
+        'table' => [
+            'email' => 'Email',
+            'action' => 'Actions',
+            'role' => 'Role',
+            'id' => '#',
+            'product' => 'Product',
+        ],
+        'form' => [
+            'password' => 'Password',
+            'confirm_pw' => 'Confirm Password',
+            'name' => 'Name',
+            'address' => 'Address',
+            'phone' => 'Phone',
+            'avatar' => 'Avatar',
+            'parent' => 'Parent Category',
+            'category' => 'Category',
+            'description' => 'Description',
+            'price' => 'Price',
+            'quantity' => 'Quantity',
+        ],
+        'message' => [
+            'create' => 'Created a :attribute successfully',
+            'update' => 'Updated the :attribute successfully',
+            'delete' => 'Deleted the :attribute successfully',
+            'error' => 'The :attribute happens',
+            'img' => "doesn't have any avatar",
+        ],
+        'attribute' => [
+            'product' => 'product',
+        ],
+        'button' => [
+            'create' => 'Create',
+            'update' => 'Update',
+            'cancel' => 'Cancel',
+        ],
+        'select' => [
+            'choose' => 'Choose here',
+            'parent' => 'Become parent category',
+        ],
+    ],
     'footer' => [
         'design' => 'Design by',
         'year' => '2017-2019',
         'author' => 'Bootstrapious',
-    ],
-    'content' => [
-       'action' => [
-           'add' => 'Add New :attribute',
-           'detail' => 'View Details',
-           'edit' => 'Edit :attribute',
-           'delete' => 'Delete :attribute',
-       ],
-       'table' => [
-           'email' => 'Email',
-           'action' => 'Actions',
-           'role' => 'Role',
-           'id' => '#',
-           'active' => 'Actived',
-           'percent' => 'Percent',
-           'start_at' => 'Start At',
-           'end_at' => 'End At',
-       ],
-       'form' => [
-           'password' => 'Password',
-           'name' => 'Name',
-           'address' => 'Address',
-           'phone' => 'Phone',
-           'avatar' => 'Avatar',
-       ],
-       'message' => [
-            'create' =>'Created a :attribute successfuly',
-            'update' =>'Update a :attribute successfuly',
-            'delete' =>'Delete a :attribute successfuly',
-            'error' =>'Have error',
-       ],
-       'button' => [
-            'create' =>'Create',
-       ]
     ]
-
 ];
