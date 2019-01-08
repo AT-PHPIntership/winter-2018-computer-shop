@@ -68,6 +68,7 @@ return [
        ],
        'button' => [
             'create' =>'Create',
+            'update' =>'Update',
        ]
     ]
 
