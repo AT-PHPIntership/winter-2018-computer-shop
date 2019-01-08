@@ -35,6 +35,6 @@ class Product extends Model
      */
     public function getUnitPriceAttribute($unitPrice)
     {
-        return number_format($unitPrice, 0, ",", ".");
+        return number_format($unitPrice, 0, ",", ",");
     }
 }

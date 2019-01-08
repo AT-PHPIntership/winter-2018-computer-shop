@@ -3,10 +3,23 @@
 namespace App\Http\ViewComposers;
 
 use Illuminate\View\View;
-use App\Models\Category;
+use App\Services\CategoryService;
+
 
 class CategoryComposer
 {
+    private $categoryService;
+    /**
+     * Contructer CategoryService
+     *
+     * @param CategoryService $categoryService [categoryService]
+     */
+    public function __construct(CategoryService $categoryService)
+    {
+        $this->categoryService = $categoryService;
+
+    }
+
     /**
     * Bind data to the view.
     *
@@ -16,6 +29,6 @@ class CategoryComposer
     */
     public function compose(View $view)
     {
-        $view->with('categories', Category::parents()->get());
+        $view->with('categories', $this->categoryService->getAllData());
     }
 }

@@ -75,4 +75,14 @@ class ProductController extends Controller
     {
         return view('admin.products.show', compact('product'));
     }
+
+    /**
+     * Show the form for editing a resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(Product $product)
+    {
+        return view('admin.products.edit', compact('product'));
+    }
 }

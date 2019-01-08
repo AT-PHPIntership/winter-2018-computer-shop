@@ -59,3 +59,37 @@ $(function() {
             ]
       });
 });
+
+//Display children category when edit
+$(document).ready(function(){
+      (function(){ 
+        var id = $('#parent_category').val();
+        // console.log(id);
+        $.ajax({
+          url: 'admin/categories/sub-category/',
+          method:"GET",
+          dataType:"JSON",
+          data: {id:id},
+          success: function(data){ 
+            // console.log(data);
+            var childId = $('#parent_category').data('categoryid');
+            if (data.length  > 0) {
+              var output = '<select name="category_id" class="form-control mb-3">';
+              $.each(data, function(key, val){
+                if (childId === val.id) {
+                  output += '<option value="'+ val.id + '"' + 'selected>' + val.name + '</option>';
+
+                } else {
+                  output += '<option value="'+ val.id + '">' + val.name + '</option>';
+                }
+              });
+              output += '</select>';
+              $('#child_category').html(output);
+            } else {
+              output = '';
+              $('#child_category').html(output);
+            }
+          }
+       });
+    })();
+});
