@@ -22,7 +22,7 @@
                                         <th>@lang('master.content.form.category')</th>
                                         <th>@lang('master.content.form.price')</th>
                                         <th>@lang('master.content.form.quantity')</th>
-                                        <th>@lang('master.content.table.action')</th>
+                                        <th class="col-1">@lang('master.content.table.action')</th>
                                     </tr>
                                 </thead>
                             </table>

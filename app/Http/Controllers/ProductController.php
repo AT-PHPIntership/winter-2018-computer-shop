@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\ProductRequest;
 use App\Services\ProductService;
+use App\Models\Product;
 
 class ProductController extends Controller
 {
@@ -61,5 +62,17 @@ class ProductController extends Controller
     {
         $this->productService->store($request);
         return redirect()->route('products.index');
+    }
+
+    /**
+     * Show the detail for a resource.
+     *
+     * @param object $product [binding product model]
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Product $product)
+    {
+        return view('admin.products.show', compact('product'));
     }
 }
