@@ -32,6 +32,7 @@ return [
         'promotion' => 'Promotions Management',
         'code' => 'Codes Management',
         'access' => 'Accessories Management',
+        'comment_details' => 'Comment Detail Management',
     ],
     'footer' => [
         'design' => 'Design by',
@@ -56,6 +57,9 @@ return [
            'end_at' => 'End At',
            'amount' => 'Amount',
            'parent_id' => 'Parent name',
+           'product_name' => 'Product name',
+           'user_name' => 'User name',
+           'content' => 'Content',
        ],
        'form' => [
            'password' => 'Password',
