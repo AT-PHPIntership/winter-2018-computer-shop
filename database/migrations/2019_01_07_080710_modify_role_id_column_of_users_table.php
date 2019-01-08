@@ -14,7 +14,6 @@ class ModifyRoleIdColumnOfUsersTable extends Migration
     public function up()
     {
          Schema::table('users', function (Blueprint $table) {
-            $table->string('name')->after('id') ;
             $table->dropForeign('users_role_id_foreign');
             $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade');        
         });
@@ -30,7 +29,6 @@ class ModifyRoleIdColumnOfUsersTable extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->dropForeign('users_role_id_foreign');
             $table->foreign('role_id')->references('id')->on('roles')->delete('cascade');
-            $table->dropColumn('name');
         });
     }
 }
