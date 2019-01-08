@@ -70,6 +70,8 @@ return [
         'button' => [
              'create' => 'Create',
              'cancel' => 'Cancel',
+             'update' =>'Update',
+
         ]
     ],
     'footer' => [
