@@ -68,33 +68,45 @@ class PromotionController extends Controller
         //
     }
 
-    // public function edit(Promotion $promotion)
-    // {
-    //     //
-    // }
+    /**
+     * Edit promotion
+     *
+     * @param int $id Id promotion
+     *
+     * @return void
+     */
+    public function edit($id)
+    {
+        $promotion = $this->promotionService->edit($id);
+        return view('admin.promotions.update', compact('promotion'));
+    }
 
     /**
-     * Update the specified resource in storage.
+     * Update promotion
      *
-     * @param \Illuminate\Http\Request $request   sdf
-     * @param \App\Models\Promotion    $promotion sdf
+     * @param int              $id      id promotion
+     * @param PromotionRequest $request Request from form
      *
-     * @return \Illuminate\Http\Response
+     * @return void
      */
-    // public function update(Request $request, Promotion $promotion)
-    // {
-    //     //
-    // }
+    public function update($id, PromotionRequest $request)
+    {
+        $this->promotionService->update($id, $request);
+        return redirect()->route('promotions.index')->with('message', Lang::get('master.content.message.update', [
+            'attribute' => 'promotion']));
+    }
 
     /**
-     * Remove the specified resource from storage.
+     * Delete promotion
      *
-     * @param \App\Models\Promotion $promotion asdf
+     * @param [int] $id [Id promotion]
      *
-     * @return \Illuminate\Http\Response
+     * @return void
      */
-    // public function destroy(Promotion $promotion)
-    // {
-    //     //
-    // }
+    public function destroy($id)
+    {
+        $this->promotionService->delete($id);
+        return redirect()->route('promotions.index')->with('message', Lang::get('master.content.message.delete', [
+            'attribute' => 'promotion']));
+    }
 }
