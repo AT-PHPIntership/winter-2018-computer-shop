@@ -28,24 +28,27 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
     /**
      * The function display relationship between role and user
      *
      * @return \App\Models\Role
      */
-    public function roles()
+    public function role()
     {
-        return $this->hasOne('App\Models\Role');
+        return $this->belongsTo('App\Models\Role');
     }
+
     /**
      * The function display relationship between userprofile and user
      *
      * @return \App\Models\UserProfile
      */
-    public function profiles()
+    public function profile()
     {
         return $this->hasOne('App\Models\UserProfile');
     }
+    
     /**
      * The function help encrypt the password when user enter into
      *

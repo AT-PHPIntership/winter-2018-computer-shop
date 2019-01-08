@@ -12,7 +12,7 @@ class RoleService
      *
      * @return void
      */
-    public function index()
+    public function getAll()
     {
         $roles = Role::paginate(config('constants.role.number_paginate'));
         return $roles;

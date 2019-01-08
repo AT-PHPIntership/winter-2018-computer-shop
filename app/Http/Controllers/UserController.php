@@ -3,24 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Lang;
 use App\Services\UserService;
 use App\Http\Requests\CreateUserRequest;
 
 class UserController extends Controller
 {
-    private $userService;
-
-   /**
-    * Contructer UserService
-    *
-    * @param UserService $userService [userService]
-    */
-    public function __construct(UserService $userService)
-    {
-        $this->userService = $userService;
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -32,6 +19,16 @@ class UserController extends Controller
     }
 
     /**
+     * Get data for datatable
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getData()
+    {
+        return app(UserService::class)->dataTable();
+    }
+
+    /**
      * Display a form to create new user
      *
      * @return \Illuminate\Http\Response
@@ -40,7 +37,6 @@ class UserController extends Controller
     {
         return view('admin.users.create');
     }
-    
     /**
      * Handle store user to database
      *
@@ -50,7 +46,7 @@ class UserController extends Controller
      */
     public function store(CreateUserRequest $request)
     {
-        $this->userService->store($request);
+        app(UserService::class)->store($request->all());
         return redirect()->route('users.index');
     }
 }

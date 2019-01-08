@@ -4,11 +4,30 @@ namespace App\Services;
 
 use App\Models\User;
 use App\Models\UserProfile;
-use DB;
 use League\Flysystem\Exception;
+use Yajra\Datatables\Datatables;
+use DB;
 
 class UserService
 {
+    /**
+     * Get data for datatable
+     *
+     * @return object [object]
+     */
+    public function dataTable()
+    {
+        $users = User::select(['id', 'name', 'email', 'role_id']);
+        return Datatables::of($users)
+                ->addColumn('role', function (User $user) {
+                    return $user->role->name;
+                })
+                ->addColumn('action', function ($data) {
+                    return view('admin.users.action', ['id' => $data->id]);
+                })
+                ->make(true);
+    }
+    
    /**
     * Handle add user to database
     *
@@ -20,16 +39,16 @@ class UserService
     {
         DB::beginTransaction();
         try {
-            $user = User::create($request->all());
-            $profile = $request->only('address', 'phone', 'avatar');
+            $user = User::create($request);
+            $profile = $request;
             $profile['user_id'] = $user->id;
-            $profile['avatar'] = $this->handleUploadedImage($request->file('avatar'));
+            $profile['avatar'] = $this->handleUploadedImage(request('avatar'));
             UserProfile::create($profile);
             DB::commit();
             session()->flash('message', __('master.content.message.create', ['attribute' => trans('master.content.attribute.user')]));
         } catch (Exception $ex) {
             DB::rollback();
-            session()->flash('warning', __('master.content.message.error', ['attribute' => $ex->getMessage]));
+            session()->flash('warning', __('master.content.message.error', ['attribute' => $ex->getMessage()]));
             return redirect()->back();
         }
     }
@@ -44,7 +63,7 @@ class UserService
     public function handleUploadedImage($image)
     {
         if (!is_null($image)) {
-            $imageName = $image->getClientOriginalName();
+            $imageName = time() . '_' . $image->getClientOriginalName();
             $image->move('storage/avatar', $imageName);
             return $imageName;
         }

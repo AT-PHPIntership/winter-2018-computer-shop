@@ -57,20 +57,21 @@ return [
             'avatar' => 'Avatar',
         ],
         'message' => [
-            'create' => 'Created a :attribute successfully',
-            'update' => 'Updated the :attribute successfully',
-            'delete' => 'Deleted the :attribute successfully',
-            'error' => 'The :attribute happens',
+             'create' => 'Created a :attribute successfuly',
+             'update' => 'Update a :attribute successfuly',
+             'delete' => 'Delete a :attribute successfuly',
+             'error' =>'Have error',
+        ],
+        'attribute' => [
+             'user' => 'user',
+             'role' => 'role',
+             'User' => 'User',
         ],
         'button' => [
             'create' => 'Create',
             'update' => 'Update',
             'cancel' => 'Cancel',
         ],
-        'attribute' => [
-            'user' => 'user',
-            'User' => 'User',
-        ]
     ],
     'footer' => [
         'design' => 'Design by',

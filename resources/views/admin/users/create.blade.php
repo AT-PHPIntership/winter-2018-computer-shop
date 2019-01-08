@@ -28,8 +28,7 @@
               </div>
               <div class="form-group">       
                 <label class="form-control-label">@lang('master.content.form.confirm_pw')<span class="ml-1 text-danger">*<span></label>
-                <input name="confirm_password" type="password" placeholder="Confirm Password" class="form-control">
-                @include('admin.partials.error', ['err' => 'confirm_password'])
+                <input name="password_confirmation" type="password" placeholder="Confirm Password" class="form-control">
               </div>
               <div class="form-group">       
                 <label class="form-control-label">@lang('master.content.form.name')<span class="ml-1 text-danger">*<span></label>
@@ -54,6 +53,7 @@
                     <option <?php echo ($role->name == 'Normal') ? 'selected' : '' ?> value="{{$role->id}}">{{$role->name}}</option>
                     @endforeach
                   </select>
+                  @include('admin.partials.error', ['err' => 'role_id'])
                 </div>
               </div>
               <div class="form-group row">

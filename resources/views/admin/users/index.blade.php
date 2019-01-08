@@ -13,7 +13,7 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">   
-                            <table class="table table-striped table-sm text-center">
+                            <table class="table table-striped table-sm text-center" id="user-table">
                                 <thead>
                                     <tr>
                                         <th>@lang('master.content.table.id')</th>
@@ -23,19 +23,6 @@
                                         <th>@lang('master.content.table.action')</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <tr>
-                                        <th scope="row">1</th>
-                                        <td>mark@gmail.com</td>
-                                        <td>Admin</td>
-                                        <td>Yes</td>
-                                        <td>
-                                            <a href="" class="btn btn-info btn-sm">@lang('master.content.action.detail')</a>
-                                            <a href="" class="btn btn-warning btn-sm">@lang('master.content.action.edit', ['attribute' => trans('master.content.attribute.User')])</a>
-                                            <a href="" class="btn btn-danger btn-sm">@lang('master.content.action.delete', ['attribute' => trans('master.content.attribute.User')])</a>
-                                        </td>
-                                    </tr>
-                                </tbody>
                             </table>
                         </div>
                     </div>
