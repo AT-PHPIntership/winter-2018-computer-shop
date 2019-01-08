@@ -36,7 +36,6 @@ class UserService
     */
     public function create($request)
     {
-        // dd($request);
         try {
              \DB::transaction(function () use ($request) {
                 $user = User::create($request);

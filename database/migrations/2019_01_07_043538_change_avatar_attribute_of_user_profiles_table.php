@@ -30,6 +30,7 @@ class ChangeAvatarAttributeOfUserProfilesTable extends Migration
     {
         Schema::table('user_profiles', function (Blueprint $table) {
             $table->dropForeign('user_profiles_user_id_foreign');
+            $table->foreign('user_id')->references('id')->on('users')->delete('cascade'); 
             $table->string('name');
             $table->dropColumn('avatar');
         });
