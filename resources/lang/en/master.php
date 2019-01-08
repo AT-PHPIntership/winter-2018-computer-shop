@@ -31,45 +31,52 @@ return [
         'order' => 'Orders Management',
         'promotion' => 'Promotions Management',
     ],
+    'content' => [
+        'action' => [
+            'add' => 'Add New :attribute',
+            'detail' => 'View Details',
+            'edit' => 'Edit :attribute',
+            'delete' => 'Delete :attribute',
+        ],
+        'table' => [
+            'email' => 'Email',
+            'action' => 'Actions',
+            'role' => 'Role',
+            'id' => '#',
+            'active' => 'Actived',
+            'percent' => 'Percent',
+            'start_at' => 'Start At',
+            'end_at' => 'End At',
+            'user' => 'User',
+        ],
+        'form' => [
+            'password' => 'Password',
+            'confirm_pw' => 'Confirm Password',
+            'name' => 'Name',
+            'address' => 'Address',
+            'phone' => 'Phone',
+            'avatar' => 'Avatar',
+        ],
+        'message' => [
+             'create' => 'Created a :attribute successfuly',
+             'update' => 'Update a :attribute successfuly',
+             'delete' => 'Delete a :attribute successfuly',
+             'error' =>'Have error',
+        ],
+        'attribute' => [
+             'user' => 'user',
+             'role' => 'role',
+        ],
+        'button' => [
+             'create' => 'Create',
+             'cancel' => 'Cancel',
+             'update' =>'Update',
+
+        ]
+    ],
     'footer' => [
         'design' => 'Design by',
         'year' => '2017-2019',
         'author' => 'Bootstrapious',
     ],
-    'content' => [
-       'action' => [
-           'add' => 'Add New :attribute',
-           'detail' => 'View Details',
-           'edit' => 'Edit :attribute',
-           'delete' => 'Delete :attribute',
-       ],
-       'table' => [
-           'email' => 'Email',
-           'action' => 'Actions',
-           'role' => 'Role',
-           'id' => '#',
-           'active' => 'Actived',
-           'percent' => 'Percent',
-           'start_at' => 'Start At',
-           'end_at' => 'End At',
-       ],
-       'form' => [
-           'password' => 'Password',
-           'name' => 'Name',
-           'address' => 'Address',
-           'phone' => 'Phone',
-           'avatar' => 'Avatar',
-       ],
-       'message' => [
-            'create' =>'Created a :attribute successfuly',
-            'update' =>'Update a :attribute successfuly',
-            'delete' =>'Delete a :attribute successfuly',
-            'error' =>'Have error',
-       ],
-       'button' => [
-            'create' =>'Create',
-            'update' =>'Update',
-       ]
-    ]
-
 ];

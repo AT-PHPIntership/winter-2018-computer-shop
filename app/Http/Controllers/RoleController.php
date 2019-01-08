@@ -51,7 +51,7 @@ class RoleController extends Controller
     public function store(RoleRequest $request)
     {
         $this->roleService->create($request);
-        return redirect()->route('roles.index')->with('message', Lang::get('master.content.message.create', ['attribute' => 'role']));
+        return redirect()->route('roles.index')->with('message', Lang::get('master.content.message.create', ['attribute' => trans('master.content.attribute.user')]));
     }
 
     /**
@@ -79,7 +79,7 @@ class RoleController extends Controller
     {
         $message = $this->roleService->update($id, $request);
         if ($message === 1) {
-            return redirect()->route('roles.index')->with('message', Lang::get('master.content.message.update', ['attribute' => 'role']));
+            return redirect()->route('roles.index')->with('message', Lang::get('master.content.message.update', ['attribute' => trans('master.content.attribute.role')]));
         } else {
             return redirect()->route('roles.index')->with('message', Lang::get('master.content.message.error'));
         }
@@ -96,20 +96,9 @@ class RoleController extends Controller
     {
         $message = $this->roleService->delete($id);
         if ($message === 1) {
-            return redirect()->route('roles.index')->with('message', Lang::get('master.content.message.delete', ['attribute' => 'role']));
+            return redirect()->route('roles.index')->with('message', Lang::get('master.content.message.delete', ['attribute' => trans('master.content.attribute.role')]));
         } else {
             return redirect()->route('roles.index')->with('message', Lang::get('master.content.message.error'));
         }
-    }
-
-
-    /**
-     * The function return role index of admin page
-     *
-     * @return void
-     */
-    public function show()
-    {
-        return 0;
     }
 }
