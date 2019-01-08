@@ -26,12 +26,7 @@ class PromotionService
      */
     public function create($request)
     {
-        Promotion::create([
-            'name' => $request->name,
-            'percent' => $request->percent,
-            'start_at' => $request->start_at,
-            'end_at' => $request->end_at
-        ]);
+        Promotion::create($request->all());
     }
 
     /**
