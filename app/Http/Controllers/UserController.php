@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Services\UserService;
+use App\Models\User;
 use App\Http\Requests\CreateUserRequest;
 
 class UserController extends Controller
@@ -48,5 +49,16 @@ class UserController extends Controller
     {
         app(UserService::class)->store($request->all());
         return redirect()->route('users.index');
+    }
+    /**
+     * View detail the user
+     *
+     * @param object $user [binding user]
+     *
+     * @return View user show
+     */
+    public function show(User $user)
+    {
+        return view('admin.users.show', compact('user'));
     }
 }

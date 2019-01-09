@@ -37,6 +37,7 @@ return [
             'detail' => 'View Details',
             'edit' => 'Edit :attribute',
             'delete' => 'Delete :attribute',
+            'show' => 'Details about :attribute',
         ],
         'table' => [
             'email' => 'Email',
@@ -57,10 +58,11 @@ return [
             'avatar' => 'Avatar',
         ],
         'message' => [
-             'create' => 'Created a :attribute successfuly',
-             'update' => 'Update a :attribute successfuly',
-             'delete' => 'Delete a :attribute successfuly',
-             'error' =>'Have error',
+            'create' => 'Created a :attribute successfully',
+            'update' => 'Updated the :attribute successfully',
+            'delete' => 'Deleted the :attribute successfully',
+            'error' => 'The :attribute happens',
+            'img' => "doesn't have any avatar",
         ],
         'attribute' => [
              'user' => 'user',
@@ -77,5 +79,5 @@ return [
         'design' => 'Design by',
         'year' => '2017-2019',
         'author' => 'Bootstrapious',
-    ]
+    ],
 ];
