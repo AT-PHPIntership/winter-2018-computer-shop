@@ -8,6 +8,8 @@ return [
     ],
     'comment' => [
         'number_paginate' => '3'
-    ]
-    
+    ],
+    'user' => [
+        'limit_rows' => 10
+    ],
 ];

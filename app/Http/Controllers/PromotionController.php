@@ -91,9 +91,13 @@ class PromotionController extends Controller
      */
     public function update($id, PromotionRequest $request)
     {
-        $this->promotionService->update($id, $request);
-        return redirect()->route('promotions.index')->with('message', Lang::get('master.content.message.update', [
-            'attribute' => 'promotion']));
+        $message = $this->promotionService->update($id, $request);
+        if ($message === 1) {
+            return redirect()->route('promotions.index')->with('message', Lang::get('master.content.message.update', [
+                'attribute' => 'promotion']));
+        } else {
+            return redirect()->route('promotions.index')->with('message', Lang::get('master.content.message.error'));
+        }
     }
 
     /**

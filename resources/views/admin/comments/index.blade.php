@@ -34,7 +34,7 @@
                      <th>@lang('master.content.table.user_name')</th>
                      <th>@lang('master.content.table.product_name')</th>
                      <th>@lang('master.content.table.content')</th>
-                     <th class="col-md-1">@lang('master.content.table.action')</th>
+                     <th class="col-md-1" text-right">@lang('master.content.table.action')</th>
                    </tr>
                  </thead>
                  <tbody>
@@ -44,14 +44,17 @@
                      <td>{{ $comment->user->name }}</td>
                      <td>{{ $comment->product->name }}</td>
                      <td>{{ $comment->content }}</td>
-                     <td>
+                     <td class="text-right">
+                      @if(sizeof($comment->children) !== 0)
                        <a href="{{ route('comments.show', $comment->id) }}" class="btn btn-sm btn-warning">
                        @lang('master.content.action.detail')
                        </a>
+                       @else
+                       @endif
                        <form action="{{ route('comments.destroy', $comment->id) }}" method="POST" class="d-inline">
                           @csrf
                           @method('DELETE')
-                          <input type="submit" value="@lang('master.content.action.delete', ['attribute' => 'Role'])" class="btn btn-sm btn-danger">
+                          <input type="submit" value="@lang('master.content.action.delete', ['attribute' => 'Comment'])" class="btn btn-sm btn-danger">
                         </form> 
                        </a>
                      </td>

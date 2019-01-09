@@ -43,10 +43,10 @@
                                  <th>{{ $item->product->name }}</th>
                                  <th>{{ $item->content }}</th>
                                  <td>
-                                   <form action="{{ route('comments.destroy', $comment->id) }}" method="POST" class="d-inline">
+                                   <form action="{{ route('comments.destroy', $item->id) }}" method="POST" class="d-inline">
                                       @csrf
                                       @method('DELETE')
-                                      <input type="submit" value="@lang('master.content.action.delete', ['attribute' => 'Role'])" class="btn btn-sm btn-danger">
+                                      <input type="submit" value="@lang('master.content.action.delete', ['attribute' => 'Comment'])" class="btn btn-sm btn-danger">
                                     </form> 
                                    </a>
                                  </td>
