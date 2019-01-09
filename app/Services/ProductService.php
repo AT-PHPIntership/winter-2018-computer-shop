@@ -50,7 +50,7 @@ class ProductService
         }
     }
 
-     /**
+    /**
     * Handle update a product to database
     *
     * @param object $request [request update a product]
@@ -68,6 +68,24 @@ class ProductService
             session()->flash('message', __('master.content.message.update', ['attribute' => trans('master.content.attribute.product')]));
         } catch (Exception $ex) {
             DB::rollback();
+             session()->flash('warning', __('master.content.message.error', ['attribute' => $ex->getMessage()]));
+            return redirect()->back();
+        }
+    }
+
+    /**
+    * Handle update a product to database
+    *
+    * @param object $product [binding product model]
+    *
+    * @return void
+    */
+    public function delete($product)
+    {
+        try {
+            $product->delete();
+            session()->flash('message', __('master.content.message.delete', ['attribute' => trans('master.content.attribute.product')]));
+        } catch (Exception $ex) {
              session()->flash('warning', __('master.content.message.error', ['attribute' => $ex->getMessage()]));
             return redirect()->back();
         }
