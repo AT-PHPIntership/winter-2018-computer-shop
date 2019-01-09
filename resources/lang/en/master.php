@@ -64,11 +64,16 @@ return [
             'error' => 'The :attribute happens',
             'img' => "doesn't have any avatar",
         ],
+        'attribute' => [
+             'user' => 'user',
+             'role' => 'role',
+             'User' => 'User',
+        ],
         'button' => [
             'create' => 'Create',
             'update' => 'Update',
             'cancel' => 'Cancel',
-        ]
+        ],
     ],
     'footer' => [
         'design' => 'Design by',

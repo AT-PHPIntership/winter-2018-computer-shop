@@ -20,17 +20,17 @@
               </div>
               <div class="form-group">       
                 <label class="form-control-label">@lang('master.content.form.address')</label>
-                <input name="address" type="text" placeholder="Address" class="form-control" value="{{$user->profiles->address}}" disabled>
+                <input name="address" type="text" placeholder="Address" class="form-control" value="{{$user->profile->address}}" disabled>
               </div>
               <div class="form-group">       
                 <label class="form-control-label">@lang('master.content.form.phone')</label>
-                <input name="phone" type="text" placeholder="Phone" class="form-control" value="{{$user->profiles->phone}}" disabled>
+                <input name="phone" type="text" placeholder="Phone" class="form-control" value="{{$user->profile->phone}}" disabled>
               </div>
               <div class="form-group row">
                 <label for="fileInput" class="col-sm-3 form-control-label">@lang('master.content.form.avatar')</label>
-                @if($user->profiles->avatar == !null)
+                @if($user->profile->avatar == !null)
                 <div class="col-sm-2">
-                    <img src="storage/avatar/{{$user->profiles->avatar}}" alt="" class="img-thumbnail">
+                    <img src="storage/avatar/{{$user->profile->avatar}}" alt="" class="img-thumbnail">
                 </div>
                 @else
                 <div class="col-sm-8">

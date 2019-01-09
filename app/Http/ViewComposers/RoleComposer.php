@@ -29,6 +29,6 @@ class RoleComposer
     */
     public function compose(View $view)
     {
-        $view->with('roles', $this->roleService->index());
+        $view->with('roles', $this->roleService->getAll());
     }
 }
