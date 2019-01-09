@@ -38,6 +38,7 @@ class UserController extends Controller
     {
         return view('admin.users.create');
     }
+
     /**
      * Handle store user to database
      *
@@ -50,6 +51,7 @@ class UserController extends Controller
         app(UserService::class)->store($request->all());
         return redirect()->route('users.index');
     }
+
     /**
      * View detail the user
      *
@@ -60,5 +62,18 @@ class UserController extends Controller
     public function show(User $user)
     {
         return view('admin.users.show', compact('user'));
+    }
+
+    /**
+     * Handle delete user out of  database
+     *
+     * @param object $user [request to delete the user]
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(User $user)
+    {
+        app(UserService::class)->delete($user);
+        return redirect()->route('users.index');
     }
 }

@@ -69,4 +69,21 @@ class UserService
         }
         return null;
     }
+    
+    /**
+    * Handle delete user out of database
+    *
+    * @param object $user [request delete a user]
+    *
+    * @return object [object]
+    */
+    public function delete($user)
+    {
+        try {
+            $user->delete();
+            session()->flash('message', __('master.content.message.delete', ['attribute' => trans('master.content.attribute.user')]));
+        } catch (Exception $ex) {
+            session()->flash('warning', __('master.content.message.error', ['attribute' => $ex->getMessage()]));
+        }
+    }
 }
