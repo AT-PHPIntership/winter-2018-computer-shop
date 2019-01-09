@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use JavaScript;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -13,9 +14,22 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        $this->putPHPToJavaScript();
     }
 
+    /**
+     * Define putPHPToJavaScript
+     *
+     * @return void
+     */
+    protected function putPHPToJavaScript()
+    {
+        JavaScript::put([
+            'define' => config('define'),
+            'trans'  => __('js'),
+        ]);
+    }
+    
     /**
      * Register any application services.
      *

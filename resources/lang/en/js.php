@@ -1,10 +1,8 @@
 <?php
-
-return [
-
+  return [
     /*
     |--------------------------------------------------------------------------
-    | Define Lines
+    | Define Language Lines
     |--------------------------------------------------------------------------
     |
     | The following language lines contain the default error messages used by
@@ -12,9 +10,5 @@ return [
     | as the size rules. Feel free to tweak each of these messages here.
     |
     */
-    'user' => [
-        'limit_rows' => 10,
-        'order_by_desc' =>'desc',
-    ],
-
-];
+    'delete' => 'Are you sure want to delete?',
+  ];

@@ -65,14 +65,15 @@ return [
             'img' => "doesn't have any avatar",
         ],
         'attribute' => [
-            'user' => 'user',
-            'User' => 'User',
+             'user' => 'user',
+             'role' => 'role',
+             'User' => 'User',
         ],
         'button' => [
             'create' => 'Create',
             'update' => 'Update',
             'cancel' => 'Cancel',
-        ]
+        ],
     ],
     'footer' => [
         'design' => 'Design by',
