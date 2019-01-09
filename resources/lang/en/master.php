@@ -62,17 +62,19 @@ return [
             'update' => 'Updated the :attribute successfully',
             'delete' => 'Deleted the :attribute successfully',
             'error' => 'The :attribute happens',
-            'img' => "doesn't have any avatar",
+            'img' => "doesn't have avatar",
             'error' =>'Have error',
+        ],
+        'attribute' => [
+             'user' => 'user',
+             'role' => 'role',
+             'User' => 'User',
         ],
         'button' => [
             'create' => 'Create',
             'update' => 'Update',
             'cancel' => 'Cancel',
         ],
-        'attribute' => [
-            'user' => 'user',
-        ]
     ],
     'footer' => [
         'design' => 'Design by',

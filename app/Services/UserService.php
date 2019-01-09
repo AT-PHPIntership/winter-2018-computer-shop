@@ -4,20 +4,28 @@ namespace App\Services;
 
 use App\Models\User;
 use App\Models\UserProfile;
-use DB;
 use League\Flysystem\Exception;
+use Yajra\Datatables\Datatables;
+use DB;
 
 class UserService
 {
     /**
-     * Get data form users table return user index page
+     * Get data for datatable
      *
      * @return object [object]
      */
-    public function getAllData()
+    public function dataTable()
     {
-        $users = User::orderBy('id', \Config::get('define.user.order_by_desc'))->paginate(\Config::get('define.user.limit_rows'));
-        return $users;
+        $users = User::select(['id', 'name', 'email', 'role_id']);
+        return Datatables::of($users)
+                ->addColumn('role', function (User $user) {
+                    return $user->role->name;
+                })
+                ->addColumn('action', function ($data) {
+                    return view('admin.users.action', ['id' => $data->id]);
+                })
+                ->make(true);
     }
     
    /**
@@ -27,21 +35,21 @@ class UserService
     *
     * @return void
     */
-    public function create($request)
+    public function store($request)
     {
+        DB::beginTransaction();
         try {
-             \DB::transaction(function () use ($request) {
-                $user = User::create($request->all());
-                UserProfile::create([
-                     'address' => request('address'),
-                     'phone' => request('phone'),
-                     'avatar' => $this->handleUploadedImage($request->file('avatar')),
-                     'user_id' => $user->id
-                     ]);
-             });
-        } catch (\Exception $ex) {
-            \DB::rollback();
-            return redirect()->back()->with('warning', Lang::get('master.content.message.error', ['attribute' => $ex]));
+            $user = User::create($request);
+            if (array_key_exists('avatar', $request)) {
+                $request['avatar'] = $this->handleUploadedImage($request['avatar']);
+            }
+            $user->profile()->create($request);
+            DB::commit();
+            session()->flash('message', __('master.content.message.create', ['attribute' => trans('master.content.attribute.user')]));
+        } catch (Exception $ex) {
+            DB::rollback();
+            session()->flash('warning', __('master.content.message.error', ['attribute' => $ex->getMessage()]));
+            return redirect()->back();
         }
     }
 
@@ -74,12 +82,11 @@ class UserService
     {
         DB::beginTransaction();
         try {
-            $profile = $request->only('address', 'phone', 'avatar');
-            if ($request->has('avatar')) {
-                $profile['avatar'] = $this->handleChangedImage($request->file('avatar'), $user);
+            if (isset($request['avatar'])) {
+                $request['avatar'] = $this->handleChangedImage($request['avatar'], $user);
             }
-            $user->profiles->update($profile);
-            $user = $user->update($request->all());
+            $user->profile->update($request);
+            $user = $user->update($request);
             DB::commit();
             session()->flash('message', __('master.content.message.update', ['attribute' => trans('master.content.attribute.user')]));
         } catch (Exception $ex) {
@@ -100,13 +107,34 @@ class UserService
     public function handleChangedImage($image, $user)
     {
         if (!is_null($image)) {
-            $userImage = realpath('storage/avatar/' . $user->profiles->avatar);
-            if (file_exists($userImage)) {
+            $userImage = realpath('storage/avatar/' . $user->profile->avatar);
+            if (!is_null($user->profile->avatar) && file_exists($userImage)) {
                 unlink($userImage);
             }
             $imageName = time() . '_' . $image->getClientOriginalName();
             $image->move('storage/avatar/', $imageName);
             return $imageName;
+        }
+    }
+
+    /**
+    * Handle delete user out of database
+    *
+    * @param object $user [request delete a user]
+    *
+    * @return object [object]
+    */
+    public function delete($user)
+    {
+        try {
+            $userImage = realpath('storage/avatar/' . $user->profile->avatar);
+            if (!is_null($user->profile->avatar) && file_exists($userImage)) {
+                unlink($userImage);
+            }
+            $user->delete();
+            session()->flash('message', __('master.content.message.delete', ['attribute' => trans('master.content.attribute.user')]));
+        } catch (Exception $ex) {
+            session()->flash('warning', __('master.content.message.error', ['attribute' => $ex->getMessage()]));
         }
     }
 }

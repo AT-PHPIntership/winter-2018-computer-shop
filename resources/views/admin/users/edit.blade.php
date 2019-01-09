@@ -29,12 +29,12 @@
               </div>
               <div class="form-group">       
                 <label class="form-control-label">@lang('master.content.form.address')</label>
-                <input name="address" type="text" placeholder="Address" class="form-control" value="{{$user->profiles->address}}">
+                <input name="address" type="text" placeholder="Address" class="form-control" value="{{$user->profile->address}}">
                 @include('admin.partials.error', ['err' => 'address'])
               </div>
               <div class="form-group">       
                 <label class="form-control-label">@lang('master.content.form.phone')</label>
-                <input name="phone" type="text" placeholder="Phone" class="form-control" value="{{$user->profiles->phone}}">
+                <input name="phone" type="text" placeholder="Phone" class="form-control" value="{{$user->profile->phone}}">
                 @include('admin.partials.error', ['err' => 'phone'])
               </div>
               <div class="form-group row">
@@ -50,9 +50,9 @@
               <div class="form-group row">
                 <label for="fileInput" class="col-sm-3 form-control-label">@lang('master.content.form.avatar')</label>
                 <div class="col-sm-9">
-                @if($user->profiles->avatar == !null)
+                @if($user->profile->avatar == !null)
                 <div class="col-sm-2">
-                    <img src="storage/avatar/{{$user->profiles->avatar}}" alt="" class="img-thumbnail">
+                    <img src="storage/avatar/{{$user->profile->avatar}}" alt="" class="img-thumbnail">
                 </div>
                 @else
                 <div class="col-sm-8">

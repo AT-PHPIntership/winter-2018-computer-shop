@@ -4,25 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Services\UserService;
-use App\Http\Requests\UserRequest;
-use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
-use Illuminate\Support\Facades\Lang ;
+use App\Http\Requests\CreateUserRequest;
+use App\Http\Requests\UpdateUserRequest;
 
 class UserController extends Controller
 {
-    private $userService;
-
-   /**
-    * Contructer UserService
-    *
-    * @param UserService $userService [userService]
-    */
-    public function __construct(UserService $userService)
-    {
-        $this->userService = $userService;
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -30,7 +17,17 @@ class UserController extends Controller
      */
     public function index()
     {
-        return view('admin.users.index', ['users' => $this->userService->getAllData()]);
+        return view('admin.users.index');
+    }
+
+    /**
+     * Get data for datatable
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getData()
+    {
+        return app(UserService::class)->dataTable();
     }
 
     /**
@@ -50,10 +47,10 @@ class UserController extends Controller
      *
      * @return user.index
      */
-    public function store(UserRequest $request)
+    public function store(CreateUserRequest $request)
     {
-        $this->userService->create($request);
-        return redirect()->route('users.index')->with('message', Lang::get('master.content.message.create', ['attribute' => 'user']));
+        app(UserService::class)->store($request->except(['_token']));
+        return redirect()->route('users.index');
     }
 
     /**
@@ -90,7 +87,20 @@ class UserController extends Controller
      */
     public function update(UpdateUserRequest $request, User $user)
     {
-        $this->userService->update($request, $user);
+        app(UserService::class)->update($request->except(['_token']), $user);
+        return redirect()->route('users.index');
+    }
+
+    /**
+     * Handle delete user out of  database
+     *
+     * @param object $user [request to delete the user]
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(User $user)
+    {
+        app(UserService::class)->delete($user);
         return redirect()->route('users.index');
     }
 }
