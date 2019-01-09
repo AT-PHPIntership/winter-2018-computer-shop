@@ -39,11 +39,12 @@
               <div class="form-group row">
                 <label class="form-control-label col-sm-12">@lang('master.content.form.category')</label>
                 <div class="col-sm-12">
-                  <select class="form-control mb-3" id='parent_category' data-categoryId='{{$product->category_id}}'>
+                  <select class="form-control mb-3" id='parent_category' data-category-id='{{$product->category_id}}'>
                     @foreach($categories as $category)
                         <option {{ $product->category->parent_id == $category->id ? 'selected' : ''}} value="{{$category->id}}">{{$category->name}}</option>
                     @endforeach
                   </select>
+                  @include('admin.partials.error', ['err' => 'category_id'])
                 </div>
               </div>
               <div class="form-group row">

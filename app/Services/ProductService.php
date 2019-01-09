@@ -49,4 +49,27 @@ class ProductService
             return redirect()->back();
         }
     }
+
+     /**
+    * Handle update a product to database
+    *
+    * @param object $request [request update a product]
+    * @param object $product [binding product model]
+    *
+    * @return void
+    */
+    public function update($request, $product)
+    {
+        DB::beginTransaction();
+        try {
+            $request['unit_price'] = (int) str_replace(',', '', request('unit_price'));
+            $product->update($request);
+            DB::commit();
+            session()->flash('message', __('master.content.message.update', ['attribute' => trans('master.content.attribute.product')]));
+        } catch (Exception $ex) {
+            DB::rollback();
+             session()->flash('warning', __('master.content.message.error', ['attribute' => $ex->getMessage()]));
+            return redirect()->back();
+        }
+    }
 }

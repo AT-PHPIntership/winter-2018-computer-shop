@@ -72,7 +72,7 @@ $(document).ready(function(){
           data: {id:id},
           success: function(data){ 
             // console.log(data);
-            var childId = $('#parent_category').data('categoryid');
+            var childId = $('#parent_category').data('category-id');
             if (data.length  > 0) {
               var output = '<select name="category_id" class="form-control mb-3">';
               $.each(data, function(key, val){

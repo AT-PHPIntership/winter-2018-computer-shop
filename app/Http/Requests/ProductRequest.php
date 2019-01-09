@@ -23,10 +23,19 @@ class ProductRequest extends FormRequest
      */
     public function rules()
     {
+        switch ($this->method()) {
+            case "POST":
+                $id = '';
+                break;
+            case "PUT":
+                $id = $this->product->id;
+                break;
+        }
         return [
-            'name' => 'required|min:3|unique:products',
-            'unit_price' => 'required|regex:/\d{1,3}(,\d{3})*/',
+            'name' => 'required|min:3|unique:products,name,' . $id,
+            'unit_price' => 'required|regex:/\d{1,3}(,\d{3})*$/',
             'quantity' => 'required|numeric',
+            'category_id' => 'exists:categories,id'
         ];
     }
 
@@ -38,7 +47,8 @@ class ProductRequest extends FormRequest
     public function messages()
     {
         return [
-            'unit_price.regex' => 'The category input field must be number',
+            'unit_price.regex' => 'The price input field must be number',
+            'category_id.exists' => 'The category not found in category table',
         ];
     }
 }

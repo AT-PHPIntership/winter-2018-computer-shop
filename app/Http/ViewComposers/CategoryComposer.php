@@ -5,7 +5,6 @@ namespace App\Http\ViewComposers;
 use Illuminate\View\View;
 use App\Services\CategoryService;
 
-
 class CategoryComposer
 {
     private $categoryService;
@@ -17,7 +16,6 @@ class CategoryComposer
     public function __construct(CategoryService $categoryService)
     {
         $this->categoryService = $categoryService;
-
     }
 
     /**

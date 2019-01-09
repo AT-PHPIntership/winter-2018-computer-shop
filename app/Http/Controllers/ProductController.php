@@ -9,18 +9,6 @@ use App\Models\Product;
 
 class ProductController extends Controller
 {
-    private $productService;
-
-   /**
-    * Contructer ProductService
-    *
-    * @param ProductService $productService [productService]
-    */
-    public function __construct(ProductService $productService)
-    {
-        $this->productService = $productService;
-    }
-
     /**
      * Display the index page
      *
@@ -38,7 +26,7 @@ class ProductController extends Controller
      */
     public function getData()
     {
-        return $this->productService->dataTable();
+        return app(ProductService::class)->dataTable();
     }
 
     /**
@@ -60,7 +48,7 @@ class ProductController extends Controller
      */
     public function store(ProductRequest $request)
     {
-        $this->productService->store($request);
+        app(ProductService::class)->store($request);
         return redirect()->route('products.index');
     }
 
@@ -79,10 +67,26 @@ class ProductController extends Controller
     /**
      * Show the form for editing a resource.
      *
+     * @param object $product [binding product model]
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit(Product $product)
     {
         return view('admin.products.edit', compact('product'));
+    }
+
+    /**
+     * Update a created resource in storage.
+     *
+     * @param object $request [request to update product]
+     * @param object $product [binding product model]
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function update(ProductRequest $request, Product $product)
+    {
+        app(ProductService::class)->update($request->all(), $product);
+        return redirect()->route('products.index');
     }
 }
