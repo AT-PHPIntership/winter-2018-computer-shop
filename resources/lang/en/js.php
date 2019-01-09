@@ -10,5 +10,7 @@
     | as the size rules. Feel free to tweak each of these messages here.
     |
     */
-    'delete' => 'Are you sure want to delete?',
+     'user' => [
+        'delete' =>   'Are you sure want to delete this user?',
+     ]
   ];
