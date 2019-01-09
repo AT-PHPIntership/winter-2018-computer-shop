@@ -2,6 +2,7 @@
 @section('content')
 <!-- Page Header-->
 @include('admin.partials.header', ['title' => trans('master.sidebar.user')])
+@include('admin.partials.warning')
 <!-- Forms Section-->
 <section class="forms"> 
   <div class="container-fluid">
@@ -10,7 +11,7 @@
       <div class="col-lg-12">
         <div class="card">
           <div class="card-header d-flex align-items-center">
-            <h3 class="h4">@lang('master.content.action.add', ['attribute' => 'User'])</h3>
+            <h3 class="h4">@lang('master.content.action.add', ['attribute' => trans('master.content.attribute.User')])</h3>
           </div>
           <div class="card-body">
             <form action="{{route('users.store')}}" method="POST" enctype="multipart/form-data">

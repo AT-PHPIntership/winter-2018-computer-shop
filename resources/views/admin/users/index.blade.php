@@ -3,14 +3,13 @@
 <!-- Page Header-->
 @include('admin.partials.header', ['title' => trans('master.sidebar.user')])
 @include('admin.partials.message')
-@include('admin.partials.warning')
 <section class="tables">  
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-header d-flex align-items-center">
-                        <a href="{{route('users.create')}}" class="btn btn-primary">@lang('master.content.action.add', ['attribute' => trans('master.content.table.user')])</a>
+                        <a href="{{route('users.create')}}" class="btn btn-primary">@lang('master.content.action.add', ['attribute' => trans('master.content.attribute.User')])</a>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">   

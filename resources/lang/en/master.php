@@ -47,7 +47,6 @@ return [
             'percent' => 'Percent',
             'start_at' => 'Start At',
             'end_at' => 'End At',
-            'user' => 'User',
         ],
         'form' => [
             'password' => 'Password',
@@ -66,17 +65,17 @@ return [
         'attribute' => [
              'user' => 'user',
              'role' => 'role',
+             'User' => 'User',
         ],
         'button' => [
-             'create' => 'Create',
-             'cancel' => 'Cancel',
-             'update' =>'Update',
-
-        ]
+            'create' => 'Create',
+            'update' => 'Update',
+            'cancel' => 'Cancel',
+        ],
     ],
     'footer' => [
         'design' => 'Design by',
         'year' => '2017-2019',
         'author' => 'Bootstrapious',
-    ],
+    ]
 ];

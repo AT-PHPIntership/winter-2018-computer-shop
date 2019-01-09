@@ -3,24 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Lang;
 use App\Services\UserService;
 use App\Http\Requests\CreateUserRequest;
 
 class UserController extends Controller
 {
-    private $userService;
-
-   /**
-    * Contructer UserService
-    *
-    * @param UserService $userService [userService]
-    */
-    public function __construct(UserService $userService)
-    {
-        $this->userService = $userService;
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -38,7 +25,7 @@ class UserController extends Controller
      */
     public function getData()
     {
-        return $this->userService->dataTable();
+        return app(UserService::class)->dataTable();
     }
 
     /**
@@ -50,7 +37,6 @@ class UserController extends Controller
     {
         return view('admin.users.create');
     }
-
     /**
      * Handle store user to database
      *
@@ -60,7 +46,7 @@ class UserController extends Controller
      */
     public function store(CreateUserRequest $request)
     {
-        $this->userService->create($request->all());
-        return redirect()->route('users.index')->with('message', Lang::get('master.content.message.create', ['attribute' => 'user']));
+        app(UserService::class)->store($request->all());
+        return redirect()->route('users.index');
     }
 }

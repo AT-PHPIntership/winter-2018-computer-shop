@@ -51,7 +51,7 @@ class RoleController extends Controller
     public function store(RoleRequest $request)
     {
         $this->roleService->create($request);
-        return redirect()->route('roles.index')->with('message', Lang::get('master.content.message.create', ['attribute' => trans('master.content.attribute.user')]));
+        return redirect()->route('roles.index')->with('message', Lang::get('master.content.message.create', ['attribute' => trans('master.content.attribute.role')]));
     }
 
     /**
