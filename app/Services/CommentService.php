@@ -21,7 +21,7 @@ class CommentService
     /**
      * Delete comment
      *
-     * @param  [int] $id [Id commetn]
+     * @param [int] $id [Id commetn]
      *
      * @return void
      */
@@ -29,7 +29,7 @@ class CommentService
     {
         try {
             $parent = Comment::find($id);
-            if($parent->parent === null) {
+            if ($parent->parent === null) {
                 $message = Comment::where('id', $id)
                                     ->orWhere('parent_id', $id)->delete();
             } else {

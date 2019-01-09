@@ -88,15 +88,16 @@ class CommentController extends Controller
     // }
 
     /**
-     * Remove the specified resource from storage.
+     * Delete comment
      *
-     * @param  \App\Models\Comment  $comment
-     * @return \Illuminate\Http\Response
+     * @param [int] $id [Id comment]
+     *
+     * @return void
      */
     public function destroy($id)
     {
         $message = $this->commentService->delete($id);
-        if($message !== 0) {
+        if ($message !== 0) {
             return redirect()->route('comments.index')->with('message', Lang::get('master.content.message.delete', ['attribute' => trans('master.content.attribute.comment')]));
         } else {
             return redirect()->route('comments.index')->with('message', Lang::get('master.content.message.error'));
