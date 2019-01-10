@@ -8,18 +8,6 @@ use App\Services\CategoryService;
 
 class CategoryController extends Controller
 {
-    private $categoryService;
-
-   /**
-    * Contructer CategoryService
-    *
-    * @param UserService $categoryService [categoryService]
-    */
-    public function __construct(CategoryService $categoryService)
-    {
-        $this->categoryService = $categoryService;
-    }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -39,7 +27,7 @@ class CategoryController extends Controller
      */
     public function store(CategoryRequest $request)
     {
-        $this->categoryService->store($request);
+        app(CategoryService::class)->store($request->all());
         return redirect()->route('categories.index');
     }
 }

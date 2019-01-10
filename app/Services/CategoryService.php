@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Category;
+use App\Services\ImageService;
 
 class CategoryService
 {
@@ -25,7 +26,15 @@ class CategoryService
      */
     public function store($request)
     {
-        return Category::create($request->all());
-        session()->flash('message', __('master.content.message.create', ['attribute' => trans('master.content.attribute.category')]));
+        try {
+            if (array_key_exists('image', $request)) {
+                $request['image'] = app(ImageService::class)->handleUploadedImage($request['image'], trans('master.content.attribute.category'));
+            }
+            Category::create($request);
+            session()->flash('message', __('master.content.message.create', ['attribute' => trans('master.content.attribute.category')]));
+        } catch (Exception $ex) {
+            session()->flash('warning', __('master.content.message.error', ['attribute' => $ex->getMessage()]));
+            return redirect()->back();
+        }
     }
 }

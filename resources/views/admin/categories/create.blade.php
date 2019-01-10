@@ -17,7 +17,7 @@
             @csrf
               <div class="form-group">
                 <label class="form-control-label">@lang('master.content.form.name')<span class="ml-1 text-danger">*<span></label>
-                <input name="name" type="text" placeholder="Enter category name" class="form-control" value="{{ old('category') }}">
+                <input name="name" type="text" placeholder="Enter category name" class="form-control" value="{{ old('name') }}">
                 @include('admin.partials.error', ['err' => 'name'])
               </div>
               <div class="form-group row">
@@ -26,9 +26,17 @@
                   <select name="parent_id" class="form-control mb-3">
                     <option value="" selected disabled hidden>Choose here</option>
                     @foreach($categories as $category)
-                        <option value="{{$category->id}}">{{$category->name}}</option>
+                        <option <?php echo (old('parent_id') == $category->id) ? 'selected' : ''?> value="{{$category->id}}">{{$category->name}}</option>
                     @endforeach
                   </select>
+                  @include('admin.partials.error', ['err' => 'parent_id'])
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="fileInput" class="col-sm-3 form-control-label">@lang('master.content.form.image')</label>
+                <div class="col-sm-9">
+                  <input type="file" id="fileInput" name="image" class="form-control-file">
+                  @include('admin.partials.error', ['err' => 'image'])
                 </div>
               </div>
               <div class="form-group">    

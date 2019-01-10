@@ -7,20 +7,6 @@ use App\Services\CategoryService;
 
 class CategoryComposer
 {
-    private $categoryService;
-
-     /**
-     * Contructer RoleService
-     *
-     * @param object $categoryService [categoryService]
-     *
-     * @return void
-     */
-    public function __construct(CategoryService $categoryService)
-    {
-        $this->categoryService = $categoryService;
-    }
-
     /**
     * Bind data to the view.
     *
@@ -30,6 +16,6 @@ class CategoryComposer
     */
     public function compose(View $view)
     {
-        $view->with('categories', $this->categoryService->parent());
+        $view->with('categories', app(CategoryService::class)->parent());
     }
 }

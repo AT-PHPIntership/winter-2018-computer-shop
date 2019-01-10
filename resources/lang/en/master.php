@@ -56,6 +56,7 @@ return [
             'address' => 'Address',
             'phone' => 'Phone',
             'avatar' => 'Avatar',
+            'image' => 'Image',
             'parent' => 'Parent Category',
         ],
         'message' => [
@@ -63,17 +64,22 @@ return [
             'update' => 'Updated the :attribute successfully',
             'delete' => 'Deleted the :attribute successfully',
             'error' => 'The :attribute happens',
-            'img' => "doesn't have any avatar",
+            'img' => 'does not have avatar',
+            'error' =>'Have error',
         ],
         'attribute' => [
-            'category' => 'category',
-            'Category' => 'Category',
+             'user' => 'user',
+             'role' => 'role',
+             'User' => 'User',
+             'category' => 'category',
+             'Category' => 'Category',
+             'avatar' => 'avatar',
         ],
         'button' => [
             'create' => 'Create',
             'update' => 'Update',
             'cancel' => 'Cancel',
-        ]
+        ],
     ],
     'footer' => [
         'design' => 'Design by',
