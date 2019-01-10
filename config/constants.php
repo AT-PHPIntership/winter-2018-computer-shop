@@ -11,9 +11,9 @@ return [
 
     'order' => [
         'status' => [
-            'pending' => 0,
-            'approve' => 1,
-            'cancel' => 2
+            'pending' => 'Pending',
+            'approve' => 'Approve',
+            'cancel' => 'Cancel'
         ],
         'number_paginate' => '3'
     ]
