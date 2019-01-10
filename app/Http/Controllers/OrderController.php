@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Order;
 use App\Models\OrderDetail;
 use App\Services\OrderService;
+use Illuminate\Support\Facades\Lang;
 
 class OrderController extends Controller
 {
@@ -64,7 +65,13 @@ class OrderController extends Controller
         return view('admin.orders.show', compact('order'));
     }
 
-
+    /**
+     * Eit order page
+     *
+     * @param Order $order [Object order
+     *
+     * @return void
+     */
     public function edit(Order $order)
     {
         return view('admin.orders.update', compact('order'));
@@ -82,14 +89,21 @@ class OrderController extends Controller
     //     //
     // }
 
-    // /**
-    //  * Remove the specified resource from storage.
-    //  *
-    //  * @param  int  $id
-    //  * @return \Illuminate\Http\Response
-    //  */
-    // public function destroy($id)
-    // {
-    //     //
-    // }
+    /**
+     * Delete order
+     *
+     * @param [Int] $id [Id order]
+     *
+     * @return void
+     */
+    public function destroy($id)
+    {
+        $message = $this->orderService->delete($id);
+        dd($message);
+        if ($message === 1) {
+            return redirect()->route('orders.index')->with('message', Lang::get('master.content.message.delete', ['attribute' => 'Order']));
+        } else {
+            return redirect()->route('orders.index')->with('message', Lang::get('master.content.message.error'));
+        }
+    }
 }
