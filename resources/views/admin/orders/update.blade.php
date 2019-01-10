@@ -25,9 +25,9 @@
                 <label class="col-sm-3 form-control-label">@lang('master.content.table.status')</label>
                 <div class="col-sm-9">
                   <select name="status" class="form-control mb-3">
-                      <option value="{{ \App\Models\Order::PENDING_STATUS }}" {{ $order->status === \App\Models\Order::PENDING_STATUS ? 'select' : '' }}>{{ config('constants.order.status.pending') }}</option>
-                      <option value="{{ \App\Models\Order::APPROVE_STATUS }}" {{ $order->status === \App\Models\Order::APPROVE_STATUS ? 'select' : '' }}>{{ config('constants.order.status.approve') }}</option>
-                      <option value="{{ \App\Models\Order::CANCEL_STATUS }}" {{ $order->status === \App\Models\Order::CANCEL_STATUS ? 'select' : '' }}>{{ config('constants.order.status.cancel') }}</option>
+                      <option value="{{ \App\Models\Order::PENDING_STATUS }}" {{ $order->status === \App\Models\Order::PENDING_STATUS ? 'selected' : '' }}>{{ config('constants.order.status.pending') }}</option>
+                      <option value="{{ \App\Models\Order::APPROVE_STATUS }}" {{ $order->status === \App\Models\Order::APPROVE_STATUS ? 'selected' : '' }}>{{ config('constants.order.status.approve') }}</option>
+                      <option value="{{ \App\Models\Order::CANCEL_STATUS }}" {{ $order->status === \App\Models\Order::CANCEL_STATUS ? 'selected' : '' }}>{{ config('constants.order.status.cancel') }}</option>
                   </select>
                 </div>
               </div>
