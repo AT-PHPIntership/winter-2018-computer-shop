@@ -29,6 +29,19 @@ class UpdateUserRequest extends FormRequest
             'address' => 'required|min:3',
             'phone' => 'required|min:10|max:10',
             'avatar' => 'image|max:5000',
+            'role_id' => 'exists:roles,id',
+        ];
+    }
+
+    /**
+     * Return message alongside with validation
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'role_id.exists' => 'The role not found in role table.',
         ];
     }
 }

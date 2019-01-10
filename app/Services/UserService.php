@@ -58,7 +58,7 @@ class UserService
     *
     * @param object $image [request from image section]
     *
-    * @return imageName
+    * @return imageName|null
     */
     public function handleUploadedImage($image)
     {

@@ -45,6 +45,7 @@
                     <option <?php echo ($role->id == $user->role_id) ? 'selected' : '' ?> value="{{$role->id}}">{{$role->name}}</option>
                     @endforeach
                   </select>
+                  @include('admin.partials.error', ['err' => 'role_id'])
                 </div>
               </div>
               <div class="form-group row">
