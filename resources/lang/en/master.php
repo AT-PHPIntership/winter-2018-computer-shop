@@ -62,7 +62,8 @@ return [
             'update' => 'Updated the :attribute successfully',
             'delete' => 'Deleted the :attribute successfully',
             'error' => 'The :attribute happens',
-            'img' => "doesn't have any avatar",
+            'img' => 'does not have avatar',
+            'error' =>'Have error',
         ],
         'attribute' => [
              'user' => 'user',

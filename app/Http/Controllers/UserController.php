@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Services\UserService;
 use App\Models\User;
 use App\Http\Requests\CreateUserRequest;
+use App\Http\Requests\UpdateUserRequest;
 
 class UserController extends Controller
 {
@@ -48,7 +49,7 @@ class UserController extends Controller
      */
     public function store(CreateUserRequest $request)
     {
-        app(UserService::class)->store($request->all());
+        app(UserService::class)->store($request->except(['_token']));
         return redirect()->route('users.index');
     }
 
@@ -62,6 +63,32 @@ class UserController extends Controller
     public function show(User $user)
     {
         return view('admin.users.show', compact('user'));
+    }
+
+    /**
+     * Display a form to edit new user
+     *
+     * @param object $user [binding user]
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(User $user)
+    {
+        return view('admin.users.edit', compact('user'));
+    }
+    
+    /**
+     * Handle update user to database
+     *
+     * @param object $request [request to create a new user]
+     * @param object $user    [binding user model alongside id]
+     *
+     * @return user
+     */
+    public function update(UpdateUserRequest $request, User $user)
+    {
+        app(UserService::class)->update($request->except(['_token']), $user);
+        return redirect()->route('users.index');
     }
 
     /**

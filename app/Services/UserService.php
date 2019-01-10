@@ -40,10 +40,10 @@ class UserService
         DB::beginTransaction();
         try {
             $user = User::create($request);
-            $profile = $request;
-            $profile['user_id'] = $user->id;
-            $profile['avatar'] = $this->handleUploadedImage(request('avatar'));
-            UserProfile::create($profile);
+            if (array_key_exists('avatar', $request)) {
+                $request['avatar'] = $this->handleUploadedImage($request['avatar']);
+            }
+            $user->profile()->create($request);
             DB::commit();
             session()->flash('message', __('master.content.message.create', ['attribute' => trans('master.content.attribute.user')]));
         } catch (Exception $ex) {
@@ -58,7 +58,7 @@ class UserService
     *
     * @param object $image [request from image section]
     *
-    * @return imageName
+    * @return imageName|null
     */
     public function handleUploadedImage($image)
     {
@@ -69,7 +69,54 @@ class UserService
         }
         return null;
     }
-    
+
+    /**
+    * Handle update user to database
+    *
+    * @param object $request [request update user]
+    * @param object $user    [binding user model alongside id]
+    *
+    * @return void
+    */
+    public function update($request, $user)
+    {
+        DB::beginTransaction();
+        try {
+            if (isset($request['avatar'])) {
+                $request['avatar'] = $this->handleChangedImage($request['avatar'], $user);
+            }
+            $user->profile->update($request);
+            $user = $user->update($request);
+            DB::commit();
+            session()->flash('message', __('master.content.message.update', ['attribute' => trans('master.content.attribute.user')]));
+        } catch (Exception $ex) {
+            DB::rollback();
+            session()->flash('warning', __('master.content.message.error', ['attribute' => $ex->getMessage()]));
+            return redirect()->back();
+        }
+    }
+
+    /**
+    * Handle change previous image of a user
+    *
+    * @param object $image [request conduct change image]
+    * @param object $user  [help check previous image exists]
+    *
+    * @return imageName
+    */
+    public function handleChangedImage($image, $user)
+    {
+        if (!is_null($image)) {
+            $userImage = realpath('storage/avatar/' . $user->profile->avatar);
+            if (!is_null($user->profile->avatar) && file_exists($userImage)) {
+                unlink($userImage);
+            }
+            $imageName = time() . '_' . $image->getClientOriginalName();
+            $image->move('storage/avatar/', $imageName);
+            return $imageName;
+        }
+    }
+
     /**
     * Handle delete user out of database
     *
@@ -80,6 +127,10 @@ class UserService
     public function delete($user)
     {
         try {
+            $userImage = realpath('storage/avatar/' . $user->profile->avatar);
+            if (!is_null($user->profile->avatar) && file_exists($userImage)) {
+                unlink($userImage);
+            }
             $user->delete();
             session()->flash('message', __('master.content.message.delete', ['attribute' => trans('master.content.attribute.user')]));
         } catch (Exception $ex) {
