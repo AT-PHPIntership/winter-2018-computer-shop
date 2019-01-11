@@ -35,6 +35,11 @@
                 <input name="quantity" type="number" placeholder="Enter product quantity" class="form-control" value="{{ old('quantity') }}">
                 @include('admin.partials.error', ['err' => 'quantity'])
               </div>
+              <div class="form-group">
+                <label class="form-control-label">@lang('master.content.form.image')</label>
+                <input name="images[]" type="file" multiple="multiple" class="form-control" value="">
+                @include('admin.partials.error', ['err' => 'images.*'])
+              </div>
               <div class="form-group row">
                 <label class="form-control-label col-sm-12">@lang('master.content.form.category')</label>
                 <div class="col-sm-12">

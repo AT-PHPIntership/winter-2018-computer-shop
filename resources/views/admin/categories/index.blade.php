@@ -37,7 +37,6 @@
                                 </tbody>
                             </table>
                         </div>
-                        @include('admin.partials.paginate', ['paginate' => $categories])
                     </div>
                 </div>
             </div>

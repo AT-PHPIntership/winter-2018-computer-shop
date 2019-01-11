@@ -23,11 +23,24 @@ class ProductRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            'name' => 'required|min:3|unique:products',
-            'unit_price' => 'required|regex:/\d{1,3}(,\d{3})*/',
+        switch ($this->method()) {
+            case "POST":
+                $id = '';
+                break;
+            case "PUT":
+                $id = $this->product->id;
+                break;
+        }
+        $rules = [
+            'name' => 'required|min:3|unique:products,name,' . $id,
+            'unit_price' => 'required|regex:/\d{1,3}(,\d{3})*$/',
             'quantity' => 'required|numeric',
         ];
+            $images = count($this->images);
+        foreach (range(0, $images) as $index) {
+            $rules['images.' . $index] = 'image|max:5000';
+        }
+            return $rules;
     }
 
      /**
@@ -38,7 +51,10 @@ class ProductRequest extends FormRequest
     public function messages()
     {
         return [
-            'unit_price.regex' => 'The category input field must be number',
+            'unit_price.regex' => 'The price input field must be number',
+            'category_id.exists' => 'The category not found in category table',
+            'images.*.image' => "One of the files you input is non-image file",
+            'images.*.max' => "One of the files you input has file size bigger than 5MB"
         ];
     }
 }

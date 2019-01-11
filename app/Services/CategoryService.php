@@ -13,7 +13,7 @@ class CategoryService
      */
     public function getAllData()
     {
-        $category = Category::parents()->orderBy('id', \Config::get('define.user.order_by_desc'))->paginate(\Config::get('define.user.limit_rows'));
+        $category = Category::parents()->get();
         return $category;
     }
 

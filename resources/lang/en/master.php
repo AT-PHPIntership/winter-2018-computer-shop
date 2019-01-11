@@ -58,6 +58,7 @@ return [
             'description' => 'Description',
             'price' => 'Price',
             'quantity' => 'Quantity',
+            'image' => 'Image',
         ],
         'message' => [
             'create' => 'Created a :attribute successfully',
