@@ -3,7 +3,7 @@
 namespace App\Http\ViewComposers;
 
 use Illuminate\View\View;
-use App\Models\Category;
+use App\Services\CategoryService;
 
 class CategoryComposer
 {
@@ -16,6 +16,6 @@ class CategoryComposer
     */
     public function compose(View $view)
     {
-        $view->with('categories', Category::parents()->get());
+        $view->with('categories', app(CategoryService::class)->parent());
     }
 }

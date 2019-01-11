@@ -8,18 +8,6 @@ use App\Services\CategoryService;
 
 class CategoryController extends Controller
 {
-    private $categoryService;
-
-   /**
-    * Contructer CategoryService
-    *
-    * @param UserService $categoryService [categoryService]
-    */
-    public function __construct(CategoryService $categoryService)
-    {
-        $this->categoryService = $categoryService;
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -38,7 +26,7 @@ class CategoryController extends Controller
     public function getData()
     {
         
-        return $this->categoryService->dataTable();
+        return app(CategoryService::class)->dataTable();
     }
     
     /**
@@ -54,13 +42,13 @@ class CategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param object $request [request create a new category]
+     * @param object $request [request store category]
      *
      * @return \Illuminate\Http\Response
      */
     public function store(CategoryRequest $request)
     {
-        $this->categoryService->create($request);
-        return redirect()->route('categories.index')->with('message', Lang::get('master.content.message.create', ['attribute' => 'category']));
+        app(CategoryService::class)->store($request->all());
+        return redirect()->route('categories.index');
     }
 }
