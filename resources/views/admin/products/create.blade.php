@@ -44,15 +44,82 @@
                 <label class="form-control-label col-sm-12">@lang('master.content.form.category')</label>
                 <div class="col-sm-12">
                   <select name='parent_category' class="form-control mb-3" id='parent_category'>
-                    <option value="" selected disabled hidden>Choose here</option>
+                    <option value="" selected disabled hidden>@lang('master.content.select.choose')</option>
                     @foreach($categories as $category)
                         <option value="{{$category->id}}">{{$category->name}}</option>
+                    @endforeach
+                  </select>
+                  @include('admin.partials.error', ['err' => 'category_id'])
+                </div>
+              </div>
+              <div class="form-group row">
+                <div class="col-sm-12" id="child_category">
+                </div>
+              </div>
+              @include('admin.partials.error', ['err' => 'accessory_id'])
+              <div class="form-group row">
+                <label class="col-sm-3 form-control-label">@lang('master.content.table.ram')</label>
+                <div class="col-sm-9">
+                  <select name="accessory_id[]" class="form-control mb-3">
+                    <option value="" selected disabled hidden>@lang('master.content.select.choose')</option>
+                    @foreach($accessories->where('name', trans('master.content.table.ram')) as $rams)
+                      @foreach($rams->childrens as $ram)
+                        <option value="{{$ram->id}}">{{$ram->name}}</option>
+                      @endforeach
                     @endforeach
                   </select>
                 </div>
               </div>
               <div class="form-group row">
-                <div class="col-sm-12" id="child_category">
+                <label class="col-sm-3 form-control-label">@lang('master.content.table.cpu')</label>
+                <div class="col-sm-9">
+                  <select name="accessory_id[]" class="form-control mb-3">
+                    <option value="" selected disabled hidden>@lang('master.content.select.choose')</option>
+                    @foreach($accessories->where('name', trans('master.content.table.cpu')) as $cpus)
+                      @foreach($cpus->childrens as $cpu)
+                        <option value="{{$cpu->id}}">{{$cpu->name}}</option>
+                      @endforeach
+                    @endforeach
+                  </select>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-3 form-control-label">@lang('master.content.table.hdd')</label>
+                <div class="col-sm-9">
+                  <select name="accessory_id[]" class="form-control mb-3">
+                    <option value="" selected disabled hidden>@lang('master.content.select.choose')</option>
+                    @foreach($accessories->where('name', trans('master.content.table.hdd')) as $hdds)
+                      @foreach($hdds->childrens as $hdd)
+                        <option value="{{$hdd->id}}">{{$hdd->name}}</option>
+                      @endforeach
+                    @endforeach
+                  </select>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-3 form-control-label">@lang('master.content.table.monitor')</label>
+                <div class="col-sm-9">
+                  <select name="accessory_id[]" class="form-control mb-3">
+                    <option value="" selected disabled hidden>@lang('master.content.select.choose')</option>
+                    @foreach($accessories->where('name', trans('master.content.table.monitor')) as $monitors)
+                      @foreach($monitors->childrens as $monitor)
+                        <option value="{{$monitor->id}}">{{$monitor->name}}</option>
+                      @endforeach
+                    @endforeach
+                  </select>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-3 form-control-label">@lang('master.content.table.gpu')</label>
+                <div class="col-sm-9">
+                  <select name="accessory_id[]" class="form-control mb-3">
+                    <option value="" selected disabled hidden>@lang('master.content.select.choose')</option>
+                    @foreach($accessories->where('name', trans('master.content.table.gpu')) as $gpus)
+                      @foreach($gpus->childrens as $gpu)
+                        <option value="{{$gpu->id}}">{{$gpu->name}}</option>
+                      @endforeach
+                    @endforeach
+                  </select>
                 </div>
               </div>
               <div class="form-group">    

@@ -47,4 +47,14 @@ class Product extends Model
     {
         return $this->hasMany('App\Models\Image');
     }
+
+    /**
+     * The function display relationship between product and accessory
+     *
+     * @return \App\Models\Product
+     */
+    public function accessories()
+    {
+        return $this->belongsToMany('App\Models\Accessory')->withTimestamps();
+    }
 }

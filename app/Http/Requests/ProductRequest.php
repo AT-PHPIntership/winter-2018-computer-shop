@@ -31,16 +31,28 @@ class ProductRequest extends FormRequest
                 $id = $this->product->id;
                 break;
         }
-        $rules = [
+         return $rules = [
             'name' => 'required|min:3|unique:products,name,' . $id,
             'unit_price' => 'required|regex:/\d{1,3}(,\d{3})*$/',
             'quantity' => 'required|numeric',
+            'category_id' => 'required|exists:categories,id',
+            'accessory_id' => 'required|exists:categories,id'
         ];
+        if (array_key_exists('images', $this->all())) {
             $images = count($this->images);
-        foreach (range(0, $images) as $index) {
-            $rules['images.' . $index] = 'image|max:5000';
-        }
-            return $rules;
+            foreach (range(0, $images) as $index) {
+                $rules['images.' . $index] = 'image|max:5000';
+            }
+                return $rules;
+        }  
+        // if (array_key_exists('accessory_id', $this->all())) {
+        //     $accessoryId = count($this->accessory_id);
+        //     foreach (range(0, $accessoryId) as $index) {
+        //         $rules['accessory_id.' . $index] = 'required|exists:accessories,id';
+        //     }
+        //         return $rules;
+        // }  
+        // dd(1);
     }
 
      /**

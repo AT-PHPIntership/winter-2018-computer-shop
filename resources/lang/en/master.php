@@ -45,6 +45,11 @@ return [
             'role' => 'Role',
             'id' => '#',
             'product' => 'Product',
+            'ram' => 'RAM',
+            'cpu' => 'CPU',
+            'hdd' => 'HDD',
+            'monitor' => 'Monitor',
+            'gpu' => 'GPU',
         ],
         'form' => [
             'password' => 'Password',

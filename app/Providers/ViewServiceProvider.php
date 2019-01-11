@@ -15,6 +15,7 @@ class ViewServiceProvider extends ServiceProvider
     public function boot()
     {
         view()->composer(['admin.users.create', 'admin.users.edit'], 'App\Http\ViewComposers\RoleComposer');
+        view()->composer(['admin.products.create'], 'App\Http\ViewComposers\AccessoryComposer');
         view()->composer(['admin.categories.create', 'admin.categories.edit', 'admin.products.create'], 'App\Http\ViewComposers\CategoryComposer');
     }
 
