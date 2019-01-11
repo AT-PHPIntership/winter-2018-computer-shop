@@ -3,7 +3,7 @@
 namespace App\Services;
 
 use App\Models\User;
-use App\Models\UserProfile;
+use App\Services\ImageService;
 use League\Flysystem\Exception;
 use Yajra\Datatables\Datatables;
 use DB;
@@ -41,7 +41,7 @@ class UserService
         try {
             $user = User::create($request);
             if (array_key_exists('avatar', $request)) {
-                $request['avatar'] = $this->handleUploadedImage($request['avatar']);
+                $request['avatar'] = app(ImageService::class)->handleUploadedImage($request['avatar'], trans('master.content.attribute.avatar'));
             }
             $user->profile()->create($request);
             DB::commit();
@@ -51,23 +51,6 @@ class UserService
             session()->flash('warning', __('master.content.message.error', ['attribute' => $ex->getMessage()]));
             return redirect()->back();
         }
-    }
-
-   /**
-    * Handle add image to database
-    *
-    * @param object $image [request from image section]
-    *
-    * @return imageName|null
-    */
-    public function handleUploadedImage($image)
-    {
-        if (!is_null($image)) {
-            $imageName = time() . '_' . $image->getClientOriginalName();
-            $image->move('storage/avatar', $imageName);
-            return $imageName;
-        }
-        return null;
     }
 
     /**
@@ -83,7 +66,7 @@ class UserService
         DB::beginTransaction();
         try {
             if (isset($request['avatar'])) {
-                $request['avatar'] = $this->handleChangedImage($request['avatar'], $user);
+                $request['avatar'] = app(ImageService::class)->handleChangedImage($request['avatar'], $user, trans('master.content.attribute.avatar'));
             }
             $user->profile->update($request);
             $user = $user->update($request);
@@ -93,27 +76,6 @@ class UserService
             DB::rollback();
             session()->flash('warning', __('master.content.message.error', ['attribute' => $ex->getMessage()]));
             return redirect()->back();
-        }
-    }
-
-    /**
-    * Handle change previous image of a user
-    *
-    * @param object $image [request conduct change image]
-    * @param object $user  [help check previous image exists]
-    *
-    * @return imageName
-    */
-    public function handleChangedImage($image, $user)
-    {
-        if (!is_null($image)) {
-            $userImage = realpath('storage/avatar/' . $user->profile->avatar);
-            if (!is_null($user->profile->avatar) && file_exists($userImage)) {
-                unlink($userImage);
-            }
-            $imageName = time() . '_' . $image->getClientOriginalName();
-            $image->move('storage/avatar/', $imageName);
-            return $imageName;
         }
     }
 

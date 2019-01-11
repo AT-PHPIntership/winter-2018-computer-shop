@@ -56,6 +56,8 @@ return [
             'address' => 'Address',
             'phone' => 'Phone',
             'avatar' => 'Avatar',
+            'image' => 'Image',
+            'parent' => 'Parent Category',
         ],
         'message' => [
             'create' => 'Created a :attribute successfully',
@@ -69,6 +71,12 @@ return [
              'user' => 'user',
              'role' => 'role',
              'User' => 'User',
+             'category' => 'category',
+             'Category' => 'Category',
+             'avatar' => 'avatar',
+        ],
+        'select' => [
+            'choose' => 'Choose here',
         ],
         'button' => [
             'create' => 'Create',
