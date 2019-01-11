@@ -24,7 +24,7 @@
                 <label class="form-control-label col-sm-12">@lang('master.content.form.parent')</label>
                 <div class="col-sm-12">
                   <select name="parent_id" class="form-control mb-3">
-                    <option value="" selected disabled hidden>Choose here</option>
+                    <option value="" selected disabled hidden>@lang('master.content.select.choose')</option>
                     @foreach($categories as $category)
                         <option <?php echo (old('parent_id') == $category->id) ? 'selected' : ''?> value="{{$category->id}}">{{$category->name}}</option>
                     @endforeach

@@ -75,6 +75,9 @@ return [
              'Category' => 'Category',
              'avatar' => 'avatar',
         ],
+        'select' => [
+            'choose' => 'Choose here',
+        ],
         'button' => [
             'create' => 'Create',
             'update' => 'Update',

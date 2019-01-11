@@ -34,7 +34,7 @@ class Category extends Model
      *
      * @return \App\Models\User
      */
-    public function children()
+    public function childrens()
     {
         return $this->hasMany('App\Models\Category', 'parent_id', 'id');
     }
