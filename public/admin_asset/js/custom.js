@@ -23,6 +23,7 @@ $('#category-table').DataTable({
       columns: [
               { data: 'id', name: 'id' },
               { data: 'name', name: 'name' },
+              { data: 'image', name: 'image' },
               { data: 'action', name: 'action' },
             ]
       });

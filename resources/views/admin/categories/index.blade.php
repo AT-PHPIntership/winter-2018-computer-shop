@@ -19,6 +19,7 @@
                                     <tr>
                                         <th>@lang('master.content.table.id')</th>
                                         <th>@lang('master.content.form.name')</th>
+                                        <th>@lang('master.content.form.image')</th>
                                         <th>@lang('master.content.table.action')</th>
                                     </tr>
                                 </thead>

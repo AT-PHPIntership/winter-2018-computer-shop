@@ -77,10 +77,6 @@ return [
         'select' => [
             'choose' => 'Choose here',
         ],
-        'attribute' => [
-            'category' => 'category',
-            'Category' => 'Category',
-        ],
         'button' => [
             'create' => 'Create',
             'update' => 'Update',

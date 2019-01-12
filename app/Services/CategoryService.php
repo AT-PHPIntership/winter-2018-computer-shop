@@ -15,11 +15,15 @@ class CategoryService
      */
     public function dataTable()
     {
-        $categories = Category::parents()->select(['id', 'name'])->get();
+        $categories = Category::parents()->select(['id', 'name', 'image'])->get();
         return Datatables::of($categories)
+                ->addColumn('image', function (Category $category) {
+                    return view('admin.categories.image', ['image' => $category->image]);
+                })
                 ->addColumn('action', function ($data) {
                     return view('admin.categories.action', ['id' => $data->id]);
                 })
+                ->rawColumns(['image', 'action'])
                 ->make(true);
     }
     
