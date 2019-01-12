@@ -39,6 +39,22 @@
                   </select>
                 </div>
               </div>
+              <div class="form-group row">
+                <label for="fileInput" class="col-sm-3 form-control-label">@lang('master.content.form.image')</label>
+                <div class="col-sm-9">
+                @if($category->image == !null)
+                <div class="col-sm-4 mb-2">
+                    <img src="storage/category/{{$category->image}}" alt="" class="img-thumbnail">
+                </div>
+                @else
+                <div class="col-sm-8">
+                    <p class="mt-4 text-danger">{{$category->name}} @lang('master.content.message.img', ['attribute' => trans('master.content.attribute.image')])</p>
+                </div>
+                @endif
+                  <input type="file" id="fileInput" name="image" class="form-control-file">
+                  @include('admin.partials.error', ['err' => 'image'])
+                </div>
+              </div>
               <div class="form-group">    
                 <a href="{{route('categories.index')}}" class="btn btn-danger">@lang('master.content.button.cancel')</a>
                 <input type="submit" value="@lang('master.content.button.update')" class="btn btn-primary">

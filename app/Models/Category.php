@@ -14,7 +14,7 @@ class Category extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'parent_id'
+        'name', 'parent_id', 'image'
     ];
     /**
      * The function to take all parent category
@@ -34,7 +34,7 @@ class Category extends Model
      *
      * @return \App\Models\User
      */
-    public function children()
+    public function childrens()
     {
         return $this->hasMany('App\Models\Category', 'parent_id', 'id');
     }

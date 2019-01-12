@@ -44,6 +44,10 @@ return [
             'action' => 'Actions',
             'role' => 'Role',
             'id' => '#',
+            'active' => 'Actived',
+            'percent' => 'Percent',
+            'start_at' => 'Start At',
+            'end_at' => 'End At',
         ],
         'form' => [
             'password' => 'Password',
@@ -52,6 +56,7 @@ return [
             'address' => 'Address',
             'phone' => 'Phone',
             'avatar' => 'Avatar',
+            'image' => 'Image',
             'parent' => 'Parent Category',
         ],
         'message' => [
@@ -59,21 +64,26 @@ return [
             'update' => 'Updated the :attribute successfully',
             'delete' => 'Deleted the :attribute successfully',
             'error' => 'The :attribute happens',
-            'img' => "doesn't have any avatar",
+            'img' => 'does not have :attribute',
         ],
         'attribute' => [
-            'category' => 'category',
-            'Category' => 'Category',
+             'user' => 'user',
+             'role' => 'role',
+             'User' => 'User',
+             'category' => 'category',
+             'Category' => 'Category',
+             'avatar' => 'avatar',
+             'image' => 'image',
+        ],
+        'select' => [
+            'choose' => 'Choose here',
+            'parent' => 'Become parent category',
         ],
         'button' => [
             'create' => 'Create',
             'update' => 'Update',
             'cancel' => 'Cancel',
         ],
-        'select' => [
-            'choose' => 'Choose here',
-            'parent' => 'Become parent category',
-        ]
     ],
     'footer' => [
         'design' => 'Design by',
