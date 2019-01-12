@@ -10,26 +10,17 @@ use Illuminate\Support\Facades\Lang;
 
 class CategoryController extends Controller
 {
-    private $categoryService;
-
-   /**
-    * Contructer CategoryService
-    *
-    * @param UserService $categoryService [categoryService]
-    */
-    public function __construct(CategoryService $categoryService)
-    {
-        $this->categoryService = $categoryService;
-    }
     /**
-     * Display a listing of the resource.
+     * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        return view('admin.categories.index', ['categories' => $this->categoryService->getAllData()]);
+        $categories = app(CategoryService::class)->getAllData();
+        return view('admin.categories.index', compact('categories'));
     }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -49,8 +40,8 @@ class CategoryController extends Controller
      */
     public function store(CategoryRequest $request)
     {
-        $this->categoryService->create($request);
-        return redirect()->route('categories.index')->with('message', Lang::get('master.content.message.create', ['attribute' => 'category']));
+        app(CategoryService::class)->store($request->all());
+        return redirect()->route('categories.index');
     }
     /**
      * Display the specified resource.
@@ -61,7 +52,7 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        $categories = $this->categoryService->getChildren($category);
+        $categories = app(CategoryService::class)->getChildren($category);
         return view('admin.categories.show', compact('categories'));
     }
 }

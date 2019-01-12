@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Category;
+use App\Services\ImageService;
 
 class CategoryService
 {
@@ -17,15 +18,34 @@ class CategoryService
         return $category;
     }
     /**
+     * Get parent category
+     *
+     * @return parent category
+     */
+    public function parents()
+    {
+        return Category::parents()->get();
+    }
+
+    /**
      * Handle add category to data
      *
      * @param object $request request from form add category
      *
      * @return void
      */
-    public function create($request)
+    public function store($request)
     {
-        return Category::create($request->all());
+        try {
+            if (array_key_exists('image', $request)) {
+                $request['image'] = app(ImageService::class)->handleUploadedImage($request['image'], trans('master.content.attribute.category'));
+            }
+            Category::create($request);
+            session()->flash('message', __('master.content.message.create', ['attribute' => trans('master.content.attribute.category')]));
+        } catch (Exception $ex) {
+            session()->flash('warning', __('master.content.message.error', ['attribute' => $ex->getMessage()]));
+            return redirect()->back();
+        }
     }
     /**
      * Get data form users table return user index page
@@ -36,6 +56,8 @@ class CategoryService
      */
     public function getChildren($category)
     {
-         return $category = Category::where('parent_id', $category->id)->latest()->paginate(\Config::get('define.user.limit_rows'));
+         return $category = Category::where('parent_id', $category->id)
+                                    ->latest()
+                                    ->paginate(\Config::get('constants.category.paginate'));
     }
 }

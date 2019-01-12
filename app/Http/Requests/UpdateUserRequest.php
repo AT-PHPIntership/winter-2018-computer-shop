@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CategoryRequest extends FormRequest
+class UpdateUserRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,9 +24,12 @@ class CategoryRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|min:2|unique:categories',
-            'parent_id' => 'nullable|exists:categories,id',
-            'image' => 'image|max:5000'
+            'email' => "required|email|unique:users,email,". $this->user->id,
+            'name' => 'required|min:3',
+            'address' => 'required|min:3',
+            'phone' => 'required|min:10|max:10',
+            'avatar' => 'image|max:5000',
+            'role_id' => 'exists:roles,id',
         ];
     }
 
@@ -38,7 +41,7 @@ class CategoryRequest extends FormRequest
     public function messages()
     {
         return [
-            'parent_id.exists' => 'The category not found in categories table.',
+            'role_id.exists' => 'The role not found in role table.',
         ];
     }
 }
