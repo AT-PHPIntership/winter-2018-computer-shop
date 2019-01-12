@@ -64,8 +64,8 @@ return [
             'update' => 'Updated the :attribute successfully',
             'delete' => 'Deleted the :attribute successfully',
             'error' => 'The :attribute happens',
+            'warning' => "You can't delete the category because it's has sub-category",
             'img' => 'does not have avatar',
-            'error' =>'Have error',
         ],
         'attribute' => [
              'user' => 'user',
@@ -88,5 +88,5 @@ return [
         'design' => 'Design by',
         'year' => '2017-2019',
         'author' => 'Bootstrapious',
-    ],
+    ]
 ];
