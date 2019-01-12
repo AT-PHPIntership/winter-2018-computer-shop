@@ -23,11 +23,19 @@ class CategoryRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            'name' => 'required|min:2|unique:categories',
-            'parent_id' => 'nullable|exists:categories,id',
-            'image' => 'image|max:5000'
-        ];
+        switch ($this->method()) {
+            case 'POST':
+                $id = '';
+                break;
+            case 'PUT':
+                $id = $this->category->id;
+                break;
+        }
+            return [
+                'name' => 'required|min:2|unique:categories,name,' . $id,
+                'parent_id' => 'nullable|exists:categories,id',
+                'image' => 'image|max:5000'
+            ];
     }
 
     /**

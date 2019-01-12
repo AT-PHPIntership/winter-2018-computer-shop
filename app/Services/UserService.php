@@ -31,7 +31,7 @@ class UserService
    /**
     * Handle add user to database
     *
-    * @param object $request request from form Add role
+    * @param object $request [request create a new user]
     *
     * @return void
     */

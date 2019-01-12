@@ -64,8 +64,7 @@ return [
             'update' => 'Updated the :attribute successfully',
             'delete' => 'Deleted the :attribute successfully',
             'error' => 'The :attribute happens',
-            'img' => 'does not have avatar',
-            'error' =>'Have error',
+            'img' => 'does not have :attribute',
         ],
         'attribute' => [
              'user' => 'user',
@@ -74,9 +73,11 @@ return [
              'category' => 'category',
              'Category' => 'Category',
              'avatar' => 'avatar',
+             'image' => 'image',
         ],
         'select' => [
             'choose' => 'Choose here',
+            'parent' => 'Become parent category',
         ],
         'button' => [
             'create' => 'Create',
@@ -88,5 +89,5 @@ return [
         'design' => 'Design by',
         'year' => '2017-2019',
         'author' => 'Bootstrapious',
-    ],
+    ]
 ];
