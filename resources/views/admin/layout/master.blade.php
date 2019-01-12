@@ -12,6 +12,8 @@
     <link rel="stylesheet" href="admin_asset/vendor/bootstrap/css/bootstrap.min.css">
     <!-- Font Awesome CSS-->
     <link rel="stylesheet" href="admin_asset/vendor/font-awesome/css/font-awesome.min.css">
+    <!-- datatable stylesheet-->
+    <link rel="stylesheet" href="admin_asset/vendor/datatable/datatables.min.css">
     <!-- Fontastic Custom icon font-->
     <link rel="stylesheet" href="admin_asset/css/fontastic.css">
     <!-- Google fonts - Poppins -->
@@ -25,7 +27,6 @@
     <!-- Tweaks for older IEs--><!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
-    <script src="admin_asset/vendor/jquery/jquery.min.js"></script>
   </head>
   <body>
     <div class="page">
@@ -39,13 +40,17 @@
       </div>
     </div>
     <!-- JavaScript files-->
+    <script src="admin_asset/vendor/jquery/jquery.min.js"></script>
+    <script src="admin_asset/vendor/datatable/datatables.min.js"> </script>
     <script src="admin_asset/vendor/popper.js/umd/popper.min.js"> </script>
     <script src="admin_asset/vendor/bootstrap/js/bootstrap.min.js"></script>
     <script src="admin_asset/vendor/jquery.cookie/jquery.cookie.js"> </script>
     <script src="admin_asset/vendor/chart.js/Chart.min.js"></script>
        <!-- Main File-->
     <script src="admin_asset/js/front.js"></script>
-      <!-- Custom File-->
-    <script src="admin_asset/js/custom.js"></script>
+     <!----Handle put php variable to js file--->
+     <script src="admin_asset/js/main.js"></script>
+     <!----Custom file--->
+     <script src="admin_asset/js/custom.js"></script>
   </body>
 </html>

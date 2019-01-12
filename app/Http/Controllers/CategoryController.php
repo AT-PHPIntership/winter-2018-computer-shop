@@ -9,18 +9,6 @@ use App\Models\Category;
 
 class CategoryController extends Controller
 {
-    private $categoryService;
-
-   /**
-    * Contructer CategoryService
-    *
-    * @param UserService $categoryService [categoryService]
-    */
-    public function __construct(CategoryService $categoryService)
-    {
-        $this->categoryService = $categoryService;
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -28,7 +16,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return view('admin.categories.index', ['categories' => $this->categoryService->getAllData()]);
+        return view('admin.categories.index', ['categories' => app(CategoryService::class)->getAllData()]);
     }
 
     /**
@@ -50,8 +38,8 @@ class CategoryController extends Controller
      */
     public function store(CategoryRequest $request)
     {
-        $this->categoryService->create($request);
-        return redirect()->route('categories.index')->with('message', Lang::get('master.content.message.create', ['attribute' => 'category']));
+        app(CategoryService::class)->store($request->all());
+        return redirect()->route('categories.index');
     }
 
     /**
@@ -63,7 +51,7 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        return view('admin.categories.show', ['categories' => $this->categoryService->getEachCategory($category)]);
+        return view('admin.categories.show', ['categories' => app(CategoryService::class)->getEachCategory($category)]);
     }
     
     /**
@@ -75,7 +63,7 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        $this->categoryService->delete($category);
+        app(CategoryService::class)->delete($category);
         return redirect()->route('categories.index');
     }
 }
