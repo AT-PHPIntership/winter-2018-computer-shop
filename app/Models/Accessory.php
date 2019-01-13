@@ -41,6 +41,11 @@ class Accessory extends Model
         $builder->whereNull('parent_id');
     }
 
+    /**
+     * The function to take all parent accessory
+     *
+     * @return \App\Models\Accessory
+     */
     public function childrens()
     {
         return $this->hasMany(Accessory::class, 'parent_id', 'id');

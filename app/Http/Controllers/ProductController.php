@@ -8,18 +8,6 @@ use App\Services\ProductService;
 
 class ProductController extends Controller
 {
-    private $productService;
-
-   /**
-    * Contructer ProductService
-    *
-    * @param ProductService $productService [productService]
-    */
-    public function __construct(ProductService $productService)
-    {
-        $this->productService = $productService;
-    }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -39,7 +27,7 @@ class ProductController extends Controller
      */
     public function store(ProductRequest $request)
     {
-        $this->productService->store($request);
+        app(ProductService::class)->store($request->all());
         return redirect()->route('products.index');
     }
 }

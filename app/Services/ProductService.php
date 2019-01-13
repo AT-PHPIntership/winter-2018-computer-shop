@@ -21,6 +21,7 @@ class ProductService
         try {
             $request['unit_price'] = (int) str_replace(',', '', $request['unit_price']);
             $product = Product::create($request);
+            // dd($request);
             if (array_key_exists('images', $request)) {
                 foreach ($request['images'] as $images) {
                     $imageName = time() . '_' . $images->getClientOriginalName();
@@ -34,8 +35,7 @@ class ProductService
                 $product->accessories()->attach($request['accessory_id']);
             }
             DB::commit();
-            dd('done');
-            // session()->flash('message', __('master.content.message.create', ['attribute' => trans('master.content.attribute.product')]));
+            session()->flash('message', __('master.content.message.create', ['attribute' => trans('master.content.attribute.product')]));
         } catch (Exception $ex) {
             DB::rollback();
              session()->flash('warning', __('master.content.message.error', ['attribute' => $ex->getMessage()]));

@@ -41,12 +41,12 @@
                 @include('admin.partials.error', ['err' => 'images.*'])
               </div>
               <div class="form-group row">
-                <label class="form-control-label col-sm-12">@lang('master.content.form.category')</label>
+                <label class="form-control-label col-sm-12">@lang('master.content.form.category')<span class="ml-1 text-danger">*<span></label>
                 <div class="col-sm-12">
                   <select name='parent_category' class="form-control mb-3" id='parent_category'>
                     <option value="" selected disabled hidden>@lang('master.content.select.choose')</option>
                     @foreach($categories as $category)
-                        <option value="{{$category->id}}">{{$category->name}}</option>
+                        <option <?php echo (old('parent_category') == $category->id) ? 'selected' : ''?> value="{{$category->id}}">{{$category->name}}</option>
                     @endforeach
                   </select>
                   @include('admin.partials.error', ['err' => 'category_id'])
@@ -56,7 +56,6 @@
                 <div class="col-sm-12" id="child_category">
                 </div>
               </div>
-              @include('admin.partials.error', ['err' => 'accessory_id'])
               <div class="form-group row">
                 <label class="col-sm-3 form-control-label">@lang('master.content.table.ram')</label>
                 <div class="col-sm-9">
@@ -64,10 +63,11 @@
                     <option value="" selected disabled hidden>@lang('master.content.select.choose')</option>
                     @foreach($accessories->where('name', trans('master.content.table.ram')) as $rams)
                       @foreach($rams->childrens as $ram)
-                        <option value="{{$ram->id}}">{{$ram->name}}</option>
+                        <option <?php echo (old('accessory_id.0') == $ram->id) ? 'selected' : ''?> value="{{$ram->id}}">{{$ram->name}}</option>
                       @endforeach
                     @endforeach
                   </select>
+                  @include('admin.partials.error', ['err' => 'accessory_id.0'])
                 </div>
               </div>
               <div class="form-group row">
@@ -77,10 +77,11 @@
                     <option value="" selected disabled hidden>@lang('master.content.select.choose')</option>
                     @foreach($accessories->where('name', trans('master.content.table.cpu')) as $cpus)
                       @foreach($cpus->childrens as $cpu)
-                        <option value="{{$cpu->id}}">{{$cpu->name}}</option>
+                        <option <?php echo (old('accessory_id.1') == $cpu->id) ? 'selected' : ''?> value="{{$cpu->id}}">{{$cpu->name}}</option>
                       @endforeach
                     @endforeach
                   </select>
+                  @include('admin.partials.error', ['err' => 'accessory_id.1'])
                 </div>
               </div>
               <div class="form-group row">
@@ -90,10 +91,11 @@
                     <option value="" selected disabled hidden>@lang('master.content.select.choose')</option>
                     @foreach($accessories->where('name', trans('master.content.table.hdd')) as $hdds)
                       @foreach($hdds->childrens as $hdd)
-                        <option value="{{$hdd->id}}">{{$hdd->name}}</option>
+                        <option <?php echo (old('accessory_id.2') == $hdd->id) ? 'selected' : ''?> value="{{$hdd->id}}">{{$hdd->name}}</option>
                       @endforeach
                     @endforeach
                   </select>
+                  @include('admin.partials.error', ['err' => 'accessory_id.2'])
                 </div>
               </div>
               <div class="form-group row">
@@ -103,10 +105,11 @@
                     <option value="" selected disabled hidden>@lang('master.content.select.choose')</option>
                     @foreach($accessories->where('name', trans('master.content.table.monitor')) as $monitors)
                       @foreach($monitors->childrens as $monitor)
-                        <option value="{{$monitor->id}}">{{$monitor->name}}</option>
+                        <option <?php echo (old('accessory_id.3') == $monitor->id) ? 'selected' : ''?> value="{{$monitor->id}}">{{$monitor->name}}</option>
                       @endforeach
                     @endforeach
                   </select>
+                  @include('admin.partials.error', ['err' => 'accessory_id.3'])
                 </div>
               </div>
               <div class="form-group row">
@@ -116,10 +119,11 @@
                     <option value="" selected disabled hidden>@lang('master.content.select.choose')</option>
                     @foreach($accessories->where('name', trans('master.content.table.gpu')) as $gpus)
                       @foreach($gpus->childrens as $gpu)
-                        <option value="{{$gpu->id}}">{{$gpu->name}}</option>
+                        <option <?php echo (old('accessory_id.4') == $gpu->id) ? 'selected' : ''?> value="{{$gpu->id}}">{{$gpu->name}}</option>
                       @endforeach
                     @endforeach
                   </select>
+                  @include('admin.partials.error', ['err' => 'accessory_id.4'])
                 </div>
               </div>
               <div class="form-group">    
