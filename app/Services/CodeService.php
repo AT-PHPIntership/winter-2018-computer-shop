@@ -13,7 +13,7 @@ class CodeService
      */
     public function index()
     {
-        $codes = Code::paginate(3);
+        $codes = Code::paginate(config('constants.code.number_paginate'));
         return $codes;
     }
 }

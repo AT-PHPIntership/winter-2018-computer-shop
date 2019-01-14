@@ -5,7 +5,7 @@
         <!-- Navbar Header-->
         <div class="navbar-header">
           <!-- Navbar Brand -->
-          <a href="admin/home" class="navbar-brand d-none d-sm-inline-block">
+          <a href="{{route('admin.home')}}" class="navbar-brand d-none d-sm-inline-block">
           <div class="brand-text d-none d-lg-inline-block"><span>@lang('master.header.title')</span>&nbsp;<strong>@lang('master.header.admin')</strong></div>
             <!-- <div class="brand-text d-none d-sm-inline-block d-lg-none"><strong>BD</strong></div></a> -->
           <!-- Toggle Button--><a id="toggle-btn" href="#" class="menu-btn active"><span></span><span></span><span></span></a>
