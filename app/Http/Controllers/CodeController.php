@@ -89,9 +89,14 @@ class CodeController extends Controller
      */
     public function update($id, CodeRequest $request)
     {
-        $this->codeService->update($id, $request);
-        return redirect()->route('codes.index')->with('message', Lang::get('master.content.message.update', [
+        $message = $this->codeService->update($id, $request);
+        if($message !== 0){
+            return redirect()->route('codes.index')->with('message', Lang::get('master.content.message.update', [
             'attribute' => 'code']));
+        } else {
+            return redirect()->route('codes.index')->with('message', Lang::get('master.content.message.error', [
+            'attribute' => Lang::get('master.content.attribute.code')]));
+        }
     }
 
     // /**
