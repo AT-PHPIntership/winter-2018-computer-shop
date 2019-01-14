@@ -82,14 +82,14 @@ class CodeController extends Controller
     /**
      * Update code
      *
-     * @param [imnt]      $id      [Id code]
      * @param CodeRequest $request [Request from form]
+     * @param [int]       $id      [Id code]
      *
      * @return void
      */
     public function update(CodeRequest $request, $id)
     {
-        $message = $this->codeService->update($id, $request);
+        $message = $this->codeService->update($request, $id);
         if ($message !== 0) {
             return redirect()->route('codes.index')->with('message', Lang::get('master.content.message.update', [
             'attribute' => 'code']));
