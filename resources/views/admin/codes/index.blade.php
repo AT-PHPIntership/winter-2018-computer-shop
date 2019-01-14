@@ -27,7 +27,7 @@
                <div class="card">
                    <div class="card-header d-flex align-items-center">
                        <a href="{{route('codes.create')}}">
-                          <button type="button" class="btn btn-primary">@lang('master.content.action.add', ['attribute' => 'Code'])</button>
+                          <button type="button" class="btn btn-primary">@lang('master.content.action.add', ['attribute' => __('master.content.attribute.code')])</button>
                         </a>
                    </div>
                    <div class="card-body">
@@ -53,12 +53,12 @@
                      <td>{{ $code->end_at }}</td>
                      <td>
                        <a href="{{ route('codes.edit', $code->id) }}" class="btn btn-sm btn-warning">
-                       @lang('master.content.action.edit', ['attribute' => 'Code'])
+                       @lang('master.content.action.edit', ['attribute' => __('master.content.attribute.code')])
                        </a>
                        <form action="{{ route('codes.destroy', $code->id) }}" method="POST" class="d-inline">
                           @csrf
                           @method('DELETE')
-                          <input type="submit" value="@lang('master.content.action.delete', ['attribute' => 'Code'])" class="btn btn-sm btn-danger">
+                          <input type="submit" value="@lang('master.content.action.delete', ['attribute' => __('master.content.attribute.code')])" class="btn btn-sm btn-danger">
                         </form> 
                        </a>
                      </td>

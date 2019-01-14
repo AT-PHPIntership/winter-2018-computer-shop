@@ -13,7 +13,7 @@ class Access extends Model
     // protected $fillable = [
     //     'name', 'parent_id'
     // ];
-    protected $guarded = [];
+    protected $guarded = ['id'];
 
     // public function getLftName()
     // {

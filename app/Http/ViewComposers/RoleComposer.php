@@ -4,9 +4,22 @@ namespace App\Http\ViewComposers;
 
 use Illuminate\View\View;
 use App\Models\Role;
+use App\Services\RoleService;
 
 class RoleComposer
 {
+    private $roleService;
+
+    /**
+     * Contructer RoleService
+     *
+     * @param RoleService $roleService [roleservice]
+     */
+    public function __construct(RoleService $roleService)
+    {
+        $this->roleService = $roleService;
+    }
+
     /**
     * Bind data to the view.
     *
@@ -16,6 +29,6 @@ class RoleComposer
     */
     public function compose(View $view)
     {
-        $view->with('roles', Role::select('id', 'name')->paginate(5));
+        $view->with('roles', $this->roleService->getAll());
     }
 }
