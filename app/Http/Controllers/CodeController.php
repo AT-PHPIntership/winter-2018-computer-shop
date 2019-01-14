@@ -53,7 +53,7 @@ class CodeController extends Controller
     public function store(CodeRequest $request)
     {
         $this->codeService->create($request);
-        return redirect()->route('codes.index')->with('message', Lang::get('master.content.message.create', ['attribute' => 'code']));
+        return redirect()->route('codes.index')->with('message', Lang::get('master.content.message.create', ['attribute' => Lang::get('master.content.attribute.code')]));
     }
 
     /**
