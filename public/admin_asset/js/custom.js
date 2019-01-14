@@ -29,6 +29,13 @@ $('#category-table').DataTable({
       });
 });
 
+//Add class for table data to modify css
+$(document).ajaxComplete(function() {
+  if ($('table').attr("id") == "category-table") {
+    $('td').addClass("category-index");
+  }
+});
+
  //Confirmed before delete
 function confirmedDelete() {
   return confirm(trans('delete'));

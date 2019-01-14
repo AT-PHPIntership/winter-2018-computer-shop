@@ -25,7 +25,6 @@ class CategoryController extends Controller
      */
     public function getData()
     {
-        
         return app(CategoryService::class)->dataTable();
     }
     
