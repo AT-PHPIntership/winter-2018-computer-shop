@@ -87,7 +87,7 @@ class CodeController extends Controller
      *
      * @return void
      */
-    public function update($id, CodeRequest $request)
+    public function update(CodeRequest $request, $id)
     {
         $message = $this->codeService->update($id, $request);
         if ($message !== 0) {

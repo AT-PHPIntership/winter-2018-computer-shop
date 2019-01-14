@@ -50,7 +50,7 @@ class CodeService
      *
      * @return void
      */
-    public function update($id, $request)
+    public function update($request, $id)
     {
         try {
             $message = Code::where('id', $id)->update([
