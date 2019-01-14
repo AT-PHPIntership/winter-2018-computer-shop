@@ -74,6 +74,11 @@ class CodeService
      */
     public function delete($id)
     {
-        Code::where('id', $id)->delete();
+        try {
+            $message = Code::where('id', $id)->delete();
+            return $message;
+        } catch (\Exception $e) {
+            return $message = $e->getMessage();
+        }
     }
 }
