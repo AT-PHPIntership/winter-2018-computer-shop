@@ -17,10 +17,19 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = app(CategoryService::class)->getAllData();
-        return view('admin.categories.index', compact('categories'));
+        return view('admin.categories.index');
     }
 
+    /**
+     * Get data for category datatable
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getData()
+    {
+        return app(CategoryService::class)->dataTable();
+    }
+    
     /**
      * Show the form for creating a new resource.
      *

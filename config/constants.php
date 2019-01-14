@@ -10,5 +10,8 @@ return [
     'category' => [
         'paginate' => 10,
     ],
+    'code' => [
+        'number_paginate' => '5'
+    ],
     
 ];

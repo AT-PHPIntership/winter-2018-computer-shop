@@ -30,6 +30,7 @@ return [
         'comment' => 'Comments Management',
         'order' => 'Orders Management',
         'promotion' => 'Promotions Management',
+        'code' => 'Codes Management',
     ],
     'content' => [
         'action' => [
@@ -48,6 +49,7 @@ return [
             'percent' => 'Percent',
             'start_at' => 'Start At',
             'end_at' => 'End At',
+            'amount' => 'Amount',
         ],
         'form' => [
             'password' => 'Password',
@@ -65,7 +67,6 @@ return [
             'delete' => 'Deleted the :attribute successfully',
             'error' => 'The :attribute happens',
             'img' => 'does not have avatar',
-            'error' =>'Have error',
         ],
         'attribute' => [
              'user' => 'user',
@@ -74,13 +75,10 @@ return [
              'category' => 'category',
              'Category' => 'Category',
              'avatar' => 'avatar',
+             'code' => 'code',
         ],
         'select' => [
             'choose' => 'Choose here',
-        ],
-        'attribute' => [
-            'category' => 'category',
-            'Category' => 'Category',
         ],
         'button' => [
             'create' => 'Create',

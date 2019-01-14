@@ -65,4 +65,21 @@ class PromotionService
             return $message = $e->getMessage();
         }
     }
+
+    /**
+     * Delete promotion
+     *
+     * @param [int] $id Id Promotion
+     *
+     * @return void
+     */
+    public function delete($id)
+    {
+        try {
+            $message = Promotion::where('id', $id)->delete();
+            return $message;
+        } catch (Exception $e) {
+            return $message = $e->getMessage();
+        }
+    }
 }
