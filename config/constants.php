@@ -7,6 +7,10 @@ return [
 
     'promotion' => [
         'number_paginate' => '3'
-    ]
+    ],
+
+    'code' => [
+        'number_paginate' => '5'
+    ],
     
 ];
