@@ -73,6 +73,7 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        return view('admin.products.show', compact('product'));
+        $products = app(ProductService::class)->show($product);
+        return view('admin.products.show', compact('products'));
     }
 }

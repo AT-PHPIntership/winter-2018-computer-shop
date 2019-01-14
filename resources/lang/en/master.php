@@ -45,6 +45,8 @@ return [
             'role' => 'Role',
             'id' => '#',
             'product' => 'Product',
+            'accessory' => 'Accessories',
+            'ram' => 'RAM',
         ],
         'form' => [
             'password' => 'Password',
@@ -58,6 +60,7 @@ return [
             'description' => 'Description',
             'price' => 'Price(đ)',
             'quantity' => 'Quantity',
+            'image' => 'Image',
         ],
         'message' => [
             'create' => 'Created a :attribute successfully',

@@ -49,4 +49,16 @@ class ProductService
             return redirect()->back();
         }
     }
+
+    /**
+    * Handle store a product to database
+    *
+    * @param object $product [request show details a product]
+    *
+    * @return void
+    */
+    public function show($product)
+    {
+        return Product::with('accessories', 'accessories.parent')->findOrFail($product->id)->first();
+    }
 }

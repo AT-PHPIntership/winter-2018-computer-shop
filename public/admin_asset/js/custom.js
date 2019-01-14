@@ -59,3 +59,9 @@ $(function() {
             ]
       });
 });
+$(document).ready(function(){
+ lightbox.option({
+      'positionFromTop': 150,
+      'wrapAround': true
+    })
+});
