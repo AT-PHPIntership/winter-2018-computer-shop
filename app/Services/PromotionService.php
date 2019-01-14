@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Promotion;
+use League\Flysystem\Exception;
 
 class PromotionService
 {
@@ -13,7 +14,7 @@ class PromotionService
      */
     public function index()
     {
-        $promotions = Promotion::all();
+        $promotions = Promotion::paginate(config('constants.promotion.number_paginate'));
         return $promotions;
     }
 
@@ -26,12 +27,7 @@ class PromotionService
      */
     public function create($request)
     {
-        Promotion::create([
-            'name' => $request->name,
-            'percent' => $request->percent,
-            'start_at' => $request->start_at,
-            'end_at' => $request->end_at
-        ]);
+        Promotion::create($request->all());
     }
 
     /**
@@ -57,12 +53,17 @@ class PromotionService
      */
     public function update($id, $request)
     {
-        Promotion::where('id', $id)->update([
-            'name' => $request->name,
-            'percent' => $request->percent,
-            'start_at' => $request->start_at,
-            'end_at' => $request->end_at
-        ]);
+        try {
+            $message = Promotion::where('id', $id)->update([
+                            'name' => $request->name,
+                            'percent' => $request->percent,
+                            'start_at' => $request->start_at,
+                            'end_at' => $request->end_at
+                        ]);
+            return $message;
+        } catch (Exception $e) {
+            return $message = $e->getMessage();
+        }
     }
 
     /**
@@ -74,6 +75,11 @@ class PromotionService
      */
     public function delete($id)
     {
-        Promotion::where('id', $id)->delete();
+        try {
+            $message = Promotion::where('id', $id)->delete();
+            return $message;
+        } catch (Exception $e) {
+            return $message = $e->getMessage();
+        }
     }
 }
