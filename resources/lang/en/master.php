@@ -30,6 +30,7 @@ return [
         'comment' => 'Comments Management',
         'order' => 'Orders Management',
         'promotion' => 'Promotions Management',
+        'code' => 'Codes Management',
     ],
     'content' => [
         'action' => [
@@ -48,6 +49,7 @@ return [
             'percent' => 'Percent',
             'start_at' => 'Start At',
             'end_at' => 'End At',
+            'amount' => 'Amount',
         ],
         'form' => [
             'password' => 'Password',
@@ -74,6 +76,7 @@ return [
              'category' => 'category',
              'Category' => 'Category',
              'avatar' => 'avatar',
+             'code' => 'code',
         ],
         'select' => [
             'choose' => 'Choose here',
