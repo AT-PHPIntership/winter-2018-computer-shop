@@ -67,7 +67,6 @@ return [
             'delete' => 'Deleted the :attribute successfully',
             'error' => 'The :attribute happens',
             'img' => 'does not have avatar',
-            'error' =>'Have error',
         ],
         'attribute' => [
              'user' => 'user',

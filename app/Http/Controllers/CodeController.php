@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Services\CodeService;
 use App\Http\Requests\CodeRequest;
 use Illuminate\Support\Facades\Lang;
+use Illuminate\Support\Facades\Redirect;
+
 
 class CodeController extends Controller
 {
@@ -90,11 +92,11 @@ class CodeController extends Controller
     public function update(CodeRequest $request, $id)
     {
         $message = $this->codeService->update($request, $id);
-        if ($message !== 0) {
+        if ($message === 1) {
             return redirect()->route('codes.index')->with('message', Lang::get('master.content.message.update', [
             'attribute' => 'code']));
         } else {
-            return redirect()->route('codes.index')->with('message', Lang::get('master.content.message.error', [
+            return Redirect::back()->with('message', Lang::get('master.content.message.error', [
             'attribute' => Lang::get('master.content.attribute.code')]));
         }
     }
