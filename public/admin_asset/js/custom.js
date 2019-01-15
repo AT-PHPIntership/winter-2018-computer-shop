@@ -57,6 +57,37 @@ $(function() {
               { data: 'quantity', name: 'quantity' },
               { data: 'action', name: 'action' },
             ]
+    });
+});
+
+//Function use for user datatable
+$(function() {
+      $('#user-table').DataTable({
+      processing: true,
+      serverSide: true,
+      ajax: 'admin/users/data',
+      columns: [
+            { data: 'id', name: 'id' },
+            { data: 'email', name: 'email' },
+            { data: 'name', name: 'name' },
+            { data: 'role', name: 'role' },
+            { data: 'action', name: 'action' },
+            ]
+      });
+});
+
+//Function use for category datatable
+$(function() {
+$('#category-table').DataTable({
+      processing: true,
+      serverSide: true,
+      ajax: 'admin/categories/data',
+      columns: [
+              { data: 'id', name: 'id' },
+              { data: 'name', name: 'name' },
+              { data: 'image', name: 'image' },
+              { data: 'action', name: 'action' },
+            ]
       });
 });
 
@@ -94,17 +125,18 @@ $(document).ready(function(){
     })();
 });
 
-//Put PHP variable to JS 
-function define(key) {
-  return window.js_variable.define[key];
-}
-
-
-function trans(key) {
-   return window.js_variable.trans[key];
-}
-
 //Confirmed before delete
 function confirmedDelete() {
   return confirm(trans('delete'));
 } 
+//Add class for table data to modify css
+$(document).ajaxComplete(function() {
+  if ($('table').attr("id") == "category-table") {
+    $('td').addClass("category-index");
+  }
+});
+
+//Make message disappear after times
+$(document).ready(function() {
+  $('div.alert').delay(2000).slideUp();
+});

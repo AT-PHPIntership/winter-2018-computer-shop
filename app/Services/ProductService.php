@@ -83,6 +83,14 @@ class ProductService
     public function delete($product)
     {
         try {
+            foreach ($product->images as $image) {
+                $productImage = realpath('storage/product/' . $image->name);
+                if (!is_null($image->name) && file_exists($productImage)) {
+                    unlink($productImage);
+                }
+            }
+            $product->images()->delete();
+            $product->accessories()->detach();
             $product->delete();
             session()->flash('message', __('master.content.message.delete', ['attribute' => trans('master.content.attribute.product')]));
         } catch (Exception $ex) {

@@ -10,34 +10,21 @@
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-header d-flex align-items-center">
-                        <a href="{{route('categories.create')}}" class="btn btn-primary">@lang('master.content.action.add', ['attribute' => 'Category'])</a>
+                        <a href="{{route('categories.create')}}" class="btn btn-primary">@lang('master.content.action.add', ['attribute' => trans('master.content.attribute.Category')])</a>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">   
-                            <table class="table table-striped table-sm text-center">
+                            <table class="table table-striped table-sm text-center" id="category-table">
                                 <thead>
                                     <tr>
                                         <th>@lang('master.content.table.id')</th>
                                         <th>@lang('master.content.form.name')</th>
+                                        <th>@lang('master.content.form.image')</th>
                                         <th>@lang('master.content.table.action')</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    @foreach($categories as $category)
-                                    <tr>
-                                        <th scope="row">{{$category->id}}</th>
-                                        <td>{{$category->name}}</td>
-                                        <td>
-                                            <a href="{{route('categories.show', $category->id)}}" class="btn btn-info btn-sm">@lang('master.content.action.detail', ['attribute' => 'Category'])</a>
-                                            <a href="{{route('categories.edit', $category->id)}}" class="btn btn-warning btn-sm">@lang('master.content.action.edit', ['attribute' => 'Category'])</a>
-                                            <a href="" class="btn btn-danger btn-sm">@lang('master.content.action.delete', ['attribute' => 'Category'])</a>
-                                        </td>
-                                    </tr>
-                                    @endforeach
-                                </tbody>
                             </table>
                         </div>
-                        @include('admin.partials.paginate', ['paginate' => $categories])
                     </div>
                 </div>
             </div>

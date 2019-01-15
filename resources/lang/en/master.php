@@ -30,6 +30,7 @@ return [
         'comment' => 'Comments Management',
         'order' => 'Orders Management',
         'promotion' => 'Promotions Management',
+        'code' => 'Codes Management',
     ],
     'content' => [
         'action' => [
@@ -45,6 +46,11 @@ return [
             'role' => 'Role',
             'id' => '#',
             'product' => 'Product',
+            'active' => 'Actived',
+            'percent' => 'Percent',
+            'start_at' => 'Start At',
+            'end_at' => 'End At',
+            'amount' => 'Amount',
         ],
         'form' => [
             'password' => 'Password',
@@ -53,6 +59,7 @@ return [
             'address' => 'Address',
             'phone' => 'Phone',
             'avatar' => 'Avatar',
+            'image' => 'Image',
             'parent' => 'Parent Category',
             'category' => 'Category',
             'description' => 'Description',
@@ -64,20 +71,27 @@ return [
             'update' => 'Updated the :attribute successfully',
             'delete' => 'Deleted the :attribute successfully',
             'error' => 'The :attribute happens',
-            'img' => "doesn't have any avatar",
+            'img' => 'does not have avatar',
         ],
         'attribute' => [
-            'product' => 'product',
+             'user' => 'user',
+             'role' => 'role',
+             'User' => 'User',
+             'category' => 'category',
+             'Category' => 'Category',
+             'avatar' => 'avatar',
+             'code' => 'code',
+             'product' => 'product',
             'Product' => 'Product',
+        ],
+        'select' => [
+            'choose' => 'Choose here',
+            'parent' => 'Become parent category',
         ],
         'button' => [
             'create' => 'Create',
             'update' => 'Update',
             'cancel' => 'Cancel',
-        ],
-        'select' => [
-            'choose' => 'Choose here',
-            'parent' => 'Become parent category',
         ],
     ],
     'footer' => [

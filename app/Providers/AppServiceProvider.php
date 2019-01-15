@@ -26,10 +26,10 @@ class AppServiceProvider extends ServiceProvider
     {
         JavaScript::put([
             'define' => config('define'),
-            'trans'  => __('js'),
+            'trans'  => __('js.section'),
         ]);
     }
-
+    
     /**
      * Register any application services.
      *

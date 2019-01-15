@@ -5,13 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\Promotion;
 use Illuminate\Http\Request;
 use App\Services\PromotionService;
+use App\Http\Requests\PromotionRequest;
+use Illuminate\Support\Facades\Lang;
 
 class PromotionController extends Controller
 {
 
 
     private $promotionService;
-
     /**
      * Constructer Promotions
      *
@@ -38,10 +39,10 @@ class PromotionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    // public function create()
-    // {
-    //     //
-    // }
+    public function create()
+    {
+        return view('admin.promotions.create');
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -50,10 +51,12 @@ class PromotionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    // public function store(Request $request)
-    // {
-    //     //
-    // }
+    public function store(PromotionRequest $request)
+    {
+        $this->promotionService->create($request);
+        return redirect()->route('promotions.index')->with('message', Lang::get('master.content.message.create', [
+            'attribute' => 'promotion']));
+    }
 
     /**
      * Display the specified resource.
@@ -65,33 +68,53 @@ class PromotionController extends Controller
         //
     }
 
-    // public function edit(Promotion $promotion)
-    // {
-    //     //
-    // }
+    /**
+     * Edit promotion
+     *
+     * @param int $id Id promotion
+     *
+     * @return void
+     */
+    public function edit($id)
+    {
+        $promotion = $this->promotionService->edit($id);
+        return view('admin.promotions.update', compact('promotion'));
+    }
 
     /**
-     * Update the specified resource in storage.
+     * Update promotion
      *
-     * @param \Illuminate\Http\Request $request   sdf
-     * @param \App\Models\Promotion    $promotion sdf
+     * @param int              $id      id promotion
+     * @param PromotionRequest $request Request from form
      *
-     * @return \Illuminate\Http\Response
+     * @return void
      */
-    // public function update(Request $request, Promotion $promotion)
-    // {
-    //     //
-    // }
+    public function update($id, PromotionRequest $request)
+    {
+        $message = $this->promotionService->update($id, $request);
+        if ($message === 1) {
+            return redirect()->route('promotions.index')->with('message', Lang::get('master.content.message.update', [
+                'attribute' => 'promotion']));
+        } else {
+            return redirect()->route('promotions.index')->with('message', Lang::get('master.content.message.error'));
+        }
+    }
 
     /**
-     * Remove the specified resource from storage.
+     * Delete promotion
      *
-     * @param \App\Models\Promotion $promotion asdf
+     * @param [int] $id [Id promotion]
      *
-     * @return \Illuminate\Http\Response
+     * @return void
      */
-    // public function destroy(Promotion $promotion)
-    // {
-    //     //
-    // }
+    public function destroy($id)
+    {
+        $message = $this->promotionService->delete($id);
+        if ($message === 1) {
+            return redirect()->route('promotions.index')->with('message', Lang::get('master.content.message.delete', [
+            'attribute' => 'promotion']));
+        } else {
+            return redirect()->route('promotions.index')->with('message', Lang::get('master.content.message.error'));
+        }
+    }
 }

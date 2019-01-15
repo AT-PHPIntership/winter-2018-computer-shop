@@ -1,6 +1,5 @@
 <?php
-
- return [
+  return [
     /*
     |--------------------------------------------------------------------------
     | Define Language Lines
@@ -11,5 +10,7 @@
     | as the size rules. Feel free to tweak each of these messages here.
     |
     */
-    'delete' => 'Are you sure you want to delete?',
- ];
+     'section' => [
+        'delete' =>   'Are you sure want to delete?',
+     ]
+  ];
