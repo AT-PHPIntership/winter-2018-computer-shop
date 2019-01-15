@@ -46,7 +46,7 @@ class CodeService
      * Update code
      *
      * @param [type] $request [Request from form
-     * @param [int] $id      [Id code]
+     * @param [int]  $id      [Id code]
      *
      * @return void
      */

@@ -9,7 +9,6 @@ use App\Http\Requests\CodeRequest;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\Redirect;
 
-
 class CodeController extends Controller
 {
     private $codeService;
