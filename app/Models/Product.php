@@ -37,4 +37,24 @@ class Product extends Model
     {
         return number_format($unitPrice, 0, ",", ",");
     }
+
+    /**
+     * The function display relationship between product and accessory
+     *
+     * @return \App\Models\Product
+     */
+    public function accessories()
+    {
+        return $this->belongsToMany('App\Models\Accessory')->withTimestamps();
+    }
+
+    /**
+     * The function display relationship between product and accessory
+     *
+     * @return \App\Models\Product
+     */
+    public function images()
+    {
+        return $this->hasMany('App\Models\Image');
+    }
 }

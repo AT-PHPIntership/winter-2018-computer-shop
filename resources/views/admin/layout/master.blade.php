@@ -14,6 +14,8 @@
     <link rel="stylesheet" href="admin_asset/vendor/font-awesome/css/font-awesome.min.css"> 
     <!-- Datatable CSS-->
     <link rel="stylesheet" href="admin_asset/vendor/datatable/datatables.min.css">
+    <!-- Lightbox CSS-->
+    <link rel="stylesheet" href="admin_asset/vendor/lightbox/lightbox.css">
     <!-- Fontastic Custom icon font-->
     <link rel="stylesheet" href="admin_asset/css/fontastic.css">
     <!-- Google fonts - Poppins -->
@@ -42,6 +44,7 @@
     <!-- JavaScript files-->
     <script type='text/javascript'src="admin_asset/vendor/jquery/jquery.min.js"></script>
     <script src="admin_asset/vendor/ckeditor/ckeditor.js"> </script>
+    <script src="admin_asset/vendor/lightbox/lightbox.js"> </script>
     <script src="admin_asset/vendor/datatable/datatables.min.js"> </script>
     <script src="admin_asset/vendor/popper.js/umd/popper.min.js"> </script>
     <script src="admin_asset/vendor/bootstrap/js/bootstrap.min.js"></script>
@@ -49,7 +52,9 @@
     <script src="admin_asset/vendor/chart.js/Chart.min.js"></script>
        <!-- Main File-->
     <script src="admin_asset/js/front.js"></script>
-       <!-- Custom File-->
-    <script src="admin_asset/js/custom.js"></script>
+     <!----Handle put php variable to js file--->
+     <script src="admin_asset/js/main.js"></script>
+     <!----Custom file--->
+     <script src="admin_asset/js/custom.js"></script>
   </body>
 </html>

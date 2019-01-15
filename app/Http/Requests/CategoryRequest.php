@@ -31,8 +31,22 @@ class CategoryRequest extends FormRequest
                 $id = $this->category->id;
                 break;
         }
-            return [
-                'name' => 'required|min:3|unique:categories,name,' . $id
-            ];
+        return [
+            'name' => 'required|min:3|unique:categories,name,' . $id,
+            'parent_id' => 'nullable|exists:categories,id',
+            'image' => 'image|max:5000'
+        ];
+    }
+
+    /**
+     * Return message alongside with validation
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'parent_id.exists' => 'The category not found in categories table.',
+        ];
     }
 }

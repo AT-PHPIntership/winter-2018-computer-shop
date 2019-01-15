@@ -10,17 +10,6 @@ use Illuminate\Support\Facades\Lang;
 
 class CategoryController extends Controller
 {
-    private $categoryService;
-
-   /**
-    * Contructer CategoryService
-    *
-    * @param UserService $categoryService [categoryService]
-    */
-    public function __construct(CategoryService $categoryService)
-    {
-        $this->categoryService = $categoryService;
-    }
     /**
      * Display a listing of the resource.
      *
@@ -28,8 +17,19 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return view('admin.categories.index', ['categories' => $this->categoryService->getAllData()]);
+        return view('admin.categories.index');
     }
+
+    /**
+     * Get data for category datatable
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getData()
+    {
+        return app(CategoryService::class)->dataTable();
+    }
+    
     /**
      * Show the form for creating a new resource.
      *
@@ -49,45 +49,8 @@ class CategoryController extends Controller
      */
     public function store(CategoryRequest $request)
     {
-        $this->categoryService->create($request);
-        return redirect()->route('categories.index')->with('message', Lang::get('master.content.message.create', ['attribute' => 'category']));
-    }
-    /**
-     * Display the specified resource.
-     *
-     * @param object $category [binding model category]
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Category $category)
-    {
-        return view('admin.categories.show', ['categories' => $this->categoryService->getEachCategory($category)]);
-    }
-
-    /**
-     * Display a form to edit category
-     *
-     * @param object $category [binding category]
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Category $category)
-    {
-        return view('admin.categories.edit', compact('category'));
-    }
-
-    /**
-     * Handle update category to database
-     *
-     * @param object $request  [request to update the category]
-     * @param object $category [binding model category]
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function update(CategoryRequest $request, Category $category)
-    {
-        $this->categoryService->update($request, $category);
-        return redirect()->route('categories.index')->with('message', Lang::get('master.content.message.update', ['attribute' => 'category']));
+        app(CategoryService::class)->store($request->all());
+        return redirect()->route('categories.index');
     }
 
     /**
@@ -99,7 +62,7 @@ class CategoryController extends Controller
      */
     public function getChildren(Request $request)
     {
-        $response = $this->categoryService->getSubCategory($request->get('id'));
+        $response = app(CategoryService::class)->getSubCategory($request->get('id'));
         return response()->json($response);
     }
 }

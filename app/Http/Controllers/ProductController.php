@@ -73,7 +73,22 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        return view('admin.products.edit', compact('product'));
+        $products = app(ProductService::class)->edit($product);
+        return view('admin.products.edit', compact('products'));
+    }
+
+    /**
+     * Show the form for editing a resource.
+     *
+     * @param object $request [request delete image of a product]
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function deleteImage(Request $request)
+    {
+        $imageId = $request->image;
+        $response = ['data' => app(ProductService::class)->deleteImage($imageId),'message' => 'success!', 'result' => 200];
+        return response()->json($response);
     }
 
     /**
