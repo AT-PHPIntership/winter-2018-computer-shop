@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Models;
 
 use Illuminate\Notifications\Notifiable;
@@ -12,13 +11,15 @@ class User extends Authenticatable
 {
     use Notifiable;
 
+    protected $table = 'users';
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-         'name', 'email', 'password'
+         'name', 'email', 'password', 'role_id'
     ];
 
     /**
@@ -48,5 +49,27 @@ class User extends Authenticatable
     public function role()
     {
         return $this->belongsTo(Role::class);
+    }
+
+    /**
+     * The function display relationship between userprofile and user
+     *
+     * @return \App\Models\UserProfile
+     */
+    public function profile()
+    {
+        return $this->hasOne('App\Models\UserProfile');
+    }
+    
+    /**
+     * The function help encrypt the password when user enter into
+     *
+     * @param string $password [input password to hash]
+     *
+     * @return \Illuminate\Support\Facades\Hash;
+     */
+    public function setPasswordAttribute($password)
+    {
+        $this->attributes['password'] = bcrypt($password);
     }
 }

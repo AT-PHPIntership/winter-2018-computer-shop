@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Services\CodeService;
 use App\Http\Requests\CodeRequest;
 use Illuminate\Support\Facades\Lang;
+use Illuminate\Support\Facades\Redirect;
 
 class CodeController extends Controller
 {
@@ -53,7 +54,7 @@ class CodeController extends Controller
     public function store(CodeRequest $request)
     {
         $this->codeService->create($request);
-        return redirect()->route('codes.index')->with('message', Lang::get('master.content.message.create', ['attribute' => 'code']));
+        return redirect()->route('codes.index')->with('message', Lang::get('master.content.message.create', ['attribute' => Lang::get('master.content.attribute.code')]));
     }
 
     /**
@@ -82,16 +83,21 @@ class CodeController extends Controller
     /**
      * Update code
      *
-     * @param [imnt]      $id      [Id code]
      * @param CodeRequest $request [Request from form]
+     * @param [int]       $id      [Id code]
      *
      * @return void
      */
-    public function update($id, CodeRequest $request)
+    public function update(CodeRequest $request, $id)
     {
-        $this->codeService->update($id, $request);
-        return redirect()->route('codes.index')->with('message', Lang::get('master.content.message.update', [
+        $message = $this->codeService->update($request, $id);
+        if ($message === 1) {
+            return redirect()->route('codes.index')->with('message', Lang::get('master.content.message.update', [
             'attribute' => 'code']));
+        } else {
+            return Redirect::back()->with('message', Lang::get('master.content.message.error', [
+            'attribute' => Lang::get('master.content.attribute.code')]));
+        }
     }
 
     /**

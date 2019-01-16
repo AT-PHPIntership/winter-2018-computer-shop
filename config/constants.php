@@ -2,7 +2,7 @@
 
 return [
     'role' => [
-        'number_paginate' => '2'
+        'number_paginate' => '3'
     ],
 
     'promotion' => [
@@ -16,6 +16,10 @@ return [
             'cancel' => 'Cancel'
         ],
         'number_paginate' => '3'
-    ]
+    ],
+    
+    'code' => [
+        'number_paginate' => '5'
+    ],
     
 ];

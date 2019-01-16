@@ -70,11 +70,7 @@
              </div>
              <div class="row">
                 <div class="col-md-12">
-<<<<<<< HEAD
-                  
-=======
                 {{ $promotions->links() }}
->>>>>>> 32ba1cf44988747eafb516159932eb82724ac229
                 </div>
               </div>
            </div>
