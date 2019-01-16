@@ -41,7 +41,7 @@
                   <select name='parent_category' class="form-control mb-3" id='parent_category'>
                     <option value="" selected disabled hidden>Choose here</option>
                     @foreach($categories as $category)
-                        <option value="{{$category->id}}">{{$category->name}}</option>
+                        <option {{ (old('parent_category') == $category->id) ? 'selected' : ''}} value="{{$category->id}}">{{$category->name}}</option>
                     @endforeach
                   </select>
                 </div>
