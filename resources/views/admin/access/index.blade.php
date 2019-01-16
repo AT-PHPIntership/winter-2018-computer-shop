@@ -34,28 +34,28 @@
                        <div class="table-responsive">
                <table class="table table-striped table-hover">
                  <thead>
-                   <tr>
-                     <th>@lang('master.content.table.id')</th>
-                     <th>@lang('master.content.form.name')</th>
-                     <th>@lang('master.content.table.action')</th>
-                   </tr>
-                 </thead>
-                 <tbody>
+                    <tr>
+                      <th>@lang('master.content.table.id')</th>
+                      <th>@lang('master.content.form.name')</th>
+                      <th>@lang('master.content.table.action')</th>
+                    </tr>
+                  </thead>
+                  <tbody>
                   @foreach($access as $acces)
                   <tr>
-                     <th scope="row">{{ $acces->id }}</th>
-                     <td>{{ $acces->name }}</td>
-                     <td>
+                      <th scope="row">{{ $acces->id }}</th>
+                      <td>{{ $acces->name }}</td>
+                      <td>
                         @if(sizeof($acces->children) > 0)
                           <a href="{{ route('access.show', $acces->id) }}" class="btn btn-sm btn-info">
                           @lang('master.content.action.show', ['attribute' => __('master.content.attribute.accessory')])
                           </a>
                         @endif
-                         <a href="{{ route('access.edit', $acces->id) }}" class="btn btn-sm btn-warning">
-                         @lang('master.content.action.edit', ['attribute' => __('master.content.attribute.accessory')])
-                         </a>
+                          <a href="{{ route('access.edit', $acces->id) }}" class="btn btn-sm btn-warning">
+                          @lang('master.content.action.edit', ['attribute' => __('master.content.attribute.accessory')])
+                          </a>
                         @if(sizeof($acces->children) == 0)
-                         <form action="{{ route('access.destroy', $acces->id) }}" method="POST" class="d-inline">
+                          <form action="{{ route('access.destroy', $acces->id) }}" method="POST" class="d-inline">
                             @csrf
                             @method('DELETE')
                             <input type="submit" value="@lang('master.content.action.delete', ['attribute' => __('master.content.attribute.accessory')])" class="btn btn-sm btn-danger">
