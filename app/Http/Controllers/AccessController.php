@@ -58,13 +58,15 @@ class AccessController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Show Accessory
      *
-     * @return \Illuminate\Http\Response
+     * @param Access $access [Object]
+     *
+     * @return void
      */
-    public function show()
+    public function show(Access $access)
     {
-        //
+        return view('admin.access.show', compact('access'));
     }
 
     // *

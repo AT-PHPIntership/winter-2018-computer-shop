@@ -25,10 +25,8 @@
        <div class="row">
            <div class="col-lg-12">
                <div class="card">
-                   <div class="card-header d-flex align-items-center">
-                       <a href="{{route('access.create')}}">
-                          <button type="button" class="btn btn-primary">@lang('master.content.action.add', ['attribute' => __('master.content.attribute.accessory')])</button>
-                        </a>
+                  <div class="card-header d-flex align-items-center">
+                       <a href="{{ URL::previous() }}"><button type="button" class="fa fa-toggle-left btn btn-primary"></button></a>
                    </div>
                    <div class="card-body">
                        <div class="table-responsive">
@@ -41,26 +39,20 @@
                    </tr>
                  </thead>
                  <tbody>
-                  @foreach($access as $acces)
+                  @foreach($access->children as $acces)
                   <tr>
                      <th scope="row">{{ $acces->id }}</th>
                      <td>{{ $acces->name }}</td>
                      <td>
-                        @if(sizeof($acces->children) > 0)
-                          <a href="{{ route('access.show', $acces->id) }}" class="btn btn-sm btn-info">
-                          @lang('master.content.action.show', ['attribute' => __('master.content.attribute.accessory')])
-                          </a>
-                        @endif
-                         <a href="{{ route('access.edit', $acces->id) }}" class="btn btn-sm btn-warning">
-                         @lang('master.content.action.edit', ['attribute' => __('master.content.attribute.accessory')])
-                         </a>
-                        @if(sizeof($acces->children) == 0)
-                         <form action="{{ route('access.destroy', $acces->id) }}" method="POST" class="d-inline">
-                            @csrf
-                            @method('DELETE')
-                            <input type="submit" value="@lang('master.content.action.delete', ['attribute' => __('master.content.attribute.accessory')])" class="btn btn-sm btn-danger">
-                          </form> 
-                        @endif
+                       <a href="{{ route('access.edit', $acces->id) }}" class="btn btn-sm btn-warning">
+                       @lang('master.content.action.edit', ['attribute' => __('master.content.attribute.accessory')])
+                       </a>
+                       <form action="{{ route('access.destroy', $acces->id) }}" method="POST" class="d-inline">
+                          @csrf
+                          @method('DELETE')
+                          <input type="submit" value="@lang('master.content.action.delete', ['attribute' => __('master.content.attribute.accessory')])" class="btn btn-sm btn-danger">
+                        </form> 
+                       </a>
                      </td>
                    </tr>
                    @endforeach
@@ -69,7 +61,6 @@
              </div>
              <div class="row">
                 <div class="col-md-12">
-                {{$access->links()}}
                 </div>
               </div>
            </div>

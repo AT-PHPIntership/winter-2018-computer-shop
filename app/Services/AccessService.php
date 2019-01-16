@@ -13,7 +13,7 @@ class AccessService
      */
     public function index()
     {
-        $access = Access::paginate(3);
+        $access = Access::where('parent_id', null)->paginate(config('constants.accessory.number_paginate'));
         return $access;
     }
 

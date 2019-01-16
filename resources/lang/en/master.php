@@ -79,6 +79,7 @@ return [
              'Category' => 'Category',
              'avatar' => 'avatar',
              'code' => 'code',
+             'accessory' => 'accessory',
         ],
         'select' => [
             'choose' => 'Choose here',
