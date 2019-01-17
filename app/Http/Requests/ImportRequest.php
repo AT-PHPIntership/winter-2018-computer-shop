@@ -3,7 +3,6 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Validator;
 
 class ImportRequest extends FormRequest
 {
@@ -25,11 +24,19 @@ class ImportRequest extends FormRequest
     public function rules()
     {
         return [
-            'extentions' => strtolower($this->import_file->getClientOriginalExtension())
-        ];
-        [
-            'import_file' => 'required|file|max:10000',
-            'extentions' => 'required|in:csv,xlsx,xls,odt'
+                'import_file' => 'required|max:5000|extentions'
+            ];
+    }
+
+    /**
+     * Get the message rules that apply to the request.
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'import_file.extentions' => 'The import file must be a file of type: csv, xlsx, xls, odt'
         ];
     }
 }
