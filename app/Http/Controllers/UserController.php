@@ -81,7 +81,7 @@ class UserController extends Controller
      * Handle update user to database
      *
      * @param object $request [request to create a new user]
-     * @param object $user    [binding user models]
+     * @param object $user    [binding user model]
      *
      * @return user
      */

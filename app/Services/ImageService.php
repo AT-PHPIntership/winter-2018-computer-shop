@@ -45,4 +45,25 @@ class ImageService
             return $imageName;
         }
     }
+
+    /**
+    * Handle change previous image
+    *
+    * @param object $request [request add multiple image]
+    * @param object $product [save image for product]
+    *
+    * @return imageName
+    */
+    public function addMultipleImage($request, $product)
+    {
+        if (array_key_exists('images', $request)) {
+            foreach ($request['images'] as $images) {
+                $imageName = time() . '_' . $images->getClientOriginalName();
+                $images->move('storage/product', $imageName);
+                $product->images()->create([
+                'name' => $imageName
+                ]);
+            }
+        }
+    }
 }
