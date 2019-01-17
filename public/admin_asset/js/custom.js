@@ -144,6 +144,11 @@ $(function() {
     });
 });
 
+//Redirect to import page
+document.getElementById("uploadFile").onclick = function () {
+    location.href = "admin/products/import";
+};
+
 /***************************************************************/
 
 //Function use for category datatable

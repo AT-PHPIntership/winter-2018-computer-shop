@@ -9,6 +9,12 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="card">
+                    <div class="card-close">
+                      <div class="dropdown">
+                        <button class="btn btn-success btn-lg fa fa-upload" id="uploadFile">
+                        </button>
+                      </div>
+                    </div>
                     <div class="card-header d-flex align-items-center">
                         <a href="{{route('products.create')}}" class="btn btn-primary">@lang('master.content.action.add', ['attribute' => trans('master.content.attribute.Product')])</a>
                     </div>

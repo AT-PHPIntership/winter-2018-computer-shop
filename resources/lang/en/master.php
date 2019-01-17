@@ -39,6 +39,7 @@ return [
             'edit' => 'Edit :attribute',
             'delete' => 'Delete :attribute',
             'show' => 'Details about :attribute',
+            'import' => 'Import :attribute',
         ],
         'table' => [
             'email' => 'Email',
@@ -70,11 +71,13 @@ return [
             'description' => 'Description',
             'price' => 'Price(đ)',
             'quantity' => 'Quantity',
+            'file' => 'File',
         ],
         'message' => [
             'create' => 'Created a :attribute successfully',
             'update' => 'Updated the :attribute successfully',
             'delete' => 'Deleted the :attribute successfully',
+            'import' => 'Imported the file successfully',
             'error' => 'The :attribute happens',
             'img' => 'does not have avatar',
         ],
@@ -97,6 +100,7 @@ return [
             'create' => 'Create',
             'update' => 'Update',
             'cancel' => 'Cancel',
+            'upload' => 'Upload',
         ],
     ],
     'footer' => [

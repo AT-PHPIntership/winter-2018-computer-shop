@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\ProductRequest;
+use App\Http\Requests\ImportRequest;
 use App\Services\ProductService;
 use App\Models\Product;
 
@@ -27,6 +28,33 @@ class ProductController extends Controller
     public function getData()
     {
         return app(ProductService::class)->dataTable();
+    }
+
+     /**
+     * Show the form for import a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function import()
+    {
+        return view('admin.products.import');
+    }
+
+    /**
+     * Handle the import a new resource.
+     *
+     * @param object $request [request to save data from import file]
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function handleImport(ImportRequest $request)
+    {
+        try {
+            app(ProductService::class)->importFile($request);
+            return redirect()->route('products.index');
+        } catch (\Exception $e) {
+            return redirect()->back();
+        }
     }
 
     /**

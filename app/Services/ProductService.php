@@ -7,7 +7,10 @@ use DB;
 use League\Flysystem\Exception;
 use Yajra\Datatables\Datatables;
 use App\Models\Image;
+use App\Models\Accessory;
+use App\Models\Category;
 use App\Services\ImageService;
+use Excel;
 
 class ProductService
 {
@@ -110,17 +113,90 @@ class ProductService
     }
 
     /**
-    * Handle update accessories of a product
+    * Help sync accessories of a product
     *
-    * @param object $request [request update accessories]
-    * @param object $product [binding product model]
+    * @param collect $accessory [request update accessories]
+    * @param object  $product   [binding product model]
     *
     * @return void
     */
-    public function syncAccessory($request, $product)
+    public function syncAccessory($accessory, $product)
     {
-        if (array_key_exists('accessory_id', $request)) {
-            $product->accessories()->sync($request['accessory_id']);
+        if (array_key_exists('accessory_id', $accessory)) {
+            $product->accessories()->sync($accessory['accessory_id']);
         }
+    }
+
+    /**
+    * Handle import product from file
+    *
+    * @param object $request [request import product]
+    *
+    * @return void
+    */
+    public function importFile($request)
+    {
+        DB::beginTransaction();
+        try {
+            $path = $request->file('import_file')->getRealPath();
+            $data = Excel::load($path)->get();
+            //Check products is duplicate when import
+            $data = $this->filterProduct($data);
+            //Save product include category id
+            $categories = Category::where('parent_id', '!=', null)->get();
+                            $categoryId = [];
+            foreach ($categories as $category) {
+                foreach ($data as $key => $categories) {
+                    if ($category->name == $categories['category']) {
+                        $categoryId[$key] = $category->id;
+                    }
+                }
+            }
+            $importProduct = [];
+            foreach ($data as $key => $value) {
+                   $importProduct[]= ['name' => $value->name, 'quantity' => $value->quantity, 'unit_price' => $value->unit_price, 'description' => $value->description, 'category_id' => $categoryId[$key] ];
+            }
+            foreach ($importProduct as $value) {
+                Product::insert($value);
+            }
+            //Sync between products and accessories
+            $accessories = Accessory::where('parent_id', '!=', null)->get();
+            $accesoryLists = $accessories->pluck('id', 'name');
+            $this->accessory = collect();
+            $data->map(function ($v) use ($accesoryLists) {
+                $value['ram'] = $accesoryLists->get($v['ram']);
+                $value['cpu'] = $accesoryLists->get($v['cpu']);
+                $value['hdd'] = $accesoryLists->get($v['hdd']);
+                $value['monitor'] = $accesoryLists->get($v['monitor']);
+                $value['gpu'] = $accesoryLists->get($v['gpu']);
+                $this->accessory->push(collect($value)->filter());
+            });
+            $products = Product::orderBy('id', 'desc')->take(count($importProduct))->get()->sortBy('id');
+            foreach ($products->values() as $key => $product) {
+                $accessory = $this->accessory[$key];
+                $product->accessories()->sync($accessory);
+            }
+            DB::commit();
+            session()->flash('message', __('master.content.message.import'));
+        } catch (Exception $ex) {
+            DB::rollback();
+            session()->flash('warning', __('master.content.message.error', ['attribute' => $ex->getMessage()]));
+            return redirect()->back();
+        }
+    }
+
+    /**
+     * Function help fillter product is duplicate or not
+     *
+     * @param array $data [data help compare with data in product table]
+     *
+     * @return $data
+    **/
+    public function filterProduct($data)
+    {
+        $fileData = collect($data->pluck('name'));
+        $productName = Product::pluck('name');
+        $compare = $fileData->diff($productName);
+        return $data->whereIn('name', $compare);
     }
 }

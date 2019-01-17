@@ -22,6 +22,8 @@ Route::group(['prefix' => 'admin'], function(){
     Route::get('categories/sub-category', 'CategoryController@getChildren');
     Route::get('categories/data', 'CategoryController@getData');
     Route::resource('categories', 'CategoryController');
+    Route::get('products/import', 'ProductController@import');
+    Route::post('products/import', 'ProductController@handleImport')->name('products.import');
     Route::get('products/data', 'ProductController@getData');
     Route::delete('products/image', 'ProductController@deleteImage');
     Route::resource('products', 'ProductController');
