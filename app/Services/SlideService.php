@@ -9,6 +9,16 @@ use DB;
 
 class SlideService
 {
+    /**
+    * Get all slide out of database
+    *
+    * @return void
+    */
+    public function allSlide()
+    {
+        return Slide::all();
+    }
+
    /**
     * Handle add user to database
     *
@@ -18,7 +28,6 @@ class SlideService
     */
     public function store($request)
     {
-        // dd($request);
         try {
             $request = app(ImageService::class)->handleUploadedImage($request['file'], trans('master.content.attribute.slide'));
             Slide::create([
