@@ -31,6 +31,7 @@ return [
         'order' => 'Orders Management',
         'promotion' => 'Promotions Management',
         'code' => 'Codes Management',
+        'slide' => 'Slides Management',
     ],
     'content' => [
         'action' => [
@@ -91,6 +92,8 @@ return [
              'code' => 'code',
              'product' => 'product',
              'Product' => 'Product',
+             'Slide' => 'Slide',
+             'slide' => 'slide',
         ],
         'select' => [
             'choose' => 'Choose here',

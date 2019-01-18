@@ -16,6 +16,8 @@
     <link rel="stylesheet" href="admin_asset/vendor/datatable/datatables.min.css">
     <!-- Lightbox CSS-->
     <link rel="stylesheet" href="admin_asset/vendor/lightbox/lightbox.css">
+    <!-- Dropzone CSS-->
+    <link rel="stylesheet" href="admin_asset/vendor/dropzone/dropzone.css">
     <!-- Fontastic Custom icon font-->
     <link rel="stylesheet" href="admin_asset/css/fontastic.css">
     <!-- Google fonts - Poppins -->
@@ -46,6 +48,7 @@
     <script src="admin_asset/vendor/ckeditor/ckeditor.js"> </script>
     <script src="admin_asset/vendor/lightbox/lightbox.js"> </script>
     <script src="admin_asset/vendor/datatable/datatables.min.js"> </script>
+    <script src="admin_asset/vendor/dropzone/dropzone.js"> </script>
     <script src="admin_asset/vendor/popper.js/umd/popper.min.js"> </script>
     <script src="admin_asset/vendor/bootstrap/js/bootstrap.min.js"></script>
     <script src="admin_asset/vendor/jquery.cookie/jquery.cookie.js"> </script>

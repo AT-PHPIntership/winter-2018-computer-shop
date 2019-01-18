@@ -14,6 +14,7 @@ class ProductRequest extends FormRequest
     {
         return true;
     }
+    
     /**
      * Get the validation rules that apply to the request.
      *
@@ -38,6 +39,7 @@ class ProductRequest extends FormRequest
             'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:5120'
          ];
     }
+
      /**
      * Return the validation messages that apply to the request.
      *

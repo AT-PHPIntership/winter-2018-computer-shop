@@ -145,9 +145,10 @@ $(function() {
 });
 
 //Redirect to import page
-document.getElementById("uploadFile").onclick = function () {
+$("#uploadFile").on('click', function (e) {
+    e.preventDefault();
     location.href = "admin/products/import";
-};
+});
 
 /***************************************************************/
 
@@ -202,3 +203,17 @@ $(document).ready(function() {
   $('div.alert').delay(2000).slideUp();
 });
 
+//Custom dropzone to validation things user input into 
+Dropzone.options.dropzone = {
+  maxFiles: 10,
+  addRemoveLinks: true,
+  success: function(file, response) 
+  {
+      setTimeout(function() { alert(response.message); }, 1000);
+  },
+  error: function(file, response)
+  {
+     var message = response.errors.file.join("\n");
+    setTimeout(function() { alert(message ); }, 1000);
+  }
+}
