@@ -35,6 +35,18 @@ return [
         'access' => 'Accessories Management',
     ],
     'content' => [
+        'dashboard' => [
+            'title' => 'Dashboard',
+            'totals' => 'Total',
+            'user'=> 'User',
+            'order'=> 'Order',
+            'product'=> 'Product',
+            'statistic_order'=> 'Statistic Order',
+            'cancel'=> 'Cancel',
+            'pending'=> 'Pending',
+            'approve'=> 'Approve',
+            'export'=> 'Export to Excel',
+        ],
         'action' => [
             'add' => 'Add New :attribute',
             'detail' => 'View Details',

@@ -16,6 +16,7 @@ Route::get('/', function () {
 });
 Route::group(['prefix' => 'admin', 'middleware' => 'adminLogin'], function(){
     Route::get('/home', 'AdminController@home')->name('admin.home');
+    Route::get('/home/excel', 'AdminController@excel')->name('admin.excel');
     Route::get('users/data', 'UserController@getData');
     Route::resource('users', 'UserController');
     Route::resource('roles', 'RoleController');
