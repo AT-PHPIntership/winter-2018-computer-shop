@@ -29,8 +29,10 @@ return [
         'img_product' => 'Products',
         'comment' => 'Comments Management',
         'order' => 'Orders Management',
+        'order_details' => 'Orders Details Management',
         'promotion' => 'Promotions Management',
         'code' => 'Codes Management',
+        'access' => 'Accessories Management',
     ],
     'content' => [
         'action' => [
@@ -39,6 +41,7 @@ return [
             'edit' => 'Edit :attribute',
             'delete' => 'Delete :attribute',
             'show' => 'Details about :attribute',
+            'back' => 'Back',
         ],
         'table' => [
             'email' => 'Email',
@@ -50,6 +53,17 @@ return [
             'start_at' => 'Start At',
             'end_at' => 'End At',
             'amount' => 'Amount',
+            'parent_id' => 'Parent name',
+            'details' => 'Details',
+            'user' => 'User',
+            'address' => 'Address',
+            'phone' => 'Phone',
+            'note' => 'Note',
+            'date_order' => 'Date order',
+            'status' => 'Status',
+            'product_name' => 'Product name',
+            'quantity' => 'Quantity',
+            'price' => 'Price',
         ],
         'form' => [
             'password' => 'Password',
