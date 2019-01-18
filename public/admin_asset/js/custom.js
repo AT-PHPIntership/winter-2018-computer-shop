@@ -202,7 +202,7 @@ function confirmedDelete() {
 $(document).ready(function() {
   $('div.alert').delay(2000).slideUp();
 });
-
+/***********************Slide function***************************/
 //Custom dropzone to validation things user input into 
 Dropzone.options.dropzone = {
   maxFiles: 10,
@@ -217,3 +217,26 @@ Dropzone.options.dropzone = {
     setTimeout(function() { alert(message ); }, 1000);
   }
 }
+
+//Delete a photo
+$(document).ready(function(){
+       $(".delete-slide").on("click", function(){
+        var result = confirm(trans('delete'));
+        if (result) {
+            var imageId = $(this).data('image-id');
+            var token = $(this).data("token");
+          // debugger;
+          $.ajax({
+            url: 'admin/slides/image',
+            type: 'DELETE',
+            dataType:"JSON",
+            data: {'image':imageId, "_token": token,},
+            success: function(data){ 
+              // console.log(data);
+              $('#image-list .image-item[data-id^=' + data.data.id +']').remove();
+            }
+         });
+        }
+        
+    });
+});

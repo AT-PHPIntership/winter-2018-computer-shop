@@ -29,7 +29,7 @@
                                               <a href="storage/slide/{{$slide->name}}" data-lightbox="product">
                                                  <img src="storage/slide/{{$slide->name}}" width='125' height='60'>
                                              </a>
-                                              <button type="button" class="btn btn-danger btn-sm fa fa-minus-circle button-image" value="{{$slide->name}}" data-token="{{ csrf_token() }}" data-image-id="{{$slide->id}}"></button>
+                                              <button type="button" class="btn btn-danger btn-sm fa fa-minus-circle delete-slide" value="{{$slide->name}}" data-token="{{ csrf_token() }}" data-image-id="{{$slide->id}}"></button>
                                             </div>
                                              @endforeach
                                         </div>

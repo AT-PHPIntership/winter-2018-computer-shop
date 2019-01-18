@@ -37,4 +37,24 @@ class SlideService
             return response()->json(['message' => $ex->getMessage(), 'result' => 500]);
         }
     }
+
+     /**
+    * Handle delete one slide
+    *
+    * @param object $imageId [the id of image]
+    *
+    * @return imageId
+    */
+    public function deleteImage($imageId)
+    {
+        $imageId = Slide::find($imageId);
+        $images = Slide::where('id', $imageId->id)->get();
+        foreach ($images as $image) {
+            if ($imageId->id == $image->id) {
+                unlink('storage/slide/' . $image->name);
+                $image->delete();
+                return $imageId;
+            }
+        }
+    }
 }

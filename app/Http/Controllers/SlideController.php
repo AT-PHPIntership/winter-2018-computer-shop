@@ -40,4 +40,18 @@ class SlideController extends Controller
         app(SlideService::class)->store($request->all());
         return response()->json(['message' => 'Uploaded image successfully!', 'result' => 200]);
     }
+
+    /**
+     * Handle delete slide to database
+     *
+     * @param object $request [request to create a new slie]
+     *
+     * @return json
+     */
+    public function deleteImage(Request $request)
+    {
+        $imageId = $request->image;
+        $response = ['data' => app(SlideService::class)->deleteImage($imageId),'message' => 'success!', 'result' => 200];
+        return response()->json($response);
+    }
 }
