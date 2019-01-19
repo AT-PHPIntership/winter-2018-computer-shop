@@ -10,10 +10,10 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+//Public route
+Route::get('/', 'PublicController@homepage');
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//Admin Route
 Route::group(['prefix' => 'admin'], function(){
     Route::get('/home', 'AdminController@home')->name('admin.home');
     Route::get('users/data', 'UserController@getData');
