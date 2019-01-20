@@ -44,13 +44,22 @@
                         <nav>
                             <ul>
                                 <li class="active"><a href="index.html">@lang('public.header.home')</a></li>
-                                <li class="menu-item-has-children"><a href="shop-grid.html">@lang('public.header.category')</a>
+                                <li class="menu-item-has-children"><a>@lang('public.header.category')</a>
                                     <ul class="sub-menu">
-                                        <li class="menu-item-has-children"><a href="shop-grid.html"></a>
+                                        @foreach($categories as $category)
+                                        <li class="menu-item-has-children"><a href="shop-grid.html"><img class="img-thumbnail" src="storage/category/{{$category->image}}" width="120" height="60"></a>
                                             <ul class="sub-menu">
-                                                <li><a href="shop-grid.html"></a></li>
+                                                @php $array = $category->childrens->pluck('name', 'id'); @endphp
+                                                @foreach ($array as $key => $val)
+                                                <li>
+                                                    <a href="{{$key}}">
+                                                        {{$val}}
+                                                    </a>
+                                                </li>
+                                                @endforeach
                                             </ul>
                                         </li>
+                                        @endforeach
                                     </ul>
                                 </li>
                                 <li><a href="contact.html">@lang('public.header.cart')</a></li>

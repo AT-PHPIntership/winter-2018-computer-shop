@@ -4088,7 +4088,7 @@ img.mfp-img {
   box-shadow: 0 10px 15px rgba(0, 0, 0, 0.3);
   border-top: 3px solid #f5d730;
   z-index: -999;
-  width: 250px;
+  width: 190px;
   padding: 15px 0;
   margin-top: 30px;
   opacity: 0;
@@ -4108,8 +4108,8 @@ img.mfp-img {
     .sub-menu li.menu-item-has-children > a::after {
       font-family: Fontawesome;
       content: "\f105";
-      margin-left: 5px;
-      float: right; }
+      margin-left: 20px;
+      }
     .sub-menu li.active > a, .sub-menu li:hover > a {
       color: #202020;
       font-weight: 600; }

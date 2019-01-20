@@ -19,12 +19,17 @@
         <link rel="stylesheet" href="public_asset/css/plugins.css">
         <!-- Main Style CSS -->
         <link rel="stylesheet" href="public_asset/css/style.css">
+        <!-- Custom Style CSS -->
+        <link rel="stylesheet" href="public_asset/css/custom.css">
         <!-- Modernizer JS -->
         <script src="public_asset/js/vendor/modernizr-2.8.3.min.js"></script>
     </head>
     <body>
         @include('public.layout.header')
+        @include('public.layout.mini_cart')
         @yield('content')
+        @include('public.layout.brand')
+        @include('public.layout.subcribe')
         @include('public.layout.footer')
         <!-- JS
         ============================================ -->

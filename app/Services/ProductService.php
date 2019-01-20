@@ -199,4 +199,46 @@ class ProductService
         $compare = $fileData->diff($productName);
         return $data->whereIn('name', $compare);
     }
+
+    /*************Function use for Public Page***********************************/
+
+    /**
+     * Function help get product has sale off
+     *
+     * @return Product
+    **/
+    public function saleOff()
+    {
+        return Product::take(\Config::get('constants.product.saleOff'))->get();
+    }
+
+    /**
+     * Function help get product
+     *
+     * @return Product
+    **/
+    public function feature()
+    {
+        return Product::take(\Config::get('constants.product.feature'))->get();
+    }
+
+    /**
+     * Function help get bestseller
+     *
+     * @return Product
+    **/
+    public function bestSeller()
+    {
+        return Product::orderBy('total_sold', 'desc')->groupBy('total_sold')->take(\Config::get('constants.product.bestSeller'))->get();
+    }
+
+    /**
+     * Function help get new Arrival product
+     *
+     * @return Product
+    **/
+    public function newArrival()
+    {
+        return Product::latest()->take(\Config::get('constants.product.newArrival'))->get();
+    }
 }

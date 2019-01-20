@@ -16,6 +16,6 @@ class SlideComposer
     */
     public function compose(View $view)
     {
-        $view->with('slides', app(SlideService::class)->allSlide());
+        $view->with(['slides' => app(SlideService::class)->allSlide(), 'banners' => app(SlideService::class)->homePage()]);
     }
 }

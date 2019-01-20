@@ -19,6 +19,16 @@ class SlideService
         return Slide::all();
     }
 
+    /**
+    * Get all slide out of database
+    *
+    * @return void
+    */
+    public function homePage()
+    {
+        return Slide::take(\Config::get('constants.banner.quantity'))->get();
+    }
+
    /**
     * Handle add user to database
     *

@@ -23,6 +23,25 @@ return [
         'contact' => 'Contact',
         'search' => 'Search your product',
     ],
+    'slide' => [
+        'hurry' => 'HURRY UP!',
+        'its' => 'IT’S',
+        'off' => 'OFF',
+        'get' => 'get it now',
+    ],
+    'subcribe' => [
+        'title' => 'subscribe',
+        'newsletter' => 'OUR NEWSLETTER',
+        'latest' => 'TO GET LATEST',
+        'product' => 'PRODUCT UPDATE',
+        'email' => 'Enter your email here',
+    ],
+    'content' => [
+        'featured' => 'FEATURED ITEMS',
+        'bestseller' => 'BEST SELLERS',
+        'newArrival' => 'NEW ARRIVAL',
+        'addToCart' => 'ADD TO CART',
+    ],
     'footer' => [
         'contact' => 'CONTACT INFO',
         'address' => 'Address',

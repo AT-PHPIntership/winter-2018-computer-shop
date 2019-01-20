@@ -12,5 +12,13 @@ return [
     'code' => [
         'number_paginate' => '5'
     ],
-    
+    'product' => [
+        'saleOff' => '3',
+        'feature' => '5',
+        'bestSeller' => '4',
+    	'newArrival' => '4',
+    ],
+    'banner' => [
+        'quantity' => '2'
+    ]
 ];
