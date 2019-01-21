@@ -64,4 +64,21 @@ class CodeService
             return $message = $e->getMessage();
         }
     }
+
+    /**
+     * Delete code
+     *
+     * @param [int] $id [Id code]
+     *
+     * @return void
+     */
+    public function delete($id)
+    {
+        try {
+            $message = Code::where('id', $id)->delete();
+            return $message;
+        } catch (\Exception $e) {
+            return $message = $e->getMessage();
+        }
+    }
 }

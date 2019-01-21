@@ -100,14 +100,22 @@ class CodeController extends Controller
         }
     }
 
-    // /**
-    //  * Remove the specified resource from storage.
-    //  *
-    //  * @param  \App\Models\Code  $code
-    //  * @return \Illuminate\Http\Response
-    //  */
-    // public function destroy(Code $code)
-    // {
-    //     //
-    // }
+    /**
+     * Delete code
+     *
+     * @param [int] $id [Id code]
+     *
+     * @return void
+     */
+    public function destroy($id)
+    {
+        $message = $this->codeService->delete($id);
+        if ($message === 1) {
+            return redirect()->route('codes.index')->with('message', Lang::get('master.content.message.delete', [
+            'attribute' => 'code']));
+        } else {
+            return redirect()->route('codes.index')->with('message', Lang::get('master.content.message.error', [
+                'attribute' => Lang::get('master.content.attribute.code')]));
+        }
+    }
 }
