@@ -26,12 +26,7 @@ class CodeService
      */
     public function create($request)
     {
-        Code::create([
-            'name' => $request->name,
-            'amount' => $request->amount,
-            'start_at' => $request->start_at,
-            'end_at' => $request->end_at
-        ]);
+        Code::create($request->all());
     }
 
     /**
@@ -50,19 +45,24 @@ class CodeService
     /**
      * Update code
      *
-     * @param [int]  $id      [Id code]
      * @param [type] $request [Request from form
+     * @param [int]  $id      [Id code]
      *
      * @return void
      */
-    public function update($id, $request)
+    public function update($request, $id)
     {
-        Code::where('id', $id)->update([
-            'name' => $request->name,
-            'amount' => $request->amount,
-            'start_at' => $request->start_at,
-            'end_at' => $request->end_at
-        ]);
+        try {
+            $message = Code::where('id', $id)->update([
+                            'name' => $request->name,
+                            'amount' => $request->amount,
+                            'start_at' => $request->start_at,
+                            'end_at' => $request->end_at
+                        ]);
+            return $message;
+        } catch (\Exception $e) {
+            return $message = $e->getMessage();
+        }
     }
 
     /**

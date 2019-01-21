@@ -1,4 +1,4 @@
-//Function use for datatable
+//Function use for user datatable
 $(function() {
       $('#user-table').DataTable({
       processing: true,
@@ -12,6 +12,28 @@ $(function() {
             { data: 'action', name: 'action' },
             ]
       });
+});
+
+//Function use for category datatable
+$(function() {
+$('#category-table').DataTable({
+      processing: true,
+      serverSide: true,
+      ajax: 'admin/categories/data',
+      columns: [
+              { data: 'id', name: 'id' },
+              { data: 'name', name: 'name' },
+              { data: 'image', name: 'image' },
+              { data: 'action', name: 'action' },
+            ]
+      });
+});
+
+//Add class for table data to modify css
+$(document).ajaxComplete(function() {
+  if ($('table').attr("id") == "category-table") {
+    $('td').addClass("category-index");
+  }
 });
 
  //Confirmed before delete

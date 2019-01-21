@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="admin_asset/vendor/bootstrap/css/bootstrap.min.css">
     <!-- Font Awesome CSS-->
     <link rel="stylesheet" href="admin_asset/vendor/font-awesome/css/font-awesome.min.css">
-    <!-- datatable stylesheet-->
+    <!-- Datatable CSS-->
     <link rel="stylesheet" href="admin_asset/vendor/datatable/datatables.min.css">
     <!-- Fontastic Custom icon font-->
     <link rel="stylesheet" href="admin_asset/css/fontastic.css">
@@ -41,7 +41,7 @@
     </div>
     <!-- JavaScript files-->
     <script src="admin_asset/vendor/jquery/jquery.min.js"></script>
-    <script src="admin_asset/vendor/datatable/datatables.min.js"> </script>
+    <script src="admin_asset/vendor/datatable/datatables.min.js"></script>
     <script src="admin_asset/vendor/popper.js/umd/popper.min.js"> </script>
     <script src="admin_asset/vendor/bootstrap/js/bootstrap.min.js"></script>
     <script src="admin_asset/vendor/jquery.cookie/jquery.cookie.js"> </script>
