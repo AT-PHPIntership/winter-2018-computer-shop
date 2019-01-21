@@ -69,7 +69,6 @@ return [
             'delete' => 'Deleted the :attribute successfully',
             'error' => 'The :attribute happens',
             'img' => 'does not have avatar',
-            'error' =>'Have error',
         ],
         'attribute' => [
              'user' => 'user',
@@ -94,5 +93,5 @@ return [
         'design' => 'Design by',
         'year' => '2017-2019',
         'author' => 'Bootstrapious',
-    ],
+    ]
 ];
