@@ -9,6 +9,15 @@ return [
         'number_paginate' => '3'
     ],
 
+    'order' => [
+        'status' => [
+            'pending' => 'Pending',
+            'approve' => 'Approve',
+            'cancel' => 'Cancel'
+        ],
+        'number_paginate' => '3'
+    ],
+    
     'code' => [
         'number_paginate' => '5'
     ],
