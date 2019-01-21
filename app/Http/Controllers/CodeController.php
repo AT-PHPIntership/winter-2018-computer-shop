@@ -109,8 +109,13 @@ class CodeController extends Controller
      */
     public function destroy($id)
     {
-        $this->codeService->delete($id);
-        return redirect()->route('codes.index')->with('message', Lang::get('master.content.message.delete', [
+        $message = $this->codeService->delete($id);
+        if ($message === 1) {
+            return redirect()->route('codes.index')->with('message', Lang::get('master.content.message.delete', [
             'attribute' => 'code']));
+        } else {
+            return redirect()->route('codes.index')->with('message', Lang::get('master.content.message.error', [
+                'attribute' => Lang::get('master.content.attribute.code')]));
+        }
     }
 }
