@@ -35,6 +35,11 @@ class OrderExport implements FromQuery, WithHeadings
         return Order::query()->whereMonth('date_order', $this->month);
     }
 
+    /**
+     * Create heading file export
+     *
+     * @return void
+     */
     public function headings(): array
     {
         return [
