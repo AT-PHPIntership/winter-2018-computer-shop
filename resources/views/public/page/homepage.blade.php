@@ -35,7 +35,7 @@
                                         <div class="content">
                                             <!-- Category & Title -->
                                             <div class="category-title">
-                                                <a href="#" class="cat">{{$product->category->name}}</a>
+                                                <a href="{{route('public.category', $product->category_id)}}" class="cat">{{$product->category->name}}</a>
                                                 <h5 class="title"><a href="single-product.html">{{$product->name}}</a></h5>
                                             </div>
                                             <!-- Price & Ratting -->
@@ -90,7 +90,7 @@
                                 <!-- Category & Title -->
                                 <div class="category-title">
 
-                                    <a href="#" class="cat">{{$product->category->name}}</a>
+                                    <a href="{{route('public.category', $product->category_id)}}" class="cat">{{$product->category->name}}</a>
                                     <h5 class="title"><a href="single-product.html">{{$product->name}}</a></h5>
 
                                 </div>
@@ -139,7 +139,7 @@
                             <div class="content">
                                 <!-- Category & Title -->
                                 <div class="category-title">
-                                    <a href="#" class="cat">{{$product->category->name}}</a>
+                                    <a href="{{route('public.category', $product->category_id)}}" class="cat">{{$product->category->name}}</a>
                                     <h5 class="title"><a href="single-product.html">{{$product->name}}</a></h5>
                                 </div>
                                 <!-- Price & Ratting -->

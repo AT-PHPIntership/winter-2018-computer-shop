@@ -17,7 +17,7 @@ class ViewServiceProvider extends ServiceProvider
         view()->composer(['admin.categories.create', 'admin.categories.edit', 'admin.products.create', 'admin.products.edit', 'public.layout.header'], 'App\Http\ViewComposers\CategoryComposer');
         view()->composer(['admin.users.create', 'admin.users.edit','admin.roles.index'], 'App\Http\ViewComposers\RoleComposer');
         view()->composer(['admin.products.edit'], 'App\Http\ViewComposers\AccessoryComposer');
-        view()->composer(['admin.slides.index', 'public.partials.slide'], 'App\Http\ViewComposers\SlideComposer');
+        view()->composer(['admin.slides.index', 'public.partials.slide', 'public.partials.breadcrumb'], 'App\Http\ViewComposers\SlideComposer');
         view()->composer(['public.partials.slide', 'public.page.homepage'], 'App\Http\ViewComposers\ProductComposer');
     }
 

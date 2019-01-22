@@ -7,7 +7,7 @@
                 <div class="col mt-10 mb-10">
                     <!-- Header Links Start -->
                     <div class="header-links">
-                       <a href="index.html">
+                       <a href="/">
                             <img src="public_asset/images/logo.png" alt="">
                             <img class="theme-dark" src="public_asset/images/logo-light.png" alt="">
                         </a>
@@ -43,16 +43,15 @@
                     <div class="main-menu">
                         <nav>
                             <ul>
-                                <li class="active"><a href="index.html">@lang('public.header.home')</a></li>
-                                <li class="menu-item-has-children"><a>@lang('public.header.category')</a>
+                                <li class="active"><a href="/">@lang('public.header.home')</a></li>
+                                <li class="menu-item-has-children"><a href="{{route('public.allCategory')}}">@lang('public.header.category')</a>
                                     <ul class="sub-menu">
                                         @foreach($categories as $category)
-                                        <li class="menu-item-has-children"><a href="shop-grid.html"><img class="img-thumbnail" src="storage/category/{{$category->image}}" width="120" height="60"></a>
+                                        <li class="menu-item-has-children"><a href="{{route('public.category', $category->id)}}"><img class="img-thumbnail" src="storage/category/{{$category->image}}" width="120" height="60"></a>
                                             <ul class="sub-menu">
-                                                @php $array = $category->childrens->pluck('name', 'id'); @endphp
-                                                @foreach ($array as $key => $val)
+                                                @foreach ($category->childrens->pluck('name', 'id') as $key => $val)
                                                 <li>
-                                                    <a href="{{$key}}">
+                                                    <a href="{{route('public.category', $key)}}">
                                                         {{$val}}
                                                     </a>
                                                 </li>

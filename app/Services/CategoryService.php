@@ -5,6 +5,10 @@ namespace App\Services;
 use App\Models\Category;
 use Yajra\Datatables\Datatables;
 use App\Services\ImageService;
+use App\Models\Product;
+use Illuminate\Pagination\Paginator;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class CategoryService
 {

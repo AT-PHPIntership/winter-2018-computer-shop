@@ -41,6 +41,7 @@ return [
         'bestseller' => 'BEST SELLERS',
         'newArrival' => 'NEW ARRIVAL',
         'addToCart' => 'ADD TO CART',
+        'noProduct' => 'Currently, this category does not have any products'
     ],
     'footer' => [
         'contact' => 'CONTACT INFO',

@@ -209,7 +209,7 @@ class ProductService
     **/
     public function saleOff()
     {
-        return Product::take(\Config::get('constants.product.saleOff'))->get();
+        return Product::take(config('constants.product.saleOff'))->get();
     }
 
     /**
@@ -219,7 +219,7 @@ class ProductService
     **/
     public function feature()
     {
-        return Product::take(\Config::get('constants.product.feature'))->get();
+        return Product::take(config('constants.product.feature'))->get();
     }
 
     /**
@@ -229,7 +229,7 @@ class ProductService
     **/
     public function bestSeller()
     {
-        return Product::orderBy('total_sold', 'desc')->groupBy('total_sold')->take(\Config::get('constants.product.bestSeller'))->get();
+        return Product::orderBy('total_sold', 'desc')->groupBy('total_sold')->take(config('constants.product.bestSeller'))->get();
     }
 
     /**
@@ -239,6 +239,32 @@ class ProductService
     **/
     public function newArrival()
     {
-        return Product::latest()->take(\Config::get('constants.product.newArrival'))->get();
+        return Product::latest()->take(config('constants.product.newArrival'))->get();
+    }
+
+    /**
+     * Get category based on id
+     *
+     * @return collection
+     */
+    public function allCategory()
+    {
+        return Product::paginate(config('constants.category.all'));
+    }
+
+    /**
+     * Get category based on id
+     *
+     * @param object $category [binding category model]
+     *
+     * @return collection
+     */
+    public function publicPage($category)
+    {
+        $raw = $category->parent_id != null ? 'category_id = ?' : 'parent_id = ?';
+        return Product::join('categories', 'products.category_id', '=', 'categories.id')
+                        ->select('products.*', 'categories.parent_id', 'categories.name as categoryName')
+                        ->whereRaw($raw, $category->id)
+                        ->paginate(config('constants.category.all'));
     }
 }
