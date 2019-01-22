@@ -12,5 +12,9 @@ return [
     'code' => [
         'number_paginate' => '5'
     ],
+
+    'accessory' => [
+        'number_paginate' => '3'
+    ]
     
 ];

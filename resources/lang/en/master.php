@@ -31,6 +31,7 @@ return [
         'order' => 'Orders Management',
         'promotion' => 'Promotions Management',
         'code' => 'Codes Management',
+        'access' => 'Accessories Management',
     ],
     'content' => [
         'action' => [
@@ -50,6 +51,7 @@ return [
             'start_at' => 'Start At',
             'end_at' => 'End At',
             'amount' => 'Amount',
+            'parent_id' => 'Parent name',
         ],
         'form' => [
             'password' => 'Password',
@@ -76,6 +78,7 @@ return [
              'Category' => 'Category',
              'avatar' => 'avatar',
              'code' => 'code',
+             'accessory' => 'accessory',
         ],
         'select' => [
             'choose' => 'Choose here',
