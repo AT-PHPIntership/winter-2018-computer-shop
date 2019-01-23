@@ -14,6 +14,9 @@
 Route::get('/', 'PublicController@homepage');
 Route::get('category', 'PublicController@allCategory')->name('public.allCategory');
 Route::get('category/{category}', 'PublicController@category')->name('public.category');
+Route::get('product/{product}', 'PublicController@getProduct')->name('public.product');
+Route::get('product/related/{category}', 'PublicController@getRelated');
+
 
 //Admin Route
 Route::group(['prefix' => 'admin'], function(){

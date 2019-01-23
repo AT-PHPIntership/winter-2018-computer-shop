@@ -253,7 +253,7 @@ class ProductService
     }
 
     /**
-     * Get category based on id
+     * Get product based on category id
      *
      * @param object $category [binding category model]
      *
@@ -266,5 +266,33 @@ class ProductService
                         ->select('products.*', 'categories.parent_id', 'categories.name as categoryName')
                         ->whereRaw($raw, $category->id)
                         ->paginate(config('constants.category.all'));
+    }
+
+    /**
+     * Get product based on category id
+     *
+     * @param object $product [binding product model]
+     *
+     * @return collection
+     */
+    public function publicProduct($product)
+    {
+        return $product->load('accessories');
+    }
+
+    /**
+     * Get product based on category id
+     *
+     * @param object $product [binding product model]
+     *
+     * @return collection
+     */
+    public function getRelated($product)
+    {
+        return Product::with(['images'])
+                        ->join('categories', 'products.category_id', '=', 'categories.id')
+                        ->select('products.name', 'products.id', 'products.unit_price', 'categories.parent_id', 'categories.id as categoryId', 'categories.name as categoryName')
+                        ->where('parent_id', $product->category->parent_id)
+                        ->get();
     }
 }

@@ -40,6 +40,7 @@ return [
         'featured' => 'FEATURED ITEMS',
         'bestseller' => 'BEST SELLERS',
         'newArrival' => 'NEW ARRIVAL',
+        'related' => 'RELATED PRODUCT',
         'addToCart' => 'ADD TO CART',
         'noProduct' => 'Currently, this category does not have any products'
     ],

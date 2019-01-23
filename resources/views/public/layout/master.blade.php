@@ -13,6 +13,8 @@
     	============================================ -->
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="public_asset/css/bootstrap.min.css">
+        <!-- Lightbox CSS-->
+        <link rel="stylesheet" href="admin_asset/vendor/lightbox/lightbox.css">
         <!-- Icon Font CSS -->
         <link rel="stylesheet" href="public_asset/css/icon-font.min.css">
         <!-- Plugins CSS -->
@@ -39,9 +41,13 @@
         <script src="public_asset/js/popper.min.js"></script>
         <!-- Bootstrap JS -->
         <script src="public_asset/js/bootstrap.min.js"></script>
+        <!-- Lightbox JS -->
+        <script src="admin_asset/vendor/lightbox/lightbox.js"> </script>
         <!-- Plugins JS -->
         <script src="public_asset/js/plugins.js"></script>
         <!-- Main JS -->
         <script src="public_asset/js/main.js"></script>
+        <!-- Custom JS -->
+        <script src="public_asset/js/custom.js"></script>
     </body>
 </html>

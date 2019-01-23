@@ -14,7 +14,7 @@
                                 <h3>@lang('public.slide.hurry')</h3>
                                 <h2 class="font-weight-bold"><span>{{$product->name}}</span></h2>
                                 <h2>@lang('public.slide.its') <span class="big font-weight-bold">29%</span> @lang('public.slide.off')</h2>
-                                <a href="#">@lang('public.slide.get')</a>
+                                <a href="{{route('public.product', $product->id)}}">@lang('public.slide.get')</a>
                             </div>
                             <!-- Hero Image -->
                             <div class="hero-image col-6">

@@ -64,7 +64,7 @@
                         <div class="ee-product">
                             <!-- Image -->
                             <div class="image">
-                                <a href="single-product.html" class="img"><img src="storage/product/{{$product->images->first()['name']}}" alt="Product Image"></a>
+                                <a href="{{route('public.product', $product->id)}}" class="img"><img src="storage/product/{{$product->images->first()['name']}}" alt="Product Image"></a>
                                 <div class="wishlist-compare">
                                     <a href="#" data-tooltip="Compare"><i class="ti-control-shuffle"></i></a>
                                 </div>
@@ -78,7 +78,7 @@
                                 <div class="category-title">
 
                                     <a href="{{route('public.category',$product->category_id )}}" class="cat">{{$product->categoryName}}</a>
-                                    <h5 class="title"><a href="single-product.html">{{$product->name}}</a></h5>
+                                    <h5 class="title"><a href="{{route('public.product', $product->id)}}">{{$product->name}}</a></h5>
 
                                 </div>
 

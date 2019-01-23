@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Category;
+use App\Models\Product;
 use App\Services\ProductService;
 
 class PublicController extends Controller
@@ -40,5 +41,19 @@ class PublicController extends Controller
     {
         $products = app(ProductService::class)->publicPage($category);
         return view('public.page.category', compact('products', 'category'));
+    }
+
+    /**
+     * Display a category of website.
+     *
+     *@param model $product [binding product model]
+     *
+     * @return Homepage view
+     */
+    public function getProduct(Product $product)
+    {
+        $products = app(ProductService::class)->publicProduct($product);
+        $relatedProduct = app(ProductService::class)->getRelated($product);
+        return view('public.page.product', compact('products', 'relatedProduct'));
     }
 }
