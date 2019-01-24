@@ -295,4 +295,16 @@ class ProductService
                         ->where('parent_id', $product->category->parent_id)
                         ->get();
     }
+
+    /**
+     * Get product based on id
+     *
+     * @param object $id [ product id]
+     *
+     * @return collection
+     */
+    public function compareProduct($id)
+    {
+        return Product::where('id', $id)->get();
+    }
 }

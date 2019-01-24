@@ -21,6 +21,7 @@ return [
         'category' => 'Category',
         'cart' => 'Cart',
         'contact' => 'Contact',
+        'compare' => 'Compare',
         'search' => 'Search your product',
     ],
     'slide' => [
@@ -28,6 +29,13 @@ return [
         'its' => 'IT’S',
         'off' => 'OFF',
         'get' => 'get it now',
+    ],
+    'compare' => [
+        'product' => 'Product',
+        'description' => 'Description',
+        'price' => 'Price',
+        'addToCart' => 'Add to cart',
+        'delete' => 'Delete',
     ],
     'subcribe' => [
         'title' => 'subscribe',

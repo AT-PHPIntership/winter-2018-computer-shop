@@ -56,4 +56,18 @@ class PublicController extends Controller
         $relatedProduct = app(ProductService::class)->getRelated($product);
         return view('public.page.product', compact('products', 'relatedProduct'));
     }
+
+    /**
+     * Display a compare two product
+     *
+     *@param request $request [request to get product]
+     *
+     * @return compare view
+     */
+    public function compare(Request $request)
+    {
+        $firstProduct = app(ProductService::class)->compareProduct($request->first);
+        $secondProduct = app(ProductService::class)->compareProduct($request->second);
+        return view('public.page.compare', compact('firstProduct', 'secondProduct'));
+    }
 }

@@ -66,7 +66,7 @@
                             <div class="image">
                                 <a href="{{route('public.product', $product->id)}}" class="img"><img src="storage/product/{{$product->images->first()['name']}}" alt="Product Image"></a>
                                 <div class="wishlist-compare">
-                                    <a href="#" data-tooltip="Compare"><i class="ti-control-shuffle"></i></a>
+                                    <a class="compare-page" data-product="{{$product->id}}" data-tooltip="Compare"><i class="ti-control-shuffle"></i></a>
                                 </div>
                                 <a href="#" class="add-to-cart"><i class="ti-shopping-cart"></i><span>@lang('public.content.addToCart')</span></a>
 

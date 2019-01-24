@@ -71,7 +71,7 @@
                     <!-- Header Shop Links Start -->
                     <div class="header-shop-links">
                         <!-- Compare -->
-                        <a href="compare.html" class="header-compare"><i class="ti-control-shuffle"></i></a>
+                        <a href="" id="header-compare"><i class="ti-control-shuffle"></i></a>
                         <!-- Cart -->
                         <a href="cart.html" class="header-cart"><i class="ti-shopping-cart"></i> <span class="number">3</span></a> 
                     </div><!-- Header Shop Links End -->

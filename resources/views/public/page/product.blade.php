@@ -56,7 +56,7 @@
                             <a href="#" class="add-to-cart"><i class="ti-shopping-cart"></i><span>@lang('public.content.addToCart')</span></a>
 
                             <div class="wishlist-compare">
-                                <a href="#" data-tooltip="Compare"><i class="ti-control-shuffle"></i></a>
+                                <a class="compare-page" data-product="{{$products->id}}" data-tooltip="Compare"><i class="ti-control-shuffle"></i></a>
                             </div>
 
                         </div>

@@ -38,6 +38,7 @@ class AppServiceProvider extends ServiceProvider
         JavaScript::put([
             'define' => config('define'),
             'trans'  => __('js.user'),
+            'message'  => __('js.compare'),
         ]);
     }
     
