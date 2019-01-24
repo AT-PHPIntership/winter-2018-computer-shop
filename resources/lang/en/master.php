@@ -33,46 +33,65 @@ return [
         'code' => 'Codes Management',
         'access' => 'Accessories Management',
     ],
+    'content' => [
+        'action' => [
+            'add' => 'Add New :attribute',
+            'detail' => 'View Details',
+            'edit' => 'Edit :attribute',
+            'delete' => 'Delete :attribute',
+            'show' => 'Details about :attribute',
+        ],
+        'table' => [
+            'email' => 'Email',
+            'action' => 'Actions',
+            'role' => 'Role',
+            'id' => '#',
+            'active' => 'Actived',
+            'percent' => 'Percent',
+            'start_at' => 'Start At',
+            'end_at' => 'End At',
+            'amount' => 'Amount',
+            'parent_id' => 'Parent name',
+        ],
+        'form' => [
+            'password' => 'Password',
+            'confirm_pw' => 'Confirm Password',
+            'name' => 'Name',
+            'address' => 'Address',
+            'phone' => 'Phone',
+            'avatar' => 'Avatar',
+            'image' => 'Image',
+            'parent' => 'Parent Category',
+        ],
+        'message' => [
+            'create' => 'Created a :attribute successfully',
+            'update' => 'Updated the :attribute successfully',
+            'delete' => 'Deleted the :attribute successfully',
+            'error' => 'The :attribute happens',
+            'img' => 'does not have avatar',
+        ],
+        'attribute' => [
+             'user' => 'user',
+             'role' => 'role',
+             'User' => 'User',
+             'category' => 'category',
+             'Category' => 'Category',
+             'avatar' => 'avatar',
+             'code' => 'code',
+             'accessory' => 'accessory',
+        ],
+        'select' => [
+            'choose' => 'Choose here',
+        ],
+        'button' => [
+            'create' => 'Create',
+            'update' => 'Update',
+            'cancel' => 'Cancel',
+        ],
+    ],
     'footer' => [
         'design' => 'Design by',
         'year' => '2017-2019',
         'author' => 'Bootstrapious',
-    ],
-    'content' => [
-       'action' => [
-           'add' => 'Add New :attribute',
-           'detail' => 'View Details',
-           'edit' => 'Edit :attribute',
-           'delete' => 'Delete :attribute',
-       ],
-       'table' => [
-           'email' => 'Email',
-           'action' => 'Actions',
-           'role' => 'Role',
-           'id' => '#',
-           'active' => 'Actived',
-           'percent' => 'Percent',
-           'start_at' => 'Start At',
-           'end_at' => 'End At',
-           'amount' => 'Amount',
-           'parent_id' => 'Parent name',
-       ],
-       'form' => [
-           'password' => 'Password',
-           'name' => 'Name',
-           'address' => 'Address',
-           'phone' => 'Phone',
-           'avatar' => 'Avatar',
-       ],
-       'message' => [
-            'create' =>'Created a :attribute successfuly',
-            'update' =>'Update a :attribute successfuly',
-            'delete' =>'Delete a :attribute successfuly',
-       ],
-       'button' => [
-            'create' =>'Create',
-            'update' =>'Update',
-       ]
     ]
-
 ];
