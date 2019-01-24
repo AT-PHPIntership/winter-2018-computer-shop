@@ -122,6 +122,7 @@ class CodeService
     public function delete($id)
     {
         try {
+            Code::find($id)->users()->detach();
             $message = Code::where('id', $id)->delete();
             return $message;
         } catch (\Exception $e) {
