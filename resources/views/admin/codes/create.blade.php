@@ -88,8 +88,8 @@
               <div class="col-sm-9">
                 <select name="all_user">
                   <option value="">{{ __('master.content.select.choose') }}</option>
-                  <option {{ old('all_user') == '0' ? "selected" : "" }} value="0">{{ __('master.content.select.no') }}</option>
-                  <option {{ old('all_user') == '1' ? "selected" : "" }} value="1">{{ __('master.content.select.yes') }}</option>
+                  <option {{ old('all_user') == \App\Models\Code::NO_USER ? "selected" : "" }} value="{{ \App\Models\Code::NO_USER }}">{{ __('master.content.select.no') }}</option>
+                  <option {{ old('all_user') == \App\Models\Code::ALL_USER ? "selected" : "" }} value="{{ \App\Models\Code::ALL_USER }}">{{ __('master.content.select.yes') }}</option>
                 </select>
                 @if ($errors->has('all_user'))
                   <span class="help-block col-sm-12">

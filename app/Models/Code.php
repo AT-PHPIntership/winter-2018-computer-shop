@@ -8,7 +8,8 @@ use App\Models\User;
 class Code extends Model
 {
     protected $table = 'codes';
-
+    const NO_USER = 0;
+    const ALL_USER = 1;
     /**
      * The attributes that are mass assignable.
      *
