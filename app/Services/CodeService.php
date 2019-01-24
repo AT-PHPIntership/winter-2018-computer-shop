@@ -72,12 +72,40 @@ class CodeService
     public function update($request, $id)
     {
         try {
-            $message = Code::where('id', $id)->update([
-                            'name' => $request->name,
-                            'amount' => $request->amount,
-                            'start_at' => $request->start_at,
-                            'end_at' => $request->end_at
-                        ]);
+            if ($request->all_user) {
+                $message = Code::where('id', $id)->update([
+                                'name' => $request->name,
+                                'amount' => $request->amount,
+                                'start_at' => $request->start_at,
+                                'end_at' => $request->end_at,
+                                'order_month' => $request->order_month,
+                                'all_user' => $request->all_user
+                            ]);
+                $users = User::all();
+                $arrayIdUser = [];
+                foreach ($users as $value) {
+                    array_push($arrayIdUser, $value->id);
+                }
+                Code::find($id)->users()->sync($arrayIdUser);
+            } else {
+                $message = Code::where('id', $id)->update([
+                                'name' => $request->name,
+                                'amount' => $request->amount,
+                                'start_at' => $request->start_at,
+                                'end_at' => $request->end_at,
+                                'order_month' => $request->order_month,
+                                'all_user' => $request->all_user
+                            ]);
+                $month = $request->order_month;
+                $users = User::whereHas('orders', function ($query) use ($month) {
+                    $query->whereMonth('date_order', $month);
+                })->get();
+                $arrayIdUser = [];
+                foreach ($users as $value) {
+                    array_push($arrayIdUser, $value->id);
+                }
+                Code::find($id)->users()->sync($arrayIdUser);
+            }
             return $message;
         } catch (\Exception $e) {
             return $message = $e->getMessage();
