@@ -27,7 +27,9 @@ class CodeRequest extends FormRequest
             'name' => 'required|min:3',
             'amount' => 'required|integer',
             'start_at' => 'required|date|after:yesterday',
-            'end_at' => 'required|date|after:start_at'
+            'end_at' => 'required|date|after:start_at',
+            'order_month' => 'required_if:all_user,0|required_without_all:all_user',
+            'all_user' => 'required|required_without_all:order_month'
         ];
     }
 }
