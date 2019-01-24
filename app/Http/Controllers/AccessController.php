@@ -93,8 +93,12 @@ class AccessController extends Controller
     public function update($id, AccessRequest $request)
     {
 
-        $this->accessService->update($id, $request);
-        return redirect()->route('access.index')->with('message', Lang::get('master.content.message.update', ['attribute' => 'Accessory']));
+        $message = $this->accessService->update($id, $request);
+        if ($message === 1) {
+            return redirect()->route('access.index')->with('message', Lang::get('master.content.message.update', ['attribute' => Lang::get('master.content.attribute.accessory')]));
+        } else {
+            return redirect()->back()->with('message', Lang::get('master.content.message.error', ['attribute' => Lang::get('master.content.attribute.accessory')]));
+        }
     }
 
     // /**

@@ -73,15 +73,20 @@ class AccessService
      */
     public function update($id, $request)
     {
-        if ($request->parent_id === null) {
-            Access::where('id', $id)->update([
-                'name' => $request->name,
-            ]);
-        } else {
-            Access::where('id', $id)->update([
-                'name' => $request->name,
-                'parent_id' => $request->parent_id
-            ]);
+        try {
+            if ($request->parent_id === null) {
+                $message = Access::where('id', $id)->update([
+                    'name' => $request->name,
+                ]);
+            } else {
+                $message = Access::where('id', $id)->update([
+                    'name' => $request->name,
+                    'parent_id' => $request->parent_id
+                ]);
+            }
+            return $message;
+        } catch (\Exception $e) {
+            return $message = $e->getMessage();
         }
     }
 }
