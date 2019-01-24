@@ -74,6 +74,39 @@
                 @endif
               </div>
             </div>
+            <div class="form-group row">
+              <label class="col-sm-3 form-control-label">@lang('master.content.table.order_month')</label>
+              <div class="col-sm-9">
+                <select name="order_month">
+                  <option value="">{{ __('master.content.select.choose') }}</option>
+                  @for($i = 1; $i <= 12; $i++)
+                  <option {{ old('order_month', $code->order_month) == $i ? "selected" : "" }} value="{{ $i }}">{{ $i }}</option>
+                  @endfor
+                </select>
+                @if ($errors->has('order_month'))
+                  <span class="help-block col-sm-12">
+                      <strong class="col-xs-12 col-sm-12 text-danger">{{ $errors->first('order_month') }}</strong>
+                  </span>
+                @endif
+              </div>
+
+            </div>
+
+            <div class="form-group row">
+              <label class="col-sm-3 form-control-label">@lang('master.content.table.all_user')</label>
+              <div class="col-sm-9">
+                <select name="all_user">
+                  <option value="">{{ __('master.content.select.choose') }}</option>
+                  <option {{ old('all_user', $code->all_user) == \App\Models\Code::NO_USER ? "selected" : "" }} value="{{ \App\Models\Code::NO_USER }}">{{ __('master.content.select.no') }}</option>
+                  <option {{ old('all_user', $code->all_user) == \App\Models\Code::ALL_USER ? "selected" : "" }} value="{{ \App\Models\Code::ALL_USER }}">{{ __('master.content.select.yes') }}</option>
+                </select>
+                @if ($errors->has('all_user'))
+                  <span class="help-block col-sm-12">
+                      <strong class="col-xs-12 col-sm-12 text-danger">{{ $errors->first('all_user') }}</strong>
+                  </span>
+                @endif
+              </div>
+            </div>
             <div class="form-group row">       
               <div class="col-sm-9 offset-sm-3">
                 <input type="submit" value="@lang('master.content.button.update')" class="btn btn-primary">
