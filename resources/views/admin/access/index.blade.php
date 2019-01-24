@@ -27,40 +27,40 @@
                <div class="card">
                    <div class="card-header d-flex align-items-center">
                        <a href="{{route('access.create')}}">
-                          <button type="button" class="btn btn-primary">@lang('master.content.action.add', ['attribute' => 'Accessory'])</button>
+                          <button type="button" class="btn btn-primary">@lang('master.content.action.add', ['attribute' => __('master.content.attribute.accessory')])</button>
                         </a>
                    </div>
                    <div class="card-body">
                        <div class="table-responsive">
                <table class="table table-striped table-hover">
                  <thead>
-                   <tr>
-                     <th>@lang('master.content.table.id')</th>
-                     <th>@lang('master.content.form.name')</th>
-                     <th>@lang('master.content.table.parent_id')</th>
-                     <th>@lang('master.content.table.action')</th>
-                   </tr>
-                 </thead>
-                 <tbody>
+                    <tr>
+                      <th>@lang('master.content.table.id')</th>
+                      <th>@lang('master.content.form.name')</th>
+                      <th>@lang('master.content.table.action')</th>
+                    </tr>
+                  </thead>
+                  <tbody>
                   @foreach($access as $acces)
                   <tr>
-                     <th scope="row">{{ $acces->id }}</th>
-                     <td>{{ $acces->name }}</td>
-                     @if($acces->parent != null)
-                     <td>{{ $acces->parent->name }}</td>
-                     @else
-                     <td>No</td>
-                     @endif
-                     <td>
-                       <a href="{{ route('access.edit', $acces->id) }}" class="btn btn-sm btn-warning">
-                       @lang('master.content.action.edit', ['attribute' => 'accessory'])
-                       </a>
-                       <form action="{{ route('access.destroy', $acces->id) }}" method="POST" class="d-inline">
-                          @csrf
-                          @method('DELETE')
-                          <input type="submit" value="@lang('master.content.action.delete', ['attribute' => 'accessory'])" class="btn btn-sm btn-danger">
-                        </form> 
-                       </a>
+                      <th scope="row">{{ $acces->id }}</th>
+                      <td>{{ $acces->name }}</td>
+                      <td>
+                        @if(sizeof($acces->children) > 0)
+                          <a href="{{ route('access.show', $acces->id) }}" class="btn btn-sm btn-info">
+                          @lang('master.content.action.show', ['attribute' => __('master.content.attribute.accessory')])
+                          </a>
+                        @endif
+                          <a href="{{ route('access.edit', $acces->id) }}" class="btn btn-sm btn-warning">
+                          @lang('master.content.action.edit', ['attribute' => __('master.content.attribute.accessory')])
+                          </a>
+                        @if(sizeof($acces->children) == 0)
+                          <form action="{{ route('access.destroy', $acces->id) }}" method="POST" class="d-inline">
+                            @csrf
+                            @method('DELETE')
+                            <input type="submit" value="@lang('master.content.action.delete', ['attribute' => __('master.content.attribute.accessory')])" class="btn btn-sm btn-danger">
+                          </form> 
+                        @endif
                      </td>
                    </tr>
                    @endforeach

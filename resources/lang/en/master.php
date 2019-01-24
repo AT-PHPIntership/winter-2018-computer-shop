@@ -76,6 +76,8 @@ return [
             'product_name' => 'Product name',
             'quantity' => 'Quantity',
             'price' => 'Price',
+            'order_month' => 'Order in month',
+            'all_user' => 'All user'
         ],
         'form' => [
             'password' => 'Password',
@@ -102,10 +104,13 @@ return [
              'Category' => 'Category',
              'avatar' => 'avatar',
              'code' => 'code',
+             'accessory' => 'accessory',
         ],
         'select' => [
             'choose' => 'Choose here',
-        ],
+            'no' => 'No',
+            'yes' => 'Yes'
+         ],
         'button' => [
             'create' => 'Create',
             'update' => 'Update',
