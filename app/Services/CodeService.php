@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Code;
+use App\Models\User;
 
 class CodeService
 {
@@ -26,9 +27,27 @@ class CodeService
      */
     public function create($request)
     {
-        Code::create($request->all());
+        if ($request->all_user) {
+            $code = Code::create($request->all());
+            $users = User::all();
+            $arrayIdUser = [];
+            foreach ($users as $value) {
+                array_push($arrayIdUser, $value->id);
+            }
+            Code::find($code->id)->users()->sync($arrayIdUser);
+        } else {
+            $code = Code::create($request->all());
+            $month = $request->order_month;
+            $users = User::whereHas('orders', function ($query) use ($month) {
+                $query->whereMonth('date_order', $month);
+            })->get();
+            $arrayIdUser = [];
+            foreach ($users as $value) {
+                array_push($arrayIdUser, $value->id);
+            }
+            Code::find($code->id)->users()->sync($arrayIdUser);
+        }
     }
-
     /**
      * Edit code
      *

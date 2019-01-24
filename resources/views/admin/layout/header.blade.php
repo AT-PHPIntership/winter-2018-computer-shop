@@ -34,7 +34,12 @@
             </ul>
           </li>
           <!-- Logout    -->
-          <li class="nav-item"><a href="login.html" class="nav-link logout"> <span class="d-none d-sm-inline">@lang('master.header.logout')</span><i class="fa fa-sign-out"></i></a></li>
+          <li class="nav-item"><a href="{{ route('logout') }}"  class="nav-link logout" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+          <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+              {{ csrf_field() }}
+          </form>
+
+           <span class="d-none d-sm-inline">@lang('master.header.logout')</span><i class="fa fa-sign-out"></i></a></li>
         </ul>
       </div>
     </div>

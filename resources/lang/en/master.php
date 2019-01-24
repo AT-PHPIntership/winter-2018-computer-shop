@@ -29,17 +29,31 @@ return [
         'img_product' => 'Products',
         'comment' => 'Comments Management',
         'order' => 'Orders Management',
+        'order_details' => 'Orders Details Management',
         'promotion' => 'Promotions Management',
         'code' => 'Codes Management',
         'access' => 'Accessories Management',
     ],
     'content' => [
+        'dashboard' => [
+            'title' => 'Dashboard',
+            'totals' => 'Total',
+            'user'=> 'User',
+            'order'=> 'Order',
+            'product'=> 'Product',
+            'statistic_order'=> 'Statistic Order',
+            'cancel'=> 'Cancel',
+            'pending'=> 'Pending',
+            'approve'=> 'Approve',
+            'export'=> 'Export to Excel',
+        ],
         'action' => [
             'add' => 'Add New :attribute',
             'detail' => 'View Details',
             'edit' => 'Edit :attribute',
             'delete' => 'Delete :attribute',
             'show' => 'Details about :attribute',
+            'back' => 'Back',
         ],
         'table' => [
             'email' => 'Email',
@@ -52,6 +66,18 @@ return [
             'end_at' => 'End At',
             'amount' => 'Amount',
             'parent_id' => 'Parent name',
+            'details' => 'Details',
+            'user' => 'User',
+            'address' => 'Address',
+            'phone' => 'Phone',
+            'note' => 'Note',
+            'date_order' => 'Date order',
+            'status' => 'Status',
+            'product_name' => 'Product name',
+            'quantity' => 'Quantity',
+            'price' => 'Price',
+            'order_month' => 'Order in month',
+            'all_user' => 'All user'
         ],
         'form' => [
             'password' => 'Password',
@@ -82,7 +108,9 @@ return [
         ],
         'select' => [
             'choose' => 'Choose here',
-        ],
+            'no' => 'No',
+            'yes' => 'Yes'
+         ],
         'button' => [
             'create' => 'Create',
             'update' => 'Update',

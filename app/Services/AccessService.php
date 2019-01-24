@@ -49,4 +49,51 @@ class AccessService
             );
         }
     }
+
+    /**
+     * Edit accessory
+     *
+     * @param [int] $id [Id accessory]
+     *
+     * @return void
+     */
+    public function edit($id)
+    {
+        $acces = Access::where('id', $id)->first();
+        return $acces;
+    }
+
+    /**
+     * Update accessory
+     *
+     * @param [int]    $id      [Id accessory]
+     * @param [object] $request [Request from form]
+     *
+     * @return void
+     */
+    public function update($id, $request)
+    {
+        if ($request->parent_id === null) {
+            Access::where('id', $id)->update([
+                'name' => $request->name,
+            ]);
+        } else {
+            Access::where('id', $id)->update([
+                'name' => $request->name,
+                'parent_id' => $request->parent_id
+            ]);
+        }
+    }
+
+    /**
+     * Delete accessory
+     *
+     * @param [int] $id [Id accessory]
+     *
+     * @return void
+     */
+    public function delete($id)
+    {
+        Access::where('id', $id)->delete();
+    }
 }
