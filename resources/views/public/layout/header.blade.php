@@ -26,7 +26,8 @@
                     <!-- Header Account Links Start -->
                     <div class="header-account-links">
                         <a href="register.html"><i class="icofont icofont-user-alt-7"></i> <span>@lang('public.header.account')</span></a>
-                        <a href="login.html"><i class="icofont icofont-login d-none"></i> <span>@lang('public.header.login')</span></a>
+                        <a href="{{route('public.login')}}"><i class="icofont icofont-login d-none"></i> <span>@lang('public.header.login')</span></a>
+                        <a href="{{route('public.register')}}"><i class="icofont icofont-login d-none"></i> <span>@lang('public.header.register')</span></a>
                     </div><!-- Header Account Links End -->
                 </div>
             </div>

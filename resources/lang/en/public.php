@@ -16,6 +16,7 @@ return [
     'header' => [
         'account' => 'My Account',
         'login' => 'Login',
+        'register' => 'Register',
         'logout' => 'Logout',
         'home' => 'Home',
         'category' => 'Category',
@@ -23,6 +24,24 @@ return [
         'contact' => 'Contact',
         'compare' => 'Compare',
         'search' => 'Search your product',
+    ],
+    'login' => [
+        'title' => 'Login to your account',
+        'email' => 'Enter your email',
+        'password' => 'Enter your password',
+        'click' => 'Don’t have account? please click',
+        'with' => 'Also you can login with...',
+        'social' => 'Login with',
+        'yet' => 'Your account is not activated yet.',
+        'active' => 'Your account are already actived.',
+        'success' => 'Your account active successfully',
+        'invalid' => 'Your token is invalid',
+    ],
+    'register' => [
+        'name' => 'Your name here',
+        'email' => 'Your email here',
+        'password' => 'Enter password',
+        'confirm' => 'Confirm password',
     ],
     'slide' => [
         'hurry' => 'HURRY UP!',
@@ -36,6 +55,13 @@ return [
         'price' => 'Price',
         'addToCart' => 'Add to cart',
         'delete' => 'Delete',
+    ],
+    'email' => [
+        'welcome' => 'Wellcome',
+        'click' => 'Please click button to activation your email:',
+        'verify' => 'Verify your account',
+        'code' => 'We sent activation code. Please check your email.',
+        'subject' => 'Verify your email account',
     ],
     'subcribe' => [
         'title' => 'subscribe',

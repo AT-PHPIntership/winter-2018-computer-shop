@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\User;
+use App\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use App\Http\Requests\RegisterRequest;
+use App\Services\UserService;
+use App\Services\ActivationService;
 
 class RegisterController extends Controller
 {
@@ -40,35 +43,40 @@ class RegisterController extends Controller
         $this->middleware('guest');
     }
 
-    /**
-     * Get a validator for an incoming registration request.
+     /**
+     * Display form to register
      *
-     * @param array $data data
-     *
-     * @return \Illuminate\Contracts\Validation\Validator
+     * @return register view
      */
-    protected function validator(array $data)
+    public function register()
     {
-        return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:6', 'confirmed'],
-        ]);
+        return view('auth.register');
     }
 
     /**
-     * Create a new user instance after a valid registration.
+     * Handle user register and send email
      *
-     * @param array $data data
+     *@param array $request [request register user]
      *
-     * @return \App\User
+     * @return register view
      */
-    protected function create(array $data)
+    public function handleRegister(RegisterRequest $request)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-        ]);
+        app(ActivationService::class)->register($request->all());
+        return redirect()->route('public.login');
+    }
+
+     /**
+     * Handle user register and send email
+     *
+     *@param string $token [identify user]
+     *
+     * @return register view
+     */
+    public function activation($token)
+    {
+        app(ActivationService::class)->activation($token);
+
+        return redirect()->route('public.login');
     }
 }
