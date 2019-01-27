@@ -103,4 +103,14 @@ class UserController extends Controller
         app(UserService::class)->delete($user);
         return redirect()->route('users.index');
     }
+
+    /**
+     * Show user profile page
+     *
+     * @return view
+     */
+    public function userProfile()
+    {
+        return view('public.user.profile');
+    }
 }

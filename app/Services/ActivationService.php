@@ -50,14 +50,14 @@ class ActivationService
         if (!is_null($check)) {
             $user = User::findOrFail($check->user_id);
             if ($user->is_actived == 1) {
-                session()->flash('message', __('public.login.active'));
+                session()->flash('message', __('public.register.active'));
                 return redirect()->route('public.login');
             }
             $user->update(['is_actived' => 1]);
             DB::table('user_activations')->where('token', $token)->delete();
-            session()->flash('message', __('public.login.success'));
+            session()->flash('message', __('public.register.success'));
             return redirect()->route('public.login');
         }
-        session()->flash('warning', __('public.login.invalid'));
+        session()->flash('warning', __('public.register.invalid'));
     }
 }

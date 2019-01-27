@@ -4,9 +4,6 @@
 <!-- Register Section Start -->
 <div class="register-section section mt-90 mb-90">
     <div class="container">
-        <div class="col-md-6">
-            @include('admin.partials.warning')
-        </div>
         <div class="row">
 
             <div class="col-md-2 col-12 d-flex">
@@ -18,7 +15,7 @@
             <!-- Register -->
             <div class="col-md-8 col-12 d-flex">
                 <div class="ee-register">
-                    
+                    @include('admin.partials.warning')
                     <!-- Register Form -->
                     <form action="{{route('public.register')}}" method="POST" enctype="multipart/form-data">
                     @csrf

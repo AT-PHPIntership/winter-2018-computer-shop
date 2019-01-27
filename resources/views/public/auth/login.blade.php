@@ -17,9 +17,12 @@
                     <form action="{{route('public.login')}}" method="POST">
                     @csrf
                         <div class="row">
-                            <div class="col-12 mb-30"><input name='email' type="text" placeholder="@lang('public.login.email')"></div>
-                            <div class="col-12 mb-20"><input name='password' type="password" placeholder="@lang('public.login.password')"></div>
-                            
+                            <div class="col-12 mb-30"><input name='email' type="text" placeholder="@lang('public.login.email')" value="{{old('name')}}">
+                            @include('admin.partials.error', ['err' => 'email'])
+                            </div>
+                            <div class="col-12 mb-20"><input name='password' type="password" placeholder="@lang('public.login.password')">
+                            @include('admin.partials.error', ['err' => 'password'])
+                            </div>
                             <div class="col-12"><input type="submit" value="@lang('public.header.login')"></div>
                         </div>
                     </form>

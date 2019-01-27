@@ -1,5 +1,4 @@
 <?php
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,7 +17,10 @@ Route::get('product/{product}', 'PublicController@getProduct')->name('public.pro
 Route::get('product/related/{category}', 'PublicController@getRelated');
 Route::get('compare/{first}/{second}', 'PublicController@compare');
 
-    
+//User route
+Route::group(['prefix' => 'user', 'middleware' => 'user.login'], function(){
+    Route::get('profile', 'UserController@userProfile')->name('user.profile');
+}); 
 
 //Admin Route
 Route::group(['prefix' => 'admin'], function(){
@@ -51,3 +53,4 @@ Route::get('activation/{token}', 'Auth\RegisterController@activation');
 
 //Login route
 Route::get('login', 'Auth\LoginController@login')->name('public.login');
+Route::post('login', 'Auth\LoginController@handleLogin')->name('public.login');
