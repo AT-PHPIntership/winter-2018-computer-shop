@@ -34,6 +34,7 @@ return [
         'social' => 'Login with',
         'yet' => 'Your account is not activated yet.',
         'wrong' => 'Your email or password wrong',
+        'duplicate' => 'Your email used by another account',
     ],
     'register' => [
         'name' => 'Your name here',

@@ -17,10 +17,10 @@
                     <form action="{{route('public.login')}}" method="POST">
                     @csrf
                         <div class="row">
-                            <div class="col-12 mb-30"><input name='email' type="text" placeholder="@lang('public.login.email')" value="{{old('name')}}">
+                            <div class="col-12 mb-30"><input name='email' type="text" placeholder="@lang('public.login.email')" value="{{old('name')}}" required>
                             @include('admin.partials.error', ['err' => 'email'])
                             </div>
-                            <div class="col-12 mb-20"><input name='password' type="password" placeholder="@lang('public.login.password')">
+                            <div class="col-12 mb-20"><input name='password' type="password" placeholder="@lang('public.login.password')" required>
                             @include('admin.partials.error', ['err' => 'password'])
                             </div>
                             <div class="col-12"><input type="submit" value="@lang('public.header.login')"></div>
@@ -41,10 +41,9 @@
                 
                 <div class="ee-social-login">
                     <h3>@lang('public.login.with')</h3>
-                    
-                    <a href="#" class="facebook-login">@lang('public.login.social') <i class="fa fa-facebook"></i></a>
-                    <a href="#" class="twitter-login">@lang('public.login.social') <i class="fa fa-twitter"></i></a>
-                    <a href="#" class="google-plus-login">@lang('public.login.social') <i class="fa fa-google-plus"></i></a>
+                
+                    <a href="{{ url('auth/facebook') }}" class="facebook-login">@lang('public.login.social') <i class="fa fa-facebook"></i></a>
+                    <a href="{{ url('auth/google') }}" class="google-plus-login">@lang('public.login.social') <i class="fa fa-google-plus"></i></a>
                     
                 </div>
                 

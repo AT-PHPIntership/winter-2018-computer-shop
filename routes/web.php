@@ -54,3 +54,9 @@ Route::get('activation/{token}', 'Auth\RegisterController@activation');
 //Login route
 Route::get('login', 'Auth\LoginController@login')->name('public.login');
 Route::post('login', 'Auth\LoginController@handleLogin')->name('public.login');
+
+//Login by Social account
+Route::get('auth/{provider}', 'Auth\LoginController@redirectToProvider');
+Route::get('auth/{provider}/callback', 'Auth\LoginController@handleProviderCallback');
+
+

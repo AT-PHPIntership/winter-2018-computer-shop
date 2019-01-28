@@ -30,7 +30,7 @@
                 <label for="fileInput" class="col-sm-3 form-control-label">@lang('master.content.form.avatar')</label>
                 @if($user->profile->avatar == !null)
                 <div class="col-sm-2">
-                    <img src="storage/avatar/{{$user->profile->avatar}}" alt="" class="img-thumbnail">
+                    <img src='{{ (is_numeric($user->profile->avatar[0])) ? 'storage/avatar/' .$user->profile->avatar : $user->profile->avatar }}' alt="" class="img-thumbnail">
                 </div>
                 @else
                 <div class="col-sm-8">
