@@ -31,16 +31,16 @@
                                 </div>
                             </div>
                             @endif
-                            <div class="col-12 mb-30"><input name="name" type="text" placeholder="@lang('public.register.name')" value="{{old('name')}}">
+                            <div class="col-12 mb-30"><input name="name" type="text" placeholder="@lang('public.register.name')" value="{{old('name')}}" required>
                             @include('admin.partials.error', ['err' => 'name'])
                             </div>
-                            <div class="col-12 mb-30"><input name="email" type="email" placeholder="@lang('public.register.email')" value="{{old('email')}}">
+                            <div class="col-12 mb-30"><input name="email" type="email" placeholder="@lang('public.register.email')" value="{{old('email')}}" required>
                             @include('admin.partials.error', ['err' => 'email'])
                             </div>
-                            <div class="col-12 mb-30"><input name="password" type="password" placeholder="@lang('public.register.password')">
+                            <div class="col-12 mb-30"><input name="password" type="password" placeholder="@lang('public.register.password')" required>
                             @include('admin.partials.error', ['err' => 'password'])
                             </div>
-                            <div class="col-12 mb-30"><input name="password_confirmation" type="password" placeholder="@lang('public.register.confirm')"></div>
+                            <div class="col-12 mb-30"><input name="password_confirmation" type="password" placeholder="@lang('public.register.confirm')" required></div>
                             <input type="hidden" name="role_id" value="1">
                             <input type="hidden" name="is_actived" value="0">
                             <div class="col-12"><input type="submit" value="@lang('public.header.register')"></div>

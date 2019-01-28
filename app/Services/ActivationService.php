@@ -4,6 +4,7 @@ namespace App\Services;
 
 use DB;
 use App\Models\User;
+use App\Models\UserProfile;
 use Mail;
 use App\Services\UserService;
 use League\Flysystem\Exception;
@@ -21,6 +22,9 @@ class ActivationService
     {
         try {
             $user = app(UserService::class)->createUser($data)->toArray();
+            UserProfile::create([
+                'user_id' => $user['id']
+            ]);
             $user['link'] = str_random(30);
             DB::table('user_activations')->insert([
                 'user_id' => $user['id'],
