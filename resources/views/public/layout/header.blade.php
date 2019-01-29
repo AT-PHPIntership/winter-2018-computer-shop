@@ -16,11 +16,13 @@
                 <div class="col order-12 order-xs-12 order-lg-2 mt-10 mb-10">
                     <!-- Header Advance Search Start -->
                     <div class="header-advance-search">
-                        <form action="#">
-                            <div class="input"><input type="text" placeholder="@lang('public.header.search')"></div>
+                        <form action="{{route('product.search')}}" method="GET" autocomplete="off">
+                            <div class="input"><input name='query' type="text" placeholder="@lang('public.header.search')" id="product-name" value="{{old('query')}}"></div>
                             <div class="submit"><button><i class="icofont icofont-search-alt-1"></i></button></div>
                         </form>
                     </div><!-- Header Advance Search End -->
+                    <div class="dropdown-menu" id="productList"></div>
+
                 </div>
                 <div class="col order-2 order-xs-2 order-lg-12 mt-10 mb-10">
                     <!-- Header Account Links Start -->

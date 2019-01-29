@@ -45,6 +45,12 @@ return [
         'success' => 'Your account active successfully',
         'invalid' => 'Your token is invalid',
     ],
+    'search' => [
+        'title' => 'Search',
+        'of' => 'of',
+        'result' => 'result for:',
+        'no' => 'We do not have any results for:',
+    ],
     'slide' => [
         'hurry' => 'HURRY UP!',
         'its' => 'IT’S',

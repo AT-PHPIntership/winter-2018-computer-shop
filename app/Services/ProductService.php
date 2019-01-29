@@ -307,4 +307,31 @@ class ProductService
     {
         return Product::where('id', $id)->get();
     }
+
+    /**
+     * Get product based on query
+     *
+     * @param object $query [query get product]
+     *
+     * @return collection
+     */
+    public function ajaxProductSearch($query)
+    {
+         return DB::table('products')
+                ->select('id', 'name')
+                ->where('name', 'LIKE', "%{$query}%")
+                ->get();
+    }
+
+    /**
+     * Get product based on query
+     *
+     * @param object $query [query get product]
+     *
+     * @return collection
+     */
+    public function productSearch($query)
+    {
+         return Product::where('name', 'LIKE', "%{$query}%")->paginate(config('constants.category.all'))->appends(['query'=> $query]);
+    }
 }

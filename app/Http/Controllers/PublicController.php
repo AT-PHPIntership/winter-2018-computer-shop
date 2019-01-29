@@ -70,4 +70,23 @@ class PublicController extends Controller
         $secondProduct = app(ProductService::class)->compareProduct($request->second);
         return view('public.page.compare', compact('firstProduct', 'secondProduct'));
     }
+
+    /**
+     * Get product from keyword in search field
+     *
+     *@param request $request [request to get product]
+     *
+     * @return compare view
+     */
+    public function productSearch(Request $request)
+    {
+        if ($request->ajax()) {
+            $response = app(ProductService::class)->ajaxProductSearch($request->get('query'));
+            return response()->json($response);
+        } else {
+            $query = $request->get('query');
+            $search = app(ProductService::class)->productSearch($query);
+            return view('public.page.search', compact('search', 'query'));
+        }
+    }
 }

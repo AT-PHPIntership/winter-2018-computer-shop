@@ -38,3 +38,28 @@
 .row h1 {
 	margin-left: 175px;
 }
+
+.dropdown-menu {
+	min-width: 20rem;
+	border-radius: 1rem;
+	margin-left: 15px;
+}
+
+.search-result {
+	margin-left: 300px;
+}
+.query {
+	color: #FF0000;
+}
+
+.product-list {
+	position: relative;
+}
+
+.product-items {
+	text-align: center;
+}
+
+#productList ul li:hover {
+	background: #fefcef;
+}

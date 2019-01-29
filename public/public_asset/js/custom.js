@@ -73,3 +73,59 @@ function checkLocalStorage(){
 };
 
 checkLocalStorage();
+
+//Search product
+
+//Delay a time before seach
+function delay(callback, ms) {
+  var timer = 0;
+  return function() {
+    var context = this, args = arguments;
+    clearTimeout(timer);
+    timer = setTimeout(function () {
+      callback.apply(context, args);
+    }, ms || 0);
+  };
+}
+
+$(document).ready(function(){
+	$('#product-name').keyup(delay(function(e){
+		e.preventDefault();
+		var query = $(this).val();
+		// debugger;
+        if (query != '' && query.length >= 2) {
+        $.ajax({
+          	url: 'product/search',
+          	method: "GET",
+          	data: {query: query},
+          	dataType:"JSON",
+          	success: function(data){
+          		// console.log(data);
+          		if (data.length > 0) {
+          			var output = '<ul class="product-list">';
+          			$.each(data, function(key, val){
+		                output += '<li class="product-items"><a href="product/' + val.id + '">' + val.name +'</a></li>';
+	                });
+                    output += '</ul>';
+                    // console.log(output);
+	                $('#productList').html(output);
+    	            $('#productList').fadeIn();
+          		} else {
+          			output = '';
+              		$('#productList').html(output);
+          		}
+            }
+        });
+        } else {
+        	$('#productList').fadeOut();
+        }
+    }, 1000));
+});
+
+//Disappear search result when click out of form
+$(document).bind('click', function (event) {
+    // Check if we have not clicked on the search box
+    if (!($(event.target).parents().andSelf().is('#product-name'))) {
+       $('#productList').fadeOut();
+    }
+});
