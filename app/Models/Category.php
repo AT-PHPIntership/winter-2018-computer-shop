@@ -41,4 +41,16 @@ class Category extends Model
     {
         return $this->hasMany('App\Models\Category', 'parent_id', 'id');
     }
+
+    /**
+     * The function display relationship between product and category
+     *
+     * @var array
+     *
+     * @return \App\Models\Product
+     */
+    public function product()
+    {
+        return $this->hasMany('App\Models\Product');
+    }
 }

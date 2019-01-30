@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\CategoryRequest;
 use App\Services\CategoryService;
+use App\Models\Category;
+use Illuminate\Support\Facades\Lang;
 
 class CategoryController extends Controller
 {
@@ -41,7 +43,7 @@ class CategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param object $request [request store category]
+     * @param object $request [request store new category]
      *
      * @return \Illuminate\Http\Response
      */
@@ -49,5 +51,18 @@ class CategoryController extends Controller
     {
         app(CategoryService::class)->store($request->all());
         return redirect()->route('categories.index');
+    }
+
+    /**
+     * Get children category from ajax request
+     *
+     * @param object $request [request to get children category]
+     *
+     * @return json()
+     */
+    public function getChildren(Request $request)
+    {
+        $response = app(CategoryService::class)->getSubCategory($request->get('id'));
+        return response()->json($response);
     }
 }
