@@ -1,0 +1,32 @@
+.image {
+	height:135px;
+	position: relative;
+}
+.ee-product {
+	height: 344px;
+	position: relative;
+}
+
+.content {
+	position: absolute;
+	bottom: 0;
+	width: 270px;
+}
+
+.row {
+	position: relative;
+}
+
+.no-product {
+	position: absolute;
+	right: 350px;
+	font-family: "Times New Roman", Times, serif;
+}
+
+.image-item {
+	margin-left: 150px;
+}
+
+.pro-desc {
+	width: 50%;
+}

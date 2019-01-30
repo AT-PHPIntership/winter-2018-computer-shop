@@ -13,13 +13,8 @@
     <li><a href="{{route('users.index')}}"><i class="fa fa-users"></i>@lang('master.sidebar.user')</a></li>
     <li><a href="{{route('roles.index')}}"><i class="fa fa-universal-access"></i>@lang('master.sidebar.role')</a></li>
     <li><a href="{{route('categories.index')}}"> <i class="fa fa-align-justify"></i>@lang('master.sidebar.category')</a></li>
-    <li><a href="login.html"> <i class="fa fa-industry"></i>@lang('master.sidebar.product')</a></li>
-    <li><a href="#exampledropdownDropdown" aria-expanded="false" data-toggle="collapse"><i class="fa fa-image"></i>@lang('master.sidebar.image')</a>
-      <ul id="exampledropdownDropdown" class="collapse list-unstyled ">
-        <li><a href="#">@lang('master.sidebar.img_category')</a></li>
-        <li><a href="#">@lang('master.sidebar.img_product')</a></li>
-      </ul>
-    </li>
+    <li><a href="{{route('products.index')}}"> <i class="fa fa-industry"></i>@lang('master.sidebar.product')</a></li>
+    <li><a href="{{route('slides.index')}}"> <i class="fa fa-image"></i>@lang('master.sidebar.slide')</a></li>
     <li><a href="login.html"><i class="fa fa-comments"></i>@lang('master.sidebar.comment')</a></li>
     <li><a href="{{ route('orders.index') }}"><i class="fa fa-shopping-cart"></i>@lang('master.sidebar.order')</a></li>
     <li><a href="{{ route('promotions.index') }}"><i class="fa fa-snowflake-o"></i>@lang('master.sidebar.promotion')</a></li>

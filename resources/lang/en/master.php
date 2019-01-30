@@ -33,6 +33,7 @@ return [
         'promotion' => 'Promotions Management',
         'code' => 'Codes Management',
         'access' => 'Accessories Management',
+        'slide' => 'Slides Management',
     ],
     'content' => [
         'dashboard' => [
@@ -54,12 +55,14 @@ return [
             'delete' => 'Delete :attribute',
             'show' => 'Details about :attribute',
             'back' => 'Back',
+            'import' => 'Import :attribute',
         ],
         'table' => [
             'email' => 'Email',
             'action' => 'Actions',
             'role' => 'Role',
             'id' => '#',
+            'product' => 'Product',
             'active' => 'Actived',
             'percent' => 'Percent',
             'start_at' => 'Start At',
@@ -77,7 +80,12 @@ return [
             'quantity' => 'Quantity',
             'price' => 'Price',
             'order_month' => 'Order in month',
-            'all_user' => 'All user'
+            'all_user' => 'All user',
+            'ram' => 'RAM',
+            'cpu' => 'CPU',
+            'hdd' => 'HDD',
+            'monitor' => 'Monitor',
+            'gpu' => 'GPU',
         ],
         'form' => [
             'password' => 'Password',
@@ -88,11 +96,17 @@ return [
             'avatar' => 'Avatar',
             'image' => 'Image',
             'parent' => 'Parent Category',
+            'category' => 'Category',
+            'description' => 'Description',
+            'price' => 'Price(đ)',
+            'quantity' => 'Quantity',
+            'file' => 'File',
         ],
         'message' => [
             'create' => 'Created a :attribute successfully',
             'update' => 'Updated the :attribute successfully',
             'delete' => 'Deleted the :attribute successfully',
+            'import' => 'Imported the file successfully',
             'error' => 'The :attribute happens',
             'img' => 'does not have avatar',
         ],
@@ -105,16 +119,22 @@ return [
              'avatar' => 'avatar',
              'code' => 'code',
              'accessory' => 'accessory',
+             'product' => 'product',
+             'Product' => 'Product',
+             'Slide' => 'Slide',
+             'slide' => 'slide',
         ],
         'select' => [
             'choose' => 'Choose here',
             'no' => 'No',
-            'yes' => 'Yes'
+            'yes' => 'Yes',
+            'parent' => 'Become parent category',
          ],
         'button' => [
             'create' => 'Create',
             'update' => 'Update',
             'cancel' => 'Cancel',
+            'upload' => 'Upload',
         ],
     ],
     'footer' => [
