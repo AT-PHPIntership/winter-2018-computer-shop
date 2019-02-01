@@ -35,9 +35,11 @@ class OrderController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Create oder
      *
-     * @return \Illuminate\Http\Response
+     * @param OrderRequest $request Request from form
+     *
+     * @return void
      */
     public function create(OrderRequest $request)
     {
@@ -68,8 +70,6 @@ class OrderController extends Controller
         }
 
         return redirect()->back()->with('message', 'Order successful');
-        
-
     }
 
     // /**

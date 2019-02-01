@@ -89,5 +89,5 @@ class PublicController extends Controller
     public function checkout()
     {
         return view('public.page.checkout');
-    }  
+    }
 }

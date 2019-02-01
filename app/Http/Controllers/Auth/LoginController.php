@@ -48,7 +48,12 @@ class LoginController extends Controller
         return $this->loggedOut($request) ?: redirect('/login');
         // return $this->loggedOut($request) ?: redirect('/admin/login');
     }
-        
+
+    /**
+     * Login
+     *
+     * @return void
+     */
     public function login()
     {
         return view('public.auth.login');
