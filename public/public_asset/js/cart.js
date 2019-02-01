@@ -19,8 +19,6 @@ $(document).ready(function(){
         $('#total-price').text(getTotalPrice());
         $('.number').text(getTotalItem());
         $('#js-total-price').text(getTotalPrice());
-        displayCheckout();
-        displayShoppingCartItems();
     })
 });
 
@@ -128,56 +126,6 @@ function displayCheckout() {
     $('#total-price').text(getTotalPrice());
 };
 
-/*----- 
-//     Quantity
-// --------------------------------*/
-// $('.pro-qty').prepend('<span class="dec qtybtn">-</span>');
-// $('.pro-qty').append('<span class="inc qtybtn">+</span>');
-// $('.qtybtn').on('click', function() {
-//     var $button = $(this);
-//     var oldValue = $button.parent().find('input').val();
-//     if ($button.hasClass('inc')) {
-//       var newVal = parseFloat(oldValue) + 1;
-//     } else {
-//        // Don't allow decrementing below zero
-//       if (oldValue > 0) {
-//         var newVal = parseFloat(oldValue) - 1;
-//         } else {
-//         newVal = 0;
-//       }
-//       }
-//     $button.parent().find('input').val(newVal);
-// });  
-    
-
-// $(document).ready(function(){
-//     $('#checkout-form').on('submit', function(e){
-//         // debugger;
-//         alert($(".container").hasClass("alert-success"));
-//         event.preventDefault();
-//         shoppingCartItems = [];
-//         localStorage["shopping-cart-items"] = JSON.stringify(shoppingCartItems);
-//         displayCheckout();
-//         displayShoppingCartItems();
-//         $('#total-price').text(getTotalPrice());
-//         $('.number').text(getTotalItem());
-//     });
-// });
-// function deleteLocal() {
-// //         console.log($(".container").hasClass("alert-success"));
-// //         alert($(".container").hasClass("alert-success"));
-
-// //     // if($(".container").hasClass("alert-success")){
-// //     //     shoppingCartItems = [];
-// //     //     localStorage["shopping-cart-items"] = JSON.stringify(shoppingCartItems);
-// //     //     displayCheckout();
-// //     //     displayShoppingCartItems();
-// //     //     $('#total-price').text(getTotalPrice());
-// //     //     $('.number').text(getTotalItem());
-// //     // }
-    
-
-// // }
 
 
 var deleteProduct = function () {
@@ -256,10 +204,61 @@ function modifyCart(e) {
 
     // reload page
     $('#total-price').text(getTotalPrice());
-    displayCheckout();
-    displayShoppingCartItems();
+    // displayCheckout();
+    // displayShoppingCartItems();
 //     $('#js-total-price').text(getTotalPrice());
 //     showCart();
 //     loadListCart();
 //     removeCart();
 }
+
+/*----- 
+//     Quantity
+// --------------------------------*/
+// $('.pro-qty').prepend('<span class="dec qtybtn">-</span>');
+// $('.pro-qty').append('<span class="inc qtybtn">+</span>');
+// $('.qtybtn').on('click', function() {
+//     var $button = $(this);
+//     var oldValue = $button.parent().find('input').val();
+//     if ($button.hasClass('inc')) {
+//       var newVal = parseFloat(oldValue) + 1;
+//     } else {
+//        // Don't allow decrementing below zero
+//       if (oldValue > 0) {
+//         var newVal = parseFloat(oldValue) - 1;
+//         } else {
+//         newVal = 0;
+//       }
+//       }
+//     $button.parent().find('input').val(newVal);
+// });  
+    
+
+// $(document).ready(function(){
+//     $('#checkout-form').on('submit', function(e){
+//         // debugger;
+//         alert($(".container").hasClass("alert-success"));
+//         event.preventDefault();
+//         shoppingCartItems = [];
+//         localStorage["shopping-cart-items"] = JSON.stringify(shoppingCartItems);
+//         displayCheckout();
+//         displayShoppingCartItems();
+//         $('#total-price').text(getTotalPrice());
+//         $('.number').text(getTotalItem());
+//     });
+// });
+// function deleteLocal() {
+// //         console.log($(".container").hasClass("alert-success"));
+// //         alert($(".container").hasClass("alert-success"));
+
+// //     // if($(".container").hasClass("alert-success")){
+// //     //     shoppingCartItems = [];
+// //     //     localStorage["shopping-cart-items"] = JSON.stringify(shoppingCartItems);
+// //     //     displayCheckout();
+// //     //     displayShoppingCartItems();
+// //     //     $('#total-price').text(getTotalPrice());
+// //     //     $('.number').text(getTotalItem());
+// //     // }
+    
+
+// // }
