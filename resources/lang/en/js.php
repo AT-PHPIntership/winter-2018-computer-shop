@@ -19,5 +19,9 @@
         'only' => 'You can only compare 2 product',
         'delete' => 'Now, you can choose different product to compare',
         'enough' => 'You do not have enough product to compare',
+     ],
+     'filter' => [
+        'title' => 'Filter by: '
      ]
+
   ];

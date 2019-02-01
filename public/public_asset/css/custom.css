@@ -63,3 +63,32 @@
 #productList ul li:hover {
 	background: #fefcef;
 }
+
+.filter-dropdown {
+  width: 125px;
+  min-width: 0;
+  text-align: center;
+}
+
+#filter-price {
+	width: 150px;
+}
+
+#sort-by {
+	width: 160px;
+}
+
+.dropdown {
+	display: inline-block;
+	margin-right: 10px;
+}
+
+.dropdown-toggle {
+	font-weight: bold;
+	font-size: 15px;
+}
+
+.filter-value {
+	font-weight: bold;
+	font-size: 18px;
+}

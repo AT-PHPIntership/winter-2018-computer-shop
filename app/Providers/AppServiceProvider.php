@@ -39,6 +39,7 @@ class AppServiceProvider extends ServiceProvider
             'define' => config('define'),
             'trans'  => __('js.user'),
             'message'  => __('js.compare'),
+            'filter'  => __('js.filter'),
         ]);
     }
     

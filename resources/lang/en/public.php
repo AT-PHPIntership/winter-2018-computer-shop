@@ -45,6 +45,18 @@ return [
         'success' => 'Your account active successfully',
         'invalid' => 'Your token is invalid',
     ],
+    'filter' => [
+        'price' => 'Price',
+        'sort' => 'Sort by',
+        'million' => 'million',
+        'over' => 'over',
+        'below' => 'below',
+        'title' => 'Filter',
+        'bestseller' => 'bestseller',
+        'latest' => 'latest',
+        'asc' => 'asc',
+        'desc' => 'desc',
+    ],
     'search' => [
         'title' => 'Search',
         'of' => 'of',

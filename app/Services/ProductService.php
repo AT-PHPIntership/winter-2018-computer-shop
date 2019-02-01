@@ -200,7 +200,7 @@ class ProductService
         return $data->whereIn('name', $compare);
     }
 
-    /*************Function use for Public Page***********************************/
+    /*************************Function use for Public Page***********************************/
 
     /**
      * Function help get product has sale off
@@ -333,5 +333,61 @@ class ProductService
     public function productSearch($query)
     {
          return Product::where('name', 'LIKE', "%{$query}%")->paginate(config('constants.category.all'))->appends(['query'=> $query]);
+    }
+
+    /**
+     * Get product based on filter field
+     *
+     * @param object $query    [query get product]
+     * @param object $parentId [parent id of accessory]
+     * @param object $value    [filter value]
+     *
+     * @return collection
+     */
+    public function productFilter($query, $parentId, $value)
+    {
+        if (!is_numeric($query)) {
+            return Product::whereHas('accessories', function ($q) use ($query, $parentId, $value) {
+                $q->where('parent_id', intval($parentId))
+                 ->where('name', 'LIKE', '%' . str_replace('-', '%', $query) . '%');
+            })->paginate(config('constants.category.all'))->appends(['query' => $query, 'val' => $value, 'parentId' => $parentId]);
+        } elseif ($query == max(array_keys(config('constants.price')))) {
+            return  Product::where(
+                'unit_price',
+                '>',
+                config("constants.price.{$query}")
+            )->paginate(config('constants.category.all'))->appends(['query'=> $query, 'val' => $value]);
+        } else {
+            $increase = $query + 1;
+            return Product::where([
+                       ['unit_price', '<=', config("constants.price.{$increase}")],
+                       ['unit_price', '>=', config("constants.price.{$query}")]
+               ])->paginate(config('constants.category.all'))->appends(['query'=> $query, 'val' => $value]);
+        }
+    }
+
+    /**
+     * Get product based on filter field
+     *
+     * @param object $query [query get product]
+     * @param object $value [filter value]
+     *
+     * @return collection
+     */
+    public function productSort($query, $value)
+    {
+        switch ($query) {
+            case __('public.filter.bestseller'):
+                return $this->bestSeller();
+            case __('public.filter.latest'):
+                return $this->newArrival();
+            case __('public.filter.asc'):
+                $product = Product::orderBy('unit_price', __('public.filter.asc'));
+                break;
+            case __('public.filter.desc'):
+                $product = Product::orderBy('unit_price', __('public.filter.desc'));
+                break;
+        }
+         return $product->paginate(config('constants.category.all'))->appends(['query'=> $query, 'val' => $value]);
     }
 }

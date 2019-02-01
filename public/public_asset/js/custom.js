@@ -19,6 +19,10 @@ function message(key) {
    return window.js_variable.message[key];
 }
 
+function filter(key) {
+   return window.js_variable.filter[key];
+}
+
 
 // Save product in oder to compare to localStoreage
 $(document).ready(function(){
@@ -74,7 +78,7 @@ function checkLocalStorage(){
 
 checkLocalStorage();
 
-//Search product
+/******************Search product by ajax**********************/
 
 //Delay a time before seach
 function delay(callback, ms) {
@@ -88,6 +92,7 @@ function delay(callback, ms) {
   };
 }
 
+//Perform search product by ajax
 $(document).ready(function(){
 	$('#product-name').keyup(delay(function(e){
 		e.preventDefault();
@@ -129,3 +134,20 @@ $(document).bind('click', function (event) {
        $('#productList').fadeOut();
     }
 });
+
+//Add to value filter when user choose filter
+var output = '<h4>' + filter('title') + '<span class="filter-value">' + GetURLParameter('val') + '</span>' +'</h4>';
+$('#filter-place').html(output)
+
+//Function to get param URL
+function GetURLParameter(sParam) {
+    var sPageURL = window.location.search.substring(1);
+    var sURLVariables = sPageURL.split('&');
+    for (var i = 0; i < sURLVariables.length; i++){
+        var sParameterName = sURLVariables[i].split('=');
+        if (sParameterName[0] == sParam)
+        {
+            return sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
+        }
+    }
+}

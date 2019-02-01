@@ -14,6 +14,8 @@ Route::get('/', 'PublicController@homepage');
 Route::get('category', 'PublicController@allCategory')->name('public.allCategory');
 Route::get('category/{category}', 'PublicController@category')->name('public.category');
 Route::get('product/search', 'PublicController@productSearch')->name('product.search');
+Route::get('product/filter', 'PublicController@productFilter')->name('product.filter');
+Route::get('product/sort', 'PublicController@productSort')->name('product.sort');
 Route::get('product/{product}', 'PublicController@getProduct')->name('public.product');
 Route::get('product/related/{category}', 'PublicController@getRelated');
 Route::get('compare/{first}/{second}', 'PublicController@compare');

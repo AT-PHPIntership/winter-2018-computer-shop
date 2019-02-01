@@ -15,4 +15,14 @@ class AccessoryService
     {
         return Accessory::with('childrens')->get();
     }
+
+    /**
+    * Get parent accessoris
+    *
+    * @return void
+    */
+    public function getParent()
+    {
+        return Accessory::parents()->get();
+    }
 }
