@@ -80,4 +80,14 @@ class PublicController extends Controller
     {
         return view('public.page.cart');
     }
+
+    /**
+     * Display page checkout
+     *
+     * @return void
+     */
+    public function checkout()
+    {
+        return view('public.page.checkout');
+    }  
 }

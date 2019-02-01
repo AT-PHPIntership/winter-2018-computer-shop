@@ -89,8 +89,7 @@
                                 <h2>Grand Total <span>$1250.00</span></h2>
                             </div>
                             <div class="cart-summary-button">
-                                <button class="checkout-btn">Checkout</button>
-                                <button class="update-btn">Update Cart</button>
+                                <a href="{{ route('public.checkout') }}"><button class="checkout-btn">Checkout</button></a>
                             </div>
                         </div>
                     </div>

@@ -5,7 +5,6 @@
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <title>@lang('public.title')</title>
         <base href="{{asset('')}}">
-        @routes
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- Favicon -->
@@ -52,5 +51,16 @@
         <script src="public_asset/js/custom.js"></script>
         <!-- Cart JS -->
         <script src="public_asset/js/cart.js"></script>
+        <!-- Javascript Requirements -->
+        
+
+        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js"></script>
+
+        <!-- Laravel Javascript Validation -->
+        <script type="text/javascript" src="/public_asset/js/jsvalidation.js"></script>
+
+
+        {!! JsValidator::formRequest('App\Http\Requests\OrderRequest') !!}
     </body>
 </html>

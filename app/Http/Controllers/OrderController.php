@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\OrderRequest;
 use App\Models\Order;
 use App\Models\OrderDetail;
+use App\Models\Product;
 use App\Services\OrderService;
 use Illuminate\Support\Facades\Lang;
+use Illuminate\Support\Carbon;
 
 class OrderController extends Controller
 {
@@ -32,15 +34,43 @@ class OrderController extends Controller
         return view('admin.orders.index', compact('orders'));
     }
 
-    // /**
-    //  * Show the form for creating a new resource.
-    //  *
-    //  * @return \Illuminate\Http\Response
-    //  */
-    // public function create()
-    // {
-    //     //
-    // }
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create(OrderRequest $request)
+    {
+        $dataOrder = [
+            'user_id' => $request->userId,
+            'phone' => $request->phone,
+            'address' => $request->address,
+            'note' => $request->note,
+            'status' => 2,
+            'date_order' => Carbon::now()->toDateString(),
+        ];
+        $order = Order::create($dataOrder);
+        foreach ($request->productId as $key => $productId) {
+            $dataProduct = [
+                'product_id' => $productId,
+                'quantity' => $request->quantity[$key],
+                'price' => $request->subprice[$key],
+                'order_id' => $order->id
+            ];
+            OrderDetail::create($dataProduct);
+            $product = Product::find($productId);
+            $quantityProduct = [
+                'quantity' => ($product->quantity - $request->quantity[$key]),
+                'total_sold' => ($product->total_sold + $request->quantity[$key])
+            ];
+
+            $product->update($quantityProduct);
+        }
+
+        return redirect()->back()->with('message', 'Order successful');
+        
+
+    }
 
     // /**
     //  * Store a newly created resource in storage.

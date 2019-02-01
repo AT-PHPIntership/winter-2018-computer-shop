@@ -1,3 +1,8 @@
+//Make message disappear after times
+$(document).ready(function() {
+  $('div.alert').delay(5000).slideUp();
+});
+
 //Display lightbox js
 $(document).ready(function(){
  lightbox.option({

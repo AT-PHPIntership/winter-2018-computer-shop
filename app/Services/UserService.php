@@ -99,4 +99,23 @@ class UserService
             session()->flash('warning', __('master.content.message.error', ['attribute' => $ex->getMessage()]));
         }
     }
+
+    /*******************User Register***************************/
+
+     /**
+     * Create a new user instance after a valid registration.
+     *
+     * @param array $data data
+     *
+     * @return \App\User
+     */
+    public function createUser(array $data)
+    {
+        try {
+            return User::create($data);
+        } catch (Exception $ex) {
+            session()->flash('warning', __('master.content.message.error', ['attribute' => $ex->getMessage()]));
+            return redirect()->back();
+        }
+    }
 }

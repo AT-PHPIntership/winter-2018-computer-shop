@@ -9,6 +9,7 @@ $(document).ready(function () {
 
     // Hiển thị thông tin từ giỏ hàng
     displayShoppingCartItems();
+    displayCheckout();
 });
 
 // reload page
@@ -18,10 +19,8 @@ $(document).ready(function(){
         $('#total-price').text(getTotalPrice());
         $('.number').text(getTotalItem());
         $('#js-total-price').text(getTotalPrice());
-        // showCart();
-        // loadListCart();
-        // modifyCart();
-        // removeCart();
+        displayCheckout();
+        displayShoppingCartItems();
     })
 });
 
@@ -30,8 +29,7 @@ $(".add-to-cart").click(function () {
     var button = $(this); // Lấy đối tượng button mà người dùng click
     var id = button.attr("id"); // id của sản phẩm là id của button
     var name = button.attr("data-name"); // name của sản phẩm là thuộc tính data-name của button
-    var price = Number(button.attr("data-price").replace(/[^0-9\.-]+/g,""));
-    // var price = button.attr("data-price"); // price của sản phẩm là thuộc tính data-price của button
+    var price = Number(button.attr("data-price").replace(/[^0-9\.-]+/g,""));// price của sản phẩm là thuộc tính data-price của button
     var quantity = 1; // Số lượng
 
 
@@ -63,6 +61,7 @@ $(".add-to-cart").click(function () {
     localStorage["shopping-cart-items"] = JSON.stringify(shoppingCartItems); // Chuyển thông tin mảng shoppingCartItems sang JSON trước khi lưu vào localStorage
     // Gọi hàm hiển thị giỏ hàng
     displayShoppingCartItems();
+    displayCheckout();
 });
 
 // Xóa hết giỏ hàng shoppingCartItems
@@ -104,38 +103,82 @@ function displayShoppingCartItems() {
     }
 
     $('.number').text(getTotalItem());
-    if (totalPrice != 0) {
-        $('#total-price').text(totalPrice);
+    $('#total-price').text(getTotalPrice());
+};
+
+// Hiển thị checkout
+function displayCheckout() {
+    if (localStorage["shopping-cart-items"] != null) {
+        shoppingCartItems = JSON.parse(localStorage["shopping-cart-items"].toString()); // Chuyển thông tin từ JSON trong localStorage sang mảng shoppingCartItems.
+
+        $("#table-checkout").html("");
+        // Duyệt qua mảng shoppingCartItems để append từng item dòng vào table
+        $.each(shoppingCartItems, function (index, item) {
+            var htmlString = '';
+            htmlString += '<li>' + item.name + ' X ' + item.quantity + '<span>' + item.quantity * item.price + '</span></li>';
+            htmlString += '<input type="hidden" name="productId[]" value="' + item.id + '"></<input>'
+            htmlString += '<input type="hidden" name="quantity[]" value="' + item.quantity + '"></<input>'
+            htmlString += '<input type="hidden" name="subprice[]" value="' + item.quantity * item.price + '"></<input>'
+            $("#table-checkout:last").append(htmlString);
+
+        });
     }
+
+    $('.number').text(getTotalItem());
+    $('#total-price').text(getTotalPrice());
 };
 
 /*----- 
-    Quantity
---------------------------------*/
-$('.pro-qty').prepend('<span class="dec qtybtn">-</span>');
-$('.pro-qty').append('<span class="inc qtybtn">+</span>');
-$('.qtybtn').on('click', function() {
-    var $button = $(this);
-    var oldValue = $button.parent().find('input').val();
-    if ($button.hasClass('inc')) {
-      var newVal = parseFloat(oldValue) + 1;
-    } else {
-       // Don't allow decrementing below zero
-      if (oldValue > 0) {
-        var newVal = parseFloat(oldValue) - 1;
-        } else {
-        newVal = 0;
-      }
-      }
-    $button.parent().find('input').val(newVal);
-});  
+//     Quantity
+// --------------------------------*/
+// $('.pro-qty').prepend('<span class="dec qtybtn">-</span>');
+// $('.pro-qty').append('<span class="inc qtybtn">+</span>');
+// $('.qtybtn').on('click', function() {
+//     var $button = $(this);
+//     var oldValue = $button.parent().find('input').val();
+//     if ($button.hasClass('inc')) {
+//       var newVal = parseFloat(oldValue) + 1;
+//     } else {
+//        // Don't allow decrementing below zero
+//       if (oldValue > 0) {
+//         var newVal = parseFloat(oldValue) - 1;
+//         } else {
+//         newVal = 0;
+//       }
+//       }
+//     $button.parent().find('input').val(newVal);
+// });  
     
 
-$("#button-clear").click(function () {
-    shoppingCartItems = [];
-    localStorage["shopping-cart-items"] = JSON.stringify(shoppingCartItems);
-    $("#table-products > tbody").html("");
-});
+// $(document).ready(function(){
+//     $('#checkout-form').on('submit', function(e){
+//         // debugger;
+//         alert($(".container").hasClass("alert-success"));
+//         event.preventDefault();
+//         shoppingCartItems = [];
+//         localStorage["shopping-cart-items"] = JSON.stringify(shoppingCartItems);
+//         displayCheckout();
+//         displayShoppingCartItems();
+//         $('#total-price').text(getTotalPrice());
+//         $('.number').text(getTotalItem());
+//     });
+// });
+// function deleteLocal() {
+// //         console.log($(".container").hasClass("alert-success"));
+// //         alert($(".container").hasClass("alert-success"));
+
+// //     // if($(".container").hasClass("alert-success")){
+// //     //     shoppingCartItems = [];
+// //     //     localStorage["shopping-cart-items"] = JSON.stringify(shoppingCartItems);
+// //     //     displayCheckout();
+// //     //     displayShoppingCartItems();
+// //     //     $('#total-price').text(getTotalPrice());
+// //     //     $('.number').text(getTotalItem());
+// //     // }
+    
+
+// // }
+
 
 var deleteProduct = function () {
     console.log(shoppingCartItems);
@@ -204,7 +247,7 @@ function modifyCart(e) {
         if (shoppingCartItems[i].id === idProduct) {
             if (quantity > 0) {
                 shoppingCartItems[i].quantity = quantity;
-                localStorage.setItem("shoppingCartItems",JSON.stringify(shoppingCartItems));
+                localStorage.setItem("shopping-cart-items",JSON.stringify(shoppingCartItems));
             } else {
                 alert('Please enter quantity larger than 0');
             }
@@ -213,6 +256,8 @@ function modifyCart(e) {
 
     // reload page
     $('#total-price').text(getTotalPrice());
+    displayCheckout();
+    displayShoppingCartItems();
 //     $('#js-total-price').text(getTotalPrice());
 //     showCart();
 //     loadListCart();

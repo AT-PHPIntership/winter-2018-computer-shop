@@ -20,7 +20,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-         'name', 'email', 'password', 'role_id'
+         'name', 'email', 'password', 'role_id', 'is_actived',
     ];
 
     /**
@@ -82,5 +82,15 @@ class User extends Authenticatable
     public function codes()
     {
         return $this->belongsToMany(Code::class);
+    }
+    
+     /**
+     * The function display relationship between user and social provider
+     *
+     * @return \App\Models\SocialProvider
+     */
+    public function socialProviders()
+    {
+        return $this->hasMany('App\Models\SocialProvider');
     }
 }

@@ -1,5 +1,4 @@
 <?php
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,6 +17,13 @@ Route::get('product/{product}', 'PublicController@getProduct')->name('public.pro
 Route::get('product/related/{category}', 'PublicController@getRelated');
 Route::get('compare/{first}/{second}', 'PublicController@compare');
 Route::get('cart', 'PublicController@cart')->name('public.cart');
+
+//User route
+Route::group(['prefix' => 'user', 'middleware' => 'user.login'], function(){
+    Route::get('profile', 'UserController@userProfile')->name('user.profile');
+    Route::get('checkout', 'PublicController@checkout')->name('public.checkout');
+    Route::post('order', 'OrderController@create')->name('public.order');
+}); 
 
 //Admin Route
 Route::group(['prefix' => 'admin'], function(){
@@ -51,3 +57,21 @@ Route::group(['prefix' => 'admin'], function(){
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+//Register route
+Route::get('register', 'Auth\RegisterController@register')->name('public.register');
+Route::post('register', 'Auth\RegisterController@handleRegister')->name('public.register');
+Route::get('activation/{token}', 'Auth\RegisterController@activation');
+
+//Login route
+Route::get('login', 'Auth\LoginController@login')->name('public.login');
+Route::post('login', 'Auth\LoginController@handleLogin')->name('public.login');
+
+//Login by Social account
+Route::get('auth/{provider}', 'Auth\LoginController@redirectToProvider');
+Route::get('auth/{provider}/callback', 'Auth\LoginController@handleProviderCallback');
+
+
