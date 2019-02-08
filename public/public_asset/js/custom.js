@@ -151,3 +151,95 @@ function GetURLParameter(sParam) {
         }
     }
 }
+
+//User comment product
+$(document).ready(function(){
+       $("#comment-button").on("click", function(e){
+        e.preventDefault();
+        var userId = $(this).data('user');
+        var productId = $(this).data('product');
+        var content = $.trim($('textarea').val());
+        var token = $(this).data("token");
+        // debugger;
+        if (content !== '') {
+            $.ajax({
+            url: 'product/comment',
+            method:"POST",
+            dataType:"JSON",
+            data: {'userId':userId, 'productId':productId, 'content':content, '_token':token},
+            success: function(data){ 
+              // console.log(data);
+                  var output = '';
+                  output += '<li class="comment-border">';
+                  output += '<article>';
+                  output += '<div class="comment-des" data-comment="' + data.id + '">'
+                  output += '<div class="comment-by">'
+                  output += '<p class="author"><strong>You<span class="comment-time">Now</span></strong></p>'
+                  output += '<span class="reply"><a class="add-reply">Reply</a></span>';
+                  output += '</div>';
+                  output += '<section>';
+                  output += '<p>' + data.content + '</p>';
+                  output += '</section>';
+                  output += '</div>';
+                  output += '</article>';
+                  output += '<ol class="children" id="commentChildren">';
+                  output += '</ol>';
+                  output += '</li>';
+                $('#commentList').html(output);
+            }
+            });
+        }
+    });
+});
+
+//Add reply form for comment
+$(document).ajaxComplete(function(){
+    $(".add-reply").click(function(){
+        var output = '';
+        output += '<h3>Add Your Reply<span>Cancel</span></h3>';
+        output += '<div class="ratting-form row">';
+        output += '<div class="col-12 mb-15">';
+        output += '<textarea name="review" id="reply-content" placeholder="Write your reply"></textarea>';
+        output += '</div>';
+        output += '<div class="col-12">';
+        output += '<input id="reply-button" value="Add Reply" type="submit">';
+        output += '</div>';
+        output += '</div>';
+        $('#replyForm').html(output);
+   });
+});
+
+//User reply comment
+$(document).on('click', '#reply-button', function() {
+    var commentId = $('.comment-des').data('comment');
+    var userId = $('#comment-button').data('user');
+    var token = $('#comment-button').data('token');
+    var productId = $('#comment-button').data('product');
+    var replyContent = $('#reply-content').val();
+    if (replyContent !== '') {
+            $.ajax({
+            url: 'product/reply',
+            method:"POST",
+            dataType:"JSON",
+            data: {'userId':userId, 'productId':productId, 'content':replyContent, '_token':token, 'parentComment':commentId},
+            success: function(data){ 
+              // console.log(data);
+                  var output = '';
+                  output += '<li class="comment-border">';
+                  output += '<article>';
+                  output += '<div class="comment-des" data-comment="' + data.id + '">'
+                  output += '<div class="comment-by">'
+                  output += '<p class="author"><strong>You<span class="comment-time">Now</span></strong></p>'
+                  output += '<span class="reply"><a class="add-reply">Reply</a></span>';
+                  output += '</div>';
+                  output += '<section>';
+                  output += '<p>' + data.content + '</p>';
+                  output += '</section>';
+                  output += '</div>';
+                  output += '</article>';
+                  output += '</li>';
+                $('#commentChildren').html(output);
+            }
+            });
+        }
+});

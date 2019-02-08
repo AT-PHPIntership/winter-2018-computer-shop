@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Product;
 use App\Services\ProductService;
+use App\Services\CommentService;
 
 class PublicController extends Controller
 {
@@ -115,5 +116,31 @@ class PublicController extends Controller
     {
         $products = app(ProductService::class)->productSort($request->get('query'), $request->get('val'));
         return view('public.page.filter', compact('products'));
+    }
+
+    /**
+     * Comment of user about a product
+     *
+     *@param request $request [request to get product]
+     *
+     * @return mix view
+     */
+    public function productComment(Request $request)
+    {
+        $response = app(CommentService::class)->comment($request->get('userId'), $request->get('productId'), $request->get('content'));
+        return response()->json($response);
+    }
+
+    /**
+     * Reply a comment
+     *
+     *@param request $request [request to get product]
+     *
+     * @return mix view
+     */
+    public function productReply(Request $request)
+    {
+        $response = app(CommentService::class)->reply($request->get('userId'), $request->get('productId'), $request->get('content'), $request->get('parentComment'));
+        return response()->json($response);
     }
 }

@@ -57,6 +57,15 @@ return [
         'asc' => 'asc',
         'desc' => 'desc',
     ],
+    'product' => [
+        'desc' => 'description',
+        'spec' => 'specifications',
+        'review' => 'reviews',
+        'title' => 'Add your Comments',
+        'login' => 'Login to write a review',
+        'placeholder' => 'Write a review',
+        'button' => 'add review',
+    ],
     'search' => [
         'title' => 'Search',
         'of' => 'of',

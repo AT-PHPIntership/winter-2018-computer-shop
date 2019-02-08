@@ -57,4 +57,14 @@ class Product extends Model
     {
         return $this->hasMany('App\Models\Image');
     }
+
+    /**
+     * The function display relationship between comment and product
+     *
+     * @return \App\Models\Role
+     */
+    public function comments()
+    {
+        return $this->hasMany('App\Models\Comment');
+    }
 }

@@ -74,9 +74,9 @@
             <div class="col-lg-10 col-12 ml-auto mr-auto">
                 
                 <ul class="single-product-tab-list nav">
-                    <li><a href="#product-description" class="active" data-toggle="tab" >description</a></li>
-                    <li><a href="#product-specifications" data-toggle="tab" >specifications</a></li>
-                    <li><a href="#product-reviews" data-toggle="tab" >reviews</a></li>
+                    <li><a href="#product-description" class="active" data-toggle="tab" >@lang('public.product.desc')</a></li>
+                    <li><a href="#product-specifications" data-toggle="tab" >@lang('public.product.spec')</a></li>
+                    <li><a href="#product-reviews" data-toggle="tab" >@lang('public.product.review')</a></li>
                 </ul>
                 
                 <div class="single-product-tab-content tab-content">
@@ -102,39 +102,59 @@
                        
                         <div class="product-ratting-wrap">
 
-                            <div class="rattings-wrapper">
-                            
-                                <div class="sin-rattings">
-                                    <div class="ratting-author">
-                                        <h3>Cristopher Lee</h3>
-                                    </div>
-                                    <p>enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia res eos qui ratione voluptatem sequi Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci veli</p>
-                                </div>
-                    
-                                
-                            </div>
                             <div class="ratting-form-wrapper fix">
-                                <h3>Add your Comments</h3>
-                                <form action="#">
+                                <h3>@lang('public.product.title')</h3>
                                     <div class="ratting-form row">
-                                        
-                                        <div class="col-md-6 col-12 mb-15">
-                                            <label for="name">Name:</label>
-                                            <input id="name" placeholder="Name" type="text">
-                                        </div>
-                                        <div class="col-md-6 col-12 mb-15">
-                                            <label for="email">Email:</label>
-                                            <input id="email" placeholder="Email" type="text">
-                                        </div>
                                         <div class="col-12 mb-15">
-                                            <label for="your-review">Your Review:</label>
-                                            <textarea name="review" id="your-review" placeholder="Write a review"></textarea>
+                                            @if (Auth::check())
+                                            <textarea name="review" id="your-review" placeholder="@lang('public.product.placeholder')"></textarea>
+                                            @else
+                                            <textarea name="review" id="your-review" placeholder="@lang('public.product.login')" disabled></textarea>
+                                            @endif
                                         </div>
                                         <div class="col-12">
-                                            <input value="add review" type="submit">
+                                            <input id='comment-button' {{(Auth::user()) ? 'data-user=' .Auth::user()->id : ''}} data-product='{{$products->id}}' data-token="{{ csrf_token() }}" value="@lang('public.product.button')" type="submit">
                                         </div>
                                     </div>
-                                </form>
+                                    <ol class="comment-list" id="commentList">
+                                        @foreach ($products->comments as $product)
+                                        <li class="comment-border">
+                                            @if ($product->parent_id == null)
+                                            <article>
+                                                <div class="comment-des" data-comment="32">
+                                                    <div class="comment-by">
+                                                        <p class="author"><strong>{{$product->user->name}}<span class="comment-time">{{$product->created_at}}</span></strong></p>
+                                                        <span class="reply"><a class="add-reply">Reply</a></span>
+                                                    </div>
+                                                    <section>
+                                                        <p>{{$product->content}}</p>
+                                                    </section>
+                                                </div>
+                                            </article>
+                                            @endif
+                                            <ol class="children" id="commentChildren">
+                                                <li class="comment-border">
+                                                    @if($product->childrens->pluck('parent_id')->first() == $product->id)
+                                                    <article>
+                                                        <div class="comment-des" data-comment="34">
+                                                            <div class="comment-by">
+                                                                <p class="author"><strong>{{$product->user->name}}<span class="comment-time">{{$product->created_at}}</span></strong></p><span class="reply"><a class="add-reply">Reply</a></span>
+                                                            </div>
+                                                            <section>
+                                                                <p>{{$product->content}}</p>
+                                                            </section>
+                                                        </div>
+                                                    </article>
+                                                    @endif
+                                                </li>
+                                            </ol>
+                                        </li>
+                                        @endforeach
+                                    </ol>
+                                    <!-- <ol class="comment-list" id="commentList">
+                                    </ol>
+                                    <div id="replyForm"> -->
+                                    </div>
                             </div>
                         </div>
                         

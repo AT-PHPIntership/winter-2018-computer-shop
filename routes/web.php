@@ -13,6 +13,8 @@
 Route::get('/', 'PublicController@homepage');
 Route::get('category', 'PublicController@allCategory')->name('public.allCategory');
 Route::get('category/{category}', 'PublicController@category')->name('public.category');
+Route::post('product/comment', 'PublicController@productComment');
+Route::post('product/reply', 'PublicController@productReply');
 Route::get('product/search', 'PublicController@productSearch')->name('product.search');
 Route::get('product/filter', 'PublicController@productFilter')->name('product.filter');
 Route::get('product/sort', 'PublicController@productSort')->name('product.sort');
