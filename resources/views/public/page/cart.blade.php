@@ -4,7 +4,15 @@
 <div class="page-section section pt-90 pb-50">
     <div class="container">
         <div class="row">
-            <div class="col-12">
+                @if(session('message'))
+                  <div class="col-12 alert alert-success">
+                      <button type="button" class="close" data-dismiss="alert">
+                          <i class="ace-icon fa fa-times"></i>
+                      </button>
+                          {{session('message')}}
+                  </div>
+                @endif
+                <div class="col-12">
                 <form action="#">               
                     <!-- Cart Table -->
                     <div class="cart-table table-responsive mb-40">
@@ -31,51 +39,36 @@
                 <div class="row">
 
                     <div class="col-lg-6 col-12 mb-15">
-                        <!-- Calculate Shipping -->
-                        <div class="calculate-shipping">
-                            <h4>Calculate Shipping</h4>
-                            <form action="#">
-                                <div class="row">
-                                    <div class="col-md-6 col-12 mb-25">
-                                        <select class="nice-select">
-                                            <option>Bangladesh</option>
-                                            <option>China</option>
-                                            <option>country</option>
-                                            <option>India</option>
-                                            <option>Japan</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-md-6 col-12 mb-25">
-                                        <select class="nice-select">
-                                            <option>Dhaka</option>
-                                            <option>Barisal</option>
-                                            <option>Khulna</option>
-                                            <option>Comilla</option>
-                                            <option>Chittagong</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-md-6 col-12 mb-25">
-                                        <input type="text" placeholder="Postcode / Zip">
-                                    </div>
-                                    <div class="col-md-6 col-12 mb-25">
-                                        <input type="submit" value="Estimate">
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
+                        
                         <!-- Discount Coupon -->
                         <div class="discount-coupon">
                             <h4>Discount Coupon Code</h4>
-                            <form action="#">
+                            <form action="{{ route('public.code') }}" method="POST">
+                                @csrf
                                 <div class="row">
                                     <div class="col-md-6 col-12 mb-25">
-                                        <input type="text" placeholder="Coupon Code">
+                                        <input type="text" name="nameCode" value="{{ old('name') }}" placeholder="Coupon Code">
+                                        @if(Auth::check())
+                                        <input  type="hidden" name="userId" value="{{ Auth::user()->id }}">
+                                        @endIf
                                     </div>
                                     <div class="col-md-6 col-12 mb-25">
+                                        @if(Auth::check())
                                         <input type="submit" value="Apply Code">
+                                        @else
+                                        <p class="text-success">You must login that apply code</p>
+                                        @endIf
                                     </div>
                                 </div>
                             </form>
+                            @if(session('message'))
+                              <div class="col-4 alert alert-success">
+                                  <button type="button" class="close" data-dismiss="alert">
+                                      <i class="ace-icon fa fa-times"></i>
+                                  </button>
+                                      {{session('message')}}
+                              </div>
+                            @endif
                         </div>
                     </div>
 

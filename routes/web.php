@@ -10,7 +10,7 @@
 |
 */
 //Public route
-Route::get('/', 'PublicController@homepage');
+Route::get('/', 'PublicController@homepage')->name('public.home');
 Route::get('category', 'PublicController@allCategory')->name('public.allCategory');
 Route::get('category/{category}', 'PublicController@category')->name('public.category');
 Route::get('product/{product}', 'PublicController@getProduct')->name('public.product');
@@ -23,6 +23,7 @@ Route::group(['prefix' => 'user', 'middleware' => 'user.login'], function(){
     Route::get('profile', 'UserController@userProfile')->name('user.profile');
     Route::get('checkout', 'PublicController@checkout')->name('public.checkout');
     Route::post('order', 'OrderController@create')->name('public.order');
+    Route::post('code', 'CodeController@applyCode')->name('public.code');
 }); 
 
 //Admin Route

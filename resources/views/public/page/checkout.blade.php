@@ -8,14 +8,15 @@
     <div class="container">
         <div class="row">
             <div class="col-12">
-                @if(session('message'))
+                @if(isset($message))
                   <div class="col-12 alert alert-success">
                       <button type="button" class="close" data-dismiss="alert">
                           <i class="ace-icon fa fa-times"></i>
                       </button>
-                          {{session('message')}}
+                          {{ $message }}
                   </div>
                 @endif
+
                 <!-- Checkout Form s-->
                 <form id="checkout-form" action="{{ route('public.order') }}" method="POST" class="checkout-form">
                   @csrf
@@ -29,47 +30,38 @@
 
                                <div class="row">
 
-                                   <div class="col-md-6 col-12 mb-20">
-                                       <label>Full Name</label>
-                                       <input readonly type="text" placeholder="First Name" value="{{ Auth::user()->name }}">
-                                       <input type="hidden" name="userId" value="{{ Auth::user()->id }}">
-                                   </div>
+                                     <div class="col-md-6 col-12 mb-20">
+                                         <label>Full Name</label>
+                                         <input readonly type="text" placeholder="First Name" value="{{ Auth::user()->name }}">
+                                         <input type="hidden" name="userId" value="{{ Auth::user()->id }}">
+                                         
+                                     </div>
 
-                                   <div class="col-md-6 col-12 mb-20">
-                                       <label>Email Address</label>
-                                       <input readonly type="email" placeholder="Email Address" value="{{ Auth::user()->email }}">
-                                   </div>
+                                     <div class="col-md-6 col-12 mb-20">
+                                         <label>Email Address</label>
+                                         <input readonly type="email" placeholder="Email Address" value="{{ Auth::user()->email }}">
+                                          @isset($arrCode)
+                                         <input type="hidden" name="codeId" value="{{ $arrCode ? $arrCode['codeId'] : "" }}">
+                                         @endisset
+                                     </div>
 
-                                      <div class="col-12 mb-20">
-                                         <label>Phone no*</label>
-                                         <input type="text" placeholder="Phone number" name="phone" value="{{ old('phone', Auth::user()->profile->phone)   }}">
-                                     </div> 
-                                     @if ($errors->has('phone'))
-                                        <span class="help-block col-6">
-                                            <strong class="col-6 text-danger">{{ $errors->first('phone') }}</strong>
-                                        </span>
-                                      @endif 
+                                    <div class="col-12 mb-20">
+                                       <label>Phone no*</label>
+                                       <input type="text" placeholder="Phone number" name="phone" value="{{ old('phone') }}">
+                                    </div> 
+                                    
 
                                      <div class="col-12 ">
                                          <label>Address*</label>
-                                         <input type="text" placeholder="Address" name="address" value="{{ old('address', Auth::user()->profile->address) }}">
+                                         <input type="text" placeholder="Address" name="address" value="{{ old('address') }}">
                                      </div>
-                                     @if ($errors->has('address'))
-                                        <span class="help-block col-sm-6">
-                                            <strong class="col-6 text-danger">{{ $errors->first('address') }}</strong>
-                                        </span>
-                                      @endif
+                                     
 
                                   <div class="col-md-12 col-12">
-                                       <label>Note*</label>
+                                       <label>Note</label>
                                        <input type="text" placeholder="Note" name="note" value="{{ old('note') }}">
                                    </div>
 
-                                   @if ($errors->has('note'))
-                                      <span class="help-block col-sm-12">
-                                          <strong class="col-xs-6 col-sm-6 text-danger">{{ $errors->first('note') }}</strong>
-                                      </span>
-                                    @endif
 
                                </div>
 

@@ -9,6 +9,7 @@ use App\Models\Product;
 use App\Services\OrderService;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Carbon;
+use App\Models\UserCode;
 
 class OrderController extends Controller
 {
@@ -43,15 +44,38 @@ class OrderController extends Controller
      */
     public function create(OrderRequest $request)
     {
-        $dataOrder = [
-            'user_id' => $request->userId,
-            'phone' => $request->phone,
-            'address' => $request->address,
-            'note' => $request->note,
-            'status' => 2,
-            'date_order' => Carbon::now()->toDateString(),
-        ];
-        $order = Order::create($dataOrder);
+        // delete code applyed
+        if (isset($request->codeId)) {
+            $codeId = $request->codeId;
+            $userId = $request->userId;
+            $codeUser = UserCode::where('user_id', $userId)->Where('code_id', $codeId)->first();
+            $codeUserID = $codeUser->id;
+            $codeUser->delete();
+
+            // create oder
+            $dataOrder = [
+                'user_id' => $request->userId,
+                'code_user_id' => $codeUserID,
+                'phone' => $request->phone,
+                'address' => $request->address,
+                'note' => $request->note,
+                'status' => 2,
+                'date_order' => Carbon::now()->toDateString(),
+            ];
+            $order = Order::create($dataOrder);
+        } else {
+            // create oder
+            $dataOrder = [
+                'user_id' => $request->userId,
+                'phone' => $request->phone,
+                'address' => $request->address,
+                'note' => $request->note,
+                'status' => 2,
+                'date_order' => Carbon::now()->toDateString(),
+            ];
+            $order = Order::create($dataOrder);
+        }
+        // ceate oder-detail
         foreach ($request->productId as $key => $productId) {
             $dataProduct = [
                 'product_id' => $productId,
@@ -60,6 +84,8 @@ class OrderController extends Controller
                 'order_id' => $order->id
             ];
             OrderDetail::create($dataProduct);
+
+            // update quantity, total-sold Product
             $product = Product::find($productId);
             $quantityProduct = [
                 'quantity' => ($product->quantity - $request->quantity[$key]),
@@ -68,8 +94,7 @@ class OrderController extends Controller
 
             $product->update($quantityProduct);
         }
-
-        return redirect()->back()->with('message', 'Order successful');
+        return redirect()->route('public.home')->with('message', 'Order successful');
     }
 
     // /**

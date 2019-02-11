@@ -8,6 +8,8 @@ use App\Services\CodeService;
 use App\Http\Requests\CodeRequest;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Carbon;
+use App\Models\UserCode;
 
 class CodeController extends Controller
 {
@@ -116,6 +118,54 @@ class CodeController extends Controller
         } else {
             return redirect()->route('codes.index')->with('message', Lang::get('master.content.message.error', [
                 'attribute' => Lang::get('master.content.attribute.code')]));
+        }
+    }
+
+    /**
+     * Apply code
+     *
+     * @param Request $request Request from form
+     *
+     * @return void
+     */
+    public function applyCode(Request $request)
+    {
+        $userId = $request->userId;
+        $nameCode = $request->nameCode;
+        $dateOrder = Carbon::now()->toDateString();
+        // dd($userId, $nameCode);
+        $checkName = Code::where('name', $nameCode)->count();
+        // $dateCode = Code
+        // dd($checkName);
+        if ($checkName === 0) {
+            return redirect()->back()->with('message', 'Code not have');
+        } else {
+            $codeDetail = Code::where('name', $nameCode)->first();
+            // dd($codeDetail);
+            $startAt = $codeDetail->start_at;
+            $endAt = $codeDetail->end_at;
+            $codeId = $codeDetail->id;
+            $amount = $codeDetail->amount;
+            // dd($codeId);
+            // dd($start_at, $end_at, $dateOrder);
+            if ($dateOrder <= $endAt && $dateOrder >= $startAt) {
+                $userCode = UserCode::where('user_id', $userId)->Where('code_id', $codeId)->first();
+                // dd($userCode->re);
+                if ($userCode === null) {
+                    return redirect()->back()->with('message', 'Code used');
+                } else {
+                    $arrCode = array(
+                        'codeId' => $codeId,
+                        'amount' =>  $amount
+                    );
+                    $message = 'Code applyed';
+                    // $userCode->delete();
+                    return view('public.page.checkout', compact('arrCode', 'message'));
+                }
+                // dd($userCode->delete());
+            } else {
+                return redirect()->back()->with('message', 'Code Expires');
+            }
         }
     }
 }
