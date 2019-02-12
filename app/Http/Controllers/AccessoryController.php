@@ -2,26 +2,26 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Access;
+use App\Models\Accessory;
 use Illuminate\Http\Request;
-use App\Services\AccessService;
-use App\Http\Requests\AccessRequest;
+use App\Services\AccessoryService;
+use App\Http\Requests\AccessoryRequest;
 use Illuminate\Support\Facades\Lang;
 
-class AccessController extends Controller
+class AccessoryController extends Controller
 {
 
 
-    protected $accessService;
+    protected $accessoryService;
 
     /**
      * Function constructer
      *
-     * @param AccsessService $accessService ClassAccess
+     * @param AccsessoryService $accessoryService ClassAccess
      */
-    public function __construct(AccessService $accessService)
+    public function __construct(AccessoryService $accessoryService)
     {
-        $this->accessService = $accessService;
+        $this->accessoryService = $accessoryService;
     }
     /**
      * Return view index access
@@ -30,8 +30,8 @@ class AccessController extends Controller
      */
     public function index()
     {
-        $access = $this->accessService->index();
-        return view('admin.access.index', compact('access'));
+        $accessories = $this->accessoryService->index();
+        return view('admin.accessories.index', compact('accessories'));
     }
 
     /**
@@ -41,7 +41,7 @@ class AccessController extends Controller
      */
     public function create()
     {
-        return view('admin.access.create');
+        return view('admin.accessories.create');
     }
 
     /**
@@ -51,22 +51,22 @@ class AccessController extends Controller
      *
      * @return void
      */
-    public function store(AccessRequest $request)
+    public function store(AccessoryRequest $request)
     {
-        $this->accessService->create($request);
-        return redirect()->route('access.index')->with('message', Lang::get('master.content.message.create', ['attribute' => 'Accessory']));
+        $this->accessoryService->create($request);
+        return redirect()->route('accessories.index')->with('message', Lang::get('master.content.message.create', ['attribute' => 'Accessory']));
     }
 
     /**
      * Show Accessory
      *
-     * @param Access $access [Object]
+     * @param Accessory $accessory [Object]
      *
      * @return void
      */
-    public function show(Access $access)
+    public function show(Accessory $accessory)
     {
-        return view('admin.access.show', compact('access'));
+        return view('admin.accessories.show', compact('accessory'));
     }
 
     /**
@@ -78,8 +78,8 @@ class AccessController extends Controller
      */
     public function edit($id)
     {
-        $acces = $this->accessService->edit($id);
-        return view('admin.access.update', compact('acces'));
+        $accessory = $this->accessoryService->edit($id);
+        return view('admin.accessories.update', compact('accessory'));
     }
 
     /**
@@ -90,12 +90,12 @@ class AccessController extends Controller
      *
      * @return void
      */
-    public function update($id, AccessRequest $request)
+    public function update($id, AccessoryRequest $request)
     {
 
-        $message = $this->accessService->update($id, $request);
+        $message = $this->accessoryService->update($id, $request);
         if ($message === 1) {
-            return redirect()->route('access.index')->with('message', Lang::get('master.content.message.update', ['attribute' => Lang::get('master.content.attribute.accessory')]));
+            return redirect()->route('accessories.index')->with('message', Lang::get('master.content.message.update', ['attribute' => Lang::get('master.content.attribute.accessory')]));
         } else {
             return redirect()->back()->with('message', Lang::get('master.content.message.error', ['attribute' => Lang::get('master.content.attribute.accessory')]));
         }

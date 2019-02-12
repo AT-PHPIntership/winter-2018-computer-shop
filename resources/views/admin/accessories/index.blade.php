@@ -2,14 +2,14 @@
 @section('content')
 <header class="page-header">
    <div class="container-fluid">
-       <h2 class="no-margin-bottom">@lang('master.sidebar.access')</h2>
+       <h2 class="no-margin-bottom">@lang('master.sidebar.accessory')</h2>
    </div>
 </header>
 <!-- Breadcrumb-->
 <div  class="breadcrumb-holder container-fluid">
    <ul class="breadcrumb">
        <li class="breadcrumb-item"><a href="{{route('admin.home')}}">@lang('master.sidebar.home')</a></li>
-       <li class="breadcrumb-item active">@lang('master.sidebar.access')</li>
+       <li class="breadcrumb-item active">@lang('master.sidebar.accessory')</li>
    </ul>
 </div>
 @if(session('message'))
@@ -26,7 +26,7 @@
            <div class="col-lg-12">
                <div class="card">
                    <div class="card-header d-flex align-items-center">
-                       <a href="{{route('access.create')}}">
+                       <a href="{{route('accessories.create')}}">
                           <button type="button" class="btn btn-primary">@lang('master.content.action.add', ['attribute' => __('master.content.attribute.accessory')])</button>
                         </a>
                    </div>
@@ -41,21 +41,21 @@
                     </tr>
                   </thead>
                   <tbody>
-                  @foreach($access as $acces)
+                  @foreach($accessories as $accesory)
                   <tr>
-                      <th scope="row">{{ $acces->id }}</th>
-                      <td>{{ $acces->name }}</td>
+                      <th scope="row">{{ $accesory->id }}</th>
+                      <td>{{ $accesory->name }}</td>
                       <td>
-                        @if(sizeof($acces->children) > 0)
-                          <a href="{{ route('access.show', $acces->id) }}" class="btn btn-sm btn-info">
+                        @if(sizeof($accesory->children) > 0)
+                          <a href="{{ route('accessories.show', $accesory->id) }}" class="btn btn-sm btn-info">
                           @lang('master.content.action.show', ['attribute' => __('master.content.attribute.accessory')])
                           </a>
                         @endif
-                          <a href="{{ route('access.edit', $acces->id) }}" class="btn btn-sm btn-warning">
+                          <a href="{{ route('accessories.edit', $accesory->id) }}" class="btn btn-sm btn-warning">
                           @lang('master.content.action.edit', ['attribute' => __('master.content.attribute.accessory')])
                           </a>
-                        @if(sizeof($acces->children) == 0)
-                          <form action="{{ route('access.destroy', $acces->id) }}" method="POST" class="d-inline">
+                        @if(sizeof($accesory->children) == 0)
+                          <form action="{{ route('accessories.destroy', $accesory->id) }}" method="POST" class="d-inline">
                             @csrf
                             @method('DELETE')
                             <input type="submit" value="@lang('master.content.action.delete', ['attribute' => __('master.content.attribute.accessory')])" class="btn btn-sm btn-danger">
@@ -69,7 +69,7 @@
              </div>
              <div class="row">
                 <div class="col-md-12">
-                {{$access->links()}}
+                {{$accessories->links()}}
                 </div>
               </div>
            </div>

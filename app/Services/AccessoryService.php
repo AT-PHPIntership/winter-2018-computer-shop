@@ -2,9 +2,9 @@
 
 namespace App\Services;
 
-use App\Models\Access;
+use App\Models\Accessory;
 
-class AccessService
+class AccessoryService
 {
     /**
      * Index access
@@ -13,8 +13,8 @@ class AccessService
      */
     public function index()
     {
-        $access = Access::where('parent_id', null)->paginate(config('constants.accessory.number_paginate'));
-        return $access;
+        $accessories = Accessory::where('parent_id', null)->paginate(config('constants.accessory.number_paginate'));
+        return $accessories;
     }
 
     /**
@@ -24,8 +24,8 @@ class AccessService
      */
     public function getList()
     {
-        $access = Access::where('parent_id', null)->get();
-        return $access;
+        $accessories = Accessory::where('parent_id', null)->get();
+        return $accessories;
     }
     /**
      * Create accessory
@@ -37,13 +37,13 @@ class AccessService
     public function create($request)
     {
         if ($request->parent_id === null) {
-            Access::create([
+            Accessory::create([
                 'name' => $request->name,
             ]);
         } else {
             $name = ['name' => $request->name];
-            $parent = Access::find($request->parent_id);
-            Access::create(
+            $parent = Accessory::find($request->parent_id);
+            Accessory::create(
                 $name,
                 $parent
             );
@@ -59,8 +59,8 @@ class AccessService
      */
     public function edit($id)
     {
-        $acces = Access::where('id', $id)->first();
-        return $acces;
+        $accessory = Accessory::where('id', $id)->first();
+        return $accessory;
     }
 
     /**
@@ -75,11 +75,11 @@ class AccessService
     {
         try {
             if ($request->parent_id === null) {
-                $message = Access::where('id', $id)->update([
+                $message = Accessory::where('id', $id)->update([
                     'name' => $request->name,
                 ]);
             } else {
-                $message = Access::where('id', $id)->update([
+                $message = Accessory::where('id', $id)->update([
                     'name' => $request->name,
                     'parent_id' => $request->parent_id
                 ]);

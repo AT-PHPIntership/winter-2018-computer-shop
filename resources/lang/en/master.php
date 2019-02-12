@@ -31,7 +31,7 @@ return [
         'order' => 'Orders Management',
         'promotion' => 'Promotions Management',
         'code' => 'Codes Management',
-        'access' => 'Accessories Management',
+        'accessory' => 'Accessories Management',
     ],
     'content' => [
         'action' => [
