@@ -105,6 +105,5 @@ class AccessoryService
         } catch (\Exception $e) {
             return $message = $e->getMessage();
         }
-        
     }
 }
