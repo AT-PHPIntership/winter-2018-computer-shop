@@ -101,14 +101,20 @@ class AccessoryController extends Controller
         }
     }
 
-    // /**
-    //  * Remove the specified resource from storage.
-    //  *
-    //  * @param  \App\Models\Access  $access
-    //  * @return \Illuminate\Http\Response
-    //  */
-    // public function destroy(Access $access)
-    // {
-    //     //
-    // }
+    /**
+     * Delete accessory
+     *
+     * @param [int] $id [Id accessory]
+     *
+     * @return void
+     */
+    public function destroy($id)
+    {
+        $message = $this->accessoryService->delete($id);
+        if ($message === 1) {
+            return redirect()->route('accessories.index')->with('message', Lang::get('master.content.message.delete', ['attribute' => 'Accessory']));
+        } else {
+            return redirect()->back()->with('message', Lang::get('master.content.message.error', ['attribute' => Lang::get('master.content.attribute.accessory')]));
+        }
+    }
 }

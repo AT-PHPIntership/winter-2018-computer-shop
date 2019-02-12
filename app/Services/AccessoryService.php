@@ -89,4 +89,21 @@ class AccessoryService
             return $message = $e->getMessage();
         }
     }
+
+    /**
+     * Delete accessory
+     *
+     * @param [int] $id [Id accessory]
+     *
+     * @return void
+     */
+    public function delete($id)
+    {
+        try {
+            $message = Accessory::where('id', $id)->delete();
+            return $message;
+        } catch (\Exception $e) {
+            return $message = $e->getMessage();
+        }
+    }
 }
