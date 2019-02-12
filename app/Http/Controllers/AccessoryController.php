@@ -110,7 +110,11 @@ class AccessoryController extends Controller
      */
     public function destroy($id)
     {
-        $this->accessoryService->delete($id);
-        return redirect()->route('accessories.index')->with('message', Lang::get('master.content.message.delete', ['attribute' => 'Accessory']));
+        $message = $this->accessoryService->delete($id);
+        if ($message === 1) {
+            return redirect()->route('accessories.index')->with('message', Lang::get('master.content.message.delete', ['attribute' => 'Accessory']));
+        } else {
+            return redirect()->back()->with('message', Lang::get('master.content.message.error', ['attribute' => Lang::get('master.content.attribute.accessory')]));
+        }
     }
 }

@@ -99,6 +99,12 @@ class AccessoryService
      */
     public function delete($id)
     {
-        Accessory::where('id', $id)->delete();
+        try {
+            $message = Accessory::where('id', $id)->delete();
+            return $message;
+        } catch (\Exception $e) {
+            return $message = $e->getMessage();
+        }
+        
     }
 }
