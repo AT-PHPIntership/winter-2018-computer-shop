@@ -38,8 +38,7 @@
                   <select name="parent_id" class="form-control mb-3">
                       @if($accessory->parent === null)
                       <option value="">No</option>
-                      @else
-                      <option value="{{ $accessory->parent->id }}">{{ $accessory->parent->name }}</option>
+                      
                       @endif
                       @foreach($accessories as $item)
                         @if($accessory->id !== $item->id)
