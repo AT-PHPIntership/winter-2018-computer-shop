@@ -9,10 +9,10 @@
   </div>
   <!-- Sidebar Navidation Menus-->
   <ul class="list-unstyled">
-    <li><a href="/admin/home"><i class="fa fa-home"></i>@lang('master.sidebar.home')</a></li>
-    <li><a href="/admin"><i class="fa fa-users"></i>@lang('master.sidebar.user')</a></li>
-    <li><a href="{{ route('roles.index') }}"><i class="fa fa-universal-access"></i>@lang('master.sidebar.role')</a></li>
-    <li><a href="login.html"> <i class="fa fa-align-justify"></i>@lang('master.sidebar.category')</a></li>
+    <li><a href="{{route('admin.home')}}"><i class="fa fa-home"></i>@lang('master.sidebar.home')</a></li>
+    <li><a href="{{route('users.index')}}"><i class="fa fa-users"></i>@lang('master.sidebar.user')</a></li>
+    <li><a href="{{route('roles.index')}}"><i class="fa fa-universal-access"></i>@lang('master.sidebar.role')</a></li>
+    <li><a href="{{route('categories.index')}}"> <i class="fa fa-align-justify"></i>@lang('master.sidebar.category')</a></li>
     <li><a href="login.html"> <i class="fa fa-industry"></i>@lang('master.sidebar.product')</a></li>
     <li><a href="#exampledropdownDropdown" aria-expanded="false" data-toggle="collapse"><i class="fa fa-image"></i>@lang('master.sidebar.image')</a>
       <ul id="exampledropdownDropdown" class="collapse list-unstyled ">
@@ -24,6 +24,6 @@
     <li><a href="login.html"><i class="fa fa-shopping-cart"></i>@lang('master.sidebar.order')</a></li>
     <li><a href="{{ route('promotions.index') }}"><i class="fa fa-snowflake-o"></i>@lang('master.sidebar.promotion')</a></li>
     <li><a href="{{ route('codes.index') }}"><i class="fa fa-money"></i>@lang('master.sidebar.code')</a></li>
-    <li><a href="{{ route('access.index') }}"><i class="fa fa-money"></i>@lang('master.sidebar.access')</a></li>
+    <li><a href="{{ route('accessories.index') }}"><i class="fa fa-money"></i>@lang('master.sidebar.accessory')</a></li>
   </ul>
 </nav>
