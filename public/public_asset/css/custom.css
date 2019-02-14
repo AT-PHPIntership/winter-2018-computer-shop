@@ -1,0 +1,171 @@
+.image {
+    height: 135px;
+    position: relative;
+}
+.ee-product {
+    height: 344px;
+    position: relative;
+}
+
+.content {
+    position: absolute;
+    bottom: 0;
+    width: 270px;
+}
+
+.row {
+    position: relative;
+}
+
+.no-product {
+    position: absolute;
+    right: 350px;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.image-item {
+    margin-left: 150px;
+}
+
+.pro-desc {
+    width: 50%;
+}
+
+.ee-register {
+    margin-left: 150px;
+}
+
+.row h1 {
+    margin-left: 175px;
+}
+
+.dropdown-menu {
+    min-width: 20rem;
+    border-radius: 1rem;
+    margin-left: 15px;
+}
+
+.search-result {
+    margin-left: 300px;
+}
+
+.query {
+    color: #ff0000;
+}
+
+.product-list {
+    position: relative;
+}
+
+.product-items {
+    text-align: center;
+}
+
+#productList ul li:hover {
+    background: #fefcef;
+}
+
+.filter-dropdown {
+    width: 125px;
+    min-width: 0;
+    text-align: center;
+}
+
+#filter-price {
+    width: 150px;
+}
+
+#sort-by {
+    width: 160px;
+}
+
+.dropdown {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.dropdown-toggle {
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.filter-value {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.comment-list {
+    list-style: none;
+    padding-left: 0;
+}
+
+.comment-by {
+    width: 100%;
+    padding-bottom: 8px;
+    padding-top: 5px;
+    position: relative;
+}
+
+.comment-des {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #fff;
+    border: 1px solid #e6e6e6;
+}
+
+.comment-time {
+    margin-left: 10px;
+    color: #999999;
+}
+
+.comment-by span.reply {
+    top: 5px;
+    right: 0;
+    position: absolute;
+    font-size: 14px;
+}
+
+.comment-by span.reply a {
+    color: #fff;
+    background-color: #669900;
+    padding: 3px 10px;
+}
+
+#replyForm h3 span {
+    margin-left: 10px;
+}
+
+/* User Profile */
+.form-horizontal {
+    margin-left: 130px;
+}
+
+form label {
+    font-weight: bold;
+    font-size: 16px;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+form input {
+    width: 250px;
+    margin-right: 10px;
+}
+
+.img {
+    width: 200px;
+    height: 200px;
+    margin-left: 32px;
+    margin-bottom: 16px;
+}
+
+.btn-save {
+    background-color: #f5d730;
+}
+
+.password-form {
+    margin-left: 370px;
+}
+
+.table .table {
+    background-color: #d6bea5;
+}
