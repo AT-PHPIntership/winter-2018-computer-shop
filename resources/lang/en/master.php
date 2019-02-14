@@ -52,6 +52,7 @@ return [
             'end_at' => 'End At',
             'amount' => 'Amount',
             'parent_id' => 'Parent name',
+            'total_sold' => 'Total Sold Product',
         ],
         'form' => [
             'password' => 'Password',

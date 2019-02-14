@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\Promotion;
 use League\Flysystem\Exception;
+use App\Models\Product;
 
 class PromotionService
 {
@@ -27,7 +28,14 @@ class PromotionService
      */
     public function create($request)
     {
-        Promotion::create($request->all());
+        $promotion = Promotion::create($request->all());
+        $totalSold = $request->total_sold;
+        $products = Product::where('total_sold', '<', $totalSold)->get();
+        $arrayProuctId = [];
+        foreach ($products as $value) {
+            array_push($arrayProuctId, $value->id);
+        }
+        Promotion::find($promotion->id)->products()->sync($arrayProuctId);
     }
 
     /**
@@ -58,8 +66,19 @@ class PromotionService
                             'name' => $request->name,
                             'percent' => $request->percent,
                             'start_at' => $request->start_at,
-                            'end_at' => $request->end_at
+                            'end_at' => $request->end_at,
+                            'total_sold' => $request->total_sold
                         ]);
+
+            // update table product_promotion
+            $totalSold = $request->total_sold;
+            $products = Product::where('total_sold', '<', $totalSold)->get();
+            $arrayProuctId = [];
+            foreach ($products as $value) {
+                array_push($arrayProuctId, $value->id);
+            }
+            Promotion::find($id)->products()->sync($arrayProuctId);
+
             return $message;
         } catch (Exception $e) {
             return $message = $e->getMessage();
@@ -76,6 +95,7 @@ class PromotionService
     public function delete($id)
     {
         try {
+            Promotion::find($id)->products()->detach();
             $message = Promotion::where('id', $id)->delete();
             return $message;
         } catch (Exception $e) {
