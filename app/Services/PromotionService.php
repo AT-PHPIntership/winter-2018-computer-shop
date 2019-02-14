@@ -20,7 +20,7 @@ class PromotionService
     }
 
     /**
-     * Create Promotion
+     * Create Promotion and Product_promotion
      *
      * @param object $request Request from form
      *
@@ -30,12 +30,8 @@ class PromotionService
     {
         $promotion = Promotion::create($request->all());
         $totalSold = $request->total_sold;
-        $products = Product::where('total_sold', '<', $totalSold)->get();
-        $arrayProuctId = [];
-        foreach ($products as $value) {
-            array_push($arrayProuctId, $value->id);
-        }
-        Promotion::find($promotion->id)->products()->sync($arrayProuctId);
+        $productIds = Product::where('total_sold', '<', $totalSold)->pluck('id');
+        $promotion->products()->sync($productIds);
     }
 
     /**
@@ -52,7 +48,7 @@ class PromotionService
     }
 
     /**
-     * Update promotion
+     * Update table promotion and product_promotion
      *
      * @param [int]    $id      [Id promotion]
      * @param [object] $request [Request from form]
@@ -72,12 +68,8 @@ class PromotionService
 
             // update table product_promotion
             $totalSold = $request->total_sold;
-            $products = Product::where('total_sold', '<', $totalSold)->get();
-            $arrayProuctId = [];
-            foreach ($products as $value) {
-                array_push($arrayProuctId, $value->id);
-            }
-            Promotion::find($id)->products()->sync($arrayProuctId);
+            $productIds = Product::where('total_sold', '<', $totalSold)->pluck('id');
+            Promotion::find($id)->products()->sync($productIds);
 
             return $message;
         } catch (Exception $e) {
@@ -86,7 +78,7 @@ class PromotionService
     }
 
     /**
-     * Delete promotion
+     * Delete table promotion and product_promotion
      *
      * @param [int] $id Id Promotion
      *
