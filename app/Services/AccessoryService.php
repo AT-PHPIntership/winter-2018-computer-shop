@@ -18,16 +18,6 @@ class AccessoryService
     }
 
     /**
-     * Get accessories has parent_id = null
-     *
-     * @return void
-     */
-    public function getList()
-    {
-        $accessories = Accessory::where('parent_id', null)->get();
-        return $accessories;
-    }
-    /**
      * Create accessory
      *
      * @param [object] $request [Request from form]
@@ -105,5 +95,25 @@ class AccessoryService
         } catch (\Exception $e) {
             return $message = $e->getMessage();
         }
+    }
+
+    /**
+    * Get child accessoris
+    *
+    * @return void
+    */
+    public function getChildren()
+    {
+        return Accessory::with('childrens')->get();
+    }
+
+    /**
+    * Get parent accessoris
+    *
+    * @return void
+    */
+    public function getParent()
+    {
+        return Accessory::parents()->get();
     }
 }

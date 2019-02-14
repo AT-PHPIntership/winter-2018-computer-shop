@@ -7,6 +7,8 @@ use App\Services\ImageService;
 use League\Flysystem\Exception;
 use Yajra\Datatables\Datatables;
 use DB;
+use Mail;
+use Auth;
 
 class UserService
 {
@@ -97,6 +99,58 @@ class UserService
             session()->flash('message', __('master.content.message.delete', ['attribute' => trans('master.content.attribute.user')]));
         } catch (Exception $ex) {
             session()->flash('warning', __('master.content.message.error', ['attribute' => $ex->getMessage()]));
+        }
+    }
+
+    /*******************User Register***************************/
+
+     /**
+     * Create a new user instance after a valid registration.
+     *
+     * @param array $data data
+     *
+     * @return \App\User
+     */
+    public function createUser(array $data)
+    {
+        try {
+            return User::create($data);
+        } catch (Exception $ex) {
+            session()->flash('warning', __('master.content.message.error', ['attribute' => $ex->getMessage()]));
+            return redirect()->back();
+        }
+    }
+
+    /**
+     * Delete a order
+     *
+     * @param array $order [delete a order]
+     *
+     * @return session
+     */
+    public function deleteOrder($order)
+    {
+        DB::beginTransaction();
+        try {
+            foreach ($order->orderDetails as $detail) {
+                $detail->delete();
+            }
+            $user = [
+                'name' => Auth::user()->name,
+                'email' => Auth::user()->email,
+                'order' => $order->id
+            ];
+            Mail::send('emails.userDeleteOrder', ['user' => $user, 'data' => $order->orderDetails], function ($message) use ($user) {
+                $message->to('phat.qatest.002@gmail.com');
+                $message->subject('The user has email ' . $user['email'] . ' delete an order');
+            });
+            $order->delete();
+            DB::commit();
+            session()->flash('message', __('master.content.message.delete', ['attribute' => trans('public.profile.order')]));
+        } catch (Exception $ex) {
+            DB::rollback();
+            session()->flash('warning', __('master.content.message.error', ['attribute' => $ex->getMessage()]));
+            return redirect()->back();
         }
     }
 }

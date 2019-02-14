@@ -14,7 +14,9 @@
         "kalnoy/nestedset": "^4.3",
         "laracasts/utilities": "^3.0",
         "laravel/framework": "5.7.*",
+        "laravel/socialite": "^4.0",
         "laravel/tinker": "^1.0",
+        "maatwebsite/excel": "~2.1.0",
         "yajra/laravel-datatables-oracle": "~8.0"
     },
     "require-dev": {
