@@ -277,7 +277,7 @@ class ProductService
      */
     public function publicProduct($product)
     {
-        return $product->load('accessories');
+        return $product->load('accessories', 'comments', 'comments.childrens');
     }
 
     /**

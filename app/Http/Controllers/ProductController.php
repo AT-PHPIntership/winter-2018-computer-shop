@@ -87,7 +87,7 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function show(Product $product)
+    public function show(Product $products)
     {
         return view('admin.products.show', compact('product'));
     }

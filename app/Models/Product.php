@@ -65,6 +65,6 @@ class Product extends Model
      */
     public function comments()
     {
-        return $this->hasMany('App\Models\Comment');
+        return $this->hasMany('App\Models\Comment')->whereNull('parent_id');
     }
 }

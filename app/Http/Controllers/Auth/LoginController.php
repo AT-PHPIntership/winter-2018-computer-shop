@@ -31,6 +31,7 @@ class LoginController extends Controller
      */
     public function login()
     {
+        Session::put('url.intended',URL::previous());
         return view('public.auth.login');
     }
 

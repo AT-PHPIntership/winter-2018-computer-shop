@@ -16,10 +16,12 @@ class LoginService
     public function userLogin($data)
     {
         if (Auth::attempt($data)) {
-            return redirect()->route('user.profile');
+             return Redirect::to(Session::get('url.intended'));
+            // return redirect()->route('user.profile');
         } else {
             session()->flash("warning", __('public.login.wrong'));
             return redirect()->back();
         }
+        return back();
     }
 }

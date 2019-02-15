@@ -161,7 +161,7 @@ $(document).ready(function(){
         var content = $.trim($('textarea').val());
         var token = $(this).data("token");
         // debugger;
-        if (content !== '') {
+        if (content !== '' && userId != undefined) {
             $.ajax({
             url: 'product/comment',
             method:"POST",
@@ -172,7 +172,7 @@ $(document).ready(function(){
                   var output = '';
                   output += '<li class="comment-border">';
                   output += '<article>';
-                  output += '<div class="comment-des" data-comment="' + data.id + '">'
+                  output += '<div class="comment-des">'
                   output += '<div class="comment-by">'
                   output += '<p class="author"><strong>You<span class="comment-time">Now</span></strong></p>'
                   output += '<span class="reply"><a class="add-reply">Reply</a></span>';
@@ -185,37 +185,50 @@ $(document).ready(function(){
                   output += '<ol class="children" id="commentChildren">';
                   output += '</ol>';
                   output += '</li>';
-                $('#commentList').html(output);
+                $('#commentList').append(output);
             }
             });
+        } else {
+          var url = "login?url=" + window.location.href; 
+          location.href = url;
         }
     });
 });
 
 //Add reply form for comment
 $(document).ajaxComplete(function(){
-    $(".add-reply").click(function(){
+    $(".add-reply").on('click', function(){
+        var articleId = $(this).attr("id");
         var output = '';
-        output += '<h3>Add Your Reply<span>Cancel</span></h3>';
+        output += '<div class="replyForm" id=' + articleId + '>';
+        output += '<h3>Add Your Reply<a class="cancelRely">Cancel</a></h3>';
         output += '<div class="ratting-form row">';
         output += '<div class="col-12 mb-15">';
         output += '<textarea name="review" id="reply-content" placeholder="Write your reply"></textarea>';
         output += '</div>';
         output += '<div class="col-12">';
-        output += '<input id="reply-button" value="Add Reply" type="submit">';
+        output += '<input id="reply-button" value="Add Reply" data-comment='+ articleId + ' type="submit">';
         output += '</div>';
         output += '</div>';
-        $('#replyForm').html(output);
+        output += '</div>';
+        $("article#" + articleId).append(output);
    });
+});
+
+//Cancel reply form
+$(document).on('click', '.cancelRely', function() {
+  var cancelId = $('.replyForm').attr('id');
+  $('div .replyForm[id^=' + cancelId +']').remove();
 });
 
 //User reply comment
 $(document).on('click', '#reply-button', function() {
-    var commentId = $('.comment-des').data('comment');
+    var commentId = $(this).data('comment');
     var userId = $('#comment-button').data('user');
     var token = $('#comment-button').data('token');
     var productId = $('#comment-button').data('product');
     var replyContent = $('#reply-content').val();
+    // debugger;
     if (replyContent !== '') {
             $.ajax({
             url: 'product/reply',
@@ -223,22 +236,23 @@ $(document).on('click', '#reply-button', function() {
             dataType:"JSON",
             data: {'userId':userId, 'productId':productId, 'content':replyContent, '_token':token, 'parentComment':commentId},
             success: function(data){ 
-              // console.log(data);
-                  var output = '';
-                  output += '<li class="comment-border">';
-                  output += '<article>';
-                  output += '<div class="comment-des" data-comment="' + data.id + '">'
-                  output += '<div class="comment-by">'
-                  output += '<p class="author"><strong>You<span class="comment-time">Now</span></strong></p>'
-                  output += '<span class="reply"><a class="add-reply">Reply</a></span>';
-                  output += '</div>';
-                  output += '<section>';
-                  output += '<p>' + data.content + '</p>';
-                  output += '</section>';
-                  output += '</div>';
-                  output += '</article>';
-                  output += '</li>';
-                $('#commentChildren').html(output);
+              // console.log(data.parent_id);
+                var output = '';
+                    output += '<li class="comment-border">';
+                    output += '<article id=' + data.id + '>';
+                    output += '<div class="comment-des">'
+                    output += '<div class="comment-by">'
+                    output += '<p class="author"><strong>You<span class="comment-time">Now</span></strong></p>'
+                    output += '<span class="reply"><a class="add-reply" id=' + data.id + '>Reply</a></span>';
+                    output += '</div>';
+                    output += '<section>';
+                    output += '<p>' + data.content + '</p>';
+                    output += '</section>';
+                    output += '</div>';
+                    output += '</article>';
+                    output += '</li>';
+                $('.comment-border[data-id^=' + data.parent_id + '] .children[id^=commentChildren]').append(output);
+                $('div .replyForm[id^=' + data.parent_id +']').remove();
             }
             });
         }
