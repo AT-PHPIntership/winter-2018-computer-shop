@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\Promotion;
 use League\Flysystem\Exception;
+use App\Models\Product;
 
 class PromotionService
 {
@@ -19,7 +20,7 @@ class PromotionService
     }
 
     /**
-     * Create Promotion
+     * Create Promotion and Product_promotion
      *
      * @param object $request Request from form
      *
@@ -27,7 +28,10 @@ class PromotionService
      */
     public function create($request)
     {
-        Promotion::create($request->all());
+        $promotion = Promotion::create($request->all());
+        $totalSold = $request->total_sold;
+        $productIds = Product::where('total_sold', '<', $totalSold)->pluck('id');
+        $promotion->products()->sync($productIds);
     }
 
     /**
@@ -44,7 +48,7 @@ class PromotionService
     }
 
     /**
-     * Update promotion
+     * Update table promotion and product_promotion
      *
      * @param [int]    $id      [Id promotion]
      * @param [object] $request [Request from form]
@@ -58,8 +62,15 @@ class PromotionService
                             'name' => $request->name,
                             'percent' => $request->percent,
                             'start_at' => $request->start_at,
-                            'end_at' => $request->end_at
+                            'end_at' => $request->end_at,
+                            'total_sold' => $request->total_sold
                         ]);
+
+            // update table product_promotion
+            $totalSold = $request->total_sold;
+            $productIds = Product::where('total_sold', '<', $totalSold)->pluck('id');
+            Promotion::find($id)->products()->sync($productIds);
+
             return $message;
         } catch (Exception $e) {
             return $message = $e->getMessage();
@@ -67,7 +78,7 @@ class PromotionService
     }
 
     /**
-     * Delete promotion
+     * Delete table promotion and product_promotion
      *
      * @param [int] $id Id Promotion
      *
@@ -76,6 +87,7 @@ class PromotionService
     public function delete($id)
     {
         try {
+            Promotion::find($id)->products()->detach();
             $message = Promotion::where('id', $id)->delete();
             return $message;
         } catch (Exception $e) {
