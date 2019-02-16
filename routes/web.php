@@ -45,6 +45,7 @@ Route::group(['prefix' => 'admin'], function(){
     Route::resource('codes', 'CodeController');
     Route::delete('slides/image', 'SlideController@deleteImage');
     Route::resource('slides', 'SlideController');
+    Route::resource('accessories', 'AccessoryController');
 }); 
 
 Auth::routes();

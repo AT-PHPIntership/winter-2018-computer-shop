@@ -60,5 +60,9 @@ return [
             'asc' => 'Price: low to high',
             'desc' => 'Price: high to low',
        ],
-   ]
+    ],
+    'accessory' => [
+        'number_paginate' => '5'
+    ]
+    
 ];

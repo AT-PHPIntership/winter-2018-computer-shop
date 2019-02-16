@@ -32,6 +32,7 @@ return [
         'promotion' => 'Promotions Management',
         'code' => 'Codes Management',
         'slide' => 'Slides Management',
+        'accessory' => 'Accessories Management',
     ],
     'content' => [
         'action' => [
@@ -58,6 +59,8 @@ return [
             'hdd' => 'HDD',
             'monitor' => 'Monitor',
             'gpu' => 'GPU',
+            'parent_id' => 'Parent name',
+            'total_sold' => 'Sold Quantity ',
         ],
         'form' => [
             'password' => 'Password',
@@ -94,6 +97,7 @@ return [
              'Product' => 'Product',
              'Slide' => 'Slide',
              'slide' => 'slide',
+             'accessory' => 'accessory',
         ],
         'select' => [
             'choose' => 'Choose here',

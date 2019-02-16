@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Services\CodeService;
 use App\Http\Requests\CodeRequest;
 use Illuminate\Support\Facades\Lang;
+use Illuminate\Support\Facades\Redirect;
 
 class CodeController extends Controller
 {
@@ -66,37 +67,55 @@ class CodeController extends Controller
         //
     }
 
-    // *
-    //  * Show the form for editing the specified resource.
-    //  *
-    //  * @param  \App\Models\Code  $code
-    //  * @return \Illuminate\Http\Response
-     
-    // public function edit(Code $code)
-    // {
-    //     //
-    // }
+    /**
+     * Code edit view
+     *
+     * @param [int] $id [Id code]
+     *
+     * @return view
+     */
+    public function edit($id)
+    {
+        $code = $this->codeService->edit($id);
+        return view('admin.codes.update', compact('code'));
+    }
 
-    // /**
-    //  * Update the specified resource in storage.
-    //  *
-    //  * @param  \Illuminate\Http\Request  $request
-    //  * @param  \App\Models\Code  $code
-    //  * @return \Illuminate\Http\Response
-    //  */
-    // public function update(Request $request, Code $code)
-    // {
-    //     //
-    // }
+    /**
+     * Update code
+     *
+     * @param CodeRequest $request [Request from form]
+     * @param [int]       $id      [Id code]
+     *
+     * @return void
+     */
+    public function update(CodeRequest $request, $id)
+    {
+        $message = $this->codeService->update($request, $id);
+        if ($message === 1) {
+            return redirect()->route('codes.index')->with('message', Lang::get('master.content.message.update', [
+            'attribute' => 'code']));
+        } else {
+            return Redirect::back()->with('message', Lang::get('master.content.message.error', [
+            'attribute' => Lang::get('master.content.attribute.code')]));
+        }
+    }
 
-    // /**
-    //  * Remove the specified resource from storage.
-    //  *
-    //  * @param  \App\Models\Code  $code
-    //  * @return \Illuminate\Http\Response
-    //  */
-    // public function destroy(Code $code)
-    // {
-    //     //
-    // }
+    /**
+     * Delete code
+     *
+     * @param [int] $id [Id code]
+     *
+     * @return void
+     */
+    public function destroy($id)
+    {
+        $message = $this->codeService->delete($id);
+        if ($message === 1) {
+            return redirect()->route('codes.index')->with('message', Lang::get('master.content.message.delete', [
+            'attribute' => 'code']));
+        } else {
+            return redirect()->route('codes.index')->with('message', Lang::get('master.content.message.error', [
+                'attribute' => Lang::get('master.content.attribute.code')]));
+        }
+    }
 }
