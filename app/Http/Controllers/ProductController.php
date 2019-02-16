@@ -132,4 +132,17 @@ class ProductController extends Controller
         app(ProductService::class)->update($request->all(), $product);
         return redirect()->route('products.index');
     }
+
+    /**
+     * Delete a created resource in storage.
+     *
+     * @param object $product [binding product model]
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Product $product)
+    {
+        app(ProductService::class)->delete($product);
+        return redirect()->route('products.index');
+    }
 }

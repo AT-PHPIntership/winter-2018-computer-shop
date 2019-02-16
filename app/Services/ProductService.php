@@ -200,6 +200,32 @@ class ProductService
         return $data->whereIn('name', $compare);
     }
 
+    /*
+    * Handle update a product to database
+    *
+    * @param object $product [binding product model]
+    *
+    * @return void
+    */
+    public function delete($product)
+    {
+        try {
+            foreach ($product->images as $image) {
+                $productImage = realpath('storage/product/' . $image->name);
+                if (!is_null($image->name) && file_exists($productImage)) {
+                    unlink($productImage);
+                }
+            }
+            $product->images()->delete();
+            $product->accessories()->detach();
+            $product->delete();
+            session()->flash('message', __('master.content.message.delete', ['attribute' => trans('master.content.attribute.product')]));
+        } catch (Exception $ex) {
+             session()->flash('warning', __('master.content.message.error', ['attribute' => $ex->getMessage()]));
+            return redirect()->back();
+        }
+    }
+
     /*************************Function use for Public Page***********************************/
 
     /**
