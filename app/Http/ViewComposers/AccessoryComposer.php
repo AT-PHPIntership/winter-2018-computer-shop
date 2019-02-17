@@ -28,6 +28,7 @@ class AccessoryComposer
     */
     public function compose(View $view)
     {
+        $view->with(['accessories' => app(AccessoryService::class)->getChildren(), 'parentAccessories' => app(AccessoryService::class)->getParent()]);
         $view->with('accessories', $this->accessoryService->getList());
     }
 }

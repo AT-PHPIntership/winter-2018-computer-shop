@@ -45,4 +45,45 @@ class ImageService
             return $imageName;
         }
     }
+
+    /**
+    * Handle change previous image
+    *
+    * @param object $request [request add multiple image]
+    * @param object $product [save image for product]
+    *
+    * @return imageName
+    */
+    public function addMultipleImage($request, $product)
+    {
+        if (array_key_exists('images', $request)) {
+            foreach ($request['images'] as $images) {
+                $imageName = time() . '_' . $images->getClientOriginalName();
+                $images->move('storage/product', $imageName);
+                $product->images()->create([
+                'name' => $imageName
+                ]);
+            }
+        }
+    }
+
+    /**
+    * Delete a image using ajax
+    *
+    * @param object $imageId [the id of image]
+    *
+    * @return imageId
+    */
+    public function deleteImage($imageId)
+    {
+        $imageId = Image::find($imageId);
+        $images = Image::where('product_id', $imageId->product->id)->get();
+        foreach ($images as $image) {
+            if ($imageId->id == $image->id) {
+                unlink('storage/product/' . $image->name);
+                $image->delete();
+                return $imageId;
+            }
+        }
+    }
 }

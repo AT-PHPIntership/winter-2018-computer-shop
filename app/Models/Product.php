@@ -23,6 +23,7 @@ class Product extends Model
     {
         return $this->belongsTo('App\Models\Category');
     }
+    
     /**
      * The function get unit price attribute
      *
@@ -34,15 +35,7 @@ class Product extends Model
     {
         return number_format($unitPrice, 0, ",", ",");
     }
-    /**
-     * The function display relationship between product and their image
-     *
-     * @return \App\Models\Product
-     */
-    // public function images()
-    // {
-    //     return $this->hasMany('App\Models\Image');
-    // }
+    
     /**
      * The function display relationship between product and accessory
      *
@@ -51,6 +44,26 @@ class Product extends Model
     public function accessories()
     {
         return $this->belongsToMany('App\Models\Accessory')->withTimestamps();
+    }
+    
+    /**
+     * The function display relationship between product and accessory
+     *
+     * @return \App\Models\Product
+     */
+    public function images()
+    {
+        return $this->hasMany('App\Models\Image');
+    }
+
+    /**
+     * The function display relationship between comment and product
+     *
+     * @return \App\Models\Role
+     */
+    public function comments()
+    {
+        return $this->hasMany('App\Models\Comment')->whereNull('parent_id');
     }
 
     /**

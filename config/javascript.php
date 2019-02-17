@@ -14,6 +14,7 @@ return [
     |
     */
     'bind_js_vars_to_this_view' => 'admin.layout.footer',
+    'bind_js_vars_to_this_view' => 'public.layout.footer',
 
     /*
     |--------------------------------------------------------------------------

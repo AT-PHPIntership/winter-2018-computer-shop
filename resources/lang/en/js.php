@@ -12,5 +12,26 @@
     */
      'user' => [
         'delete' =>   'Are you sure want to delete this user?',
-     ]
+     ],
+     'compare' => [
+        'first' => 'You have one product to compare',
+        'second' => 'You have second product to compare',
+        'only' => 'You can only compare 2 product',
+        'delete' => 'Now, you can choose different product to compare',
+        'enough' => 'You do not have enough product to compare',
+     ],
+     'filter' => [
+        'title' => 'Filter by: '
+     ],
+     'comment' => [
+        'author' => 'You',
+        'time' => 'Now',
+        'reply' => 'Reply',
+        'add' => 'Add Your Reply',
+        'cancel' => 'Cancel',
+        'write' => 'Write your reply',
+        'addReply' => 'Add Reply',
+     ],
+
+
   ];

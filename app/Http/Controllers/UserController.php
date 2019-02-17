@@ -81,7 +81,7 @@ class UserController extends Controller
      * Handle update user to database
      *
      * @param object $request [request to create a new user]
-     * @param object $user    [binding user models]
+     * @param object $user    [binding user model]
      *
      * @return user
      */
@@ -102,5 +102,15 @@ class UserController extends Controller
     {
         app(UserService::class)->delete($user);
         return redirect()->route('users.index');
+    }
+
+    /**
+     * Show user profile page
+     *
+     * @return view
+     */
+    public function userProfile()
+    {
+        return view('public.user.profile');
     }
 }
