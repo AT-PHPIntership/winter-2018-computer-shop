@@ -9,7 +9,11 @@ class CommentService
     /**
     * Save comment of a product
     *
-    * @return void
+    * @param object $userId    [user comment product]
+    * @param object $productId [product user comment]
+    * @param object $content   [content of comment]
+    *
+    * @return comment
     */
     public function comment($userId, $productId, $content)
     {
@@ -21,9 +25,14 @@ class CommentService
     }
 
      /**
-    * Save comment of a product
+    * Save reply of a cooment
     *
-    * @return void
+    * @param object $userId        [user comment product]
+    * @param object $productId     [product user comment]
+    * @param object $content       [content of comment]
+    * @param object $parentComment [parent of a reply]
+    *
+    * @return comment
     */
     public function reply($userId, $productId, $content, $parentComment)
     {

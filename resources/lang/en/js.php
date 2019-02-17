@@ -22,6 +22,16 @@
      ],
      'filter' => [
         'title' => 'Filter by: '
-     ]
+     ],
+     'comment' => [
+        'author' => 'You',
+        'time' => 'Now',
+        'reply' => 'Reply',
+        'add' => 'Add Your Reply',
+        'cancel' => 'Cancel',
+        'write' => 'Write your reply',
+        'addReply' => 'Add Reply',
+     ],
+
 
   ];

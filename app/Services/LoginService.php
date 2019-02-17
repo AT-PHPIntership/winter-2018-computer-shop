@@ -3,6 +3,8 @@
 namespace App\Services;
 
 use Auth;
+use Session;
+use Redirect;
 
 class LoginService
 {
@@ -17,10 +19,9 @@ class LoginService
     {
         if (Auth::attempt($data)) {
              return Redirect::to(Session::get('url.intended'));
-            // return redirect()->route('user.profile');
         } else {
             session()->flash("warning", __('public.login.wrong'));
-            return redirect()->back();
+            return back();
         }
         return back();
     }

@@ -40,12 +40,12 @@
                             <p>{!!$products->description!!}</p>
                         </div>
                         
-                        <span class="availability">Availability: <span>@if($products->quantity > 0)In Stock @else Out of Stock @endif</span></span>
+                        <span class="availability">@lang('public.product.available.title') <span>@if($products->quantity > 0)@lang('public.product.available.in') @else @lang('public.product.available.out') @endif</span></span>
                         
                         <div class="quantity-colors">
                             
                             <div class="quantity">
-                                <h5>Quantity</h5>
+                                <h5>@lang('public.product.quantity')</h5>
                                 <div class="pro-qty"><input type="text" value="1"></div>
                             </div>                                                  
                             
@@ -56,7 +56,7 @@
                             <a href="#" class="add-to-cart"><i class="ti-shopping-cart"></i><span>@lang('public.content.addToCart')</span></a>
 
                             <div class="wishlist-compare">
-                                <a class="compare-page" data-product="{{$products->id}}" data-tooltip="Compare"><i class="ti-control-shuffle"></i></a>
+                                <a class="compare-page" data-product="{{$products->id}}" data-tooltip="@lang('public.product.compare')"><i class="ti-control-shuffle"></i></a>
                             </div>
 
                         </div>
@@ -106,11 +106,7 @@
                                 <h3>@lang('public.product.title')</h3>
                                 <div class="ratting-form row">
                                     <div class="col-12 mb-15">
-                                        @if (Auth::check())
-                                        <textarea name="review" placeholder="@lang('public.product.placeholder')"></textarea>
-                                        @else
-                                        <textarea name="review" id="your-review" placeholder="@lang('public.product.placeholder')" id="your-review"></textarea>
-                                        @endif
+                                        <textarea id='comment-text' name="review" placeholder="@lang('public.product.placeholder')"></textarea>
                                     </div>
                                     <div class="col-12">
                                         <input id='comment-button' {{(Auth::user()) ? 'data-user=' .Auth::user()->id : ''}} data-product='{{$products->id}}' data-token="{{ csrf_token() }}" value="@lang('public.product.button')" type="submit">
@@ -123,7 +119,7 @@
                                             <div class="comment-des">
                                                 <div class="comment-by">
                                                     <p class="author"><strong>{{$comment->user->name}}<span class="comment-time">{{$comment->created_at->diffForHumans()}}</span></strong></p>
-                                                    <span class="reply"><a class="add-reply" id='{{$comment->id}}'>Reply</a></span>
+                                                    <span class="reply"><a class="add-reply" id='{{$comment->id}}'>@lang('public.product.reply')</a></span>
                                                 </div>
                                                 <section>
                                                     <p>{{$comment->content}}</p>
@@ -136,7 +132,7 @@
                                                 <article id="{{$reply->id}}">
                                                     <div class="comment-des">
                                                         <div class="comment-by">
-                                                            <p class="author"><strong>{{$reply->user->name}}<span class="comment-time">{{$reply->created_at->diffForHumans()}}</span></strong></p><!-- <span class="reply"><a class="add-reply" id='{{$reply->id}}'>Reply</a></span> -->
+                                                            <p class="author"><strong>{{$reply->user->name}}<span class="comment-time">{{$reply->created_at->diffForHumans()}}</span></strong></p>
                                                         </div>
                                                         <section>
                                                             <p>{{$reply->content}}</p>
@@ -188,7 +184,7 @@
                                     <a href="product/{{$product->id}}" class="img"><img src="storage/product/{{$product->images->first()['name']}}" alt="Product Image"></a>
 
                                     <div class="wishlist-compare">
-                                        <a href="#" data-tooltip="Compare"><i class="ti-control-shuffle"></i></a>
+                                        <a class="compare-page" data-product="{{$product->id}}" data-tooltip="@lang('public.product.compare')"><i class="ti-control-shuffle"></i></a>
                                     </div>
 
                                     <a href="#" class="add-to-cart"><i class="ti-shopping-cart"></i><span>@lang('public.content.addToCart')</span></a>

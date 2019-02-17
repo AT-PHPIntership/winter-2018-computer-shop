@@ -5,6 +5,7 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use JavaScript;
 use Validator;
+use Illuminate\Database\Eloquent\Relations\Relation;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -40,6 +41,7 @@ class AppServiceProvider extends ServiceProvider
             'trans'  => __('js.user'),
             'message'  => __('js.compare'),
             'filter'  => __('js.filter'),
+            'comment'  => __('js.comment'),
         ]);
     }
     

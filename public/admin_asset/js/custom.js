@@ -48,6 +48,78 @@ $(document).ajaxComplete(function() {
     });
 });
 
+//Get value of select option of category at Add Product page
+$(document).ajaxComplete(function() {
+    var autoSelect = $('#localStorage')
+        .find(':selected')
+        .val();
+    localStorage.setItem('autoSelect', JSON.stringify(autoSelect));
+    // console.log(autoSelect)
+    $('#localStorage').change(function() {
+        var manualSelect = $(this).val();
+        localStorage.setItem('manualSelect', JSON.stringify(manualSelect));
+        // debugger;
+    });
+});
+
+//Display children category when edit
+$(document).ready(function() {
+    (function() {
+        var id = $('#parent_category').val();
+        // console.log(id);
+        if (id != null) {
+            $.ajax({
+                url: 'admin/categories/sub-category/',
+                method: 'GET',
+                dataType: 'JSON',
+                data: { id: id },
+                success: function(data) {
+                    // console.log(data);
+                    if (localStorage.getItem('manualSelect') != null) {
+                        var childId = parseInt(
+                            JSON.parse(localStorage.getItem('manualSelect'))
+                        );
+                    } else {
+                        var childId = parseInt(
+                            JSON.parse(localStorage.getItem('autoSelect'))
+                        );
+                    }
+                    if (data.length > 0) {
+                        var output =
+                            '<select name="category_id" class="form-control mb-3" id="localStorage">';
+                        $.each(data, function(key, val) {
+                            if (childId === val.id) {
+                                output +=
+                                    '<option value="' +
+                                    val.id +
+                                    '"' +
+                                    'selected>' +
+                                    val.name +
+                                    '</option>';
+                            } else {
+                                output +=
+                                    '<option value="' +
+                                    val.id +
+                                    '">' +
+                                    val.name +
+                                    '</option>';
+                            }
+                        });
+                        output += '</select>';
+                        $('#child_category').html(output);
+                        localStorage.clear();
+                    } else {
+                        output = '';
+                        $('#child_category').html(output);
+                    }
+                }
+            });
+        }
+    })();
+});
+
+/*************************/
+
 //Format vietnamese currency
 $(document).ready(function() {
     $('#formatCurrency')
@@ -325,3 +397,17 @@ $(document).ready(function() {
         }
     });
 });
+
+//Put PHP variable to JS
+function define(key) {
+    return window.js_variable.define[key];
+}
+
+function trans(key) {
+    return window.js_variable.trans[key];
+}
+
+//Confirmed before delete
+function confirmedDelete() {
+    return confirm(trans('delete'));
+}

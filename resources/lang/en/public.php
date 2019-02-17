@@ -64,7 +64,15 @@ return [
         'title' => 'Add your Comments',
         'login' => 'Login to write a review',
         'placeholder' => 'Write a review',
+        'reply' => 'Reply',
         'button' => 'add review',
+        'available' => [
+            'title' => 'Availability:',
+            'in' => 'In Stock',
+            'out' => 'Out of Stock',
+        ],
+        'quantity' => 'Quantity',
+        'compare' => 'Compare',
     ],
     'search' => [
         'title' => 'Search',
