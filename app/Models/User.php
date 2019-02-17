@@ -82,9 +82,9 @@ class User extends Authenticatable
     }
 
      /**
-     * Get User Object
+     * The function display relationship between order and user
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function orders()
     {

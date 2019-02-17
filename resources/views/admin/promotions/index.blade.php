@@ -32,7 +32,7 @@
                    </div>
                    <div class="card-body">
                        <div class="table-responsive">
-               <table class="table table-striped table-hover">
+               <table class="table table-striped table-hover text-center">
                  <thead>
                    <tr>
                      <th>@lang('master.content.table.id')</th>
@@ -40,6 +40,7 @@
                      <th>@lang('master.content.table.percent')</th>
                      <th>@lang('master.content.table.start_at')</th>
                      <th>@lang('master.content.table.end_at')</th>
+                     <th>@lang('master.content.table.total_sold')</th>
                      <th>@lang('master.content.table.action')</th>
                    </tr>
                  </thead>
@@ -52,6 +53,7 @@
                      <td>{{ $promotion->percent }}</td>
                      <td>{{ $promotion->start_at }}</td>
                      <td>{{ $promotion->end_at }}</td>
+                     <td>{{ $promotion->total_sold }}</td>
                      <td>
                        <a href="{{ route('promotions.edit', $promotion->id) }}" class="btn btn-sm btn-warning">
                        @lang('master.content.action.edit', ['attribute' => 'Promotion'])

@@ -54,6 +54,44 @@ class CategoryController extends Controller
     }
 
     /**
+     * Display the specified resource.
+     *
+     * @param object $category [binding model category]
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Category $category)
+    {
+        return view('admin.categories.show', ['categories' => app(CategoryService::class)->getEachCategory($category)]);
+    }
+
+    /**
+     * Display a form to edit category
+     *
+     * @param object $category [binding category]
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(Category $category)
+    {
+        return view('admin.categories.edit', compact('category'));
+    }
+
+    /**
+     * Handle update category to database
+     *
+     * @param object $request  [request to update the category]
+     * @param object $category [binding model category]
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function update(CategoryRequest $request, Category $category)
+    {
+        app(CategoryService::class)->update($request, $category);
+        return redirect()->route('categories.index')->with('message', Lang::get('master.content.message.update', ['attribute' => 'category']));
+    }
+
+    /**
      * Get children category from ajax request
      *
      * @param object $request [request to get children category]

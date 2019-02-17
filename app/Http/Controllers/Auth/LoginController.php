@@ -8,6 +8,8 @@ use App\Http\Requests\LoginRequest;
 use App\Services\LoginService;
 use App\Services\SocialProviderService;
 use Socialite;
+use Session;
+use URL;
 
 class LoginController extends Controller
 {
@@ -31,6 +33,7 @@ class LoginController extends Controller
      */
     public function login()
     {
+        Session::put('url.intended', URL::previous());
         return view('public.auth.login');
     }
 

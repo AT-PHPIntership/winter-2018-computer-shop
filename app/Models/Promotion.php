@@ -14,6 +14,16 @@ class Promotion extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'percent', 'start_at', 'end_at'
+        'name', 'percent', 'start_at', 'end_at', 'total_sold'
     ];
+
+    /**
+     * Display relationship between promotion and product
+     *
+     * @return void
+     */
+    public function products()
+    {
+        return $this->belongsToMany('App\Models\Product');
+    }
 }

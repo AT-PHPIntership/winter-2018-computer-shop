@@ -43,9 +43,20 @@ class ProductService
     {
         DB::beginTransaction();
         try {
-            $input = $request->all();
-            $input['unit_price'] = (int) str_replace(',', '', $request->unit_price);
-            Product::create($input);
+            $request['unit_price'] = (int) str_replace(',', '', $request['unit_price']);
+            $product = Product::create($request);
+            if (array_key_exists('images', $request)) {
+                foreach ($request['images'] as $images) {
+                    $imageName = time() . '_' . $images->getClientOriginalName();
+                    $images->move('storage/product', $imageName);
+                    $product->images()->create([
+                        'name' => $imageName
+                    ]);
+                }
+            }
+            if (array_key_exists('accessory_id', $request)) {
+                $product->accessories()->attach($request['accessory_id']);
+            }
             DB::commit();
             session()->flash('message', __('master.content.message.create', ['attribute' => trans('master.content.attribute.product')]));
         } catch (Exception $ex) {
@@ -65,26 +76,6 @@ class ProductService
     public function edit($product)
     {
          return Product::where('id', $product->id)->with('accessories', 'accessories.parent')->first();
-    }
-
-    /**
-    * Show form edit a product
-    *
-    * @param object $imageId [the id of image]
-    *
-    * @return imageId
-    */
-    public function deleteImage($imageId)
-    {
-        $imageId = Image::find($imageId);
-        $images = Image::where('product_id', $imageId->product->id)->get();
-        foreach ($images as $image) {
-            if ($imageId->id == $image->id) {
-                unlink('storage/product/' . $image->name);
-                $image->delete();
-                return $imageId;
-            }
-        }
     }
 
     /**
@@ -200,6 +191,32 @@ class ProductService
         return $data->whereIn('name', $compare);
     }
 
+    /**
+    * Handle update a product to database
+    *
+    * @param object $product [binding product model]
+    *
+    * @return void
+    */
+    public function delete($product)
+    {
+        try {
+            foreach ($product->images as $image) {
+                $productImage = realpath('storage/product/' . $image->name);
+                if (!is_null($image->name) && file_exists($productImage)) {
+                    unlink($productImage);
+                }
+            }
+            $product->images()->delete();
+            $product->accessories()->detach();
+            $product->delete();
+            session()->flash('message', __('master.content.message.delete', ['attribute' => trans('master.content.attribute.product')]));
+        } catch (Exception $ex) {
+             session()->flash('warning', __('master.content.message.error', ['attribute' => $ex->getMessage()]));
+            return redirect()->back();
+        }
+    }
+
     /*************************Function use for Public Page***********************************/
 
     /**
@@ -277,7 +294,7 @@ class ProductService
      */
     public function publicProduct($product)
     {
-        return $product->load('accessories');
+        return $product->load('accessories', 'comments', 'comments.childrens');
     }
 
     /**

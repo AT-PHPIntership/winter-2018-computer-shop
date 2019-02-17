@@ -66,4 +66,24 @@ class ImageService
             }
         }
     }
+
+    /**
+    * Delete a image using ajax
+    *
+    * @param object $imageId [the id of image]
+    *
+    * @return imageId
+    */
+    public function deleteImage($imageId)
+    {
+        $imageId = Image::find($imageId);
+        $images = Image::where('product_id', $imageId->product->id)->get();
+        foreach ($images as $image) {
+            if ($imageId->id == $image->id) {
+                unlink('storage/product/' . $image->name);
+                $image->delete();
+                return $imageId;
+            }
+        }
+    }
 }

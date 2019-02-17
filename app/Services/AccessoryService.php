@@ -7,6 +7,26 @@ use App\Models\Accessory;
 class AccessoryService
 {
     /**
+    * Get child accessoris
+    *
+    * @return void
+    */
+    public function getChildren()
+    {
+        return Accessory::with('childrens')->get();
+    }
+
+    /**
+    * Get parent accessoris
+    *
+    * @return void
+    */
+    public function getParent()
+    {
+        return Accessory::parents()->get();
+    }
+    
+    /**
      * Index access
      *
      * @return void
@@ -95,25 +115,5 @@ class AccessoryService
         } catch (\Exception $e) {
             return $message = $e->getMessage();
         }
-    }
-
-    /**
-    * Get child accessoris
-    *
-    * @return void
-    */
-    public function getChildren()
-    {
-        return Accessory::with('childrens')->get();
-    }
-
-    /**
-    * Get parent accessoris
-    *
-    * @return void
-    */
-    public function getParent()
-    {
-        return Accessory::parents()->get();
     }
 }

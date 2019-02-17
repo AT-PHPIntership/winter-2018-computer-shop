@@ -36,7 +36,7 @@
                 <div class="col-sm-9">
                   <select name="parent_id" class="form-control mb-3">
                       <option value="">No</option>
-                    @foreach($accessories as $accessory)
+                    @foreach($parentAccessories as $accessory)
                       <option value="{{ $accessory->id }}">{{ $accessory->name }}</option>
                     @endforeach
                   </select>

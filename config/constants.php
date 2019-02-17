@@ -12,11 +12,6 @@ return [
     'code' => [
         'number_paginate' => '5'
     ],
-
-    'accessory' => [
-        'number_paginate' => '3'
-    ],
-    
     'product' => [
         'saleOff' => '3',
         'feature' => '5',
@@ -29,12 +24,6 @@ return [
     'banner' => [
         'quantity' => '2'
     ],
-    'price' => [
-        '3' => 30000000,
-        '2' => 20000000,
-        '1' => 10000000,
-        '0' => 0
-   ],
    'filter' => [
         'CPU' => [
             'core-i5' => 'Intel Core i5',
@@ -65,7 +54,15 @@ return [
             'asc' => 'Price: low to high',
             'desc' => 'Price: high to low',
        ],
-
+    ],
+    'accessory' => [
+        'number_paginate' => '5'
+    ],
+    'price' => [
+        '3' => 30000000,
+        '2' => 20000000,
+        '1' => 10000000,
+        '0' => 0
     ],
     'order' => [
         'status' => [
@@ -74,5 +71,5 @@ return [
             'cancel' => 2
         ],
         'number_paginate' => '3'
-    ]   
+    ],
 ];

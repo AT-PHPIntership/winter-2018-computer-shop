@@ -13,19 +13,18 @@ class Product extends Model
      * @var array
      */
     protected $fillable = [
-         'name', 'description', 'quantity', 'unit_price', 'category_id'
+         'name', 'description', 'quantity', 'unit_price', 'category_id', 'total_sold'
     ];
-
     /**
      * The function display relationship between category and product
      *
-     * @return array
+     * @return \App\Models\Role
      */
     public function category()
     {
         return $this->belongsTo('App\Models\Category');
     }
-
+    
     /**
      * The function get unit price attribute
      *
@@ -37,7 +36,7 @@ class Product extends Model
     {
         return number_format($unitPrice, 0, ",", ",");
     }
-
+    
     /**
      * The function display relationship between product and accessory
      *
@@ -47,7 +46,7 @@ class Product extends Model
     {
         return $this->belongsToMany('App\Models\Accessory')->withTimestamps();
     }
-
+    
     /**
      * The function display relationship between product and accessory
      *
@@ -65,6 +64,16 @@ class Product extends Model
      */
     public function comments()
     {
-        return $this->hasMany('App\Models\Comment');
+        return $this->hasMany('App\Models\Comment')->whereNull('parent_id');
+    }
+
+    /**
+     * Desplay relationship between product and promotion
+     *
+     * @return void
+     */
+    public function promotions()
+    {
+        return $this->belongsToMany('App\Models\Promotion');
     }
 }

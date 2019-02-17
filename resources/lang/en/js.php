@@ -26,5 +26,13 @@
      'order' => [
          'delete' =>   'Are you sure want to delete this order?',
      ],
-
+     'comment' => [
+        'author' => 'You',
+        'time' => 'Now',
+        'reply' => 'Reply',
+        'add' => 'Add Your Reply',
+        'cancel' => 'Cancel',
+        'write' => 'Write your reply',
+        'addReply' => 'Add Reply',
+     ],
   ];
