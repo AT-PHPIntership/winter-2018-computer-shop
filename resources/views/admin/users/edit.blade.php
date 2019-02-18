@@ -19,22 +19,22 @@
             @csrf
               <div class="form-group">
                 <label class="form-control-label">@lang('master.content.table.email')</label>
-                <input name="email" type="email" placeholder="Email Address" class="form-control" value="{{$user->email}}">
+                <input name="email" type="email" placeholder="Email Address" class="form-control" value="{{$user->email}}" required>
                 @include('admin.partials.error', ['err' => 'email'])
               </div>
               <div class="form-group">       
                 <label class="form-control-label">@lang('master.content.form.name')</label>
-                <input name="name" type="text" placeholder="Name" class="form-control" value="{{$user->name}}">
+                <input name="name" type="text" placeholder="Name" class="form-control" value="{{$user->name}}" required>
                 @include('admin.partials.error', ['err' => 'name'])
               </div>
               <div class="form-group">       
                 <label class="form-control-label">@lang('master.content.form.address')</label>
-                <input name="address" type="text" placeholder="Address" class="form-control" value="{{$user->profile->address}}">
+                <input name="address" type="text" placeholder="Address" class="form-control" value="{{$user->profile->address}}" required>
                 @include('admin.partials.error', ['err' => 'address'])
               </div>
               <div class="form-group">       
                 <label class="form-control-label">@lang('master.content.form.phone')</label>
-                <input name="phone" type="text" placeholder="Phone" class="form-control" value="{{$user->profile->phone}}">
+                <input name="phone" type="text" placeholder="Phone" class="form-control" value="{{$user->profile->phone}}" required>
                 @include('admin.partials.error', ['err' => 'phone'])
               </div>
               <div class="form-group row">

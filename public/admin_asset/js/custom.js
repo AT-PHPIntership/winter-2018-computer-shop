@@ -163,22 +163,6 @@ $(function() {
     });
 });
 
-//Function use for user datatable
-$(function() {
-    $('#user-table').DataTable({
-        processing: true,
-        serverSide: true,
-        ajax: 'admin/users/data',
-        columns: [
-            { data: 'id', name: 'id' },
-            { data: 'email', name: 'email' },
-            { data: 'name', name: 'name' },
-            { data: 'role', name: 'role' },
-            { data: 'action', name: 'action' }
-        ]
-    });
-});
-
 //Get value of select option of category at Add Product page
 $(document).ajaxComplete(function(){
   var autoSelect = $('#localStorage').find(":selected").val();
@@ -429,24 +413,6 @@ $(document).ajaxComplete(function() {
 
 //Function use for user datatable
 $(function() {
-    $('#user-table').DataTable({
-        processing: true,
-        serverSide: true,
-        ajax: 'admin/users/data',
-        columns: [
-            { data: 'id', name: 'id' },
-            { data: 'email', name: 'email' },
-            { data: 'name', name: 'name' },
-            { data: 'role', name: 'role' },
-            { data: 'action', name: 'action' }
-        ]
-    });
-});
-
-/****************************************************************/
-
-//Function use for user datatable
-$(function() {
   $('#user-table').DataTable({
   processing: true,
   serverSide: true,
@@ -471,6 +437,7 @@ function confirmedDelete() {
 $(document).ready(function() {
   $('div.alert').delay(2000).slideUp();
 });
+
 /***********************Slide function***************************/
 //Custom dropzone to validation things user input into 
 Dropzone.options.dropzone = {
@@ -509,3 +476,61 @@ $(document).ready(function(){
         
     });
 });
+
+/** HANDLE STATISTIC */
+
+
+$(function(){
+  var ctx1 = $("#mycanvas");
+  //doughnut chart data
+  var data1 = {
+    labels: ["Cancel Order", "Pending Order", "Approve Order"],
+    datasets: [
+      {
+        label: "Order Chart",
+        data: [cancelOrder, pendingOrder, approveOrder],
+        backgroundColor: [
+          "#DEB887",
+          "#A9A9A9",
+          "#2E8B57"
+        ],
+        borderColor: [
+          "#CDA776",
+          "#989898",
+          "#1D7A46"
+        ],
+        borderWidth: [1, 1, 1]
+      }
+    ]
+  };
+
+  //options
+  var options = {
+    responsive: true,
+    title: {
+      display: true,
+      position: "top",
+      text: "Order Chart",
+      fontSize: 18,
+      fontColor: "#111"
+    },
+    legend: {
+      display: true,
+      position: "bottom",
+      labels: {
+        fontColor: "#333",
+        fontSize: 16
+      }
+    }
+  };
+
+  //create Chart class object
+  var chart1 = new Chart(ctx1, {
+    type: "doughnut",
+    data: data1,
+    options: options
+  });
+
+});
+
+/** HANDLE STATISTIC */

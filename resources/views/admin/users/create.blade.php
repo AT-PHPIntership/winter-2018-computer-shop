@@ -18,32 +18,32 @@
             @csrf
               <div class="form-group">
                 <label class="form-control-label">@lang('master.content.table.email')<span class="ml-1 text-danger">*<span></label>
-                <input name="email" type="email" placeholder="Email Address" class="form-control" value="{{ old('email') }}">
+                <input name="email" type="email" placeholder="Email Address" class="form-control" value="{{ old('email') }}" required>
                 @include('admin.partials.error', ['err' => 'email'])
               </div>
               <div class="form-group">       
                 <label class="form-control-label">@lang('master.content.form.password')<span class="ml-1 text-danger">*<span></label>
-                <input name="password" type="password" placeholder="Password" class="form-control">
+                <input name="password" type="password" placeholder="Password" class="form-control" required>
                 @include('admin.partials.error', ['err' => 'password'])
               </div>
               <div class="form-group">       
                 <label class="form-control-label">@lang('master.content.form.confirm_pw')<span class="ml-1 text-danger">*<span></label>
-                <input name="password_confirmation" type="password" placeholder="Confirm Password" class="form-control">
+                <input name="password_confirmation" type="password" placeholder="Confirm Password" class="form-control" required>
               </div>
               <div class="form-group">       
                 <label class="form-control-label">@lang('master.content.form.name')<span class="ml-1 text-danger">*<span></label>
-                <input name="name" type="text" placeholder="Name" class="form-control" value="{{ old('name') }}">
+                <input name="name" type="text" placeholder="Name" class="form-control" value="{{ old('name') }}" required>
                 @include('admin.partials.error', ['err' => 'name'])
               </div>
               <div class="form-group">       
                 <label class="form-control-label">@lang('master.content.form.address')<span class="ml-1 text-danger">*<span></label>
-                <input name="address" type="text" placeholder="Address" class="form-control" value="{{ old('address') }}">
+                <input name="address" type="text" placeholder="Address" class="form-control" value="{{ old('address') }}" required>
                 @include('admin.partials.error', ['err' => 'address'])
               </div>
               <div class="form-group">       
                 <label class="form-control-label">@lang('master.content.form.phone')<span class="ml-1 text-danger">*<span></label>
-                <input name="phone" type="text" placeholder="Phone" class="form-control" value="{{ old('phone') }}">
-                @include('admin.partials.error', ['err' => 'phone'])
+                <input name="phone" type="text" placeholder="Phone" class="form-control" value="{{ old('phone') }}"` required>
+                @include('admin.partials.error', ['err' => 'phone'])`
               </div>
               <div class="form-group row">
                 <label class="form-control-label col-sm-12">@lang('master.content.table.role')</label>
