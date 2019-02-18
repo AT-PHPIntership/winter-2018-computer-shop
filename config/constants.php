@@ -4,20 +4,12 @@ return [
     'role' => [
         'number_paginate' => '5'
     ],
-
     'promotion' => [
         'number_paginate' => '3'
     ],
-
-    // 'order' => [
-    //     'status' => [
-    //         'pending' => 'Pending',
-    //         'approve' => 'Approve',
-    //         'cancel' => 'Cancel'
-    //     ],
-    //     'number_paginate' => '3'
-    // ],
-    
+    'category' => [
+        'paginate' => 10,
+    ],
     'code' => [
         'number_paginate' => '5'
     ],

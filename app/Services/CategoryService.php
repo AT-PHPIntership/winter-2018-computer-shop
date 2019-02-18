@@ -36,7 +36,7 @@ class CategoryService
      *
      * @return parent category
      */
-    public function parent()
+    public function parents()
     {
         return Category::parents()->get();
     }
@@ -69,7 +69,7 @@ class CategoryService
      *
      * @return object
      */
-    public function getEachCategory($category)
+    public function getChildren($category)
     {
          return $category = Category::where('parent_id', $category->id)->orderBy('id', \Config::get('define.user.order_by_desc'))->paginate(\Config::get('define.user.limit_rows'));
     }

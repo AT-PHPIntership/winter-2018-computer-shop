@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Lang;
 class CategoryController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
@@ -62,7 +62,7 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        return view('admin.categories.show', ['categories' => app(CategoryService::class)->getEachCategory($category)]);
+        return view('admin.categories.show', ['categories' => app(CategoryService::class)->getChildren($category)]);
     }
 
     /**
