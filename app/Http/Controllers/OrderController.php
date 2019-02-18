@@ -44,6 +44,7 @@ class OrderController extends Controller
      */
     public function create(OrderRequest $request)
     {
+        
         // delete code applyed
         if (isset($request->codeId)) {
             $codeId = $request->codeId;
@@ -94,6 +95,19 @@ class OrderController extends Controller
 
             $product->update($quantityProduct);
         }
+        
+        // Send mail to custommer
+        $to_name = $request->full_name;
+        $to_email = $request->email;
+        $data = array('name'=> $to_name, "body" => "You Ordered Successfully");
+            
+        \Mail::send('admin.orders.mail', $data, function($message) use ($to_name, $to_email) {
+            $message->to($to_email, $to_name)
+                    ->subject('Mail Order To Computer Shop');
+            $message->from('thanhnguyen11923112@gmail.com','ComputerShop Web');
+        });
+        // Send mail to custommer
+        
         return redirect()->route('public.home')->with('message', 'Order successful');
     }
 

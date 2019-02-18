@@ -14,8 +14,8 @@ class ViewServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        view()->composer(['admin.access.update','admin.access.create'], 'App\Http\ViewComposers\AccessComposer');
         view()->composer(['admin.categories.create', 'admin.categories.edit', 'admin.products.create', 'admin.products.edit', 'public.layout.header'], 'App\Http\ViewComposers\CategoryComposer');
+        view()->composer(['admin.accessories.update','admin.accessories.create'], 'App\Http\ViewComposers\AccessoryComposer');
         view()->composer(['admin.users.create', 'admin.users.edit','admin.roles.index'], 'App\Http\ViewComposers\RoleComposer');
         view()->composer(['admin.products.edit'], 'App\Http\ViewComposers\AccessoryComposer');
         view()->composer(['admin.slides.index', 'public.partials.slide', 'public.partials.breadcrumb'], 'App\Http\ViewComposers\SlideComposer');

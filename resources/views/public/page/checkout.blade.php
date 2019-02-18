@@ -32,14 +32,14 @@
 
                                      <div class="col-md-6 col-12 mb-20">
                                          <label>Full Name</label>
-                                         <input readonly type="text" placeholder="First Name" value="{{ Auth::user()->name }}">
+                                         <input readonly type="text" name="full_name" placeholder="First Name" value="{{ Auth::user()->name }}">
                                          <input type="hidden" name="userId" value="{{ Auth::user()->id }}">
                                          
                                      </div>
 
                                      <div class="col-md-6 col-12 mb-20">
                                          <label>Email Address</label>
-                                         <input readonly type="email" placeholder="Email Address" value="{{ Auth::user()->email }}">
+                                         <input readonly type="email" name="email" placeholder="Email Address" value="{{ Auth::user()->email }}">
                                           @isset($arrCode)
                                          <input type="hidden" name="codeId" value="{{ $arrCode ? $arrCode['codeId'] : "" }}">
                                          @endisset

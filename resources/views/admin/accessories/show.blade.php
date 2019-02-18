@@ -2,14 +2,14 @@
 @section('content')
 <header class="page-header">
    <div class="container-fluid">
-       <h2 class="no-margin-bottom">@lang('master.sidebar.access')</h2>
+       <h2 class="no-margin-bottom">@lang('master.sidebar.accessory')</h2>
    </div>
 </header>
 <!-- Breadcrumb-->
 <div  class="breadcrumb-holder container-fluid">
    <ul class="breadcrumb">
        <li class="breadcrumb-item"><a href="{{route('admin.home')}}">@lang('master.sidebar.home')</a></li>
-       <li class="breadcrumb-item active">@lang('master.sidebar.access')</li>
+       <li class="breadcrumb-item active">@lang('master.sidebar.accessory')</li>
    </ul>
 </div>
 @if(session('message'))
@@ -39,15 +39,15 @@
                    </tr>
                  </thead>
                  <tbody>
-                  @foreach($access->children as $acces)
+                  @foreach($accessory->children as $acces)
                   <tr>
                      <th scope="row">{{ $acces->id }}</th>
                      <td>{{ $acces->name }}</td>
                      <td>
-                       <a href="{{ route('access.edit', $acces->id) }}" class="btn btn-sm btn-warning">
+                       <a href="{{ route('accessories.edit', $acces->id) }}" class="btn btn-sm btn-warning">
                        @lang('master.content.action.edit', ['attribute' => __('master.content.attribute.accessory')])
                        </a>
-                       <form action="{{ route('access.destroy', $acces->id) }}" method="POST" class="d-inline">
+                       <form action="{{ route('accessories.destroy', $acces->id) }}" method="POST" class="d-inline">
                           @csrf
                           @method('DELETE')
                           <input type="submit" value="@lang('master.content.action.delete', ['attribute' => __('master.content.attribute.accessory')])" class="btn btn-sm btn-danger">

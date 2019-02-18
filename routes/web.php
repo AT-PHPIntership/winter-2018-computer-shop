@@ -43,10 +43,10 @@ Route::group(['prefix' => 'admin'], function(){
     Route::resource('products', 'ProductController');
     Route::resource('promotions', 'PromotionController');
     Route::resource('codes', 'CodeController');
-    Route::resource('access', 'AccessController');
     Route::resource('orders', 'OrderController');
     Route::delete('slides/image', 'SlideController@deleteImage');
     Route::resource('slides', 'SlideController');
+    Route::resource('accessories', 'AccessoryController');
 }); 
 
 // Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Auth'], function() {

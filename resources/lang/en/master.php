@@ -32,8 +32,8 @@ return [
         'order_details' => 'Orders Details Management',
         'promotion' => 'Promotions Management',
         'code' => 'Codes Management',
-        'access' => 'Accessories Management',
         'slide' => 'Slides Management',
+        'accessory' => 'Accessories Management',
     ],
     'content' => [
         'dashboard' => [
