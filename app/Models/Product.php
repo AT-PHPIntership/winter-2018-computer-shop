@@ -76,4 +76,14 @@ class Product extends Model
     {
         return $this->belongsToMany('App\Models\Promotion');
     }
+
+    /**
+     * [orderDetails description]
+     *
+     * @return [type] [description] Dsdf
+     */
+    public function orderDetails()
+    {
+        return $this->hasMany(OrderDetail::class);
+    }
 }

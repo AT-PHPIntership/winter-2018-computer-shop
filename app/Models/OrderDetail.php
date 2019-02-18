@@ -13,7 +13,6 @@ class OrderDetail extends Model
         'quantity', 'price', 'order_id', 'product_id'
     ];
 
-
     /**
      * Relationshop with order
      *

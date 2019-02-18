@@ -29,6 +29,7 @@ return [
         'img_product' => 'Products',
         'comment' => 'Comments Management',
         'order' => 'Orders Management',
+        'order_details' => 'Orders Details Management',
         'promotion' => 'Promotions Management',
         'code' => 'Codes Management',
         'slide' => 'Slides Management',
@@ -43,6 +44,7 @@ return [
             'delete' => 'Delete :attribute',
             'show' => 'Details about :attribute',
             'import' => 'Import :attribute',
+            'back' => 'Back',
         ],
         'table' => [
             'email' => 'Email',
@@ -66,6 +68,10 @@ return [
             'gpu' => 'GPU',
             'parent_id' => 'Parent name',
             'total_sold' => 'Sold Quantity ',
+            'parent_id' => 'Parent name',
+            'details' => 'Details',
+            'date_order' => 'Date order',
+            'product_name' => 'Product name',
         ],
         'form' => [
             'password' => 'Password',

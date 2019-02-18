@@ -4,6 +4,8 @@ namespace App\Models;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Models\Order;
+use App\Models\Role;
 
 class User extends Authenticatable
 {
@@ -30,13 +32,23 @@ class User extends Authenticatable
     ];
 
     /**
-     * The function display relationship between role and user
+     * Get User Object
      *
-     * @return \App\Models\Role
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
+
+    /**
+     * Belongs to role
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function role()
     {
-        return $this->belongsTo('App\Models\Role');
+        return $this->belongsTo(Role::class);
     }
 
     /**
@@ -79,15 +91,5 @@ class User extends Authenticatable
     public function comments()
     {
         return $this->hasMany('App\Models\Comment');
-    }
-
-     /**
-     * The function display relationship between order and user
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function orders()
-    {
-        return $this->hasMany('App\Models\Order');
     }
 }

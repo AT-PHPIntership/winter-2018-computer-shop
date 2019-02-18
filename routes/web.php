@@ -30,8 +30,8 @@ Route::group(['prefix' => 'user', 'middleware' => 'user.login'], function(){
     Route::delete('order/{order}', 'UserController@deleteOrder')->name('user.delete.order');
 }); 
 
-//Admin Route
-Route::group(['prefix' => 'admin'], function(){
+//Admin route
+Route::group(['prefix' => 'admin', 'middleware' => 'adminLogin'], function(){
     Route::get('/home', 'AdminController@home')->name('admin.home');
     Route::get('users/data', 'UserController@getData');
     Route::resource('users', 'UserController');
@@ -51,6 +51,7 @@ Route::group(['prefix' => 'admin'], function(){
     Route::resource('accessories', 'AccessoryController');
     Route::delete('slides/image', 'SlideController@deleteImage');
     Route::resource('slides', 'SlideController');
+    Route::resource('orders', 'OrderController');
 }); 
 
 Auth::routes();
@@ -62,12 +63,13 @@ Route::get('register', 'Auth\RegisterController@register')->name('public.registe
 Route::post('register', 'Auth\RegisterController@handleRegister')->name('public.register');
 Route::get('activation/{token}', 'Auth\RegisterController@activation');
 
-//Login route
+//Public login route
 Route::get('login', 'Auth\LoginController@login')->name('public.login');
 Route::post('login', 'Auth\LoginController@handleLogin')->name('public.login');
+Route::get('logout', 'Auth\LoginController@logout')->name('logout');
+
 
 //Login by Social account
 Route::get('auth/{provider}', 'Auth\LoginController@redirectToProvider');
 Route::get('auth/{provider}/callback', 'Auth\LoginController@handleProviderCallback');
-
 

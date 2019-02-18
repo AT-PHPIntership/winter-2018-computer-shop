@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use App\Http\Requests\LoginRequest;
 use App\Services\LoginService;
@@ -10,6 +11,7 @@ use App\Services\SocialProviderService;
 use Socialite;
 use Session;
 use URL;
+use Auth;
 
 class LoginController extends Controller
 {
@@ -38,6 +40,19 @@ class LoginController extends Controller
     }
 
     /**
+     * Log the user out of the application.
+     *
+     * @param \Illuminate\Http\Request $request Request
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        return redirect()->route('public.login');
+    }
+
+    /**
      * Handle data from login form
      *
      *@param collection $request [request login]
@@ -46,7 +61,7 @@ class LoginController extends Controller
      */
     public function handleLogin(LoginRequest $request)
     {
-        return app(LoginService::class)->userLogin($request->except(['_token']));
+        return app(LoginService::class)->handleLogin($request->except(['_token']));
     }
 
       /**
@@ -78,4 +93,6 @@ class LoginController extends Controller
             return redirect()->route('public.login');
         }
     }
+
+     
 }

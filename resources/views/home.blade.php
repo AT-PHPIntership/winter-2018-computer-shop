@@ -1,11 +1,10 @@
-@extends('layouts.app')
-
+@extends('admin.layout.app')
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Dashboard</div>
+                <div class="card-header">User</div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -13,8 +12,16 @@
                             {{ session('status') }}
                         </div>
                     @endif
+                    <h1>Page User   </h1>
 
-                    You are logged in!
+                    <a href="{{ route('logout') }}"
+                            onclick="event.preventDefault();
+                                    document.getElementById('logout-form').submit();">
+                            Logout
+                        </a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        {{ csrf_field() }}
+                    </form>
                 </div>
             </div>
         </div>

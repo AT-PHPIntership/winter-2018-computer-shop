@@ -9,6 +9,8 @@ use App\Models\OrderDetail;
 class Order extends Model
 {
     protected $table = 'orders';
+    
+    //Constant status order
     const PENDING_STATUS = 'Pending';
     const APPROVE_STATUS = 'Approve';
     const CANCEL_STATUS = 'Cancel';
