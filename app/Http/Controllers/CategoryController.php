@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use App\Http\Requests\CategoryRequest;
 use App\Services\CategoryService;
 use App\Models\Category;
-use Illuminate\Support\Facades\Lang;
 
 class CategoryController extends Controller
 {
@@ -62,7 +61,8 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        return view('admin.categories.show', ['categories' => app(CategoryService::class)->getChildren($category)]);
+        $categories = app(CategoryService::class)->getChildren($category);
+        return view('admin.categories.show', compact('categories'));
     }
 
     /**
@@ -102,5 +102,18 @@ class CategoryController extends Controller
     {
         $response = app(CategoryService::class)->getSubCategory($request->get('id'));
         return response()->json($response);
+    }
+    
+    /**
+     * Delete the specified resource.
+     *
+     * @param object $category [binding category model]
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Category $category)
+    {
+        app(CategoryService::class)->delete($category);
+        return redirect()->route('categories.index');
     }
 }

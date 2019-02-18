@@ -98,4 +98,30 @@ class CategoryService
     {
         return Category::where('parent_id', $id)->select('id', 'name')->get();
     }
+
+     /**
+     * Handle delete category out of data
+     *
+     * @param object $category [binding category model]
+     *
+     * @return void
+     */
+    public function delete($category)
+    {
+        $subCategory = Category::where('parent_id', $category->id)->get();
+        if ($subCategory->count() > 0) {
+            session()->flash('warning', __('master.content.message.warning'));
+        } else {
+            try {
+                $categoryImage = realpath('storage/category/' . $category->image);
+                if (!is_null($category->image) && file_exists($categoryImage)) {
+                    unlink($categoryImage);
+                }
+                $category->delete();
+                session()->flash('message', __('master.content.message.delete', ['attribute' => trans('master.content.attribute.category')]));
+            } catch (Exception $ex) {
+                session()->flash('warning', __('master.content.message.error', ['attribute' => $ex->getMessage()]));
+            }
+        }
+    }
 }

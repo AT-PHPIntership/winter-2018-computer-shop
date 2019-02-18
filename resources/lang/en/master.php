@@ -111,6 +111,7 @@ return [
             'delete' => 'Deleted the :attribute successfully',
             'import' => 'Imported the file successfully',
             'error' => 'The :attribute happens',
+            'warning' => "You can't delete the category because it's has sub-category",
             'img' => 'does not have avatar',
         ],
         'attribute' => [

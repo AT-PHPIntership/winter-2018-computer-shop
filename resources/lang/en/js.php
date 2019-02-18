@@ -13,6 +13,7 @@
      'delete' => [
         'user' =>   'Are you sure want to delete this user?',
         'role' =>   'Are you sure want to delete this role?',
+        'category' =>   'Are you sure want to delete this category?',
      ],
      'compare' => [
         'first' => 'You have one product to compare',
