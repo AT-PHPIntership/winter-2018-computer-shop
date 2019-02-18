@@ -16,6 +16,6 @@ class CategoryComposer
     */
     public function compose(View $view)
     {
-        $view->with('categories', app(CategoryService::class)->parent());
+        $view->with('categories', app(CategoryService::class)->parents());
     }
 }

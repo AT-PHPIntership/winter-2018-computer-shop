@@ -32,7 +32,7 @@ class CategoryService
      *
      * @return parent category
      */
-    public function parent()
+    public function parents()
     {
         return Category::parents()->get();
     }
@@ -56,5 +56,18 @@ class CategoryService
             session()->flash('warning', __('master.content.message.error', ['attribute' => $ex->getMessage()]));
             return redirect()->back();
         }
+    }
+    /**
+     * Get data form users table return user index page
+     *
+     * @param object $category [request get children category]
+     *
+     * @return object [object]
+     */
+    public function getChildren($category)
+    {
+         return $category = Category::where('parent_id', $category->id)
+                                    ->latest()
+                                    ->paginate(\Config::get('constants.category.paginate'));
     }
 }
