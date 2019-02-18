@@ -97,14 +97,14 @@ class OrderController extends Controller
         }
         
         // Send mail to custommer
-        $to_name = $request->full_name;
-        $to_email = $request->email;
-        $data = array('name'=> $to_name, "body" => "You Ordered Successfully");
+        $toName = $request->full_name;
+        $toEmail = $request->email;
+        $data = array('name'=> $toName, "body" => "You Ordered Successfully");
             
-        \Mail::send('admin.orders.mail', $data, function($message) use ($to_name, $to_email) {
-            $message->to($to_email, $to_name)
+        \Mail::send('admin.orders.mail', $data, function ($message) use ($toName, $toEmail) {
+            $message->to($toEmail, $toName)
                     ->subject('Mail Order To Computer Shop');
-            $message->from('thanhnguyen11923112@gmail.com','ComputerShop Web');
+            $message->from('thanhnguyen11923112@gmail.com', 'ComputerShop Web');
         });
         // Send mail to custommer
         
