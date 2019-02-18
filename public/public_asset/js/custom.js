@@ -226,7 +226,7 @@ $(document).ready(function() {
                   output += '</article>';
                   output += '</li>';
                   $('#commentList').append(output);
-                  document.getElementById("comment-text").value = "";
+                  $("#comment-text").val("");
               }
             });
           }

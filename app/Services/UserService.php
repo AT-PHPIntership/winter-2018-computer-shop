@@ -9,7 +9,6 @@ use Yajra\Datatables\Datatables;
 use DB;
 use Mail;
 use Auth;
-
 class UserService
 {
     /**

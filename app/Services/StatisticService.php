@@ -19,8 +19,8 @@ class StatisticService
         $totalProduct = Product::all()->count();
         $totalOrder = Order::all()->count();
         $cancelOrder = Order::where('status', 0)->get()->count();
-        $pendingOrder = Order::where('status', 1)->get()->count();
-        $approveOrder = Order::where('status', 2)->get()->count();
+        $pendingOrder = Order::where('status', 2)->get()->count();
+        $approveOrder = Order::where('status', 1)->get()->count();
         $arrayData = [
             'totalUser' => $totalUser,
             'totalProduct' => $totalProduct,

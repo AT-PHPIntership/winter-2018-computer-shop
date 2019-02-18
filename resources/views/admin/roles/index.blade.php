@@ -32,7 +32,7 @@
                    </div>
                    <div class="card-body">
                        <div class="table-responsive">
-               <table class="table table-striped table-hover">
+               <table class="table table-striped table-hover text-center">
                  <thead>
                    <tr>
                      <th>@lang('master.content.table.id')</th>
@@ -43,13 +43,13 @@
                  <tbody>
                   @foreach($roles as $role)
                   <tr>
-                     <th scope="row">{{ $role->id }}</th>
+                     <th>{{ $role->id }}</th>
                      <td>{{ $role->name }}</td>
                      <td>
                        <a href="{{ route('roles.edit', $role->id) }}" class="btn btn-sm btn-warning">
                        @lang('master.content.action.edit', ['attribute' => 'Role'])
                        </a>
-                       <form action="{{ route('roles.destroy', $role->id) }}" method="POST" class="d-inline">
+                       <form action="{{ route('roles.destroy', $role->id) }}" method="POST" class="d-inline" onsubmit="return confirmedDelete('role')">
                           @csrf
                           @method('DELETE')
                           <input type="submit" value="@lang('master.content.action.delete', ['attribute' => 'Role'])" class="btn btn-sm btn-danger">

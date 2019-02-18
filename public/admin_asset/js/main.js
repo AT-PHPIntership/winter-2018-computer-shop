@@ -1,8 +1,9 @@
-//Put PHP variable to JS 
+//Put PHP variable to JS
 function define(key) {
-  return window.js_variable.define[key];
+    return window.js_variable.define[key];
 }
 
- function trans(key) {
-   return window.js_variable.trans[key];
+function element(key) {
+    return window.js_variable.element[key];
 }
+

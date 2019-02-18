@@ -70,7 +70,7 @@
                         </div>
                       <div class="row">
                         <div class="col-md-12">
-
+                          {{ $orders->links()}}
                         </div>
                       </div>
                     </div>

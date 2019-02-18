@@ -10,8 +10,9 @@
     | as the size rules. Feel free to tweak each of these messages here.
     |
     */
-     'user' => [
-        'delete' =>   'Are you sure want to delete this user?',
+     'delete' => [
+        'user' =>   'Are you sure want to delete this user?',
+        'role' =>   'Are you sure want to delete this role?',
      ],
      'compare' => [
         'first' => 'You have one product to compare',

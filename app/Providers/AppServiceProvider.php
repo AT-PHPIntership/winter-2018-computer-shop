@@ -5,7 +5,6 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use JavaScript;
 use Validator;
-use Illuminate\Database\Eloquent\Relations\Relation;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -19,13 +18,13 @@ class AppServiceProvider extends ServiceProvider
         Validator::extend('extentions', function ($attribute, $value) {
             if (!is_null($attribute)) {
                 $extention = strtolower($value->getClientOriginalExtension());
-                if (in_array($extention, ['csv','xlsx','xls','odt'])) {
+                if (in_array($extention, ['csv', 'xlsx', 'xls', 'odt'])) {
                     return true;
                 }
-                    return false;
+                return false;
             }
         });
-        
+
         $this->putPHPToJavaScript();
     }
 
@@ -38,14 +37,14 @@ class AppServiceProvider extends ServiceProvider
     {
         JavaScript::put([
             'define' => config('define'),
-            'trans'  => __('js.user'),
-            'message'  => __('js.compare'),
-            'filter'  => __('js.filter'),
-            'order'  => __('js.order'),
-            'comment'  => __('js.comment'),
+            'element' => __('js.delete'),
+            'message' => __('js.compare'),
+            'filter' => __('js.filter'),
+            'order' => __('js.order'),
+            'comment' => __('js.comment'),
         ]);
     }
-    
+
     /**
      * Register any application services.
      *

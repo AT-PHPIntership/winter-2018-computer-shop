@@ -2,21 +2,21 @@
 
 return [
     'role' => [
-        'number_paginate' => '3'
+        'number_paginate' => '5'
     ],
 
     'promotion' => [
         'number_paginate' => '3'
     ],
 
-    'order' => [
-        'status' => [
-            'pending' => 'Pending',
-            'approve' => 'Approve',
-            'cancel' => 'Cancel'
-        ],
-        'number_paginate' => '3'
-    ],
+    // 'order' => [
+    //     'status' => [
+    //         'pending' => 'Pending',
+    //         'approve' => 'Approve',
+    //         'cancel' => 'Cancel'
+    //     ],
+    //     'number_paginate' => '3'
+    // ],
     
     'code' => [
         'number_paginate' => '5'
@@ -75,10 +75,10 @@ return [
     ],
     'order' => [
         'status' => [
-            'pending' => 0,
+            'pending' => 2,
             'approve' => 1,
-            'cancel' => 2
+            'cancel' => 0
         ],
-        'number_paginate' => '3'
+        'number_paginate' => '10'
     ],
 ];
