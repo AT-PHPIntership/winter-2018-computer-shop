@@ -65,6 +65,17 @@
                 @endif
               </div>
             </div>
+            <div class="form-group row">
+              <label class="col-sm-3 form-control-label">@lang('master.content.table.total_sold')</label>
+              <div class="col-sm-9">
+                <input id="inputHorizontalWarning" type="text" name="total_sold" placeholder="Total Sold" class="form-control" value="{{ old('total_sold') ? old('total_sold') : $promotion->total_sold }}">
+                @if ($errors->has('total_sold'))
+                  <span class="help-block col-sm-12">
+                      <strong class="col-xs-12 col-sm-12 text-danger">{{ $errors->first('total_sold') }}</strong>
+                  </span>
+                @endif
+              </div>
+            </div>
             <div class="form-group row">       
               <div class="col-sm-9 offset-sm-3">
                 <input type="submit" value="@lang('master.content.button.update')" class="btn btn-primary">

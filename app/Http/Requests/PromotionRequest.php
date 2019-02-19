@@ -27,7 +27,8 @@ class PromotionRequest extends FormRequest
             'name' => 'required|min:3',
             'percent' => 'required|integer',
             'start_at' => 'required|date|after:yesterday',
-            'end_at' => 'required|date|after:start_at'
+            'end_at' => 'required|date|after:start_at',
+            'total_sold' => 'required|integer'
         ];
     }
 }

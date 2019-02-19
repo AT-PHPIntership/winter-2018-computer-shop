@@ -36,7 +36,6 @@ class Product extends Model
     {
         return $this->belongsTo('App\Models\Category');
     }
-
     /**
      * The function get unit price attribute
      *
@@ -48,7 +47,6 @@ class Product extends Model
     {
         return number_format($unitPrice, 0, ",", ",");
     }
-
     /**
      * The function display relationship between product and accessory
      *
@@ -67,5 +65,14 @@ class Product extends Model
     public function images()
     {
         return $this->hasMany('App\Models\Image');
+    }
+
+    /** Desplay relationship between product and promotion
+     *
+     * @return void
+     */
+    public function promotions()
+    {
+        return $this->belongsToMany('App\Models\Promotion');
     }
 }

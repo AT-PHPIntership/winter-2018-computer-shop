@@ -86,6 +86,7 @@ return [
             'hdd' => 'HDD',
             'monitor' => 'Monitor',
             'gpu' => 'GPU',
+            'total_sold' => 'Sold Quantity <',
         ],
         'form' => [
             'password' => 'Password',

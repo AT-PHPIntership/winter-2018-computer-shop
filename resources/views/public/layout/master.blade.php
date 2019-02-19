@@ -27,6 +27,7 @@
         <script src="public_asset/js/vendor/modernizr-2.8.3.min.js"></script>
     </head>
     <body>
+        @include('public.layout.message')
         @include('public.layout.header')
         @include('public.layout.mini_cart')
         @yield('content')
