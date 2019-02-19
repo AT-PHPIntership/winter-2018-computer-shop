@@ -57,7 +57,7 @@
                 </div>
                 @else
                 <div class="col-sm-8">
-                    <p class="mt-4 text-danger">{{$user->name}} @lang('master.content.message.img')</p>
+                    <p class="mt-4 text-danger">{{$user->name}} @lang('master.content.message.img', ['attribute' => trans('master.content.attribute.avatar')])</p>
                 </div>
                 @endif
                   <input type="file" id="fileInput" name="avatar" class="form-control-file mt-1">

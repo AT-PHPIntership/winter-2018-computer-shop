@@ -84,7 +84,16 @@ class CategoryService
      */
     public function update($request, $category)
     {
-        return $category->update($request->all());
+        try {
+            if (array_key_exists('image', $request)) {
+                $request['image'] = app(ImageService::class)->handleChangedImage($request['image'], $category, trans('master.content.attribute.category'));
+            }
+            $category->update($request);
+            session()->flash('message', __('master.content.message.update', ['attribute' => trans('master.content.attribute.category')]));
+        } catch (Exception $ex) {
+            session()->flash('warning', __('master.content.message.error', ['attribute' => $ex->getMessage()]));
+            return redirect()->back();
+        }
     }
 
     /**

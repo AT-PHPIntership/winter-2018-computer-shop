@@ -18,7 +18,7 @@
             @method('PUT')
               <div class="form-group">
                 <label class="form-control-label">@lang('master.content.form.name')</label>
-                <input name="name" type="text" placeholder="Enter category name" class="form-control" value="{{$category->name}}">
+                <input name="name" type="text" placeholder="Enter category name" class="form-control" value="{{$category->name}}" required>
                 @include('admin.partials.error', ['err' => 'name'])
               </div>
               <div class="form-group row">
@@ -27,8 +27,8 @@
                   <select name="parent_id" class="form-control mb-3">
                     @if($category->parent_id == null)
                         <option value="" <?php echo 'selected' ?> disabled hidden>@lang('master.content.select.choose')</option>
-                    @foreach($categories as $category_main)
-                        <option value="{{$category_main->id}}">{{$category_main->name}}</option>
+                    @foreach($categories as $main_category)
+                        <option value="{{$main_category->id}}">{{$main_category->name}}</option>
                     @endforeach
                     @else
                       <option value="">@lang('master.content.select.parent')</option>
@@ -37,6 +37,23 @@
                     @endforeach
                     @endif
                   </select>
+                  @include('admin.partials.error', ['err' => 'parent_id'])
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="fileInput" class="col-sm-3 form-control-label">@lang('master.content.form.image')</label>
+                <div class="col-sm-9">
+                @if($category->image == !null)
+                <div class="col-sm-4 mb-2">
+                    <img src="storage/category/{{$category->image}}" alt="" class="img-thumbnail">
+                </div>
+                @else
+                <div class="col-sm-8">
+                    <p class="mt-4 text-danger">{{$category->name}} @lang('master.content.message.img', ['attribute' => trans('master.content.attribute.image')])</p>
+                </div>
+                @endif
+                  <input type="file" id="fileInput" name="image" class="form-control-file">
+                  @include('admin.partials.error', ['err' => 'image'])
                 </div>
               </div>
               <div class="form-group">    

@@ -2,9 +2,9 @@
 <nav class="side-navbar">
   <!-- Sidebar Header-->
   <div class="sidebar-header d-flex align-items-center">
-    <div class="avatar"><img src="admin_asset/img/avatar-1.jpg" alt="..." class="img-fluid rounded-circle"></div>
+    <div class="avatar"><img src="storage/avatar/{{Auth::user()->profile->avatar}}" alt="..." class="img-fluid rounded-circle"></div>
     <div class="title">
-      <h1 class="h4">Mark Stephen</h1>
+      <h1 class="h4">{{Auth::user()->name}}</h1>
     </div>
   </div>
   <!-- Sidebar Navidation Menus-->

@@ -78,7 +78,6 @@
   </div>
     
 </section>
-
 <script type="text/javascript">
     var cancelOrder = <?php echo json_decode($arrayData['cancelOrder']); ?>;
     var pendingOrder = <?php echo json_decode($arrayData['pendingOrder']); ?>;

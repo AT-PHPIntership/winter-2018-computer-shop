@@ -112,7 +112,7 @@ return [
             'import' => 'Imported the file successfully',
             'error' => 'The :attribute happens',
             'warning' => "You can't delete the category because it's has sub-category",
-            'img' => 'does not have avatar',
+            'img' => 'does not have :attribute',
         ],
         'attribute' => [
              'user' => 'user',
@@ -137,6 +137,7 @@ return [
              'Product' => 'Product',
              'Slide' => 'Slide',
              'slide' => 'slide',
+             'image' => 'image',
         ],
         'select' => [
             'choose' => 'Choose here',

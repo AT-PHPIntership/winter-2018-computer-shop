@@ -76,7 +76,7 @@ class CategoryController extends Controller
     {
         return view('admin.categories.edit', compact('category'));
     }
-
+    
     /**
      * Handle update category to database
      *
@@ -87,8 +87,8 @@ class CategoryController extends Controller
      */
     public function update(CategoryRequest $request, Category $category)
     {
-        app(CategoryService::class)->update($request, $category);
-        return redirect()->route('categories.index')->with('message', Lang::get('master.content.message.update', ['attribute' => 'category']));
+        app(CategoryService::class)->update($request->all(), $category);
+        return redirect()->route('categories.index');
     }
 
     /**

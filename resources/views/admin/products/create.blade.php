@@ -18,7 +18,7 @@
             @csrf
               <div class="form-group">
                 <label class="form-control-label">@lang('master.content.form.name')<span class="ml-1 text-danger">*<span></label>
-                <input name="name" type="text" placeholder="Enter product name" class="form-control" value="{{ old('name') }}">
+                <input name="name" type="text" placeholder="Enter product name" class="form-control" value="{{ old('name') }}" required>
                 @include('admin.partials.error', ['err' => 'name'])
               </div>
               <div class="form-group">
@@ -27,12 +27,12 @@
               </div>
               <div class="form-group">
                 <label class="form-control-label">@lang('master.content.form.price')<span class="ml-1 text-danger">*<span></label>
-                <input name="unit_price" type="text" placeholder="Enter product price" class="form-control" value="{{ old('unit_price') }}" id='formatCurrency'>
+                <input name="unit_price" type="text" placeholder="Enter product price" class="form-control" value="{{ old('unit_price') }}" id='formatCurrency' required>
                 @include('admin.partials.error', ['err' => 'unit_price'])
               </div>
               <div class="form-group">
                 <label class="form-control-label">@lang('master.content.form.quantity')<span class="ml-1 text-danger">*<span></label>
-                <input name="quantity" type="number" placeholder="Enter product quantity" class="form-control" value="{{ old('quantity') }}">
+                <input name="quantity" type="number" placeholder="Enter product quantity" class="form-control" value="{{ old('quantity') }}" required>
                 @include('admin.partials.error', ['err' => 'quantity'])
               </div>
               <div class="form-group">
@@ -43,7 +43,7 @@
               <div class="form-group row">
                 <label class="form-control-label col-sm-12">@lang('master.content.form.category')<span class="ml-1 text-danger">*<span></label>
                 <div class="col-sm-12">
-                  <select name='parent_category' class="form-control mb-3" id='parent_category'>
+                  <select name='parent_category' class="form-control mb-3" id='parent_category' required>
                     <option value="" selected disabled hidden>@lang('master.content.select.choose')</option>
                     @foreach($categories as $category)
                         <option {{ (old('parent_category') == $category->id) ? 'selected' : ''}} value="{{$category->id}}">{{$category->name}}</option>

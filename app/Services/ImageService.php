@@ -34,9 +34,14 @@ class ImageService
     public function handleChangedImage($image, $component, $storage)
     {
         if (!is_null($image)) {
-            if (!is_null($component->profile->avatar)) {
+            if (!is_null($component->profile)) {
                 $images = realpath("storage/$storage/" . $component->profile->avatar);
-                if (file_exists($images)) {
+                if (!is_null($component->profile->avatar) && file_exists($images)) {
+                    unlink($images);
+                }
+            } else {
+                $images = realpath("storage/$storage/" . $component->image);
+                if (!is_null($component->image) && file_exists($images)) {
                     unlink($images);
                 }
             }
