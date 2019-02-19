@@ -87,6 +87,7 @@ return [
             'user' => 'User',
             'address' => 'Adress',
             'phone' => 'Phone',
+            'accessory' => 'Accessories',
         ],
         'form' => [
             'password' => 'Password',
@@ -104,6 +105,7 @@ return [
             'price' => 'Price(đ)',
             'quantity' => 'Quantity',
             'file' => 'File',
+            'image' => 'Image',
         ],
         'message' => [
             'create' => 'Created a :attribute successfully',
@@ -138,6 +140,7 @@ return [
              'Slide' => 'Slide',
              'slide' => 'slide',
              'image' => 'image',
+             'desc' => 'description',
         ],
         'select' => [
             'choose' => 'Choose here',

@@ -23,27 +23,27 @@ class ProductService
     {
         $products = Product::select(['id', 'name', 'quantity', 'unit_price', 'category_id']);
         return Datatables::of($products)
-                ->addColumn('category', function (Product $product) {
-                    return $product->category->name;
-                })
-                ->addColumn('action', function ($data) {
-                    return view('admin.products.action', ['id' => $data->id]);
-                })
-                ->make(true);
+            ->addColumn('category', function (Product $product) {
+                return $product->category->name;
+            })
+            ->addColumn('action', function ($data) {
+                return view('admin.products.action', ['id' => $data->id]);
+            })
+            ->make(true);
     }
 
-   /**
-    * Handle store a product to database
-    *
-    * @param object $request [request from add new product form]
-    *
-    * @return void
-    */
+    /**
+     * Handle store a product to database
+     *
+     * @param object $request [request from add new product form]
+     *
+     * @return void
+     */
     public function store($request)
     {
         DB::beginTransaction();
         try {
-            $request['unit_price'] = (int) str_replace(',', '', $request['unit_price']);
+            $request['unit_price'] = (int)str_replace(',', '', $request['unit_price']);
             $product = Product::create($request);
             if (array_key_exists('images', $request)) {
                 foreach ($request['images'] as $images) {
@@ -61,36 +61,48 @@ class ProductService
             session()->flash('message', __('master.content.message.create', ['attribute' => trans('master.content.attribute.product')]));
         } catch (Exception $ex) {
             DB::rollback();
-             session()->flash('warning', __('master.content.message.error', ['attribute' => $ex->getMessage()]));
+            session()->flash('warning', __('master.content.message.error', ['attribute' => $ex->getMessage()]));
             return redirect()->back();
         }
     }
 
-    /**
-    * Show form edit a product
-    *
-    * @param object $product [binding product model]
-    *
-    * @return product with accessories
-    */
-    public function edit($product)
+    /*
+     * Handle store a product to database
+     *
+     * @param object $product [request show details a product]
+     *
+     * @return void
+     */
+    public function show($product)
     {
-         return Product::where('id', $product->id)->with('accessories', 'accessories.parent')->first();
+        return $product->load('accessories', 'accessories.parent');
     }
 
     /**
-    * Handle update a product to database
-    *
-    * @param object $request [request update a product]
-    * @param object $product [binding product model]
-    *
-    * @return void
-    */
+     * Show form edit a product
+     *
+     * @param object $product [binding product model]
+     *
+     * @return product with accessories
+     */
+    public function edit($product)
+    {
+        return Product::where('id', $product->id)->with('accessories', 'accessories.parent')->first();
+    }
+
+    /**
+     * Handle update a product to database
+     *
+     * @param object $request [request update a product]
+     * @param object $product [binding product model]
+     *
+     * @return void
+     */
     public function update($request, $product)
     {
         DB::beginTransaction();
         try {
-            $request['unit_price'] = (int) str_replace(',', '', request('unit_price'));
+            $request['unit_price'] = (int)str_replace(',', '', request('unit_price'));
             $product->update($request);
             app(ImageService::class)->addMultipleImage($request, $product);
             $this->syncAccessory($request, $product);
@@ -98,19 +110,19 @@ class ProductService
             session()->flash('message', __('master.content.message.update', ['attribute' => trans('master.content.attribute.product')]));
         } catch (Exception $ex) {
             DB::rollback();
-             session()->flash('warning', __('master.content.message.error', ['attribute' => $ex->getMessage()]));
+            session()->flash('warning', __('master.content.message.error', ['attribute' => $ex->getMessage()]));
             return redirect()->back();
         }
     }
 
     /**
-    * Help sync accessories of a product
-    *
-    * @param collect $accessory [request update accessories]
-    * @param object  $product   [binding product model]
-    *
-    * @return void
-    */
+     * Help sync accessories of a product
+     *
+     * @param collect $accessory [request update accessories]
+     * @param object  $product   [binding product model]
+     *
+     * @return void
+     */
     public function syncAccessory($accessory, $product)
     {
         if (array_key_exists('accessory_id', $accessory)) {
@@ -119,12 +131,12 @@ class ProductService
     }
 
     /**
-    * Handle import product from file
-    *
-    * @param object $request [request import product]
-    *
-    * @return void
-    */
+     * Handle import product from file
+     *
+     * @param object $request [request import product]
+     *
+     * @return void
+     */
     public function importFile($request)
     {
         DB::beginTransaction();
@@ -135,7 +147,7 @@ class ProductService
             $data = $this->filterProduct($data);
             //Save product include category id
             $categories = Category::where('parent_id', '!=', null)->get();
-                            $categoryId = [];
+            $categoryId = [];
             foreach ($categories as $category) {
                 foreach ($data as $key => $categories) {
                     if ($category->name == $categories['category']) {
@@ -145,7 +157,7 @@ class ProductService
             }
             $importProduct = [];
             foreach ($data as $key => $value) {
-                   $importProduct[]= ['name' => $value->name, 'quantity' => $value->quantity, 'unit_price' => $value->unit_price, 'description' => $value->description, 'category_id' => $categoryId[$key] ];
+                $importProduct[] = ['name' => $value->name, 'quantity' => $value->quantity, 'unit_price' => $value->unit_price, 'description' => $value->description, 'category_id' => $categoryId[$key]];
             }
             foreach ($importProduct as $value) {
                 Product::insert($value);
@@ -182,7 +194,7 @@ class ProductService
      * @param array $data [data help compare with data in product table]
      *
      * @return $data
-    **/
+     **/
     public function filterProduct($data)
     {
         $fileData = collect($data->pluck('name'));
@@ -192,12 +204,12 @@ class ProductService
     }
 
     /**
-    * Handle update a product to database
-    *
-    * @param object $product [binding product model]
-    *
-    * @return void
-    */
+     * Handle update a product to database
+     *
+     * @param object $product [binding product model]
+     *
+     * @return void
+     */
     public function delete($product)
     {
         try {
@@ -212,7 +224,7 @@ class ProductService
             $product->delete();
             session()->flash('message', __('master.content.message.delete', ['attribute' => trans('master.content.attribute.product')]));
         } catch (Exception $ex) {
-             session()->flash('warning', __('master.content.message.error', ['attribute' => $ex->getMessage()]));
+            session()->flash('warning', __('master.content.message.error', ['attribute' => $ex->getMessage()]));
             return redirect()->back();
         }
     }
@@ -223,7 +235,7 @@ class ProductService
      * Function help get product has sale off
      *
      * @return Product
-    **/
+     **/
     public function saleOff()
     {
         return Product::take(config('constants.product.saleOff'))->get();
@@ -233,7 +245,7 @@ class ProductService
      * Function help get product
      *
      * @return Product
-    **/
+     **/
     public function feature()
     {
         return Product::take(config('constants.product.feature'))->get();
@@ -243,7 +255,7 @@ class ProductService
      * Function help get bestseller
      *
      * @return Product
-    **/
+     **/
     public function bestSeller()
     {
         return Product::orderBy('total_sold', 'desc')->groupBy('total_sold')->take(config('constants.product.bestSeller'))->get();
@@ -253,7 +265,7 @@ class ProductService
      * Function help get new Arrival product
      *
      * @return Product
-    **/
+     **/
     public function newArrival()
     {
         return Product::latest()->take(config('constants.product.newArrival'))->get();
@@ -280,9 +292,9 @@ class ProductService
     {
         $raw = $category->parent_id != null ? 'category_id = ?' : 'parent_id = ?';
         return Product::join('categories', 'products.category_id', '=', 'categories.id')
-                        ->select('products.*', 'categories.parent_id', 'categories.name as categoryName')
-                        ->whereRaw($raw, $category->id)
-                        ->paginate(config('constants.category.all'));
+            ->select('products.*', 'categories.parent_id', 'categories.name as categoryName')
+            ->whereRaw($raw, $category->id)
+            ->paginate(config('constants.category.all'));
     }
 
     /**
@@ -307,10 +319,10 @@ class ProductService
     public function getRelated($product)
     {
         return Product::with(['images'])
-                        ->join('categories', 'products.category_id', '=', 'categories.id')
-                        ->select('products.name', 'products.id', 'products.unit_price', 'categories.parent_id', 'categories.id as categoryId', 'categories.name as categoryName')
-                        ->where('parent_id', $product->category->parent_id)
-                        ->get();
+            ->join('categories', 'products.category_id', '=', 'categories.id')
+            ->select('products.name', 'products.id', 'products.unit_price', 'categories.parent_id', 'categories.id as categoryId', 'categories.name as categoryName')
+            ->where('parent_id', $product->category->parent_id)
+            ->get();
     }
 
     /**
@@ -334,10 +346,10 @@ class ProductService
      */
     public function ajaxProductSearch($query)
     {
-         return DB::table('products')
-                ->select('id', 'name')
-                ->where('name', 'LIKE', "%{$query}%")
-                ->get();
+        return DB::table('products')
+            ->select('id', 'name')
+            ->where('name', 'LIKE', "%{$query}%")
+            ->get();
     }
 
     /**
@@ -349,7 +361,7 @@ class ProductService
      */
     public function productSearch($query)
     {
-         return Product::where('name', 'LIKE', "%{$query}%")->paginate(config('constants.category.all'))->appends(['query'=> $query]);
+        return Product::where('name', 'LIKE', "%{$query}%")->paginate(config('constants.category.all'))->appends(['query' => $query]);
     }
 
     /**
@@ -366,20 +378,20 @@ class ProductService
         if (!is_numeric($query)) {
             return Product::whereHas('accessories', function ($q) use ($query, $parentId, $value) {
                 $q->where('parent_id', intval($parentId))
-                 ->where('name', 'LIKE', '%' . str_replace('-', '%', $query) . '%');
+                    ->where('name', 'LIKE', '%' . str_replace('-', '%', $query) . '%');
             })->paginate(config('constants.category.all'))->appends(['query' => $query, 'val' => $value, 'parentId' => $parentId]);
         } elseif ($query == max(array_keys(config('constants.price')))) {
-            return  Product::where(
+            return Product::where(
                 'unit_price',
                 '>',
                 config("constants.price.{$query}")
-            )->paginate(config('constants.category.all'))->appends(['query'=> $query, 'val' => $value]);
+            )->paginate(config('constants.category.all'))->appends(['query' => $query, 'val' => $value]);
         } else {
             $increase = $query + 1;
             return Product::where([
-                       ['unit_price', '<=', config("constants.price.{$increase}")],
-                       ['unit_price', '>=', config("constants.price.{$query}")]
-               ])->paginate(config('constants.category.all'))->appends(['query'=> $query, 'val' => $value]);
+                ['unit_price', '<=', config("constants.price.{$increase}")],
+                ['unit_price', '>=', config("constants.price.{$query}")]
+            ])->paginate(config('constants.category.all'))->appends(['query' => $query, 'val' => $value]);
         }
     }
 
@@ -405,6 +417,6 @@ class ProductService
                 $product = Product::orderBy('unit_price', __('public.filter.desc'));
                 break;
         }
-         return $product->paginate(config('constants.category.all'))->appends(['query'=> $query, 'val' => $value]);
+        return $product->paginate(config('constants.category.all'))->appends(['query' => $query, 'val' => $value]);
     }
 }

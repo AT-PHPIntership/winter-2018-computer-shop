@@ -27,7 +27,7 @@ class Accessory extends Model
     {
         return $this->belongsToMany('App\Models\Product')->withTimestamps();
     }
-
+    
     /**
      * The function to take all parent accessory
      *
@@ -39,7 +39,7 @@ class Accessory extends Model
     {
         $builder->whereNull('parent_id');
     }
-
+    
     /**
      * The function to take all parent accessory
      *
