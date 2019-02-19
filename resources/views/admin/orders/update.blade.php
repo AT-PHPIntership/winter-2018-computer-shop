@@ -25,15 +25,16 @@
                 <label class="col-sm-3 form-control-label">@lang('master.content.table.status')</label>
                 <div class="col-sm-9">
                   <select name="status" class="form-control mb-3">
-                      <option value="{{ \App\Models\Order::PENDING_STATUS }}" {{ $order->status === \App\Models\Order::PENDING_STATUS ? 'select' : '' }}>{{ config('constants.order.status.pending') }}</option>
-                      <option value="{{ \App\Models\Order::APPROVE_STATUS }}" {{ $order->status === \App\Models\Order::APPROVE_STATUS ? 'select' : '' }}>{{ config('constants.order.status.approve') }}</option>
-                      <option value="{{ \App\Models\Order::CANCEL_STATUS }}" {{ $order->status === \App\Models\Order::CANCEL_STATUS ? 'select' : '' }}>{{ config('constants.order.status.cancel') }}</option>
+                      <option value="{{ config('constants.order.status.pending')}}" {{ $order->status === config('constants.order.status.pending') ? 'selected' : '' }}>{{ \App\Models\Order::PENDING_STATUS }}</option>
+                      <option value="{{ config('constants.order.status.approve')}} " {{ $order->status === config('constants.order.status.approve') ? 'selected' : '' }}>{{ \App\Models\Order::APPROVE_STATUS }}</option>
+                      <option value="{{ config('constants.order.status.cancel')  }}" {{ $order->status === config('constants.order.status.cancel') ? 'selected' : '' }}>{{ \App\Models\Order::CANCEL_STATUS }}</option>
                   </select>
                 </div>
               </div>
             <div class="form-group row">       
               <div class="col-sm-9 offset-sm-3">
-                <input type="submit" value="@lang('master.content.button.create')" class="btn btn-primary">
+                <a href="{{route('orders.index')}}" class="btn btn-danger">@lang('master.content.button.cancel')</a>
+                <input type="submit" value="@lang('master.content.button.update')" class="btn btn-primary">
               </div>
             </div>
           </form>

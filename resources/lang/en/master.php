@@ -88,7 +88,6 @@ return [
             'parent_id' => 'Parent name',
             'details' => 'Details',
             'date_order' => 'Date order',
-            'product_name' => 'Product name',
             'user' => 'User',
             'address' => 'Adress',
             'phone' => 'Phone',

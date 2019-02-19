@@ -12,7 +12,7 @@ return [
     | This can be a single view, or an array of views.
     | Example: 'footer' or ['footer', 'bottom']
     |
-    */
+ */
     'bind_js_vars_to_this_view' => ['admin.layout.footer', 'public.layout.footer'],
     /*
     |--------------------------------------------------------------------------
@@ -23,7 +23,7 @@ return [
     | it's recommended that you change this to some namespace - anything.
     | That way, you can access vars, like "SomeNamespace.someVariable."
     |
-    */
+     */
     'js_namespace' => 'js_variable'
 
 ];

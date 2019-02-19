@@ -18,7 +18,7 @@
             @csrf
               <div class="form-group">
                 <label class="form-control-label">@lang('master.content.form.file')</label>
-                <input name="import_file" type="file" class="form-control" value="">
+                <input name="import_file" type="file" class="form-control" value="" required>
                 @include('admin.partials.error', ['err' => 'import_file'])
               </div>
               <div class="form-group">    

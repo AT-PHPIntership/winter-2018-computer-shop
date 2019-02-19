@@ -147,7 +147,7 @@ class ProductService
             $data = $this->filterProduct($data);
             //Save product include category id
             $categories = Category::where('parent_id', '!=', null)->get();
-            $categoryId = [];
+                            $categoryId = [];
             foreach ($categories as $category) {
                 foreach ($data as $key => $categories) {
                     if ($category->name == $categories['category']) {
@@ -157,7 +157,7 @@ class ProductService
             }
             $importProduct = [];
             foreach ($data as $key => $value) {
-                $importProduct[] = ['name' => $value->name, 'quantity' => $value->quantity, 'unit_price' => $value->unit_price, 'description' => $value->description, 'category_id' => $categoryId[$key]];
+                   $importProduct[]= ['name' => $value->name, 'quantity' => $value->quantity, 'unit_price' => $value->unit_price, 'description' => $value->description, 'category_id' => $categoryId[$key] ];
             }
             foreach ($importProduct as $value) {
                 Product::insert($value);
@@ -184,7 +184,7 @@ class ProductService
         } catch (Exception $ex) {
             DB::rollback();
             session()->flash('warning', __('master.content.message.error', ['attribute' => $ex->getMessage()]));
-            return redirect()->back();
+            return back();
         }
     }
 

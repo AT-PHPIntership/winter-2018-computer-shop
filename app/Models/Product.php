@@ -7,13 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
     protected $table = 'products';
-     /**
+    /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-         'name', 'description', 'quantity', 'unit_price', 'category_id', 'total_sold'
+        'name', 'description', 'quantity', 'unit_price', 'category_id', 'total_sold'
     ];
     /**
      * The function display relationship between category and product
@@ -24,7 +24,7 @@ class Product extends Model
     {
         return $this->belongsTo('App\Models\Category');
     }
-    
+
     /**
      * The function get unit price attribute
      *
@@ -36,7 +36,7 @@ class Product extends Model
     {
         return number_format($unitPrice, 0, ",", ",");
     }
-    
+
     /**
      * The function display relationship between product and accessory
      *
@@ -46,7 +46,7 @@ class Product extends Model
     {
         return $this->belongsToMany('App\Models\Accessory')->withTimestamps();
     }
-    
+
     /**
      * The function display relationship between product and accessory
      *

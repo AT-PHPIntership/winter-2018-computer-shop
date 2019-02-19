@@ -57,7 +57,7 @@
                                       <a href="{{ route('orders.edit', $order->id) }}">
                                         <button type="button" class="btn-sm btn-success">@lang('master.content.action.edit', ['attribute' => 'Order'])</button>
                                       </a>
-                                      <form action="{{ route('orders.destroy', $order->id) }}" method="POST" class="d-inline">
+                                      <form action="{{ route('orders.destroy', $order->id) }}" method="POST" class="d-inline" onsubmit="return confirmedDeleteOrder('delete')">
                                         @csrf
                                         @method('DELETE')
                                         <input type="submit" value="@lang('master.content.action.delete', ['attribute' => 'Order'])" class="btn btn-sm btn-danger">

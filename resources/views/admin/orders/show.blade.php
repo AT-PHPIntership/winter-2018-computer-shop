@@ -17,29 +17,27 @@
        <div class="row">
            <div class="col-lg-12">
                <div class="card-header d-flex align-items-center">
-                   <a href="{{route('orders.index')}}">
-                      <button type="button" class="btn btn-primary">@lang('master.content.action.back')</button>
-                    </a>
+                  <a href="{{route('orders.index')}}" class="btn btn-success rounded-circle mr-1"><i class="fa fa-arrow-left"></i></a>
                </div> 
                <div class="card">
                    <div class="card-body">
                        <div class="table-responsive">
-                           <table class="table table-striped table-hover">
+                           <table class="table table-striped table-hover text-center ">
                              <thead>
                                <tr>
                                  <th>@lang('master.content.table.id')</th>
-                                 <th>@lang('master.content.table.product_name')</th>
-                                 <th>@lang('master.content.table.quantity')</th>
-                                 <th>@lang('master.content.table.price')</th>
+                                 <th>@lang('master.content.form.name')</th>
+                                 <th>@lang('master.content.form.quantity')</th>
+                                 <th>@lang('master.content.form.price')</th>
                                </tr>
                              </thead>
                              <tbody>
                               @foreach($order->orderDetails as $orderDetail)
                               <tr>
-                                 <th scope="row">{{ $orderDetail->id }}</th>
+                                 <th>{{ $orderDetail->id }}</th>
                                  <th>{{ $orderDetail->product->name }}</th>
                                  <th>{{ $orderDetail->quantity }}</th>
-                                 <th>{{ $orderDetail->price }}</th>
+                                 <th>{!!number_format($orderDetail->price,0,",",".") . ' vnđ'!!}</th>
                                </tr>
                                @endforeach
                              </tbody>

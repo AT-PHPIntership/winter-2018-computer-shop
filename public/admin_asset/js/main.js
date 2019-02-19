@@ -7,3 +7,6 @@ function element(key) {
     return window.js_variable.element[key];
 }
 
+function order(key) {
+    return window.js_variable.order[key];
+}

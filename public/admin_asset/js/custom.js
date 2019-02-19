@@ -36,7 +36,9 @@ $(document).ready(function() {
 /*************************/
 //Get value of select option of category at Add Product page
 $(document).ajaxComplete(function() {
-    var autoSelect = $('#localStorage').find(':selected').val();
+    var autoSelect = $('#localStorage')
+        .find(':selected')
+        .val();
     localStorage.setItem('autoSelect', JSON.stringify(autoSelect));
     // console.log(autoSelect)
     $('#localStorage').change(function() {
@@ -48,18 +50,27 @@ $(document).ajaxComplete(function() {
 
 //Format vietnamese currency
 $(document).ready(function() {
-    $('#formatCurrency').on('input', function(e) {
-        $(this).val(formatCurrency(this.value.replace(/[,VNĐ]/g, '')));
-    }).on('keypress', function(e) {
+    $('#formatCurrency')
+        .on('input', function(e) {
+            $(this).val(formatCurrency(this.value.replace(/[,VNĐ]/g, '')));
+        })
+        .on('keypress', function(e) {
             if (!$.isNumeric(String.fromCharCode(e.which))) e.preventDefault();
-        }).on('paste', function(e) {
+        })
+        .on('paste', function(e) {
             var cb = e.originalEvent.clipboardData || window.clipboardData;
             if (!$.isNumeric(cb.getData('text'))) e.preventDefault();
         });
     function formatCurrency(number) {
-        var n = number.split('').reverse().join('');
+        var n = number
+            .split('')
+            .reverse()
+            .join('');
         var n2 = n.replace(/\d\d\d(?!$)/g, '$&,');
-        return n2.split('').reverse().join('');
+        return n2
+            .split('')
+            .reverse()
+            .join('');
     }
 });
 
@@ -79,17 +90,33 @@ $(document).ready(function() {
                     if ($('#parent_category').data('category-id') != null) {
                         var childId = $('#parent_category').data('category-id');
                     } else if (localStorage.getItem('manualSelect') != null) {
-                        var childId = parseInt(JSON.parse(localStorage.getItem('manualSelect')));
+                        var childId = parseInt(
+                            JSON.parse(localStorage.getItem('manualSelect'))
+                        );
                     } else {
-                        var childId = parseInt(JSON.parse(localStorage.getItem('autoSelect')) );
+                        var childId = parseInt(
+                            JSON.parse(localStorage.getItem('autoSelect'))
+                        );
                     }
                     if (data.length > 0) {
-                        var output ='<select name="category_id" class="form-control mb-3" id="localStorage">';
+                        var output =
+                            '<select name="category_id" class="form-control mb-3" id="localStorage">';
                         $.each(data, function(key, val) {
                             if (childId === val.id) {
-                                output +='<option value="' + val.id + '"' + 'selected>' + val.name + '</option>';
+                                output +=
+                                    '<option value="' +
+                                    val.id +
+                                    '"' +
+                                    'selected>' +
+                                    val.name +
+                                    '</option>';
                             } else {
-                                output +='<option value="' + val.id + '">' + val.name + '</option>';
+                                output +=
+                                    '<option value="' +
+                                    val.id +
+                                    '">' +
+                                    val.name +
+                                    '</option>';
                             }
                         });
                         output += '</select>';
@@ -118,7 +145,9 @@ $(document).ready(function() {
                 data: { image: imageId, _token: token },
                 success: function(data) {
                     // console.log(data);
-                    $('#image-list .image-item[data-id^=' + data.data.id + ']').remove();
+                    $(
+                        '#image-list .image-item[data-id^=' + data.data.id + ']'
+                    ).remove();
                 }
             });
         }
@@ -201,9 +230,16 @@ function confirmedDelete(ele) {
     return confirm(element(ele));
 }
 
+//Confirmed before delete order
+function confirmedDeleteOrder(orders) {
+    return confirm(order(orders));
+}
+
 //Make message disappear after times
 $(document).ready(function() {
-    $('div.alert').delay(2000).slideUp();
+    $('div.alert')
+        .delay(2000)
+        .slideUp();
 });
 
 /***********************Slide function***************************/
@@ -239,7 +275,9 @@ $(document).ready(function() {
                 data: { image: imageId, _token: token },
                 success: function(data) {
                     // console.log(data);
-                    $('#image-list .image-item[data-id^=' + data.data.id + ']').remove();
+                    $(
+                        '#image-list .image-item[data-id^=' + data.data.id + ']'
+                    ).remove();
                 }
             });
         }

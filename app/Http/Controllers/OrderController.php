@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Order;
 use App\Models\OrderDetail;
 use App\Services\OrderService;
+use App\Http\Requests\OrderRequest;
 use Illuminate\Support\Facades\Lang;
 
 class OrderController extends Controller
@@ -32,26 +33,6 @@ class OrderController extends Controller
         return view('admin.orders.index', compact('orders'));
     }
 
-    // /**
-    //  * Show the form for creating a new resource.
-    //  *
-    //  * @return \Illuminate\Http\Response
-    //  */
-    // public function create()
-    // {
-    //     //
-    // }
-
-    // /**
-    //  * Store a newly created resource in storage.
-    //  *
-    //  * @param  \Illuminate\Http\Request  $request
-    //  * @return \Illuminate\Http\Response
-    //  */
-    // public function store(Request $request)
-    // {
-    //     //
-    // }
 
     /**
      * Display the specified resource.
@@ -66,9 +47,9 @@ class OrderController extends Controller
     }
 
     /**
-     * Eit order page
+     * Edit order page
      *
-     * @param Order $order [Object order
+     * @param Order $order [Models order]
      *
      * @return void
      */
@@ -77,17 +58,23 @@ class OrderController extends Controller
         return view('admin.orders.update', compact('order'));
     }
 
-    // /**
-    //  * Update the specified resource in storage.
-    //  *
-    //  * @param  \Illuminate\Http\Request  $request
-    //  * @param  int  $id
-    //  * @return \Illuminate\Http\Response
-    //  */
-    // public function update(Request $request, $id)
-    // {
-    //     //
-    // }
+    /**
+     * Update order
+     *
+     * @param OrderRequest $request [Request from form]
+     * @param [Int]        $id      [Id order]
+     *
+     * @return void
+     */
+    public function update(OrderRequest $request, $id)
+    {
+        $message = $this->orderService->update($request, $id);
+        if ($message !== 0) {
+            return redirect()->route('orders.index')->with('message', Lang::get('master.content.message.update', ['attribute' => 'Order']));
+        } else {
+            return redirect()->route('orders.index')->with('message', Lang::get('master.content.message.error'));
+        }
+    }
 
     /**
      * Delete order
@@ -99,7 +86,6 @@ class OrderController extends Controller
     public function destroy($id)
     {
         $message = $this->orderService->delete($id);
-        dd($message);
         if ($message === 1) {
             return redirect()->route('orders.index')->with('message', Lang::get('master.content.message.delete', ['attribute' => 'Order']));
         } else {

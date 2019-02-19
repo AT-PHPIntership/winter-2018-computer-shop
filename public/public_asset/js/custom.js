@@ -194,42 +194,55 @@ $(document).ready(function() {
     $('#comment-button').on('click', function() {
         var userId = $(this).data('user');
         var productId = $(this).data('product');
-        var content = $('#comment-text').val()
+        var content = $('#comment-text').val();
         var token = $(this).data('token');
         // debugger;
         if (userId != undefined) {
-          if (content !== '') {
-            $.ajax({
-              url: 'product/comment',
-              method: 'POST',
-              dataType: 'JSON',
-              data: {
-                  userId: userId,
-                  productId: productId,
-                  content: content,
-                  _token: token
-              },
-              success: function(data) {
-                  // console.log(data);
-                  var output = '';
-                  output +='<li class="comment-border" data-id=' + data.id + '>';
-                  output += '<article id=' + data.id + '>';
-                  output += '<div class="comment-des">';
-                  output += '<div class="comment-by">';
-                  output +='<p class="author"><strong>' + comment('author') + '<span class="comment-time">' + comment('time') + '</span></strong></p>';
-                  output +='<span class="reply"><a class="add-reply" id=' + data.id + '>' + comment('reply') + '</a></span>';
-                  output += '</div>';
-                  output += '<section>';
-                  output += '<p>' + data.content + '</p>';
-                  output += '</section>';
-                  output += '</div>';
-                  output += '</article>';
-                  output += '</li>';
-                  $('#commentList').append(output);
-                  $("#comment-text").val("");
-              }
-            });
-          }
+            if (content !== '') {
+                $.ajax({
+                    url: 'product/comment',
+                    method: 'POST',
+                    dataType: 'JSON',
+                    data: {
+                        userId: userId,
+                        productId: productId,
+                        content: content,
+                        _token: token
+                    },
+                    success: function(data) {
+                        // console.log(data);
+                        var output = '';
+                        output +=
+                            '<li class="comment-border" data-id=' +
+                            data.id +
+                            '>';
+                        output += '<article id=' + data.id + '>';
+                        output += '<div class="comment-des">';
+                        output += '<div class="comment-by">';
+                        output +=
+                            '<p class="author"><strong>' +
+                            comment('author') +
+                            '<span class="comment-time">' +
+                            comment('time') +
+                            '</span></strong></p>';
+                        output +=
+                            '<span class="reply"><a class="add-reply" id=' +
+                            data.id +
+                            '>' +
+                            comment('reply') +
+                            '</a></span>';
+                        output += '</div>';
+                        output += '<section>';
+                        output += '<p>' + data.content + '</p>';
+                        output += '</section>';
+                        output += '</div>';
+                        output += '</article>';
+                        output += '</li>';
+                        $('#commentList').append(output);
+                        $('#comment-text').val('');
+                    }
+                });
+            }
         } else {
             location.href = 'login';
         }
@@ -238,29 +251,38 @@ $(document).ready(function() {
 
 //Add reply form for comment
 $(document).on('click', '.add-reply', function() {
-      if ($('.add-reply').attr('disabled') !== 'disabled') {
-          var articleId = $(this).attr('id');
-          var output = '';
-          output += '<div class="replyForm" id=' + articleId + '>';
-          output += '<h3>'+ comment('add') + '<a class="cancelRely">'+ comment('cancel') + '</a></h3>';
-          output += '<div class="ratting-form row">';
-          output += '<div class="col-12 mb-15">';
-          output +=
-              '<textarea name="review" id="reply-content" placeholder="' + comment('write') + '"></textarea>';
-          output += '</div>';
-          output += '<div class="col-12">';
-          output +=
-              '<input id="reply-button" value="' + comment('addReply') + '" data-comment=' +
-              articleId +
-              ' type="submit">';
-          output += '</div>';
-          output += '</div>';
-          output += '</div>';
-          $('article#' + articleId).append(output);
-          $('.add-reply').attr('disabled', 'disabled');
-      } else {
-          return false;
-      }
+    if ($('.add-reply').attr('disabled') !== 'disabled') {
+        var articleId = $(this).attr('id');
+        var output = '';
+        output += '<div class="replyForm" id=' + articleId + '>';
+        output +=
+            '<h3>' +
+            comment('add') +
+            '<a class="cancelRely">' +
+            comment('cancel') +
+            '</a></h3>';
+        output += '<div class="ratting-form row">';
+        output += '<div class="col-12 mb-15">';
+        output +=
+            '<textarea name="review" id="reply-content" placeholder="' +
+            comment('write') +
+            '"></textarea>';
+        output += '</div>';
+        output += '<div class="col-12">';
+        output +=
+            '<input id="reply-button" value="' +
+            comment('addReply') +
+            '" data-comment=' +
+            articleId +
+            ' type="submit">';
+        output += '</div>';
+        output += '</div>';
+        output += '</div>';
+        $('article#' + articleId).append(output);
+        $('.add-reply').attr('disabled', 'disabled');
+    } else {
+        return false;
+    }
 });
 
 //Cancel reply form
@@ -298,7 +320,12 @@ $(document).on('click', '#reply-button', function() {
                 output += '<article id=' + data.id + '>';
                 output += '<div class="comment-des">';
                 output += '<div class="comment-by">';
-                output +='<p class="author"><strong>' + comment('author') + '<span class="comment-time">' + comment('time') + '</span></strong></p>';
+                output +=
+                    '<p class="author"><strong>' +
+                    comment('author') +
+                    '<span class="comment-time">' +
+                    comment('time') +
+                    '</span></strong></p>';
                 output += '</div>';
                 output += '<section>';
                 output += '<p>' + data.content + '</p>';
