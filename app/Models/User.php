@@ -6,6 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Models\Order;
 use App\Models\Role;
+use App\Models\Code;
 
 class User extends Authenticatable
 {
@@ -91,5 +92,15 @@ class User extends Authenticatable
     public function comments()
     {
         return $this->hasMany('App\Models\Comment');
+    }
+    
+    /**
+     * Relationship user - code
+     *
+     * @return void
+     */
+    public function codes()
+    {
+        return $this->belongsToMany(Code::class);
     }
 }

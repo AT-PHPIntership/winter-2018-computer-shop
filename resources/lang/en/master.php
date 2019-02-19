@@ -92,6 +92,14 @@ return [
             'address' => 'Adress',
             'phone' => 'Phone',
             'accessory' => 'Accessories',
+            'note' => 'Note',
+            'date_order' => 'Date order',
+            'status' => 'Status',
+            'product_name' => 'Product name',
+            'quantity' => 'Quantity',
+            'price' => 'Price',
+            'order_month' => 'Order in month',
+            'all_user' => 'All user'
         ],
         'form' => [
             'password' => 'Password',
@@ -149,7 +157,9 @@ return [
         'select' => [
             'choose' => 'Choose here',
             'parent' => 'Become parent category',
-        ],
+            'no' => 'No',
+            'yes' => 'Yes'
+         ],
         'button' => [
             'create' => 'Create',
             'update' => 'Update',

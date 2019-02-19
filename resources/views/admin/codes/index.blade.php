@@ -40,6 +40,8 @@
                      <th>@lang('master.content.table.amount')</th>
                      <th>@lang('master.content.table.start_at')</th>
                      <th>@lang('master.content.table.end_at')</th>
+                     <th>@lang('master.content.table.order_month')</th>
+                     <th>@lang('master.content.table.all_user')</th>
                      <th>@lang('master.content.table.action')</th>
                    </tr>
                  </thead>
@@ -51,11 +53,13 @@
                      <td>{{ $code->amount }}</td>
                      <td>{{ $code->start_at }}</td>
                      <td>{{ $code->end_at }}</td>
+                     <td>{{ $code->order_month }}</td>
+                     <td>{{ $code->all_user }}</td>
                      <td>
                        <a href="{{ route('codes.edit', $code->id) }}" class="btn btn-sm btn-warning">
                        @lang('master.content.action.edit', ['attribute' => __('master.content.attribute.code')])
                        </a>
-                       <form action="{{ route('codes.destroy', $code->id) }}" method="POST" class="d-inline">
+                       <form action="{{ route('codes.destroy', $code->id) }}" method="POST" class="d-inline" onsubmit="return confirmedDelete('code')">
                           @csrf
                           @method('DELETE')
                           <input type="submit" value="@lang('master.content.action.delete', ['attribute' => __('master.content.attribute.code')])" class="btn btn-sm btn-danger">

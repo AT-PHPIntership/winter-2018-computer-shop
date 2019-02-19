@@ -25,9 +25,11 @@ class CodeRequest extends FormRequest
     {
         return [
             'name' => 'required|min:3',
-            'amount' => 'required|integer',
+            'amount' => 'required|integer|min:0',
             'start_at' => 'required|date|after:yesterday',
-            'end_at' => 'required|date|after:start_at'
+            'end_at' => 'required|date|after:start_at',
+            'order_month' => 'required_if:all_user,0|required_without_all:all_user|between:1,12',
+            'all_user' => 'required|required_without_all:order_month|in:0,1'
         ];
     }
 }
