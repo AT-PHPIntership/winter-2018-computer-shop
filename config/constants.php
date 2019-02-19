@@ -5,7 +5,7 @@ return [
         'number_paginate' => '5'
     ],
     'promotion' => [
-        'number_paginate' => '3'
+        'number_paginate' => '5'
     ],
     'category' => [
         'paginate' => 10,

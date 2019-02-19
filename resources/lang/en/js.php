@@ -16,6 +16,7 @@
         'category' =>   'Are you sure want to delete this category?',
         'product' =>   'Are you sure want to delete this product?',
         'image' =>   'Are you sure want to delete this image?',
+        'promotion' =>   'Are you sure want to delete this promotion?',
      ],
      'compare' => [
         'first' => 'You have one product to compare',
