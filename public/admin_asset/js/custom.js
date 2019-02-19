@@ -107,19 +107,21 @@ $(document).ready(function() {
 //Delete a photo
 $(document).ready(function() {
     $('.button-image').on('click', function() {
-        var imageId = $(this).data('image-id');
-        var token = $(this).data('token');
-        // debugger;
-        $.ajax({
-            url: 'admin/products/image',
-            type: 'DELETE',
-            dataType: 'JSON',
-            data: { image: imageId, _token: token },
-            success: function(data) {
-                // console.log(data);
-                $('#image-list .image-item[data-id^=' + data.data.id + ']').remove();
-            }
-        });
+        var imgProduct = confirm(element('image'));
+        if (imgProduct) {
+            var imageId = $(this).data('image-id');
+            var token = $(this).data('token');
+            $.ajax({
+                url: 'admin/products/image',
+                type: 'DELETE',
+                dataType: 'JSON',
+                data: { image: imageId, _token: token },
+                success: function(data) {
+                    // console.log(data);
+                    $('#image-list .image-item[data-id^=' + data.data.id + ']').remove();
+                }
+            });
+        }
     });
 });
 
@@ -225,7 +227,7 @@ Dropzone.options.dropzone = {
 //Delete a photo
 $(document).ready(function() {
     $('.delete-slide').on('click', function() {
-        var result = confirm(element('delete'));
+        var result = confirm(element('image'));
         if (result) {
             var imageId = $(this).data('image-id');
             var token = $(this).data('token');

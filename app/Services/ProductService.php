@@ -87,7 +87,7 @@ class ProductService
      */
     public function edit($product)
     {
-        return Product::where('id', $product->id)->with('accessories', 'accessories.parent')->first();
+        return $product->load('accessories', 'accessories.parent');
     }
 
     /**

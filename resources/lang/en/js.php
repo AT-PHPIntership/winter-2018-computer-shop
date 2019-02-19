@@ -14,6 +14,8 @@
         'user' =>   'Are you sure want to delete this user?',
         'role' =>   'Are you sure want to delete this role?',
         'category' =>   'Are you sure want to delete this category?',
+        'product' =>   'Are you sure want to delete this product?',
+        'image' =>   'Are you sure want to delete this image?',
      ],
      'compare' => [
         'first' => 'You have one product to compare',

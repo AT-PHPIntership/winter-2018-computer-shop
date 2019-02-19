@@ -18,7 +18,7 @@
                             <div class="col-sm-12">
                                 @foreach($products->images as $image)
                                 <a href="storage/product/{{$image->name}}" data-lightbox="product">
-                                    <img src="storage/product/{{$image->name}}">
+                                    <img src="storage/product/{{$image->name}}" width="280" height="180">
                                 </a>
                                 @endforeach
                             </div>

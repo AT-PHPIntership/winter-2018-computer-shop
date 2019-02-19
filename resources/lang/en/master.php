@@ -57,6 +57,11 @@ return [
             'show' => 'Details about :attribute',
             'import' => 'Import :attribute',
             'back' => 'Back',
+            'product' => [
+                'details' => 'Details',
+                'edit' => 'Edit',
+                'delete' => 'Delete',
+            ]
         ],
         'table' => [
             'email' => 'Email',
