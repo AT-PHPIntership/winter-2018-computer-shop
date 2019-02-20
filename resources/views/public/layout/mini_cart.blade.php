@@ -10,42 +10,16 @@
 
     <!-- Mini Cart Products -->
     <ul class="mini-cart-products">
-        <li>
-            <!-- <a class="image"><img src="assets/images/product/product-1.png" alt="Product"></a> -->
-            <div class="content">
-                <a href="single-product.html" class="title">Waxon Note Book Pro 5</a>
-                <span class="price">Price: $295</span>
-                <span class="qty">Qty: 02</span>
-            </div>
-            <button class="remove"><i class="fa fa-trash-o"></i></button>
-        </li>
-        <li>
-            <!-- <a class="image"><img src="assets/images/product/product-2.png" alt="Product"></a> -->
-            <div class="content">
-                <a href="single-product.html" class="title">Aquet Drone D 420</a>
-                <span class="price">Price: $275</span>
-                <span class="qty">Qty: 01</span>
-            </div>
-            <button class="remove"><i class="fa fa-trash-o"></i></button>
-        </li>
-        <li>
-            <!-- <a class="image"><img src="assets/images/product/product-3.png" alt="Product"></a> -->
-            <div class="content">
-                <a href="single-product.html" class="title">Game Station X 22</a>
-                <span class="price">Price: $295</span>
-                <span class="qty">Qty: 01</span>
-            </div>
-            <button class="remove"><i class="fa fa-trash-o"></i></button>
-        </li>
+        
     </ul>
 
     <!-- Mini Cart Bottom -->
     <div class="mini-cart-bottom">    
     
-        <h4 class="sub-total">Total: <span>$1160</span></h4>
+        <h4 class="sub-total">Total: <span class="total-price">0 d</span></h4>
 
         <div class="button">
-            <a href="checkout.html">CHECK OUT</a>
+            <a href="{{ route('public.cart') }}">Go to Cart</a>
         </div>
         
     </div>

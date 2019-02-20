@@ -87,10 +87,10 @@
 
                                        </ul>
                                        
-                                       <p>Sub Total <span>$1250.00</span></p>
-                                       <p>Shipping Fee <span>$00.00</span></p>
+                                       <p>Sub Total <span class="total-price">0 đ</span></p>
+                                       <p>Amount <span id="amout-price">0 đ</span></p>
                                        
-                                       <h4>Grand Total <span>$1250.00</span></h4>
+                                       <h4>Grand Total <span id="grand-price">0 đ</span></h4>
                                        
                                    </div>
                                    
@@ -108,6 +108,23 @@
         </div>
     </div>
 </div>
+<?php
+if (isset($arrCode)) {
+?>
+<script type="text/javascript">
+var amount = <?php echo json_decode($arrCode['amount']) ?>;
+console.log(amount);
+</script>
+<?php
+} else {
+?>
+<script type="text/javascript">
+    var amount = 0;
+    console.log(amount);
+</script>
+<?php
+}
+?>
 
 <!-- Checkout Page End --> 
 @endsection

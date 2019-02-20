@@ -77,9 +77,7 @@
                         <div class="cart-summary">
                             <div class="cart-summary-wrap">
                                 <h4>Cart Summary</h4>
-                                <p>Sub Total <span id="total-price"></span></p>
-                                <p>Shipping Cost <span>$00.00</span></p>
-                                <h2>Grand Total <span>$1250.00</span></h2>
+                                <p>Total <span id="total-price">0 d</span></p>
                             </div>
                             <div class="cart-summary-button">
                                 <a href="{{ route('public.checkout') }}"><button class="checkout-btn">Checkout</button></a>

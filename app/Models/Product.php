@@ -67,7 +67,8 @@ class Product extends Model
         return $this->hasMany('App\Models\Image');
     }
 
-    /** Desplay relationship between product and promotion
+    /**
+ * Desplay relationship between product and promotion
      *
      * @return void
      */
