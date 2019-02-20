@@ -55,7 +55,7 @@
                           @lang('master.content.action.edit', ['attribute' => __('master.content.attribute.accessory')])
                           </a>
                         @if(sizeof($accesory->children) == 0)
-                          <form action="{{ route('accessories.destroy', $accesory->id) }}" method="POST" class="d-inline">
+                          <form action="{{ route('accessories.destroy', $accesory->id) }}" method="POST" class="d-inline" onsubmit="return confirmedDelete('accessory')">
                             @csrf
                             @method('DELETE')
                             <input type="submit" value="@lang('master.content.action.delete', ['attribute' => __('master.content.attribute.accessory')])" class="btn btn-sm btn-danger">

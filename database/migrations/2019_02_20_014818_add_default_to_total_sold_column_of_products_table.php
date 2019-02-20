@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddTotalSoldToPromotionsTable extends Migration
+class AddDefaultToTotalSoldColumnOfProductsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,9 @@ class AddTotalSoldToPromotionsTable extends Migration
      */
     public function up()
     {
-        Schema::table('promotions', function (Blueprint $table) {
-            $table->integer('total_sold')->after('end_at');
+        Schema::table('products', function (Blueprint $table) {
+            $table->integer('total_sold')->default(0)->change();
         });
-        
     }
 
     /**
@@ -26,7 +25,7 @@ class AddTotalSoldToPromotionsTable extends Migration
      */
     public function down()
     {
-        Schema::table('promotions', function (Blueprint $table) {
+        Schema::table('products', function (Blueprint $table) {
             $table->dropColumn('total_sold');
         });
     }

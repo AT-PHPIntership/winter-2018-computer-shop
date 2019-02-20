@@ -23,7 +23,7 @@
             <div class="form-group row">
               <label class="col-sm-3 form-control-label">@lang('master.content.form.name')</label>
               <div class="col-sm-9">
-                <input id="inputHorizontalWarning" type="text" name="name" placeholder="Name" class="form-control" value="{{ old('name') }}">
+                <input id="inputHorizontalWarning" type="text" name="name" placeholder="Name" class="form-control" value="{{ old('name') }}" required>
                 @if ($errors->has('name'))
                   <span class="help-block col-sm-12">
                       <strong class="col-xs-12 col-sm-12 text-danger">{{ $errors->first('name') }}</strong>
@@ -35,15 +35,21 @@
                 <label class="col-sm-3 form-control-label">@lang('master.content.table.parent_id')</label>
                 <div class="col-sm-9">
                   <select name="parent_id" class="form-control mb-3">
-                      <option value="">No</option>
+                    <option value="" <?php echo 'selected' ?> disabled hidden>@lang('master.content.select.choose')</option>
                     @foreach($parentAccessories as $accessory)
                       <option value="{{ $accessory->id }}">{{ $accessory->name }}</option>
                     @endforeach
                   </select>
+                @if ($errors->has('parent_id'))
+                  <span class="help-block col-sm-12">
+                      <strong class="col-xs-12 col-sm-12 text-danger">{{ $errors->first('parent_id') }}</strong>
+                  </span>
+                @endif
                 </div>
               </div>
             <div class="form-group row">       
               <div class="col-sm-9 offset-sm-3">
+                <a href="{{route('accessories.index')}}" class="btn btn-danger">@lang('master.content.button.cancel')</a>
                 <input type="submit" value="@lang('master.content.button.create')" class="btn btn-primary">
               </div>
             </div>

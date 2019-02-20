@@ -18,6 +18,7 @@ return [
       'image' => 'Are you sure want to delete this image?',
       'promotion' => 'Are you sure want to delete this promotion?',
       'code' => 'Are you sure want to delete this code?',
+      'accessory' => 'Are you sure want to delete this accessory?',
    ],
    'compare' => [
       'first' => 'You have one product to compare',

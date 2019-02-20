@@ -28,7 +28,7 @@ class CategoryController extends Controller
     {
         return app(CategoryService::class)->dataTable();
     }
-    
+
     /**
      * Show the form for creating a new resource.
      *
@@ -76,7 +76,7 @@ class CategoryController extends Controller
     {
         return view('admin.categories.edit', compact('category'));
     }
-    
+
     /**
      * Handle update category to database
      *
@@ -103,7 +103,7 @@ class CategoryController extends Controller
         $response = app(CategoryService::class)->getSubCategory($request->get('id'));
         return response()->json($response);
     }
-    
+
     /**
      * Delete the specified resource.
      *

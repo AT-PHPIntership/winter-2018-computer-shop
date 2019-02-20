@@ -28,7 +28,9 @@
                     @if($category->parent_id == null)
                         <option value="" <?php echo 'selected' ?> disabled hidden>@lang('master.content.select.choose')</option>
                     @foreach($categories as $main_category)
+                      @if ($main_category->id != $category->id)
                         <option value="{{$main_category->id}}">{{$main_category->name}}</option>
+                      @endif
                     @endforeach
                     @else
                       <option value="">@lang('master.content.select.parent')</option>
@@ -57,7 +59,7 @@
                 </div>
               </div>
               <div class="form-group">    
-                <a href="{{route('categories.index')}}" class="btn btn-danger">@lang('master.content.button.cancel')</a>
+                <a href="{{URL::previous()}}" class="btn btn-danger">@lang('master.content.button.cancel')</a>
                 <input type="submit" value="@lang('master.content.button.update')" class="btn btn-primary">
               </div>
             </form>

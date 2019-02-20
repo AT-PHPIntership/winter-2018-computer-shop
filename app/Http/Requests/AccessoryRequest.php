@@ -25,6 +25,19 @@ class AccessoryRequest extends FormRequest
     {
         return [
             'name' => 'required|min:3',
+            'parent_id' => 'required|exists:accessories,id',
+        ];
+    }
+
+     /**
+     * Return the validation messages that apply to the request.
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'parent_id.exists' => 'The accessory not found in accessories table',
         ];
     }
 }

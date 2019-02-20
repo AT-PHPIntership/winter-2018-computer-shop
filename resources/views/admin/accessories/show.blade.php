@@ -26,7 +26,7 @@
            <div class="col-lg-12">
                <div class="card">
                   <div class="card-header d-flex align-items-center">
-                       <a href="{{ URL::previous() }}"><button type="button" class="fa fa-toggle-left btn btn-primary"></button></a>
+                    <a href="{{route('accessories.index')}}" class="btn btn-success rounded-circle"><i class="fa fa-arrow-left"></i></a>
                    </div>
                    <div class="card-body">
                        <div class="table-responsive">
@@ -47,7 +47,7 @@
                        <a href="{{ route('accessories.edit', $acces->id) }}" class="btn btn-sm btn-warning">
                        @lang('master.content.action.edit', ['attribute' => __('master.content.attribute.accessory')])
                        </a>
-                       <form action="{{ route('accessories.destroy', $acces->id) }}" method="POST" class="d-inline">
+                       <form action="{{ route('accessories.destroy', $acces->id) }}" method="POST" class="d-inline" onsubmit="return confirmedDelete('accessory')">
                           @csrf
                           @method('DELETE')
                           <input type="submit" value="@lang('master.content.action.delete', ['attribute' => __('master.content.attribute.accessory')])" class="btn btn-sm btn-danger">

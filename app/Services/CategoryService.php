@@ -21,16 +21,16 @@ class CategoryService
     {
         $categories = Category::parents()->select(['id', 'name', 'image'])->get();
         return Datatables::of($categories)
-                ->addColumn('image', function (Category $category) {
-                    return view('admin.categories.image', ['image' => $category->image]);
-                })
-                ->addColumn('action', function ($data) {
-                    return view('admin.categories.action', ['id' => $data->id]);
-                })
-                ->rawColumns(['image', 'action'])
-                ->make(true);
+            ->addColumn('image', function (Category $category) {
+                return view('admin.categories.image', ['image' => $category->image]);
+            })
+            ->addColumn('action', function ($data) {
+                return view('admin.categories.action', ['id' => $data->id]);
+            })
+            ->rawColumns(['image', 'action'])
+            ->make(true);
     }
-    
+
     /**
      * Get parent category
      *
@@ -71,7 +71,7 @@ class CategoryService
      */
     public function getChildren($category)
     {
-         return $category = Category::where('parent_id', $category->id)->orderBy('id', \Config::get('define.user.order_by_desc'))->paginate(\Config::get('define.user.limit_rows'));
+        return $category = Category::where('parent_id', $category->id)->orderBy('id', \Config::get('define.user.order_by_desc'))->paginate(\Config::get('define.user.limit_rows'));
     }
 
     /**
@@ -108,7 +108,7 @@ class CategoryService
         return Category::where('parent_id', $id)->select('id', 'name')->get();
     }
 
-     /**
+    /**
      * Handle delete category out of data
      *
      * @param object $category [binding category model]

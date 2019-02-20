@@ -68,7 +68,7 @@
             <div class="form-group row">
               <label class="col-sm-3 form-control-label">@lang('master.content.table.order_month')</label>
               <div class="col-sm-9">
-                <select name="order_month" required>
+                <select name="order_month">
                   <option value="">{{ __('master.content.select.choose') }}</option>
                   @for($i = 1; $i <= 12; $i++)
                   <option {{ old('order_month') == $i ? "selected" : "" }} value="{{ $i }}">{{ $i }}</option>
@@ -86,7 +86,7 @@
             <div class="form-group row">
               <label class="col-sm-3 form-control-label">@lang('master.content.table.all_user')</label>
               <div class="col-sm-9">
-                <select name="all_user" required>
+                <select name="all_user">
                   <option value="">{{ __('master.content.select.choose') }}</option>
                   <option {{ old('all_user') == \App\Models\Code::NO_USER ? "selected" : "" }} value={{ \App\Models\Code::NO_USER }}>{{ __('master.content.select.no') }}</option>
                   <option {{ old('all_user') == \App\Models\Code::ALL_USER ? "selected" : "" }} value={{ \App\Models\Code::ALL_USER }}>{{ __('master.content.select.yes') }}</option>
