@@ -118,8 +118,11 @@ class CategoryService
     public function delete($category)
     {
         $subCategory = Category::where('parent_id', $category->id)->get();
+        $product = Product::where('category_id', $category->id)->get();
         if ($subCategory->count() > 0) {
             session()->flash('warning', __('master.content.message.warning'));
+        } elseif ($product->count() > 0) {
+            session()->flash('warning', __('master.content.message.product'));
         } else {
             try {
                 $categoryImage = realpath('storage/category/' . $category->image);

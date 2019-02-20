@@ -1,5 +1,4 @@
 <?php
-
 return [
     'role' => [
         'number_paginate' => '5'
@@ -11,6 +10,9 @@ return [
         'paginate' => 10,
     ],
     'code' => [
+        'number_paginate' => '5'
+    ],
+    'comment' => [
         'number_paginate' => '5'
     ],
     'product' => [

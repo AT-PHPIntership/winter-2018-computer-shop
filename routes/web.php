@@ -53,6 +53,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'adminLogin'], function(){
     Route::delete('slides/image', 'SlideController@deleteImage');
     Route::resource('slides', 'SlideController');
     Route::resource('orders', 'OrderController');
+    Route::resource('comments', 'CommentController');
 }); 
 
 Auth::routes();

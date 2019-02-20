@@ -29,7 +29,7 @@ class Comment extends Model
     {
         $builder->whereNull('parent_id');
     }
-    
+
     /**
      * The function display relationship between parent category
      *
@@ -54,7 +54,7 @@ class Comment extends Model
         return $this->belongsTo('App\Models\Product');
     }
 
-     /**
+    /**
      * The function display relationship between user and category
      *
      * @var array

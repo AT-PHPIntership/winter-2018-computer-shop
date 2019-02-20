@@ -6,11 +6,12 @@ use App\Models\Product;
 use DB;
 use League\Flysystem\Exception;
 use Yajra\Datatables\Datatables;
-use App\Models\Image;
+use App\Models\Comment;
 use App\Models\Accessory;
 use App\Models\Category;
 use App\Services\ImageService;
 use Excel;
+use App\Models\OrderDetail;
 
 class ProductService
 {
@@ -147,7 +148,7 @@ class ProductService
             $data = $this->filterProduct($data);
             //Save product include category id
             $categories = Category::where('parent_id', '!=', null)->get();
-                            $categoryId = [];
+            $categoryId = [];
             foreach ($categories as $category) {
                 foreach ($data as $key => $categories) {
                     if ($category->name == $categories['category']) {
@@ -157,7 +158,7 @@ class ProductService
             }
             $importProduct = [];
             foreach ($data as $key => $value) {
-                   $importProduct[]= ['name' => $value->name, 'quantity' => $value->quantity, 'unit_price' => $value->unit_price, 'description' => $value->description, 'category_id' => $categoryId[$key] ];
+                $importProduct[] = ['name' => $value->name, 'quantity' => $value->quantity, 'unit_price' => $value->unit_price, 'description' => $value->description, 'category_id' => $categoryId[$key]];
             }
             foreach ($importProduct as $value) {
                 Product::insert($value);
@@ -213,16 +214,24 @@ class ProductService
     public function delete($product)
     {
         try {
-            foreach ($product->images as $image) {
-                $productImage = realpath('storage/product/' . $image->name);
-                if (!is_null($image->name) && file_exists($productImage)) {
-                    unlink($productImage);
+            $order = OrderDetail::where('product_id', $product->id)->get();
+            $comments = Comment::where('product_id', $product->id)->get();
+            if ($order->count() > 0) {
+                session()->flash('warning', __('master.content.message.orderDetail'));
+            } elseif ($comments->count() > 0) {
+                session()->flash('warning', __('master.content.message.commentProduct'));
+            } else {
+                foreach ($product->images as $image) {
+                    $productImage = realpath('storage/product/' . $image->name);
+                    if (!is_null($image->name) && file_exists($productImage)) {
+                        unlink($productImage);
+                    }
                 }
+                $product->images()->delete();
+                $product->accessories()->detach();
+                $product->delete();
+                session()->flash('message', __('master.content.message.delete', ['attribute' => trans('master.content.attribute.product')]));
             }
-            $product->images()->delete();
-            $product->accessories()->detach();
-            $product->delete();
-            session()->flash('message', __('master.content.message.delete', ['attribute' => trans('master.content.attribute.product')]));
         } catch (Exception $ex) {
             session()->flash('warning', __('master.content.message.error', ['attribute' => $ex->getMessage()]));
             return redirect()->back();

@@ -78,7 +78,7 @@ class UserController extends Controller
     {
         return view('admin.users.edit', compact('user'));
     }
-    
+
     /**
      * Handle update user to database
      *

@@ -96,7 +96,7 @@ class CategoryController extends Controller
      *
      * @param object $request [request to get children category]
      *
-     * @return json()
+     * @return json
      */
     public function getChildren(Request $request)
     {

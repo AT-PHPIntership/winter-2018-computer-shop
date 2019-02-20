@@ -3,12 +3,15 @@
 namespace App\Services;
 
 use App\Models\User;
+use App\Models\Order;
+use App\Models\Comment;
 use App\Services\ImageService;
 use League\Flysystem\Exception;
 use Yajra\Datatables\Datatables;
 use DB;
 use Mail;
 use Auth;
+
 class UserService
 {
     /**
@@ -20,22 +23,22 @@ class UserService
     {
         $users = User::select(['id', 'name', 'email', 'role_id']);
         return Datatables::of($users)
-                ->addColumn('role', function (User $user) {
-                    return $user->role->name;
-                })
-                ->addColumn('action', function ($data) {
-                    return view('admin.users.action', ['id' => $data->id]);
-                })
-                ->make(true);
+            ->addColumn('role', function (User $user) {
+                return $user->role->name;
+            })
+            ->addColumn('action', function ($data) {
+                return view('admin.users.action', ['id' => $data->id]);
+            })
+            ->make(true);
     }
-    
-   /**
-    * Handle add user to database
-    *
-    * @param object $request [request create a new user]
-    *
-    * @return void
-    */
+
+    /**
+     * Handle add user to database
+     *
+     * @param object $request [request create a new user]
+     *
+     * @return void
+     */
     public function store($request)
     {
         DB::beginTransaction();
@@ -55,13 +58,13 @@ class UserService
     }
 
     /**
-    * Handle update user to database
-    *
-    * @param object $request [request update user]
-    * @param object $user    [binding user model alongside id]
-    *
-    * @return void
-    */
+     * Handle update user to database
+     *
+     * @param object $request [request update user]
+     * @param object $user    [binding user model alongside id]
+     *
+     * @return void
+     */
     public function update($request, $user)
     {
         DB::beginTransaction();
@@ -81,21 +84,29 @@ class UserService
     }
 
     /**
-    * Handle delete user out of database
-    *
-    * @param object $user [request delete a user]
-    *
-    * @return object [object]
-    */
+     * Handle delete user out of database
+     *
+     * @param object $user [request delete a user]
+     *
+     * @return object [object]
+     */
     public function delete($user)
     {
         try {
-            $userImage = realpath('storage/avatar/' . $user->profile->avatar);
-            if (!is_null($user->profile->avatar) && file_exists($userImage)) {
-                unlink($userImage);
+            $orders = Order::where('user_id', $user->id)->get();
+            $comments = Comment::where('user_id', $user->id)->get();
+            if ($orders->count() > 0) {
+                session()->flash('warning', __('master.content.message.order'));
+            } elseif ($comments->count() > 0) {
+                session()->flash('warning', __('master.content.message.comment'));
+            } else {
+                $userImage = realpath('storage/avatar/' . $user->profile->avatar);
+                if (!is_null($user->profile->avatar) && file_exists($userImage)) {
+                    unlink($userImage);
+                }
+                $user->delete();
+                session()->flash('message', __('master.content.message.delete', ['attribute' => trans('master.content.attribute.user')]));
             }
-            $user->delete();
-            session()->flash('message', __('master.content.message.delete', ['attribute' => trans('master.content.attribute.user')]));
         } catch (Exception $ex) {
             session()->flash('warning', __('master.content.message.error', ['attribute' => $ex->getMessage()]));
         }
@@ -103,7 +114,7 @@ class UserService
 
     /*******************User Register***************************/
 
-     /**
+    /**
      * Create a new user instance after a valid registration.
      *
      * @param array $data data

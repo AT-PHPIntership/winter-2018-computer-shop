@@ -20,7 +20,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-         'name', 'email', 'password', 'role_id', 'is_actived',
+        'name', 'email', 'password', 'role_id', 'is_actived',
     ];
 
     /**
@@ -61,7 +61,7 @@ class User extends Authenticatable
     {
         return $this->hasOne('App\Models\UserProfile');
     }
-    
+
     /**
      * The function help encrypt the password when user enter into
      *
@@ -74,7 +74,7 @@ class User extends Authenticatable
         $this->attributes['password'] = bcrypt($password);
     }
 
-     /**
+    /**
      * The function display relationship between user and social provider
      *
      * @return \App\Models\SocialProvider
@@ -93,7 +93,7 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Models\Comment');
     }
-    
+
     /**
      * Relationship user - code
      *

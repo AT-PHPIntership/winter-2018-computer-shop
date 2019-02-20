@@ -3,6 +3,7 @@
 <!-- Page Header-->
 @include('admin.partials.header', ['title' => trans('master.sidebar.user')])
 @include('admin.partials.message')
+@include('admin.partials.warning')
 <section class="tables">  
     <div class="container-fluid">
         <div class="row">

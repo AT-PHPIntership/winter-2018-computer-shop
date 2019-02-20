@@ -2,14 +2,14 @@
 @section('content')
 <header class="page-header">
    <div class="container-fluid">
-       <h2 class="no-margin-bottom">@lang('master.sidebar.accessory')</h2>
+       <h2 class="no-margin-bottom">@lang('master.sidebar.comment')</h2>
    </div>
 </header>
 <!-- Breadcrumb-->
 <div  class="breadcrumb-holder container-fluid">
    <ul class="breadcrumb">
        <li class="breadcrumb-item"><a href="{{route('admin.home')}}">@lang('master.sidebar.home')</a></li>
-       <li class="breadcrumb-item active">@lang('master.sidebar.accessory')</li>
+       <li class="breadcrumb-item active">@lang('master.sidebar.comment')</li>
    </ul>
 </div>
 @if(session('message'))
@@ -25,35 +25,39 @@
        <div class="row">
            <div class="col-lg-12">
                <div class="card">
-                  <div class="card-header d-flex align-items-center">
-                    <a href="{{route('accessories.index')}}" class="btn btn-success rounded-circle"><i class="fa fa-arrow-left"></i></a>
-                   </div>
                    <div class="card-body">
                        <div class="table-responsive">
-               <table class="table table-striped table-hover text-center">
+               <table class="table table-striped table-hover text-center  ">
                  <thead>
-                   <tr>
+                   <tr class="something">
                      <th>@lang('master.content.table.id')</th>
-                     <th>@lang('master.content.form.name')</th>
+                     <th>@lang('master.content.table.user_name')</th>
+                     <th>@lang('master.content.table.product_name')</th>
+                     <th>@lang('master.content.table.content')</th>
                      <th>@lang('master.content.table.action')</th>
                    </tr>
                  </thead>
                  <tbody>
-                  @foreach($accessory->children as $acces)
-                  <tr>
-                     <th scope="row">{{ $acces->id }}</th>
-                     <td>{{ $acces->name }}</td>
+                  @foreach($comments as $comment)
+                  <tr class="something">
+                     <th scope="row"  >{{ $comment->id }}</th>
+                     <td>{{ $comment->user->name }}</td>
+                     <td>{{ $comment->product->name }}</td>
+                     <td>{{ $comment->content }}</td>
                      <td>
-                       <a href="{{ route('accessories.edit', $acces->id) }}" class="btn btn-sm btn-warning">
-                       @lang('master.content.action.product.edit')
+                       @if ($comment->childrens->count() > 0)
+                       <a href="{{ route('comments.show', $comment->id) }}" class="btn btn-sm btn-warning">
+                       @lang('master.content.action.product.details')
                        </a>
-                       <form action="{{ route('accessories.destroy', $acces->id) }}" method="POST" class="d-inline" onsubmit="return confirmedDelete('accessory')">
+                       @endif
+                       <form action="{{ route('comments.destroy', $comment->id) }}" method="POST" class="d-inline" onsubmit="return confirmedDelete('comment')">
                           @csrf
                           @method('DELETE')
                           <input type="submit" value="@lang('master.content.action.product.delete')" class="btn btn-sm btn-danger">
                         </form> 
                        </a>
                      </td>
+
                    </tr>
                    @endforeach
                  </tbody>
@@ -61,6 +65,7 @@
              </div>
              <div class="row">
                 <div class="col-md-12">
+                {{$comments->links()}}
                 </div>
               </div>
            </div>
