@@ -34,7 +34,7 @@ return [
         'social' => 'Login with',
         'yet' => 'Your account is not activated yet.',
         'wrong' => 'Your email or password wrong',
-        'duplicate' => 'Your email used by another account',
+        'duplicate' => 'Email of the service used by another account',
     ],
     'register' => [
         'name' => 'Your name here',
@@ -65,6 +65,13 @@ return [
         'login' => 'Login to write a review',
         'placeholder' => 'Write a review',
         'button' => 'add review',
+        'available' => [
+            'title' => 'Availability:',
+            'in' => 'In Stock',
+            'out' => 'Out of Stock',
+        ],
+        'quantity' => 'Quantity',
+        'reply' => 'Reply',
     ],
     'profile' => [
         'title' => 'Profile',
@@ -74,19 +81,13 @@ return [
             'profile' => 'My Profile',
             'password' => 'Password',
             'order' => 'Your Order',
+            'code' => 'Vouchers',
         ],
         'submit' => [
             'save' => 'Save',
             'reset' => 'Reset',
         ],
-        'reply' => 'Reply',
         'button' => 'add review',
-        'available' => [
-            'title' => 'Availability:',
-            'in' => 'In Stock',
-            'out' => 'Out of Stock',
-        ],
-        'quantity' => 'Quantity',
         'compare' => 'Compare',
     ],
     'search' => [

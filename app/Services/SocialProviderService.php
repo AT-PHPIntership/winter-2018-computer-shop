@@ -4,6 +4,7 @@ namespace App\Services;
 use Socialite;
 use App\Models\SocialProvider;
 use App\Models\User;
+use App\Models\Role;
 use Laravel\Socialite\Two\InvalidStateException;
 use DB;
 
@@ -20,7 +21,7 @@ class SocialProviderService
     {
         try {
             $socialUser = Socialite::driver($provider)->user();
-        } catch (Exception $e) {
+        } catch (Exception $ex) {
             session()->flash('warning', __('master.content.message.error', ['attribute' => $ex->getMessage()]));
             return redirect()->route('public.login');
         }
@@ -34,7 +35,7 @@ class SocialProviderService
                     $user = User::firstOrCreate([
                         'email' => $socialUser->getEmail(),
                         'name' => $socialUser->getName(),
-                        'role_id' => 1
+                        'role_id' => Role::where('name', Role::ROLE_NORMAL)->select('id')->pluck('id')->first(),
                     ]);
                     $user->profile()->create([
                         'avatar' => $socialUser->getAvatar()

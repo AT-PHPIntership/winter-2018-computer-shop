@@ -10,20 +10,14 @@
                 
                 <div class="row mb-50">
                     <div class="col">
-
                         <!-- Shop Top Bar Start -->
+                        @if(count($products) > 0)
                         <div class="shop-top-bar">
-
                             <div class="product-view-mode">
-                                @if(count($products) > 0)
                                 <h2><span>1 - {{count($products)}}</span><span> @lang('public.search.of') {{$products->total()}}</span> @lang('public.search.result') <span class="query">{{$category->name}}</span></h2>
-                                @else
-                                <h2 class="search-result">@lang('public.search.no') <span class="query">{{$query}}</span></h2>
-                                @endif
                             </div>
-
                         </div><!-- Shop Top Bar End -->
-                        
+                        @endif
                     </div>
                 </div>
                 <!-- Shop Product Wrap Start -->

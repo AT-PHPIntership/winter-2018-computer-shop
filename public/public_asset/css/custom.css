@@ -150,7 +150,7 @@
 
 /* User Profile */
 .form-horizontal {
-    margin-left: 130px;
+    margin-left: 95px;
 }
 
 form label {
@@ -176,9 +176,9 @@ form input {
 }
 
 .password-form {
-    margin-left: 370px;
+    margin-left: 250px;
 }
 
 .table .table {
-    background-color: #d6bea5;
+    background-color: #ffffff;
 }

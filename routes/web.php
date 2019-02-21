@@ -1,5 +1,5 @@
 <?php
-/*
+ /*
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
@@ -23,15 +23,15 @@ Route::get('product/related/{category}', 'PublicController@getRelated');
 Route::get('compare/{first}/{second}', 'PublicController@compare');
 
 //User route
-Route::group(['prefix' => 'user', 'middleware' => 'user.login'], function(){
+Route::group(['prefix' => 'user', 'middleware' => 'user.login'], function () {
     Route::get('profile', 'UserController@userProfile')->name('user.profile');
     Route::put('profile/{user}', 'UserController@updateProfile')->name('user.update.profile');
     Route::put('password/{user}', 'UserController@updatePassword')->name('user.update.password');
     Route::delete('order/{order}', 'UserController@deleteOrder')->name('user.delete.order');
-}); 
+});
 
 //Admin route
-Route::group(['prefix' => 'admin', 'middleware' => 'adminLogin'], function(){
+Route::group(['prefix' => 'admin', 'middleware' => 'adminLogin'], function () {
     Route::get('/home', 'AdminController@home')->name('admin.home');
     Route::get('/home/excel', 'AdminController@excel')->name('admin.excel');
     Route::get('users/data', 'UserController@getData');
@@ -54,7 +54,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'adminLogin'], function(){
     Route::resource('slides', 'SlideController');
     Route::resource('orders', 'OrderController');
     Route::resource('comments', 'CommentController');
-}); 
+});
 
 Auth::routes();
 
@@ -70,8 +70,6 @@ Route::get('login', 'Auth\LoginController@login')->name('public.login');
 Route::post('login', 'Auth\LoginController@handleLogin')->name('public.login');
 Route::get('logout', 'Auth\LoginController@logout')->name('logout');
 
-
 //Login by Social account
 Route::get('auth/{provider}', 'Auth\LoginController@redirectToProvider');
 Route::get('auth/{provider}/callback', 'Auth\LoginController@handleProviderCallback');
-

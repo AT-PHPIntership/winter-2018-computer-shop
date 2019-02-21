@@ -26,22 +26,9 @@ class UpdateUserRequest extends FormRequest
         return [
             'email' => "required|email|unique:users,email,". $this->user->id,
             'name' => 'required|min:3',
-            'address' => 'min:3',
-            'phone' => 'min:10|max:10',
+            'address' => 'nullable|min:3',
+            'phone' => 'nullable|numeric|digits:10',
             'avatar' => 'image|max:5000',
-            'role_id' => 'exists:roles,id',
-        ];
-    }
-
-    /**
-     * Return message alongside with validation
-     *
-     * @return array
-     */
-    public function messages()
-    {
-        return [
-            'role_id.exists' => 'The role not found in role table.',
         ];
     }
 }

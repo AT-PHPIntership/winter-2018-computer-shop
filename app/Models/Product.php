@@ -74,7 +74,7 @@ class Product extends Model
      */
     public function promotions()
     {
-        return $this->belongsToMany('App\Models\Promotion');
+        return $this->belongsToMany('App\Models\Promotion', 'product_promotion')->withTimestamps();
     }
 
     /**

@@ -94,7 +94,6 @@ return [
             'phone' => 'Phone',
             'accessory' => 'Accessories',
             'note' => 'Note',
-            'date_order' => 'Date order',
             'status' => 'Status',
             'product_name' => 'Product Name',
             'quantity' => 'Quantity',

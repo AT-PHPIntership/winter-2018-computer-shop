@@ -16,7 +16,7 @@ return [
         'number_paginate' => '5'
     ],
     'product' => [
-        'saleOff' => '3',
+        'saleOff' => '2',
         'feature' => '5',
         'bestSeller' => '4',
         'newArrival' => '4',
@@ -26,6 +26,9 @@ return [
     ],
     'banner' => [
         'quantity' => '2'
+    ],
+    'search' => [
+        'quantity' => '5'
     ],
     'filter' => [
         'CPU' => [
@@ -44,6 +47,7 @@ return [
         'HDD' => [
             '500-GB' => '500 GB',
             '1-TB' => '1 TB',
+            '128-GB' => 'SSD 128 GB',
         ],
         'Price' => [
             '3' => 'Over 30 million',

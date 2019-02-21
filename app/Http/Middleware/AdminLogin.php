@@ -20,7 +20,7 @@ class AdminLogin
     {
         if (Auth::check() && Auth::user()->role->name == Role::ROLE_ADMIN) {
             return $next($request);
-        } 
-            return redirect()->route('public.login')->with('warning', __('common.warning_login'));
+        }
+        return redirect()->route('public.login')->with('warning', __('common.warning_login'));
     }
 }

@@ -101,6 +101,6 @@ class User extends Authenticatable
      */
     public function codes()
     {
-        return $this->belongsToMany(Code::class);
+        return $this->belongsToMany(Code::class, 'code_user')->whereNull('code_user.deleted_at')->withTimestamps();
     }
 }

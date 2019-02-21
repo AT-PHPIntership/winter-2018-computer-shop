@@ -3,7 +3,6 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-
 class RegisterRequest extends FormRequest
 {
     /**
@@ -27,7 +26,7 @@ class RegisterRequest extends FormRequest
             'name' => 'required|min:3',
             'email' => 'required|email|min:6|unique:users',
             'password' => 'required|string|min:6|confirmed',
-            'role_id' => 'in:1',
+            'role_id' => 'exists:roles,id,name,'.\App\Models\Role::ROLE_NORMAL,
             'is_actived' => 'in:0'
         ];
     }
@@ -40,7 +39,7 @@ class RegisterRequest extends FormRequest
     public function messages()
     {
         return [
-            'role_id.in' => 'You can not change the role field',
+            'role_id.exists' => 'You can not change the role field',
             'is_actived.in' => 'You can not change the actived field',
         ];
     }

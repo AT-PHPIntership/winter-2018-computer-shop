@@ -9,6 +9,7 @@ use Yajra\Datatables\Datatables;
 use App\Models\Comment;
 use App\Models\Accessory;
 use App\Models\Category;
+use App\Models\Promotion;
 use App\Services\ImageService;
 use Excel;
 use App\Models\OrderDetail;
@@ -243,11 +244,11 @@ class ProductService
     /**
      * Function help get product has sale off
      *
-     * @return Product
+     * @return collection
      **/
     public function saleOff()
     {
-        return Product::take(config('constants.product.saleOff'))->get();
+        return Promotion::with('products.images')->orderBy('percent', 'desc')->first();
     }
 
     /**
@@ -358,7 +359,7 @@ class ProductService
         return DB::table('products')
             ->select('id', 'name')
             ->where('name', 'LIKE', "%{$query}%")
-            ->get();
+            ->take(config('constants.search.quantity'))->get();
     }
 
     /**

@@ -4,6 +4,8 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Hash;
+use Auth;
+use DB;
 
 class UpdatePasswordRequest extends FormRequest
 {
@@ -38,11 +40,13 @@ class UpdatePasswordRequest extends FormRequest
      */
     public function withValidator($validator)
     {
-        $validator->after(function ($validator) {
-            if (!empty($this->current_password) && !Hash::check($this->current_password, $this->user->password)) {
-                $validator->errors()->add('current_password', __('public.profile.wrongPassword'));
-            }
-        });
+        if ($this->user->password != "") {
+            $validator->after(function ($validator) {
+                if (is_null($this->current_password) || !Hash::check($this->current_password, $this->user->password)) {
+                    $validator->errors()->add('current_password', __('public.profile.wrongPassword'));
+                }
+            });
+        }
         return;
     }
 }

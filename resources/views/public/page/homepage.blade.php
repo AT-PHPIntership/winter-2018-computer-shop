@@ -7,12 +7,14 @@
         <div class="row">
             <!-- Section Title Start -->
             <div class="col-12 mb-40">
-                <div class="section-title-one" data-title="@lang('public.content.featured')"><h1>@lang('public.content.featured')</h1></div>
+                <div class="section-title-one" data-title="@lang('public.content.featured')">
+                    <h1>@lang('public.content.featured')</h1>
+                </div>
             </div>
             <!-- Section Title End -->
             <!-- Product Tab Content Start -->
             <div class="col-12">
-                <div class="tab-content">  
+                <div class="tab-content">
                     <!-- Tab Pane Start -->
                     <div class="tab-pane fade show active" id="tab-one">
                         <!-- Product Slider Wrap Start -->
@@ -47,10 +49,10 @@
                                 </div>
                                 @endforeach
                             </div><!-- Product Slider End -->
-                        </div><!-- Product Slider Wrap End --> 
-                    </div><!-- Tab Pane End -->        
+                        </div><!-- Product Slider Wrap End -->
+                    </div><!-- Tab Pane End -->
                 </div>
-            </div><!-- Product Tab Content End -->       
+            </div><!-- Product Tab Content End -->
         </div>
     </div>
 </div><!-- Feature Product Section End -->
@@ -58,12 +60,14 @@
 <div class="product-section section mb-60">
     <div class="container">
         <div class="row">
-            
+
             <!-- Section Title Start -->
             <div class="col-12 mb-40">
-                <div class="section-title-one" data-title="@lang('public.content.bestseller')"><h1>@lang('public.content.bestseller')</h1></div>
+                <div class="section-title-one" data-title="@lang('public.content.bestseller')">
+                    <h1>@lang('public.content.bestseller')</h1>
+                </div>
             </div><!-- Section Title End -->
-            
+
             <div class="col-12">
                 <div class="row">
                     @foreach($bestSeller as $product)
@@ -109,7 +113,7 @@
                     @endforeach
                 </div>
             </div>
-            
+
         </div>
     </div>
 </div><!-- Best Sell Product Section End -->
@@ -119,7 +123,9 @@
         <div class="row">
             <!-- Section Title Start -->
             <div class="col-12 mb-40">
-                <div class="section-title-one" data-title="@lang('public.content.newArrival')"><h1>@lang('public.content.newArrival')</h1></div>
+                <div class="section-title-one" data-title="@lang('public.content.newArrival')">
+                    <h1>@lang('public.content.newArrival')</h1>
+                </div>
             </div><!-- Section Title End -->
             <div class="col-12">
                 <div class="row">
@@ -155,4 +161,4 @@
         </div>
     </div>
 </div><!-- New Arrival Product Section End -->
-@endsection
+@endsection 

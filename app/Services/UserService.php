@@ -124,7 +124,9 @@ class UserService
     public function createUser(array $data)
     {
         try {
-            return User::create($data);
+            $user = User::create($data);
+            $user->profile()->create($data);
+            return $user;
         } catch (Exception $ex) {
             session()->flash('warning', __('master.content.message.error', ['attribute' => $ex->getMessage()]));
             return redirect()->back();

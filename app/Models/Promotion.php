@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Promotion extends Model
 {
     protected $table = 'promotions';
-    
+
     /**
      * The attributes that are mass assignable.
      *
@@ -24,6 +24,6 @@ class Promotion extends Model
      */
     public function products()
     {
-        return $this->belongsToMany('App\Models\Product')->withTimestamps();
+        return $this->belongsToMany('App\Models\Product', 'product_promotion')->withTimestamps();
     }
 }

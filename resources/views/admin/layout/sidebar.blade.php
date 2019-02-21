@@ -2,7 +2,11 @@
 <nav class="side-navbar">
     <!-- Sidebar Header-->
     <div class="sidebar-header d-flex align-items-center">
+        @if(isset(Auth::user()->profile->avatar))
         <div class="avatar"><img src="storage/avatar/{{Auth::user()->profile->avatar}}" alt="..." class="img-fluid rounded-circle"></div>
+        @else
+        <div class="avatar"><img src="public_asset/images/account-image-placeholder.jpg" alt="..." class="img-fluid rounded-circle"></div>
+        @endif
         <div class="title">
             <h1 class="h4">{{Auth::user()->name}}</h1>
         </div>
