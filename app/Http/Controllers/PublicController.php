@@ -143,4 +143,24 @@ class PublicController extends Controller
         $response = app(CommentService::class)->reply($request->get('userId'), $request->get('productId'), $request->get('content'), $request->get('parentComment'));
         return response()->json($response);
     }
+
+    /*
+     * Display page cart
+     *
+     * @return void
+     */
+    public function cart()
+    {
+        return view('public.page.cart');
+    }
+
+    /**
+     * Display page checkout
+     *
+     * @return void
+     */
+    public function checkout()
+    {
+        return view('public.page.checkout');
+    }
 }

@@ -9,7 +9,7 @@ use App\Models\OrderDetail;
 class Order extends Model
 {
     protected $table = 'orders';
-    
+
     //Constant status order
     const PENDING_STATUS = 'Pending';
     const APPROVE_STATUS = 'Approve';
@@ -21,7 +21,7 @@ class Order extends Model
      * @var array
      */
     protected $fillable = [
-        'id', 'date_order', 'status', 'note', 'user_id', 'address', 'phone'
+        'id', 'date_order', 'status', 'note', 'user_id', 'code_user_id', 'address', 'phone'
     ];
 
     /**

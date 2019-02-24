@@ -6,7 +6,7 @@
             <div class="row">
                 <!-- Footer Widget Start -->
                 <div class="col-lg-4 col-md-6 col-12 mb-40">
-                    <div class="footer-wiget">
+                    <div class="footer-wiget" id="contact">
                         <h4 class="widget-title">@lang('public.footer.contact')</h4>
                         <p class="contact-info">
                             <span>@lang('public.footer.address')</span>
@@ -29,8 +29,8 @@
                         <h4 class="widget-title">@lang('public.footer.care')</h4>
                         <ul class="link-widget">
                             <li><a href="{{route('user.profile')}}">@lang('public.header.account')</a></li>
-                            <li><a href="#">@lang('public.header.cart')</a></li>
-                            <li><a href="#">@lang('public.footer.checkout')</a></li>
+                            <li><a href="{{route('public.cart')}}">@lang('public.header.cart')</a></li>
+                            <li><a href="{{route('public.checkout')}}">@lang('public.footer.checkout')</a></li>
                         </ul>
 
                     </div>
@@ -43,7 +43,6 @@
                         <ul class="link-widget">
                             <li><a href="#">@lang('public.footer.us')</a></li>
                             <li><a href="#">@lang('public.footer.term')</a></li>
-                            <li><a href="#">@lang('public.header.contact')</a></li>
                         </ul>
                     </div>
                 </div>

@@ -1,12 +1,12 @@
 //Make message disappear after times
-$(document).ready(function() {
+$(document).ready(function () {
     $('div.alert')
         .delay(5000)
         .slideUp();
 });
 
 //Display lightbox js
-$(document).ready(function() {
+$(document).ready(function () {
     lightbox.option({
         wrapAround: true
     });
@@ -25,6 +25,10 @@ function filter(key) {
     return window.js_variable.filter[key];
 }
 
+function search(key) {
+    return window.js_variable.search[key];
+}
+
 function order(key) {
     return window.js_variable.order[key];
 }
@@ -39,8 +43,8 @@ function confirmedDelete() {
 }
 
 // Save product in oder to compare to localStoreage
-$(document).ready(function() {
-    $('.compare-page').on('click', function() {
+$(document).ready(function () {
+    $('.compare-page').on('click', function () {
         var product = $(this).data('product');
         if (localStorage.getItem('firstCompare') === null) {
             localStorage.setItem('firstCompare', JSON.stringify(product));
@@ -57,8 +61,8 @@ $(document).ready(function() {
 });
 
 //Delete product to compare
-$(document).ready(function() {
-    $('.delete-compare').on('click', function() {
+$(document).ready(function () {
+    $('.delete-compare').on('click', function () {
         var id = $(this).data('id');
         // console.log(id);
         if (id === 0) {
@@ -82,7 +86,7 @@ addToCompare();
 
 //Check have enough product to compare ?
 function checkLocalStorage() {
-    $('#header-compare').click(function(e) {
+    $('#header-compare').click(function (e) {
         if (
             localStorage.getItem('firstCompare') == null ||
             localStorage.getItem('secondCompare') == null
@@ -100,20 +104,20 @@ checkLocalStorage();
 //Delay a time before seach
 function delay(callback, ms) {
     var timer = 0;
-    return function() {
+    return function () {
         var context = this,
             args = arguments;
         clearTimeout(timer);
-        timer = setTimeout(function() {
+        timer = setTimeout(function () {
             callback.apply(context, args);
         }, ms || 0);
     };
 }
 
 //Perform search product by ajax
-$(document).ready(function() {
+$(document).ready(function () {
     $('#product-name').keyup(
-        delay(function(e) {
+        delay(function (e) {
             e.preventDefault();
             var query = $(this).val();
             // debugger;
@@ -123,11 +127,11 @@ $(document).ready(function() {
                     method: 'GET',
                     data: { query: query },
                     dataType: 'JSON',
-                    success: function(data) {
+                    success: function (data) {
                         // console.log(data);
                         if (data.length > 0) {
                             var output = '<ul class="product-list">';
-                            $.each(data, function(key, val) {
+                            $.each(data, function (key, val) {
                                 output +=
                                     '<li class="product-items"><a href="product/' +
                                     val.id +
@@ -140,8 +144,9 @@ $(document).ready(function() {
                             $('#productList').html(output);
                             $('#productList').fadeIn();
                         } else {
-                            output = '';
+                            output = search('result');
                             $('#productList').html(output);
+                            $('#productList').fadeIn();
                         }
                     }
                 });
@@ -153,7 +158,7 @@ $(document).ready(function() {
 });
 
 //Disappear search result when click out of form
-$(document).bind('click', function(event) {
+$(document).bind('click', function (event) {
     // Check if we have not clicked on the search box
     if (
         !$(event.target)
@@ -190,8 +195,8 @@ function GetURLParameter(sParam) {
 }
 
 //User comment product
-$(document).ready(function() {
-    $('#comment-button').on('click', function() {
+$(document).ready(function () {
+    $('#comment-button').on('click', function () {
         var userId = $(this).data('user');
         var productId = $(this).data('product');
         var content = $('#comment-text').val();
@@ -209,7 +214,7 @@ $(document).ready(function() {
                         content: content,
                         _token: token
                     },
-                    success: function(data) {
+                    success: function (data) {
                         // console.log(data);
                         var output = '';
                         output +=
@@ -250,7 +255,7 @@ $(document).ready(function() {
 });
 
 //Add reply form for comment
-$(document).on('click', '.add-reply', function() {
+$(document).on('click', '.add-reply', function () {
     if ($('.add-reply').attr('disabled') !== 'disabled') {
         var articleId = $(this).attr('id');
         var output = '';
@@ -286,14 +291,14 @@ $(document).on('click', '.add-reply', function() {
 });
 
 //Cancel reply form
-$(document).on('click', '.cancelRely', function() {
+$(document).on('click', '.cancelRely', function () {
     var cancelId = $('.replyForm').attr('id');
     $('div .replyForm[id=' + cancelId + ']').remove();
     $('.add-reply').removeAttr('disabled');
 });
 
 //User reply comment
-$(document).on('click', '#reply-button', function() {
+$(document).on('click', '#reply-button', function () {
     var commentId = $(this).data('comment');
     var userId = $('#comment-button').data('user');
     var token = $('#comment-button').data('token');
@@ -312,7 +317,7 @@ $(document).on('click', '#reply-button', function() {
                 _token: token,
                 parentComment: commentId
             },
-            success: function(data) {
+            success: function (data) {
                 // console.log(data.parent_id);
                 var output = '';
                 output += '<ol class="children" id="commentChildren">';

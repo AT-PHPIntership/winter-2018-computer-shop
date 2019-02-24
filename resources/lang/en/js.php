@@ -1,6 +1,6 @@
 <?php
 return [
-    /*
+   /*
     |--------------------------------------------------------------------------
     | Define Language Lines
     |--------------------------------------------------------------------------
@@ -31,6 +31,9 @@ return [
    ],
    'filter' => [
       'title' => 'Filter by: '
+   ],
+   'search' => [
+      'result' => 'No data found!',
    ],
    'order' => [
       'delete' => 'Are you sure want to delete this order?',

@@ -29,6 +29,7 @@
 </head>
 
 <body>
+    @include('public.layout.message')
     @include('public.layout.header')
     @include('public.layout.mini_cart')
     @yield('content')
@@ -50,6 +51,11 @@
     <script src="public_asset/js/main.js"></script>
     <!-- Custom JS -->
     <script src="public_asset/js/custom.js"></script>
+    <!-- Cart JS -->
+    <script src="public_asset/js/cart.js"></script>
+    <!-- Laravel Javascript Validation -->
+    <script type="text/javascript" src="public_asset/js/jsvalidation.js"></script>
+    {!! JsValidator::formRequest('App\Http\Requests\OrderRequest') !!}
 </body>
 
 </html> 

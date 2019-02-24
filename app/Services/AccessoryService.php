@@ -25,7 +25,7 @@ class AccessoryService
     {
         return Accessory::parents()->get();
     }
-    
+
     /**
      * Index access
      *

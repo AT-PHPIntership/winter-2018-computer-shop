@@ -21,7 +21,7 @@
                             <div class="submit"><button><i class="icofont icofont-search-alt-1"></i></button></div>
                         </form>
                     </div><!-- Header Advance Search End -->
-                    <div class="dropdown-menu" id="productList"></div>
+                    <div class="dropdown-menu text-center" id="productList"></div>
 
                 </div>
                 <div class="col order-2 order-xs-2 order-lg-12 mt-10 mb-10">
@@ -68,8 +68,8 @@
                                         @endforeach
                                     </ul>
                                 </li>
-                                <li><a href="contact.html">@lang('public.header.cart')</a></li>
-                                <li><a href="contact.html">@lang('public.header.contact')</a></li>
+                                <li><a href="{{ route('public.cart') }}">@lang('public.header.cart')</a></li>
+                                <li><a href="#contact">@lang('public.header.contact')</a></li>
                             </ul>
                         </nav>
                     </div><!-- Main Menu End -->
@@ -80,7 +80,7 @@
                         <!-- Compare -->
                         <a href="" id="header-compare"><i class="ti-control-shuffle"></i></a>
                         <!-- Cart -->
-                        <a href="cart.html" class="header-cart"><i class="ti-shopping-cart"></i> <span class="number">3</span></a>
+                        <a href="cart.html" class="header-cart"><i class="ti-shopping-cart"></i> <span class="number"></span></a>
                     </div><!-- Header Shop Links End -->
                 </div>
                 <!-- Mobile Menu -->

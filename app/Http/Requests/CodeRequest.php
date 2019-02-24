@@ -24,11 +24,11 @@ class CodeRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|min:3',
+            'name' => 'required|min:3|unique:codes',
             'amount' => 'required|integer|min:0',
             'start_at' => 'required|date|after:yesterday',
             'end_at' => 'required|date|after:start_at',
-            'order_month' => 'required_if:all_user,0|required_without_all:all_user|between:1,12',
+            'order_month' => 'required_if:all_user,0|required_without_all:all_user|nullable|between:1,12',
             'all_user' => 'required|required_without_all:order_month|in:0,1'
         ];
     }

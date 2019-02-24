@@ -6,11 +6,14 @@
     height: 344px;
     position: relative;
 }
-
+.mini-cart-content {
+	bottom: 0;
+	width: 270px;
+}
 .content {
-    position: absolute;
-    bottom: 0;
-    width: 270px;
+	position: absolute;
+	bottom: 0;
+	width: 270px;
 }
 
 .row {
@@ -181,4 +184,40 @@ form input {
 
 .table .table {
     background-color: #ffffff;
+}
+
+/* CSS for cart */
+.mini-cart-content {
+    margin-bottom: 10px;
+    position: relative;
+}
+
+.mini-cart-qty {
+    position: absolute;
+    display: block;
+    left: 108px;
+}
+
+.pro-qty {
+    position: relative;
+}
+
+.fa-minus:before {
+    position: absolute;
+    left: 15px;
+    top: 10px;
+}
+.original-quantity{
+    position: absolute;
+    left: 30px;
+    bottom: 1px;
+}
+
+.fa-plus {
+    position: absolute;
+    left: 62px;
+    bottom: 8px;
+}
+#scrollUp {
+    bottom: 100px;
 }

@@ -6,6 +6,8 @@ use App\Models\Order;
 use App\Models\User;
 use App\Models\Product;
 use App\Models\OrderDetail;
+use Maatwebsite\Excel\Facades\Excel;
+use Carbon\Carbon;
 
 class OrderService
 {
@@ -57,5 +59,21 @@ class OrderService
         } catch (\Exception $e) {
             return $message = $e->getMessage();
         }
+    }
+
+    /**
+     * Export file collect order based on month 
+     *
+     * @return file xlsx
+     */
+    public function orderExport()
+    {
+        $month = Carbon::now()->month;
+        $data = Order::whereMonth('date_order', $month)->get();
+        Excel::create('month_' . $month . '_order', function ($excel) use ($data) {
+            $excel->sheet('order', function ($sheet) use ($data) {
+                $sheet->loadView('admin.orders.export', compact('data'));
+            });
+        })->export('xlsx');
     }
 }

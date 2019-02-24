@@ -5,12 +5,12 @@
 <div class="product-section section mt-90 mb-90">
     <div class="container">
         <div class="row">
-           
+
             <div class="col-12">
 
                 <div class="row mb-50">
                     <div class="col">
-                       @include('public.partials.filter')
+                        @include('public.partials.filter')
                     </div>
                 </div>
                 <!-- Shop Product Wrap Start -->
@@ -28,8 +28,7 @@
                                     <a class="compare-page" data-product="{{$product->id}}" data-tooltip="Compare"><i class="ti-control-shuffle"></i></a>
                                 </div>
 
-                                <a href="#" class="add-to-cart"><i class="ti-shopping-cart"></i><span>@lang('public.content.addToCart')</span></a>
-
+                                <a href="{{ route('public.cart') }}" id="{{ $product->id }}" data-name="{{ $product->name }}" data-price="{{ $product->unit_price }}" data-image="{{$product->images->first()['name']}}" class="add-to-cart"><i class="ti-shopping-cart"></i><span>@lang('public.content.addToCart')</span></a>
                             </div>
                             <!-- Content -->
                             <div class="content">
@@ -59,14 +58,14 @@
                     <div class="col">
 
                         <ul class="pagination">
-                        {{ $products->links('public.partials.pagination', ['paginator' => $products]) }}
+                            {{ $products->links('public.partials.pagination', ['paginator' => $products]) }}
                         </ul>
                     </div>
                 </div>
-                
+
             </div>
-            
+
         </div>
     </div>
 </div><!-- Feature Product Section End -->
-@endsection
+@endsection 

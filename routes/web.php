@@ -10,7 +10,7 @@
 |
 */
 //Public route
-Route::get('/', 'PublicController@homepage');
+Route::get('/', 'PublicController@homepage')->name('public.home');
 Route::get('category', 'PublicController@allCategory')->name('public.allCategory');
 Route::get('category/{category}', 'PublicController@category')->name('public.category');
 Route::post('product/comment', 'PublicController@productComment');
@@ -21,9 +21,13 @@ Route::get('product/sort', 'PublicController@productSort')->name('product.sort')
 Route::get('product/{product}', 'PublicController@getProduct')->name('public.product');
 Route::get('product/related/{category}', 'PublicController@getRelated');
 Route::get('compare/{first}/{second}', 'PublicController@compare');
+Route::get('cart', 'PublicController@cart')->name('public.cart');
 
 //User route
 Route::group(['prefix' => 'user', 'middleware' => 'user.login'], function () {
+    Route::get('checkout', 'PublicController@checkout')->name('public.checkout');
+    Route::post('order/create', 'OrderController@createOrder')->name('public.order');
+    Route::post('code', 'CodeController@applyCode')->name('public.code');
     Route::get('profile', 'UserController@userProfile')->name('user.profile');
     Route::put('profile/{user}', 'UserController@updateProfile')->name('user.update.profile');
     Route::put('password/{user}', 'UserController@updatePassword')->name('user.update.password');

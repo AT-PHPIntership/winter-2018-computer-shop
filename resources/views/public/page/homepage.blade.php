@@ -3,7 +3,16 @@
 @include('public.partials.slide')
 <!-- Feature Product Section Start -->
 <div class="product-section section mb-70">
+
     <div class="container">
+        @if(session('message'))
+        <div class="col-12 alert alert-success">
+            <button type="button" class="close" data-dismiss="alert">
+                <i class="ace-icon fa fa-times"></i>
+            </button>
+            {{ session('message') }}z
+        </div>
+        @endif
         <div class="row">
             <!-- Section Title Start -->
             <div class="col-12 mb-40">
@@ -31,7 +40,7 @@
                                             <div class="wishlist-compare">
                                                 <a class="compare-page" data-product="{{$product->id}}" data-tooltip="Compare"><i class="ti-control-shuffle"></i></a>
                                             </div>
-                                            <a href="#" class="add-to-cart"><i class="ti-shopping-cart"></i><span>@lang('public.content.addToCart')</span></a>
+                                            <a href="{{ route('public.cart') }}" id="{{ $product->id }}" data-name="{{ $product->name }}" data-price="{{ $product->unit_price }}" data-image="{{$product->images->pluck('name')->first()}}" class="add-to-cart"><i class="ti-shopping-cart"></i><span>@lang('public.content.addToCart')</span></a>
                                         </div>
                                         <!-- Content -->
                                         <div class="content">
@@ -84,7 +93,7 @@
                                     <a class="compare-page" data-product="{{$product->id}}" data-tooltip="Compare"><i class="ti-control-shuffle"></i></a>
                                 </div>
 
-                                <a href="#" class="add-to-cart"><i class="ti-shopping-cart"></i><span>@lang('public.content.addToCart')</span></a>
+                                <a href="{{ route('public.cart') }}" id="{{ $product->id }}" data-name="{{ $product->name }}" data-price="{{ $product->unit_price }}" data-image="{{$product->images->pluck('name')->first()}}" class="add-to-cart"><i class="ti-shopping-cart"></i><span>@lang('public.content.addToCart')</span></a>
 
                             </div>
 
@@ -139,7 +148,7 @@
                                 <div class="wishlist-compare">
                                     <a class="compare-page" data-product="{{$product->id}}" data-tooltip="Compare"><i class="ti-control-shuffle"></i></a>
                                 </div>
-                                <a href="#" class="add-to-cart"><i class="ti-shopping-cart"></i><span>@lang('public.content.addToCart')</span></a>
+                                <a href="{{ route('public.cart') }}" id="{{ $product->id }}" data-name="{{ $product->name }}" data-price="{{ $product->unit_price }}" data-image="{{$product->images->pluck('name')->first()}}" class="add-to-cart"><i class="ti-shopping-cart"></i><span>@lang('public.content.addToCart')</span></a>
                             </div>
                             <!-- Content -->
                             <div class="content">

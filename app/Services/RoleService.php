@@ -77,7 +77,7 @@ class RoleService
             if ($users->count() > 0) {
                 session()->flash('warning', __('master.content.message.user'));
             } else {
-                 Role::where('id', $id)->delete();
+                Role::where('id', $id)->delete();
                 session()->flash('message', __('master.content.message.delete', ['attribute' => trans('master.content.attribute.role')]));
             }
         } catch (Exception $e) {

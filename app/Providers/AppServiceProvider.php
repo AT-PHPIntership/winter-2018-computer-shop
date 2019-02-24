@@ -40,6 +40,7 @@ class AppServiceProvider extends ServiceProvider
             'element' => __('js.delete'),
             'message' => __('js.compare'),
             'filter' => __('js.filter'),
+            'search' => __('js.search'),
             'order' => __('js.order'),
             'comment' => __('js.comment'),
         ]);

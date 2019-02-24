@@ -29,6 +29,6 @@ class RoleComposer
     */
     public function compose(View $view)
     {
-        $view->with(['roles', $this->roleService->getAll(), 'normalRole' => \App\Models\Role::where('name', \App\Models\Role::ROLE_NORMAL)->select('id')->pluck('id')->first()]);
+        $view->with(['roles' => $this->roleService->getAll(), 'normalRole' => \App\Models\Role::where('name', \App\Models\Role::ROLE_NORMAL)->select('id')->pluck('id')->first()]);
     }
 }

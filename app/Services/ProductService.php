@@ -146,19 +146,19 @@ class ProductService
             $path = $request->file('import_file')->getRealPath();
             $data = Excel::load($path)->get();
             //Check products is duplicate when import
-            $data = $this->filterProduct($data);
+            $filterData = $this->filterProduct($data);
             //Save product include category id
             $categories = Category::where('parent_id', '!=', null)->get();
             $categoryId = [];
             foreach ($categories as $category) {
-                foreach ($data as $key => $categories) {
+                foreach ($filterData as $key => $categories) {
                     if ($category->name == $categories['category']) {
                         $categoryId[$key] = $category->id;
                     }
                 }
             }
             $importProduct = [];
-            foreach ($data as $key => $value) {
+            foreach ($filterData as $key => $value) {
                 $importProduct[] = ['name' => $value->name, 'quantity' => $value->quantity, 'unit_price' => $value->unit_price, 'description' => $value->description, 'category_id' => $categoryId[$key]];
             }
             foreach ($importProduct as $value) {
@@ -182,11 +182,14 @@ class ProductService
                 $product->accessories()->sync($accessory);
             }
             DB::commit();
-            session()->flash('message', __('master.content.message.import'));
+            if ($filterData->count() > 0) {
+                return session()->flash('message', __('master.content.message.import', ['attribute' => $filterData->count()]));
+            }
+            session()->flash('warning', __('master.content.message.noProductImport'));
         } catch (Exception $ex) {
             DB::rollback();
             session()->flash('warning', __('master.content.message.error', ['attribute' => $ex->getMessage()]));
-            return back();
+            return redirect()->back();
         }
     }
 
@@ -199,7 +202,9 @@ class ProductService
      **/
     public function filterProduct($data)
     {
-        $fileData = collect($data->pluck('name'));
+        $fileData = collect($data->pluck('name'))->map(function ($value) {
+            return trim($value);
+        })->filter();
         $productName = Product::pluck('name');
         $compare = $fileData->diff($productName);
         return $data->whereIn('name', $compare);
