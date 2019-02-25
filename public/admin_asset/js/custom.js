@@ -1,7 +1,7 @@
 /****************Function for Product**************/
 //Display children category when choose parent category
-$(document).ready(function() {
-    $('#parent_category').on('click', function() {
+$(document).ready(function () {
+    $('#parent_category').on('click', function () {
         var id = $(this).val();
         // console.log(id);
         $.ajax({
@@ -9,12 +9,12 @@ $(document).ready(function() {
             method: 'GET',
             dataType: 'JSON',
             data: { id: id },
-            success: function(data) {
+            success: function (data) {
                 // console.log(data);
                 if (data.length > 0) {
                     var output =
                         '<select name="category_id" class="form-control mb-3" id="localStorage">';
-                    $.each(data, function(key, val) {
+                    $.each(data, function (key, val) {
                         output +=
                             '<option value="' +
                             val.id +
@@ -35,13 +35,13 @@ $(document).ready(function() {
 
 /*************************/
 //Get value of select option of category at Add Product page
-$(document).ajaxComplete(function() {
+$(document).ajaxComplete(function () {
     var autoSelect = $('#localStorage')
         .find(':selected')
         .val();
     localStorage.setItem('autoSelect', JSON.stringify(autoSelect));
     // console.log(autoSelect)
-    $('#localStorage').change(function() {
+    $('#localStorage').change(function () {
         var manualSelect = $(this).val();
         localStorage.setItem('manualSelect', JSON.stringify(manualSelect));
         // debugger;
@@ -49,15 +49,15 @@ $(document).ajaxComplete(function() {
 });
 
 //Format vietnamese currency
-$(document).ready(function() {
+$(document).ready(function () {
     $('#formatCurrency')
-        .on('input', function(e) {
+        .on('input', function (e) {
             $(this).val(formatCurrency(this.value.replace(/[,VNĐ]/g, '')));
         })
-        .on('keypress', function(e) {
+        .on('keypress', function (e) {
             if (!$.isNumeric(String.fromCharCode(e.which))) e.preventDefault();
         })
-        .on('paste', function(e) {
+        .on('paste', function (e) {
             var cb = e.originalEvent.clipboardData || window.clipboardData;
             if (!$.isNumeric(cb.getData('text'))) e.preventDefault();
         });
@@ -75,8 +75,8 @@ $(document).ready(function() {
 });
 
 //Display children category when edit
-$(document).ready(function() {
-    (function() {
+$(document).ready(function () {
+    (function () {
         var id = $('#parent_category').val();
         // console.log(id);
         if (id != null) {
@@ -85,7 +85,7 @@ $(document).ready(function() {
                 method: 'GET',
                 dataType: 'JSON',
                 data: { id: id },
-                success: function(data) {
+                success: function (data) {
                     // console.log(data);
                     if ($('#parent_category').data('category-id') != null) {
                         var childId = $('#parent_category').data('category-id');
@@ -101,7 +101,7 @@ $(document).ready(function() {
                     if (data.length > 0) {
                         var output =
                             '<select name="category_id" class="form-control mb-3" id="localStorage">';
-                        $.each(data, function(key, val) {
+                        $.each(data, function (key, val) {
                             if (childId === val.id) {
                                 output +=
                                     '<option value="' +
@@ -132,8 +132,8 @@ $(document).ready(function() {
 });
 
 //Delete a photo
-$(document).ready(function() {
-    $('.button-image').on('click', function() {
+$(document).ready(function () {
+    $('.button-image').on('click', function () {
         var imgProduct = confirm(element('image'));
         if (imgProduct) {
             var imageId = $(this).data('image-id');
@@ -143,7 +143,7 @@ $(document).ready(function() {
                 type: 'DELETE',
                 dataType: 'JSON',
                 data: { image: imageId, _token: token },
-                success: function(data) {
+                success: function (data) {
                     // console.log(data);
                     $(
                         '#image-list .image-item[data-id^=' + data.data.id + ']'
@@ -155,14 +155,14 @@ $(document).ready(function() {
 });
 
 //Display lightbox js
-$(document).ready(function() {
+$(document).ready(function () {
     lightbox.option({
         wrapAround: true
     });
 });
 
 //Function to conduct use datatable for product
-$(function() {
+$(function () {
     $('#product-table').DataTable({
         processing: true,
         serverSide: true,
@@ -179,14 +179,14 @@ $(function() {
 });
 
 //Redirect to import page
-$('#uploadFile').on('click', function(e) {
+$('#uploadFile').on('click', function (e) {
     e.preventDefault();
     location.href = 'admin/products/import';
 });
 
 /***************************************************************/
 //Function use for category datatable
-$(function() {
+$(function () {
     $('#category-table').DataTable({
         processing: true,
         serverSide: true,
@@ -201,7 +201,7 @@ $(function() {
 });
 
 //Add class for table data to modify css
-$(document).ajaxComplete(function() {
+$(document).ajaxComplete(function () {
     if ($('table').attr('id') == 'category-table') {
         $('td').addClass('category-index');
     }
@@ -210,7 +210,7 @@ $(document).ajaxComplete(function() {
 /****************************************************************/
 
 //Function use for user datatable
-$(function() {
+$(function () {
     $('#user-table').DataTable({
         processing: true,
         serverSide: true,
@@ -236,9 +236,9 @@ function confirmedDeleteOrder(orders) {
 }
 
 //Make message disappear after times
-$(document).ready(function() {
+$(document).ready(function () {
     $('div.alert')
-        .delay(2000)
+        .delay(3000)
         .slideUp();
 });
 
@@ -247,22 +247,22 @@ $(document).ready(function() {
 Dropzone.options.dropzone = {
     maxFiles: 10,
     addRemoveLinks: true,
-    success: function(file, response) {
-        setTimeout(function() {
+    success: function (file, response) {
+        setTimeout(function () {
             alert(response.message);
         }, 1000);
     },
-    error: function(file, response) {
+    error: function (file, response) {
         var message = response.errors.file.join('\n');
-        setTimeout(function() {
+        setTimeout(function () {
             alert(message);
         }, 1000);
     }
 };
 
 //Delete a photo
-$(document).ready(function() {
-    $('.delete-slide').on('click', function() {
+$(document).ready(function () {
+    $('.delete-slide').on('click', function () {
         var result = confirm(element('image'));
         if (result) {
             var imageId = $(this).data('image-id');
@@ -273,7 +273,7 @@ $(document).ready(function() {
                 type: 'DELETE',
                 dataType: 'JSON',
                 data: { image: imageId, _token: token },
-                success: function(data) {
+                success: function (data) {
                     // console.log(data);
                     $(
                         '#image-list .image-item[data-id^=' + data.data.id + ']'
@@ -285,7 +285,7 @@ $(document).ready(function() {
 });
 
 /** HANDLE STATISTIC */
-$(function() {
+$(function () {
     var ctx1 = $('#mycanvas');
     //doughnut chart data
     var data1 = {

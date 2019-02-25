@@ -54,8 +54,7 @@
     <!-- Cart JS -->
     <script src="public_asset/js/cart.js"></script>
     <!-- Laravel Javascript Validation -->
-    <script type="text/javascript" src="public_asset/js/jsvalidation.js"></script>
-    {!! JsValidator::formRequest('App\Http\Requests\OrderRequest') !!}
+
 </body>
 
 </html> 

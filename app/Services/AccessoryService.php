@@ -87,6 +87,7 @@ class AccessoryService
             if ($request->parent_id === null) {
                 $message = Accessory::where('id', $id)->update([
                     'name' => $request->name,
+                    'parent_id' => null
                 ]);
             } else {
                 $message = Accessory::where('id', $id)->update([

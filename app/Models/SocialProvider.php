@@ -14,7 +14,7 @@ class SocialProvider extends Model
      * @var array
      */
     protected $fillable = [
-        'provider_id','provider'
+        'provider_id', 'provider'
     ];
 
     /**

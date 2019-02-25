@@ -18,7 +18,7 @@
                     <div class="header-advance-search">
                         <form action="{{route('product.search')}}" method="GET" autocomplete="off">
                             <div class="input"><input name='query' type="text" placeholder="@lang('public.header.search')" id="product-name" value="{{old('query')}}"></div>
-                            <div class="submit"><button><i class="icofont icofont-search-alt-1"></i></button></div>
+                            <div class="submit"><button class="search-button"><i class="icofont icofont-search-alt-1"></i></button></div>
                         </form>
                     </div><!-- Header Advance Search End -->
                     <div class="dropdown-menu text-center" id="productList"></div>

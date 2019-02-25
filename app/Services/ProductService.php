@@ -205,9 +205,13 @@ class ProductService
         $fileData = collect($data->pluck('name'))->map(function ($value) {
             return trim($value);
         })->filter();
-        $productName = Product::pluck('name');
+        $productName = Product::pluck('name')->map(function ($value) {
+            return trim($value);
+        })->filter();
         $compare = $fileData->diff($productName);
-        return $data->whereIn('name', $compare);
+        return $data->filter(function ($value) use ($compare) {
+            return $compare->contains(trim($value->name));
+        });
     }
 
     /**
@@ -335,7 +339,7 @@ class ProductService
     {
         return Product::with(['images'])
             ->join('categories', 'products.category_id', '=', 'categories.id')
-            ->select('products.name', 'products.id', 'products.unit_price', 'categories.parent_id', 'categories.id as categoryId', 'categories.name as categoryName')
+            ->select('products.name', 'products.id', 'products.unit_price', 'products.quantity', 'categories.parent_id', 'categories.id as categoryId', 'categories.name as categoryName')
             ->where('parent_id', $product->category->parent_id)
             ->get();
     }

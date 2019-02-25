@@ -116,8 +116,7 @@ class ProductController extends Controller
      */
     public function deleteImage(Request $request)
     {
-        $imageId = $request->image;
-        $response = ['data' => app(ImageService::class)->deleteImage($imageId), 'message' => 'success!', 'result' => 200];
+        $response = ['data' => app(ImageService::class)->deleteImage($request->image), 'message' => 'success!', 'result' => 200];
         return response()->json($response);
     }
 

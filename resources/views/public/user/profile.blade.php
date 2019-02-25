@@ -72,6 +72,7 @@
                                                                         <i class="ace-icon fa fa-home"></i>
                                                                     </span>
                                                                 </div>
+                                                                @include('admin.partials.error', ['err' => trans('master.content.attribute.address')])
                                                                 @endif
                                                             </div>
 
@@ -94,6 +95,7 @@
                                                                         <i class="ace-icon fa fa-phone fa-flip-horizontal"></i>
                                                                     </span>
                                                                 </div>
+                                                                @include('admin.partials.error', ['err' => trans('master.content.attribute.phone')])
                                                                 @endif
                                                             </div>
 

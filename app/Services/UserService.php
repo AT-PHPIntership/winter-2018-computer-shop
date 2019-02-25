@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\User;
 use App\Models\Order;
+use App\Models\Role;
 use App\Models\Comment;
 use App\Services\ImageService;
 use League\Flysystem\Exception;
@@ -95,6 +96,9 @@ class UserService
         try {
             $orders = Order::where('user_id', $user->id)->get();
             $comments = Comment::where('user_id', $user->id)->get();
+            if ($user->role->name == Role::ROLE_ADMIN) {
+                session()->flash('warning', __('master.content.message.admin'));
+            }
             if ($orders->count() > 0) {
                 session()->flash('warning', __('master.content.message.order'));
             } elseif ($comments->count() > 0) {

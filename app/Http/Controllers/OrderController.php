@@ -147,7 +147,7 @@ class OrderController extends Controller
     {
         $message = $this->orderService->update($request, $id);
         if ($message !== 0) {
-            return redirect()->route('orders.index')->with('message', Lang::get('master.content.message.update', ['attribute' => 'Order']));
+            return redirect()->route('orders.index')->with('message', Lang::get('master.content.message.update', ['attribute' => 'order']));
         } else {
             return redirect()->route('orders.index')->with('message', Lang::get('master.content.message.error'));
         }
@@ -164,7 +164,7 @@ class OrderController extends Controller
     {
         $message = $this->orderService->delete($id);
         if ($message === 1) {
-            return redirect()->route('orders.index')->with('message', Lang::get('master.content.message.delete', ['attribute' => 'Order']));
+            return redirect()->route('orders.index')->with('message', Lang::get('master.content.message.delete', ['attribute' => 'order']));
         } else {
             return redirect()->route('orders.index')->with('message', Lang::get('master.content.message.error'));
         }

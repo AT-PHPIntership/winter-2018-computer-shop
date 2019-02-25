@@ -8,7 +8,7 @@ use App\Models\OrderDetail;
 class Product extends Model
 {
     protected $table = 'products';
-    
+
     /**
      * The attributes that are mass assignable.
      *
@@ -26,7 +26,7 @@ class Product extends Model
     {
         return $this->belongsTo('App\Models\Category');
     }
-    
+
     /**
      * The function get unit price attribute
      *
@@ -38,7 +38,7 @@ class Product extends Model
     {
         return number_format($unitPrice, 0, ",", ",");
     }
-    
+
     /**
      * The function display relationship between product and accessory
      *

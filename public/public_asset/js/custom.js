@@ -170,6 +170,13 @@ $(document).bind('click', function (event) {
     }
 });
 
+//Prevent user click search button but don't input anything
+$(document).on('click', '.search-button', function () {
+    var input = $("#product-name").val();
+    if (input == "") {
+        return false;
+    }
+});
 //Add to value filter when user choose filter
 var output =
     '<h4>' +

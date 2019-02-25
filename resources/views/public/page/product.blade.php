@@ -53,10 +53,10 @@
 
                         <div class="actions">
 
-                            <a href="{{ route('public.cart') }}" id="{{ $products->id }}" data-name="{{ $products->name }}" data-price="{{ $products->unit_price }}" data-image="{{$products->images->first()['name']}}" class="add-to-cart"><i class="ti-shopping-cart"></i><span>@lang('public.content.addToCart')</span></a>
+                            <a href="{{ route('public.cart') }}" id="{{ $products->id }}" data-name="{{ $products->name }}" data-price="{{ $products->unit_price }}" data-quantity="{{ $products->quantity }}" data-image="{{$products->images->first()['name']}}" class="add-to-cart"><i class="ti-shopping-cart"></i><span>@lang('public.content.addToCart')</span></a>
 
                             <div class="wishlist-compare">
-                                <a class="compare-page" data-product="{{$products->id}}" data-tooltip="@lang('public.product.compare')"><i class="ti-control-shuffle"></i></a>
+                                <a class="compare-page" data-product="{{$products->id}}" data-tooltip="@lang('public.profile.compare')"><i class="ti-control-shuffle"></i></a>
                             </div>
 
                         </div>
@@ -118,7 +118,11 @@
                                         <article id="{{$comment->id}}">
                                             <div class="comment-des">
                                                 <div class="comment-by">
+                                                    @if(!is_null($comment->created_at))
                                                     <p class="author"><strong>{{$comment->user->name}}<span class="comment-time">{{$comment->created_at->diffForHumans()}}</span></strong></p>
+                                                    @else
+                                                    <p class="author"><strong>{{$comment->user->name}}<span class="comment-time">@lang('public.product.time.no')</span></strong></p>
+                                                    @endif
                                                     <span class="reply"><a class="add-reply" id='{{$comment->id}}'>@lang('public.product.reply')</a></span>
                                                 </div>
                                                 <section>
@@ -176,6 +180,7 @@
                 <div class="product-slider-wrap product-slider-arrow-one">
                     <div class="product-slider product-slider-4">
                         @foreach($relatedProduct as $product)
+                        @if ($product->id != $products->id)
                         <div class="col pb-20 pt-10">
                             <!-- Product Start -->
                             <div class="ee-product">
@@ -186,10 +191,10 @@
                                     <a href="product/{{$product->id}}" class="img"><img src="storage/product/{{$product->images->first()['name']}}" alt="Product Image"></a>
 
                                     <div class="wishlist-compare">
-                                        <a class="compare-page" data-product="{{$product->id}}" data-tooltip="@lang('public.product.compare')"><i class="ti-control-shuffle"></i></a>
+                                        <a class="compare-page" data-product="{{$product->id}}" data-tooltip="@lang('public.profile.compare')"><i class="ti-control-shuffle"></i></a>
                                     </div>
 
-                                    <a href="{{ route('public.cart') }}" id="{{ $product->id }}" data-name="{{ $product->name }}" data-price="{{ $product->unit_price }}" data-image="{{$product->images->first()['name']}}" class="add-to-cart"><i class="ti-shopping-cart"></i><span>@lang('public.content.addToCart')</span></a>
+                                    <a href="{{ route('public.cart') }}" id="{{ $product->id }}" data-name="{{ $product->name }}" data-price="{{ $product->unit_price }}" data-quantity="{{ $product->quantity }}" data-image="{{$product->images->first()['name']}}" class="add-to-cart"><i class="ti-shopping-cart"></i><span>@lang('public.content.addToCart')</span></a>
 
                                 </div>
 
@@ -215,6 +220,7 @@
 
                             </div><!-- Product End -->
                         </div>
+                        @endif
                         @endforeach
                     </div>
                 </div><!-- Product Slider Wrap End -->

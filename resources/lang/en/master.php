@@ -132,6 +132,7 @@ return [
             'img' => 'does not have :attribute',
             'order' => 'You can not delete the user because the user has order!',
             'role' => 'You can not delete the role because it used by the user!',
+            'admin' => 'You can not delete the user because he(she) was admin',
             'comment' => 'You can not delete the user because the user has comment at some product!',
             'user' => 'You can not delete the role because it used by the users!',
             'product' => 'You can not delete the category because it used by the products!',

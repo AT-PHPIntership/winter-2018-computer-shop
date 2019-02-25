@@ -30,7 +30,8 @@ class SocialProviderService
         if (!$socialProvider) {
             DB::beginTransaction();
             try {
-                if (!(User::where('email', $socialUser->getEmail())->first())) {
+                $checkEmailProvider = User::where('email', $socialUser->getEmail())->first();
+                if (!($checkEmailProvider)) {
                     //create a new user and provider
                     $user = User::firstOrCreate([
                         'email' => $socialUser->getEmail(),
@@ -45,7 +46,7 @@ class SocialProviderService
                     );
                     DB::commit();
                 } else {
-                    throw new InvalidStateException(__('public.login.duplicate'));
+                    throw new InvalidStateException(__('public.login.duplicate', ['attribute' => $checkEmailProvider->socialProviders->pluck('provider')->first()]));
                 }
             } catch (\Exception $ex) {
                 DB::rollback();

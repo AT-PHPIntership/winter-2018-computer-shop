@@ -49,18 +49,32 @@
                                         <label>Phone no*</label>
                                         <input type="text" placeholder="Phone number" name="phone" value="{{ old('phone') }}">
                                     </div>
-
+                                    @if ($errors->has('phone'))
+                                    <span class="help-block col-sm-12">
+                                        <strong class="col-xs-12 col-sm-12 text-danger">{{ $errors->first('phone') }}</strong>
+                                    </span>
+                                    @endif
 
                                     <div class="col-12 ">
                                         <label>Address*</label>
                                         <input type="text" placeholder="Address" name="address" value="{{ old('address') }}">
                                     </div>
+                                    @if ($errors->has('address'))
+                                    <span class="help-block col-sm-12">
+                                        <strong class="col-xs-12 col-sm-12 text-danger">{{ $errors->first('address') }}</strong>
+                                    </span>
+                                    @endif
 
 
                                     <div class="col-md-12 col-12">
                                         <label>Note</label>
                                         <input type="text" placeholder="Note" name="note" value="{{ old('note') }}">
                                     </div>
+                                    @if ($errors->has('note'))
+                                    <span class="help-block col-sm-12">
+                                        <strong class="col-xs-12 col-sm-12 text-danger">{{ $errors->first('note') }}</strong>
+                                    </span>
+                                    @endif
 
 
                                 </div>
@@ -123,10 +137,14 @@ if (isset($arrCode)) {
     var amount = 0;
     console.log(amount);
 </script>
+
 <?php
 
 }
 ?>
 
+
+<!-- <script type="text/javascript" src="public_asset/js/jsvalidation.js"></script>
+{!! JsValidator::formRequest('App\Http\Requests\OrderRequest') !!} -->
 <!-- Checkout Page End -->
 @endsection 

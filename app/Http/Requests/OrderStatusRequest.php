@@ -24,7 +24,19 @@ class OrderStatusRequest extends FormRequest
     public function rules()
     {
         return [
-            'status' => 'required|integer|between:1,2'
+            'status' => 'required|exists:orders,status'
+        ];
+    }
+
+    /**
+     * Return message alongside with validation
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'status.exists' => 'The status not found in orders table.',
         ];
     }
 }

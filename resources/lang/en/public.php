@@ -32,9 +32,9 @@ return [
         'click' => 'Don’t have account? please click',
         'with' => 'Also you can login with...',
         'social' => 'Login with',
-        'yet' => 'Your account is not activated yet.',
+        'yet' => 'Your account is not activated yet. Please activation it by your email!',
         'wrong' => 'Your email or password wrong',
-        'duplicate' => 'Email of the service used by another account',
+        'duplicate' => 'You already used this email to sign up with :attribute',
     ],
     'register' => [
         'name' => 'Your name here',
@@ -72,6 +72,9 @@ return [
         ],
         'quantity' => 'Quantity',
         'reply' => 'Reply',
+        'time' => [
+            'no' => 'Unknow Time'
+        ],
     ],
     'profile' => [
         'title' => 'Profile',
