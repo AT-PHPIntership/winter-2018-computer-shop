@@ -168,7 +168,6 @@ class OrderController extends Controller
     public function destroy($id)
     {
         $message = $this->orderService->delete($id);
-        dd($message);
         if ($message === 1) {
             return redirect()->route('orders.index')->with('message', Lang::get('master.content.message.delete', ['attribute' => 'Order']));
         } else {
