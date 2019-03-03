@@ -23,8 +23,16 @@ class RoleRequest extends FormRequest
      */
     public function rules()
     {
+        switch ($this->method()) {
+            case 'POST':
+                $id = '';
+                break;
+            case 'PUT':
+                $id = $this->role;
+                break;
+        }
         return [
-           'name' => 'required|min:3'
+            'name' => 'required|min:3|max:255|unique:roles,name,' . $id,
         ];
     }
 }

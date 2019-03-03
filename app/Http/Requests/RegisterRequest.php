@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+
 class RegisterRequest extends FormRequest
 {
     /**
@@ -23,10 +24,10 @@ class RegisterRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|min:3',
-            'email' => 'required|email|min:6|unique:users',
-            'password' => 'required|string|min:6|confirmed',
-            'role_id' => 'exists:roles,id,name,'.\App\Models\Role::ROLE_NORMAL,
+            'name' => 'required|min:3|max:255',
+            'email' => 'required|email|max:255|unique:users',
+            'password' => 'required|string|min:6|max:255|confirmed',
+            'role_id' => 'exists:roles,id,name,' . \App\Models\Role::ROLE_NORMAL,
             'is_actived' => 'in:0'
         ];
     }

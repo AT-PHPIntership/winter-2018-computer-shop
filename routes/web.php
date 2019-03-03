@@ -25,7 +25,8 @@ Route::get('cart', 'PublicController@cart')->name('public.cart');
 
 //User route
 Route::group(['prefix' => 'user', 'middleware' => 'user.login'], function () {
-    Route::get('checkout', 'PublicController@checkout')->name('public.checkout');
+    Route::get('checkout/{amount}/{codeId}', 'PublicController@checkout')->name('public.checkout');
+    Route::get('infor/order', 'PublicController@inforOder')->name('public.infor.order');
     Route::post('order/create', 'OrderController@createOrder')->name('public.order');
     Route::post('code', 'CodeController@applyCode')->name('public.code');
     Route::get('profile', 'UserController@userProfile')->name('user.profile');

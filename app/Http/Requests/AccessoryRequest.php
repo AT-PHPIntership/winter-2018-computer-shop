@@ -32,7 +32,7 @@ class AccessoryRequest extends FormRequest
                 break;
         }
         return [
-            'name' => 'required|min:3|unique:accessories,name,' . $id,
+            'name' => 'required|min:3|max:255|unique:accessories,name,' . $id,
             'parent_id' => 'nullable|exists:accessories,id',
         ];
     }

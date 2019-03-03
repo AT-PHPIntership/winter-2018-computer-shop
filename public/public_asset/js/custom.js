@@ -1,8 +1,6 @@
 //Make message disappear after times
 $(document).ready(function () {
-    $('div.alert')
-        .delay(5000)
-        .slideUp();
+    $('div.alert').delay(5000).slideUp();
 });
 
 //Display lightbox js
@@ -132,12 +130,7 @@ $(document).ready(function () {
                         if (data.length > 0) {
                             var output = '<ul class="product-list">';
                             $.each(data, function (key, val) {
-                                output +=
-                                    '<li class="product-items"><a href="product/' +
-                                    val.id +
-                                    '">' +
-                                    val.name +
-                                    '</a></li>';
+                                output += '<li class="product-items"><a href="product/' + val.id + '">' + val.name + '</a></li>';
                             });
                             output += '</ul>';
                             // console.log(output);
@@ -160,12 +153,7 @@ $(document).ready(function () {
 //Disappear search result when click out of form
 $(document).bind('click', function (event) {
     // Check if we have not clicked on the search box
-    if (
-        !$(event.target)
-            .parents()
-            .andSelf()
-            .is('#product-name')
-    ) {
+    if (!$(event.target).parents().andSelf().is('#product-name')) {
         $('#productList').fadeOut();
     }
 });
@@ -178,13 +166,7 @@ $(document).on('click', '.search-button', function () {
     }
 });
 //Add to value filter when user choose filter
-var output =
-    '<h4>' +
-    filter('title') +
-    '<span class="filter-value">' +
-    GetURLParameter('val') +
-    '</span>' +
-    '</h4>';
+var output = '<h4>' + filter('title') + '<span class="filter-value">' + GetURLParameter('val') + '</span>' + '</h4>';
 $('#filter-place').html(output);
 
 //Function to get param URL
@@ -194,9 +176,7 @@ function GetURLParameter(sParam) {
     for (var i = 0; i < sURLVariables.length; i++) {
         var sParameterName = sURLVariables[i].split('=');
         if (sParameterName[0] == sParam) {
-            return sParameterName[1] === undefined
-                ? true
-                : decodeURIComponent(sParameterName[1]);
+            return sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
         }
     }
 }
@@ -224,25 +204,12 @@ $(document).ready(function () {
                     success: function (data) {
                         // console.log(data);
                         var output = '';
-                        output +=
-                            '<li class="comment-border" data-id=' +
-                            data.id +
-                            '>';
+                        output += '<li class="comment-border" data-id=' + data.id + '>';
                         output += '<article id=' + data.id + '>';
                         output += '<div class="comment-des">';
                         output += '<div class="comment-by">';
-                        output +=
-                            '<p class="author"><strong>' +
-                            comment('author') +
-                            '<span class="comment-time">' +
-                            comment('time') +
-                            '</span></strong></p>';
-                        output +=
-                            '<span class="reply"><a class="add-reply" id=' +
-                            data.id +
-                            '>' +
-                            comment('reply') +
-                            '</a></span>';
+                        output += '<p class="author"><strong>' + comment('author') + '<span class="comment-time">' + comment('time') + '</span></strong></p>';
+                        output += '<span class="reply"><a class="add-reply" id=' + data.id + '>' + comment('reply') + '</a></span>';
                         output += '</div>';
                         output += '<section>';
                         output += '<p>' + data.content + '</p>';
@@ -267,26 +234,13 @@ $(document).on('click', '.add-reply', function () {
         var articleId = $(this).attr('id');
         var output = '';
         output += '<div class="replyForm" id=' + articleId + '>';
-        output +=
-            '<h3>' +
-            comment('add') +
-            '<a class="cancelRely">' +
-            comment('cancel') +
-            '</a></h3>';
+        output += '<h3>' + comment('add') + '<a class="cancelRely">' + comment('cancel') + '</a></h3>';
         output += '<div class="ratting-form row">';
         output += '<div class="col-12 mb-15">';
-        output +=
-            '<textarea name="review" id="reply-content" placeholder="' +
-            comment('write') +
-            '"></textarea>';
+        output += '<textarea name="review" id="reply-content" placeholder="' + comment('write') + '"></textarea>';
         output += '</div>';
         output += '<div class="col-12">';
-        output +=
-            '<input id="reply-button" value="' +
-            comment('addReply') +
-            '" data-comment=' +
-            articleId +
-            ' type="submit">';
+        output += '<input id="reply-button" value="' + comment('addReply') + '" data-comment=' + articleId + ' type="submit">';
         output += '</div>';
         output += '</div>';
         output += '</div>';
@@ -312,46 +266,43 @@ $(document).on('click', '#reply-button', function () {
     var productId = $('#comment-button').data('product');
     var replyContent = $('#reply-content').val();
     // debugger;
-    if (replyContent !== '') {
-        $.ajax({
-            url: 'product/reply',
-            method: 'POST',
-            dataType: 'JSON',
-            data: {
-                userId: userId,
-                productId: productId,
-                content: replyContent,
-                _token: token,
-                parentComment: commentId
-            },
-            success: function (data) {
-                // console.log(data.parent_id);
-                var output = '';
-                output += '<ol class="children" id="commentChildren">';
-                output += '<li class="comment-border" id=' + data.id + '>';
-                output += '<article id=' + data.id + '>';
-                output += '<div class="comment-des">';
-                output += '<div class="comment-by">';
-                output +=
-                    '<p class="author"><strong>' +
-                    comment('author') +
-                    '<span class="comment-time">' +
-                    comment('time') +
-                    '</span></strong></p>';
-                output += '</div>';
-                output += '<section>';
-                output += '<p>' + data.content + '</p>';
-                output += '</section>';
-                output += '</div>';
-                output += '</article>';
-                output += '</li>';
-                output += '</ol>';
-                $('div .replyForm[id=' + data.parent_id + ']').remove();
-                $('.comment-border[data-id=' + data.parent_id + ']').append(
-                    output
-                );
-                $('.add-reply').removeAttr('disabled');
-            }
-        });
+    if (userId != undefined) {
+        if (replyContent !== '') {
+            $.ajax({
+                url: 'product/reply',
+                method: 'POST',
+                dataType: 'JSON',
+                data: {
+                    userId: userId,
+                    productId: productId,
+                    content: replyContent,
+                    _token: token,
+                    parentComment: commentId
+                },
+                success: function (data) {
+                    // console.log(data.parent_id);
+                    var output = '';
+                    output += '<ol class="children" id="commentChildren">';
+                    output += '<li class="comment-border" id=' + data.id + '>';
+                    output += '<article id=' + data.id + '>';
+                    output += '<div class="comment-des">';
+                    output += '<div class="comment-by">';
+                    output += '<p class="author"><strong>' + comment('author') + '<span class="comment-time">' + comment('time') + '</span></strong></p>';
+                    output += '</div>';
+                    output += '<section>';
+                    output += '<p>' + data.content + '</p>';
+                    output += '</section>';
+                    output += '</div>';
+                    output += '</article>';
+                    output += '</li>';
+                    output += '</ol>';
+                    $('div .replyForm[id=' + data.parent_id + ']').remove();
+                    $('.comment-border[data-id=' + data.parent_id + ']').append(output);
+                    $('.add-reply').removeAttr('disabled');
+                }
+            });
+        }
+    } else {
+        location.href = 'login';
     }
 });

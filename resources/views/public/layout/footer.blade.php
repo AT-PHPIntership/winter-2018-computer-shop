@@ -30,7 +30,7 @@
                         <ul class="link-widget">
                             <li><a href="{{route('user.profile')}}">@lang('public.header.account')</a></li>
                             <li><a href="{{route('public.cart')}}">@lang('public.header.cart')</a></li>
-                            <li><a href="{{route('public.checkout')}}">@lang('public.footer.checkout')</a></li>
+                            <li><a href="{{route('public.checkout', ['amount' => 0, 'codeId' => 0])}}">@lang('public.footer.checkout')</a></li>
                         </ul>
 
                     </div>

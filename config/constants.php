@@ -79,4 +79,8 @@ return [
         ],
         'number_paginate' => '10'
     ],
+    'unit_price' => [
+        'min' => 1000000,
+        'max' => 500000000,
+    ],
 ];

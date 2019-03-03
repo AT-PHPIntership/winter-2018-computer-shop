@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Lang;
 use App\Services\RoleService;
 use App\Http\Requests\RoleRequest;
+use App\Models\Role;
 
 class RoleController extends Controller
 {
@@ -61,9 +62,10 @@ class RoleController extends Controller
      *
      * @return [view]     [update page]
      */
-    public function edit($id)
+    // public function edit($id)
+    public function edit(Role $role)
     {
-        $role = $this->roleService->edit($id);
+        // $role = $this->roleService->edit($id);
         return view('admin.roles.update', compact('role'));
     }
 

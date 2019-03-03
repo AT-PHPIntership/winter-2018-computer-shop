@@ -107,6 +107,9 @@ class ProductService
             $request['unit_price'] = (int)str_replace(',', '', request('unit_price'));
             $product->update($request);
             app(ImageService::class)->addMultipleImage($request, $product);
+            if (!is_null($request['deleteImage'])) {
+                app(ImageService::class)->deleteImage($request['deleteImage']);
+            }
             $this->syncAccessory($request, $product);
             DB::commit();
             session()->flash('message', __('master.content.message.update', ['attribute' => trans('master.content.attribute.product')]));
@@ -400,11 +403,7 @@ class ProductService
                     ->where('name', 'LIKE', '%' . str_replace('-', '%', $query) . '%');
             })->paginate(config('constants.category.all'))->appends(['query' => $query, 'val' => $value, 'parentId' => $parentId]);
         } elseif ($query == max(array_keys(config('constants.price')))) {
-            return Product::where(
-                'unit_price',
-                '>',
-                config("constants.price.{$query}")
-            )->paginate(config('constants.category.all'))->appends(['query' => $query, 'val' => $value]);
+            return Product::where('unit_price', '>', config("constants.price.{$query}"))->paginate(config('constants.category.all'))->appends(['query' => $query, 'val' => $value]);
         } else {
             $increase = $query + 1;
             return Product::where([

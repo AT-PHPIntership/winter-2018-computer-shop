@@ -32,7 +32,7 @@ class CategoryRequest extends FormRequest
                 break;
         }
         return [
-            'name' => 'required|min:2|unique:categories,name,' . $id,
+            'name' => 'required|min:2|max:255|unique:categories,name,' . $id,
             'parent_id' => 'nullable|exists:categories,id',
             'image' => 'image|max:5000'
         ];

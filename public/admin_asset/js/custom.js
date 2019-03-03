@@ -15,12 +15,7 @@ $(document).ready(function () {
                     var output =
                         '<select name="category_id" class="form-control mb-3" id="localStorage">';
                     $.each(data, function (key, val) {
-                        output +=
-                            '<option value="' +
-                            val.id +
-                            '">' +
-                            val.name +
-                            '</option>';
+                        output += '<option value="' + val.id + '">' + val.name + '</option>';
                     });
                     output += '</select>';
                     $('#child_category').html(output);
@@ -36,9 +31,7 @@ $(document).ready(function () {
 /*************************/
 //Get value of select option of category at Add Product page
 $(document).ajaxComplete(function () {
-    var autoSelect = $('#localStorage')
-        .find(':selected')
-        .val();
+    var autoSelect = $('#localStorage').find(':selected').val();
     localStorage.setItem('autoSelect', JSON.stringify(autoSelect));
     // console.log(autoSelect)
     $('#localStorage').change(function () {
@@ -62,15 +55,9 @@ $(document).ready(function () {
             if (!$.isNumeric(cb.getData('text'))) e.preventDefault();
         });
     function formatCurrency(number) {
-        var n = number
-            .split('')
-            .reverse()
-            .join('');
+        var n = number.split('').reverse().join('');
         var n2 = n.replace(/\d\d\d(?!$)/g, '$&,');
-        return n2
-            .split('')
-            .reverse()
-            .join('');
+        return n2.split('').reverse().join('');
     }
 });
 
@@ -103,20 +90,9 @@ $(document).ready(function () {
                             '<select name="category_id" class="form-control mb-3" id="localStorage">';
                         $.each(data, function (key, val) {
                             if (childId === val.id) {
-                                output +=
-                                    '<option value="' +
-                                    val.id +
-                                    '"' +
-                                    'selected>' +
-                                    val.name +
-                                    '</option>';
+                                output += '<option value="' + val.id + '"' + 'selected>' + val.name + '</option>';
                             } else {
-                                output +=
-                                    '<option value="' +
-                                    val.id +
-                                    '">' +
-                                    val.name +
-                                    '</option>';
+                                output += '<option value="' + val.id + '">' + val.name + '</option>';
                             }
                         });
                         output += '</select>';
@@ -131,7 +107,19 @@ $(document).ready(function () {
     })();
 });
 
-//Delete a photo
+//Delete a photo of a product 
+$(document).ready(function () {
+    $('.delete-image').on('click', function () {
+        var imgProduct = confirm(element('image'));
+        if (imgProduct) {
+            var imageId = $(this).data('image-id');
+            $("#deleteImage").val(imageId);
+            $('#image-list .image-item[data-id^=' + imageId + ']').remove();
+        }
+    });
+});
+
+//Delete a banner 
 $(document).ready(function () {
     $('.button-image').on('click', function () {
         var imgProduct = confirm(element('image'));
@@ -145,9 +133,7 @@ $(document).ready(function () {
                 data: { image: imageId, _token: token },
                 success: function (data) {
                     // console.log(data);
-                    $(
-                        '#image-list .image-item[data-id^=' + data.data.id + ']'
-                    ).remove();
+                    $('#image-list .image-item[data-id^=' + data.data.id + ']').remove();
                 }
             });
         }
@@ -237,9 +223,7 @@ function confirmedDeleteOrder(orders) {
 
 //Make message disappear after times
 $(document).ready(function () {
-    $('div.alert')
-        .delay(3000)
-        .slideUp();
+    $('div.alert').delay(3000).slideUp();
 });
 
 /***********************Slide function***************************/

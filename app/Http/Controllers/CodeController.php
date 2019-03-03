@@ -95,10 +95,12 @@ class CodeController extends Controller
         $message = $this->codeService->update($request, $id);
         if ($message === 1) {
             return redirect()->route('codes.index')->with('message', Lang::get('master.content.message.update', [
-            'attribute' => 'code']));
+                'attribute' => 'code'
+            ]));
         } else {
             return Redirect::back()->with('message', Lang::get('master.content.message.error', [
-            'attribute' => Lang::get('master.content.attribute.code')]));
+                'attribute' => Lang::get('master.content.attribute.code')
+            ]));
         }
     }
 
@@ -114,10 +116,12 @@ class CodeController extends Controller
         $message = $this->codeService->delete($id);
         if ($message === 1) {
             return redirect()->route('codes.index')->with('message', Lang::get('master.content.message.delete', [
-            'attribute' => 'code']));
+                'attribute' => 'code'
+            ]));
         } else {
             return redirect()->route('codes.index')->with('message', Lang::get('master.content.message.error', [
-                'attribute' => Lang::get('master.content.attribute.code')]));
+                'attribute' => Lang::get('master.content.attribute.code')
+            ]));
         }
     }
 
@@ -160,7 +164,8 @@ class CodeController extends Controller
                     );
                     $message = 'Code applyed';
                     // $userCode->delete();
-                    return view('public.page.checkout', compact('arrCode', 'message'));
+                    // return view('public.page.checkout', compact('arrCode', 'message'));
+                    return redirect()->route('public.checkout', ['amount' => $amount, 'codeId' => $codeId])->with('message', $message);
                 }
                 // dd($userCode->delete());
             } else {

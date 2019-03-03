@@ -46,11 +46,12 @@ class OrderController extends Controller
      */
     public function createOrder(OrderRequest $request)
     {
+        $codeIdInt = (int)($request->codeId);
         // delete code applyed
-        if (isset($request->codeId)) {
-            $codeId = $request->codeId;
+        if ($codeIdInt !== 0) {
+            $codeId = $codeIdInt;
             $userId = $request->userId;
-            $codeUser = UserCode::where('user_id', $userId)->Where('code_id', $codeId)->first();
+            $codeUser = UserCode::where('user_id', $userId)->Where('code_id', $codeIdInt)->first();
             $codeUserID = $codeUser->id;
             $codeUser->delete();
 
@@ -108,7 +109,8 @@ class OrderController extends Controller
         });
         // Send mail to custommer
 
-        return redirect()->route('public.home')->with('message', 'Order successful');
+        return redirect()->route('public.infor.order');
+        // return redirect()->route('public.home')->with('message', 'Order successful');
     }
 
     /**

@@ -93,6 +93,10 @@ return [
         'button' => 'add review',
         'compare' => 'Compare',
     ],
+    'unit_price' => [
+        'min' => 'The price input field must be at least :min.',
+        'max' => 'The price input field may not be greater than :max.',
+    ],
     'search' => [
         'title' => 'Search',
         'of' => 'of',

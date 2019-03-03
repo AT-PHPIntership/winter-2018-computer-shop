@@ -18,6 +18,12 @@
     top: 0;
     right: 0;
 }
+
+.image-list .delete-image {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
 .image-list .delete-slide {
     position: absolute;
     top: 0;

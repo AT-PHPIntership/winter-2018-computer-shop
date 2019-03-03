@@ -8,12 +8,12 @@
     <div class="container">
         <div class="row">
             <div class="col-12">
-                @if(isset($message))
+                @if(session('message'))
                 <div class="col-12 alert alert-success">
                     <button type="button" class="close" data-dismiss="alert">
                         <i class="ace-icon fa fa-times"></i>
                     </button>
-                    {{ $message }}
+                    {{ session('message') }}
                 </div>
                 @endif
 
@@ -40,9 +40,11 @@
                                     <div class="col-md-6 col-12 mb-20">
                                         <label>Email Address</label>
                                         <input readonly type="email" name="email" placeholder="Email Address" value="{{ Auth::user()->email }}">
-                                        @isset($arrCode)
-                                        <input type="hidden" id="codeId" name="codeId" value="{{ $arrCode ? $arrCode['codeId'] : "" }}">
-                                        @endisset
+
+                                        @php
+                                        $urlValue = explode('/', $_SERVER['REQUEST_URI']);
+                                        @endphp
+                                        <input type="hidden" id="codeId" name="codeId" value="{{ $urlValue[4] }}">
                                     </div>
 
                                     <div class="col-12 mb-20">
@@ -123,10 +125,10 @@
     </div>
 </div>
 <?php
-if (isset($arrCode)) {
+if (isset($urlValue[3])) {
     ?>
 <script type="text/javascript">
-    var amount = <?php echo json_decode($arrCode['amount']) ?>;
+    var amount = <?php echo json_decode($urlValue[3]) ?>;
     console.log(amount);
 </script>
 <?php

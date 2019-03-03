@@ -105,7 +105,7 @@ class PublicController extends Controller
         return view('public.page.filter', compact('products', 'value'));
     }
 
-     /**
+    /**
      * Get product from keyword in filter field
      *
      *@param request $request [request to get product]
@@ -162,5 +162,15 @@ class PublicController extends Controller
     public function checkout()
     {
         return view('public.page.checkout');
+    }
+
+    /**
+     * Display page checkout
+     *
+     * @return void
+     */
+    public function inforOder()
+    {
+        return view('public.page.ordered');
     }
 }
