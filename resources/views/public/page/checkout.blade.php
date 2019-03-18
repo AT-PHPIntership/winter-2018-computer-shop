@@ -135,7 +135,6 @@ if (isset($urlValue[3])) {
     console.log(amount);
 </script>
 <?php
-
 } else {
     ?>
 <script type="text/javascript">
@@ -144,7 +143,6 @@ if (isset($urlValue[3])) {
 </script>
 
 <?php
-
 }
 ?>
 

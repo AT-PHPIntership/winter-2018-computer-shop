@@ -144,7 +144,7 @@ class PublicController extends Controller
         return response()->json($response);
     }
 
-    /*
+    /**
      * Display page cart
      *
      * @return void
@@ -164,6 +164,11 @@ class PublicController extends Controller
         return view('public.page.checkout');
     }
 
+    /**
+     * Display page checkout
+     *
+     * @return void
+     */
     public function inforOder()
     {
         return view('public.page.ordered');

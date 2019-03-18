@@ -62,7 +62,7 @@ class OrderService
     }
 
     /**
-     * Export file collect order based on month 
+     * Export file collect order based on month
      *
      * @return file xlsx
      */
@@ -70,7 +70,7 @@ class OrderService
     {
         $lastMonth = Carbon::now()->subMonth()->month;
         $month = Carbon::now()->month;
-        $data = Order::whereMonth('date_order', '>=',$lastMonth)
+        $data = Order::whereMonth('date_order', '>=', $lastMonth)
                         ->get();
         Excel::create('month_' . $lastMonth . '_' . $month . '_order', function ($excel) use ($data) {
             $excel->sheet('order', function ($sheet) use ($data) {

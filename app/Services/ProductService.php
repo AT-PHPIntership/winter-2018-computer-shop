@@ -21,7 +21,7 @@ class ProductService
      *
      * @return object [object]
      */
-    public function dataTable()
+    protected function dataTable()
     {
         $products = Product::select(['id', 'name', 'quantity', 'unit_price', 'category_id']);
         return Datatables::of($products)
@@ -45,7 +45,7 @@ class ProductService
     {
         DB::beginTransaction();
         try {
-            $request['unit_price'] = (int)str_replace(',', '', $request['unit_price']);
+            $request['unit_price'] = (int) str_replace(',', '', $request['unit_price']);
             $product = Product::create($request);
             if (array_key_exists('images', $request)) {
                 foreach ($request['images'] as $images) {
@@ -68,7 +68,7 @@ class ProductService
         }
     }
 
-    /*
+    /**
      * Handle store a product to database
      *
      * @param object $product [request show details a product]
@@ -104,7 +104,7 @@ class ProductService
     {
         DB::beginTransaction();
         try {
-            $request['unit_price'] = (int)str_replace(',', '', request('unit_price'));
+            $request['unit_price'] = (int) str_replace(',', '', request('unit_price'));
             $product->update($request);
             app(ImageService::class)->addMultipleImage($request, $product);
             $this->syncAccessory($request, $product);

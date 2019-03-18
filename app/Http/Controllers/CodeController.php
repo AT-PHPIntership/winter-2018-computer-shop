@@ -154,10 +154,10 @@ class CodeController extends Controller
                 if ($userCode === null) {
                     return redirect()->back()->with('message', 'Code used');
                 } else {
-                    $arrCode = array(
-                        'codeId' => $codeId,
-                        'amount' =>  $amount
-                    );
+                    // $arrCode = array(
+                    //     'codeId' => $codeId,
+                    //     'amount' =>  $amount
+                    // );
                     $message = 'Code applyed';
                     // $userCode->delete();
                     // return view('public.page.checkout', compact('arrCode', 'message'));

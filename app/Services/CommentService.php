@@ -43,7 +43,6 @@ class CommentService
             'content' => $content,
             'parent_id' => $parentComment,
         ]);
-    
     }
     /**
      * Get list comments
