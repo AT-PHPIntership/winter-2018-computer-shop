@@ -33,7 +33,7 @@ class ActivationService
             session()->flash('message', __('public.email.code'));
         } catch (Exception $ex) {
             session()->flash('warning', __('master.content.message.error', ['attribute' => $ex->getMessage()]));
-            return redirect()->back();
+            return back();
         }
     }
 

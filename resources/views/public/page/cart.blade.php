@@ -80,7 +80,7 @@
                                 <p>Total <span id="total-price">0 d</span></p>
                             </div>
                             <div class="cart-summary-button">
-                                <a href="{{ route('public.checkout') }}"><button class="checkout-btn">Checkout</button></a>
+                                <a href="{{ route('public.checkout', ['amount' => 0, 'codeId' => 0]) }}"><button class="checkout-btn">Checkout</button></a>
                             </div>
                         </div>
                     </div>

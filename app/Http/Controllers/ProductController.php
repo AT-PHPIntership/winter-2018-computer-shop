@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\ProductRequest;
 use App\Http\Requests\ImportRequest;
 use App\Services\ProductService;
+use App\Services\ImageService;
 use App\Models\Product;
 
 class ProductController extends Controller
@@ -30,7 +31,7 @@ class ProductController extends Controller
         return app(ProductService::class)->dataTable();
     }
 
-     /**
+    /**
      * Show the form for import a new resource.
      *
      * @return \Illuminate\Http\Response
@@ -76,7 +77,7 @@ class ProductController extends Controller
      */
     public function store(ProductRequest $request)
     {
-        app(ProductService::class)->store($request);
+        app(ProductService::class)->store($request->all());
         return redirect()->route('products.index');
     }
 
@@ -89,7 +90,8 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        return view('admin.products.show', compact('product'));
+        $products = app(ProductService::class)->show($product);
+        return view('admin.products.show', compact('products'));
     }
 
     /**
@@ -114,8 +116,7 @@ class ProductController extends Controller
      */
     public function deleteImage(Request $request)
     {
-        $imageId = $request->image;
-        $response = ['data' => app(ProductService::class)->deleteImage($imageId),'message' => 'success!', 'result' => 200];
+        $response = ['data' => app(ImageService::class)->deleteImage($request->image), 'message' => 'success!', 'result' => 200];
         return response()->json($response);
     }
 
@@ -130,6 +131,19 @@ class ProductController extends Controller
     public function update(ProductRequest $request, Product $product)
     {
         app(ProductService::class)->update($request->all(), $product);
+        return redirect()->route('products.index');
+    }
+
+    /**
+     * Delete a created resource in storage.
+     *
+     * @param object $product [binding product model]
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Product $product)
+    {
+        app(ProductService::class)->delete($product);
         return redirect()->route('products.index');
     }
 }

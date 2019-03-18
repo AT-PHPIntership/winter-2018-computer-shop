@@ -9,9 +9,11 @@ use App\Models\OrderDetail;
 class Order extends Model
 {
     protected $table = 'orders';
-    const PENDING_STATUS = 1;
-    const APPROVE_STATUS = 2;
-    const CANCEL_STATUS = 0;
+
+    //Constant status order
+    const PENDING_STATUS = 'Pending';
+    const APPROVE_STATUS = 'Approve';
+    const CANCEL_STATUS = 'Cancel';
 
     /**
      * The attributes that are mass assignable.
@@ -50,12 +52,12 @@ class Order extends Model
     public function getCurrentStatusAttribute()
     {
         switch ($this->status) {
-            case self::PENDING_STATUS:
-                return config('constants.order.status.pending');
-            case self::APPROVE_STATUS:
-                return config('constants.order.status.approve');
-            case self::CANCEL_STATUS:
-                return config('constants.order.status.cancel');
+            case config('constants.order.status.pending'):
+                return self::PENDING_STATUS;
+            case config('constants.order.status.approve'):
+                return self::APPROVE_STATUS;
+            case config('constants.order.status.cancel'):
+                return self::CANCEL_STATUS;
             default:
         }
     }

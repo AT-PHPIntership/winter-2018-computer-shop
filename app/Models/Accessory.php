@@ -8,16 +8,16 @@ use Kalnoy\Nestedset\NodeTrait;
 class Accessory extends Model
 {
     use NodeTrait;
-
+    
     protected $table = 'accessories';
-
+    
      /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $guarded = ['id'];
-
+    
      /**
      * The function display relationship between product and accessory
      *
@@ -27,7 +27,7 @@ class Accessory extends Model
     {
         return $this->belongsToMany('App\Models\Product')->withTimestamps();
     }
-
+    
     /**
      * The function to take all parent accessory
      *
@@ -39,7 +39,7 @@ class Accessory extends Model
     {
         $builder->whereNull('parent_id');
     }
-
+    
     /**
      * The function to take all parent accessory
      *

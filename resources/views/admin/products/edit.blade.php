@@ -19,7 +19,7 @@
             @csrf
               <div class="form-group">
                 <label class="form-control-label">@lang('master.content.form.name')</label>
-                <input name="name" type="text" placeholder="Enter product name" class="form-control" value="{{ $products->name }}">
+                <input name="name" type="text" placeholder="Enter product name" class="form-control" value="{{ $products->name }}" required>
                 @include('admin.partials.error', ['err' => 'name'])
               </div>
               <div class="form-group">
@@ -28,12 +28,12 @@
               </div>
               <div class="form-group">
                 <label class="form-control-label">@lang('master.content.form.price')</label>
-                <input name="unit_price" type="text" placeholder="Enter product price" class="form-control" value="{{  $products->unit_price  }}" id='formatCurrency'>
+                <input name="unit_price" type="text" placeholder="Enter product price" class="form-control" value="{{  $products->unit_price  }}" id='formatCurrency' required>
                 @include('admin.partials.error', ['err' => 'unit_price'])
               </div>
               <div class="form-group">
                 <label class="form-control-label">@lang('master.content.form.quantity')</label>
-                <input name="quantity" type="number" placeholder="Enter product quantity" class="form-control" value="{{  $products->quantity }}">
+                <input name="quantity" type="number" placeholder="Enter product quantity" class="form-control" value="{{  $products->quantity }}" required>
                 @include('admin.partials.error', ['err' => 'quantity'])
               </div>
               <div class="form-group">
@@ -71,6 +71,7 @@
               <div class="form-group row">
                 <label class="col-sm-3 form-control-label">@lang('master.content.table.ram')</label>
                 <div class="col-sm-9">
+                  @if ($products->accessories->pluck('parent')->pluck("name")->contains(trans('master.content.table.ram')))
                   <select name="accessory_id[]" class="form-control mb-3">
                     @foreach($accessories->where('name', trans('master.content.table.ram')) as $rams)
                       @foreach($rams->childrens as $ram)
@@ -82,12 +83,25 @@
                     @endforeach
                     @endforeach
                   </select>
+                  @else
+                  <select name="accessory_id[]" class="form-control mb-3">
+                  <option value="" selected disabled hidden>@lang('master.content.select.choose')</option>
+                    @foreach($accessories->where('name', trans('master.content.table.ram')) as $rams)
+                        @foreach($rams->childrens as $ram)
+                        <option value="{{$ram->id}}">
+                          {{$ram->name}}
+                        </option>
+                        @endforeach
+                    @endforeach
+                  </select>
+                  @endif 
                   @include('admin.partials.error', ['err' => 'accessory_id.0'])
                 </div>
               </div>
               <div class="form-group row">
                 <label class="col-sm-3 form-control-label">@lang('master.content.table.cpu')</label>
                 <div class="col-sm-9">
+                @if ($products->accessories->pluck('parent')->pluck("name")->contains(trans('master.content.table.cpu')))
                   <select name="accessory_id[]" class="form-control mb-3">
                     @foreach($accessories->where('name', trans('master.content.table.cpu')) as $cpus)
                       @foreach($cpus->childrens as $cpu)
@@ -99,12 +113,25 @@
                     @endforeach
                     @endforeach
                   </select>
+                  @else
+                  <select name="accessory_id[]" class="form-control mb-3">
+                  <option value="" selected disabled hidden>@lang('master.content.select.choose')</option>
+                    @foreach($accessories->where('name', trans('master.content.table.cpu')) as $cpus)
+                      @foreach($cpus->childrens as $cpu)
+                        <option value="{{$cpu->id}}">
+                          {{$cpu->name}}
+                        </option>
+                    @endforeach
+                    @endforeach
+                  </select>
+                  @endif
                   @include('admin.partials.error', ['err' => 'accessory_id.1'])
                 </div>
               </div>
               <div class="form-group row">
                 <label class="col-sm-3 form-control-label">@lang('master.content.table.hdd')</label>
                 <div class="col-sm-9">
+                @if ($products->accessories->pluck('parent')->pluck("name")->contains(trans('master.content.table.hdd')))
                   <select name="accessory_id[]" class="form-control mb-3">
                     @foreach($accessories->where('name', trans('master.content.table.hdd')) as $hdds)
                       @foreach($hdds->childrens as $hdd)
@@ -116,12 +143,25 @@
                     @endforeach
                     @endforeach
                   </select>
+                  @else
+                  <select name="accessory_id[]" class="form-control mb-3">
+                  <option value="" selected disabled hidden>@lang('master.content.select.choose')</option>
+                    @foreach($accessories->where('name', trans('master.content.table.hdd')) as $hdds)
+                      @foreach($hdds->childrens as $hdd)
+                        <option value="{{$hdd->id}}">
+                          {{$hdd->name}}
+                        </option>
+                    @endforeach
+                    @endforeach
+                  </select>
+                  @endif
                   @include('admin.partials.error', ['err' => 'accessory_id.2'])
                 </div>
               </div>
               <div class="form-group row">
                 <label class="col-sm-3 form-control-label">@lang('master.content.table.monitor')</label>
                 <div class="col-sm-9">
+                @if ($products->accessories->pluck('parent')->pluck("name")->contains(trans('master.content.table.monitor')))
                   <select name="accessory_id[]" class="form-control mb-3">
                     @foreach($accessories->where('name', trans('master.content.table.monitor')) as $monitors)
                       @foreach($monitors->childrens as $monitor)
@@ -133,12 +173,25 @@
                     @endforeach
                     @endforeach
                   </select>
+                  @else
+                  <select name="accessory_id[]" class="form-control mb-3">
+                  <option value="" selected disabled hidden>@lang('master.content.select.choose')</option>
+                    @foreach($accessories->where('name', trans('master.content.table.monitor')) as $monitors)
+                      @foreach($monitors->childrens as $monitor)
+                        <option value="{{$monitor->id}}">
+                          {{$monitor->name}}
+                        </option>
+                    @endforeach
+                    @endforeach
+                  </select>
+                  @endif
                   @include('admin.partials.error', ['err' => 'accessory_id.3'])
                 </div>
               </div>
               <div class="form-group row">
                 <label class="col-sm-3 form-control-label">@lang('master.content.table.gpu')</label>
                 <div class="col-sm-9">
+                @if ($products->accessories->pluck('parent')->pluck("name")->contains(trans('master.content.table.gpu')))
                   <select name="accessory_id[]" class="form-control mb-3">
                     @foreach($accessories->where('name', trans('master.content.table.gpu')) as $gpus)
                       @foreach($gpus->childrens as $gpu)
@@ -150,6 +203,18 @@
                     @endforeach
                     @endforeach
                   </select>
+                  @else
+                  <select name="accessory_id[]" class="form-control mb-3">
+                  <option value="" selected disabled hidden>@lang('master.content.select.choose')</option>
+                    @foreach($accessories->where('name', trans('master.content.table.gpu')) as $gpus)
+                      @foreach($gpus->childrens as $gpu)
+                        <option value="{{$gpu->id}}">
+                          {{$gpu->name}}
+                        </option>
+                    @endforeach
+                    @endforeach
+                  </select>
+                  @endif
                   @include('admin.partials.error', ['err' => 'accessory_id.4'])
                 </div>
               </div>

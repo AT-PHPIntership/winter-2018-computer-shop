@@ -3,12 +3,15 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use App\Http\Requests\LoginRequest;
 use App\Services\LoginService;
 use App\Services\SocialProviderService;
 use Socialite;
+use Session;
+use URL;
+use Auth;
 
 class LoginController extends Controller
 {
@@ -30,9 +33,11 @@ class LoginController extends Controller
      *
      * @return void
      */
-    // protected $redirectTo = '/home';
-    protected $redirectTo = '/admin/home/';
-
+    public function login()
+    {
+        Session::put('url.intended', URL::previous());
+        return view('public.auth.login');
+    }
 
     /**
      * Log the user out of the application.
@@ -43,20 +48,8 @@ class LoginController extends Controller
      */
     public function logout(Request $request)
     {
-        $this->guard()->logout();
-        $request->session()->invalidate();
-        return $this->loggedOut($request) ?: redirect('/login');
-        // return $this->loggedOut($request) ?: redirect('/admin/login');
-    }
-
-    /**
-     * Login
-     *
-     * @return void
-     */
-    public function login()
-    {
-        return view('public.auth.login');
+        Auth::logout();
+        return redirect()->route('public.login');
     }
 
     /**
@@ -68,7 +61,7 @@ class LoginController extends Controller
      */
     public function handleLogin(LoginRequest $request)
     {
-        return app(LoginService::class)->userLogin($request->except(['_token']));
+        return app(LoginService::class)->handleLogin($request->except(['_token']));
     }
 
       /**
@@ -101,13 +94,5 @@ class LoginController extends Controller
         }
     }
 
-     /**
-     * Show the application's login form.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function showLoginForm()
-    {
-        return view('admin.auth.login');
-    }
+     
 }

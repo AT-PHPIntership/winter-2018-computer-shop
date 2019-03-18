@@ -6,13 +6,13 @@
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <form action="#">       
-                        
+                <form action="#">
+
                     <!-- Compare Table -->
-                    <div class="compare-table table-responsive" >
+                    <div class="compare-table table-responsive">
                         <table class="table mb-0">
-                            <tbody id="compare-product" >
-                               <tr>
+                            <tbody id="compare-product">
+                                <tr>
                                     <td class="first-column">@lang('public.compare.product')</td>
                                     <td class="product-image-title">
                                         @foreach($firstProduct as $product)
@@ -28,17 +28,21 @@
                                         <a href="product/{{$product->id}}" class="title">{{$product->name}}</a>
                                         @endforeach
                                     </td>
-                                   
+
                                 </tr>
                                 <tr>
                                     <td class="first-column">@lang('public.compare.description')</td>
                                     @foreach($firstProduct as $product)
-                                    <td class="pro-desc"><p>{!!$product->description!!}</p></td>
-                                   @endforeach 
-                                   @foreach($secondProduct as $product)
-                                    <td class="pro-desc"><p>{!!$product->description!!}</p></td>
-                                   @endforeach
-                                   
+                                    <td class="pro-desc">
+                                        <p>{!!$product->description!!}</p>
+                                    </td>
+                                    @endforeach
+                                    @foreach($secondProduct as $product)
+                                    <td class="pro-desc">
+                                        <p>{!!$product->description!!}</p>
+                                    </td>
+                                    @endforeach
+
                                 </tr>
                                 <tr>
                                     <td class="first-column">@lang('public.compare.price')</td>
@@ -51,26 +55,28 @@
                                 </tr>
                                 <tr>
                                     <td class="first-column">@lang('public.compare.addToCart')</td>
-                                    @for($i = 0; $i <= count($firstProduct); $i++)
-                                    <td class="pro-addtocart"><a href="#" class="add-to-cart" tabindex="0"><i class="ti-shopping-cart"></i><span>@lang('public.content.addToCart')</span></a></td>
-                                    @endfor
-                                   
+                                    @foreach($firstProduct as $product)
+                                    <td class="pro-addtocart"><a href="{{ route('public.cart') }}" id="{{ $product->id }}" data-name="{{ $product->name }}" data-quantity="{{ $product->quantity }}" data-price="{{ $product->unit_price }}" data-image="{{$product->images->pluck('name')->first()}}" class="add-to-cart"><i class="ti-shopping-cart"></i><span>@lang('public.content.addToCart')</span></a></td>
+                                    @endforeach
+                                    @foreach($secondProduct as $product)
+                                    <td class="pro-addtocart"><a href="{{ route('public.cart') }}" id="{{ $product->id }}" data-name="{{ $product->name }}" data-quantity="{{ $product->quantity }}" data-price="{{ $product->unit_price }}" data-image="{{$product->images->pluck('name')->first()}}" class="add-to-cart"><i class="ti-shopping-cart"></i><span>@lang('public.content.addToCart')</span></a></td>
+                                    @endforeach
+
                                 </tr>
                                 <tr>
                                     <td class="first-column">@lang('public.compare.delete')</td>
-                                    @for($i = 0; $i <= count($firstProduct); $i++)
-                                    <td class="pro-remove"><button type="button" data-id="{{$i}}" class="delete-compare"><i class="fa fa-trash-o"></i></button></td>
-                                    @endfor
+                                    @for($i = 0; $i <= count($firstProduct); $i++) <td class="pro-remove"><button type="button" data-id="{{$i}}" class="delete-compare"><i class="fa fa-trash-o"></i></button></td>
+                                        @endfor
                                 </tr>
                             </tbody>
                         </table>
                     </div>
-                    
-                </form> 
-                
+
+                </form>
+
             </div>
         </div>
     </div>
 </div>
-<!-- Compare Page End --> 
-@endsection
+<!-- Compare Page End -->
+@endsection 

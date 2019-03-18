@@ -24,11 +24,11 @@ class PromotionRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|min:3',
-            'percent' => 'required|integer',
+            'name' => 'required|min:3|unique:promotions',
+            'percent' => 'required|integer|between:1,100',
             'start_at' => 'required|date|after:yesterday',
             'end_at' => 'required|date|after:start_at',
-            'total_sold' => 'required|integer'
+            'total_sold' => 'required|integer|min:0|max:20'
         ];
     }
 }

@@ -1,6 +1,6 @@
 <?php
 return [
-    'warning_login' => 'Your account is not access. Please try again!',
+    'warning_login' => 'Access Denied!',
     'remember_login' => 'Remember me',
     'btn_login' => 'Login',
     'success' => 'Success!',

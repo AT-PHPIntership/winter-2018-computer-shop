@@ -160,7 +160,10 @@ class CodeController extends Controller
                     );
                     $message = 'Code applyed';
                     // $userCode->delete();
-                    return view('public.page.checkout', compact('arrCode', 'message'));
+                    // return view('public.page.checkout', compact('arrCode', 'message'));
+                    // return redirect()->route('public.checkout', [$message]);
+                    // return redirect()->route('public.checkout')->with('message', $arrCode);
+                    return redirect()->route('public.checkout', ['amount' => $amount, 'codeId' => $codeId])->with('message', $message);
                 }
                 // dd($userCode->delete());
             } else {

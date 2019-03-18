@@ -32,7 +32,7 @@
                    </div>
                    <div class="card-body">
                        <div class="table-responsive">
-               <table class="table table-striped table-hover">
+               <table class="table table-striped table-hover text-center">
                  <thead>
                     <tr>
                       <th>@lang('master.content.table.id')</th>
@@ -48,17 +48,17 @@
                       <td>
                         @if(sizeof($accesory->children) > 0)
                           <a href="{{ route('accessories.show', $accesory->id) }}" class="btn btn-sm btn-info">
-                          @lang('master.content.action.show', ['attribute' => __('master.content.attribute.accessory')])
+                          @lang('master.content.action.product.details')
                           </a>
                         @endif
                           <a href="{{ route('accessories.edit', $accesory->id) }}" class="btn btn-sm btn-warning">
-                          @lang('master.content.action.edit', ['attribute' => __('master.content.attribute.accessory')])
+                          @lang('master.content.action.product.edit')
                           </a>
                         @if(sizeof($accesory->children) == 0)
-                          <form action="{{ route('accessories.destroy', $accesory->id) }}" method="POST" class="d-inline">
+                          <form action="{{ route('accessories.destroy', $accesory->id) }}" method="POST" class="d-inline" onsubmit="return confirmedDelete('accessory')">
                             @csrf
                             @method('DELETE')
-                            <input type="submit" value="@lang('master.content.action.delete', ['attribute' => __('master.content.attribute.accessory')])" class="btn btn-sm btn-danger">
+                            <input type="submit" value="@lang('master.content.action.product.delete')" class="btn btn-sm btn-danger">
                           </form> 
                         @endif
                      </td>

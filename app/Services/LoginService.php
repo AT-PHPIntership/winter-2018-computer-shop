@@ -3,6 +3,9 @@
 namespace App\Services;
 
 use Auth;
+use Session;
+use Redirect;
+use App\Models\Role;
 
 class LoginService
 {
@@ -13,13 +16,19 @@ class LoginService
     *
     * @return redirect route
     */
-    public function userLogin($data)
+    public function handleLogin($data)
     {
+        $backup = explode("/", Session::get('url.intended'))[3];
         if (Auth::attempt($data)) {
-            return redirect()->route('user.profile');
+            if (Auth::user()->role->name == Role::ROLE_ADMIN) {
+                return redirect()->route('admin.home');
+            } elseif ($backup === 'login' || $backup === 'admin' || $backup === '' || $backup === 'activation') {
+                return redirect()->route('user.profile');
+            }
+            return Redirect::to(Session::get('url.intended'));
         } else {
             session()->flash("warning", __('public.login.wrong'));
-            return redirect()->back();
+            return back();
         }
     }
 }

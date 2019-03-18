@@ -24,6 +24,7 @@ class OrderRequest extends FormRequest
     public function rules()
     {
         return [
+            // 'phone' => 'required|regex:/(0)[0-9]{9}/',
             'phone' => 'required',
             'address' => 'required',
             'note' => 'required'

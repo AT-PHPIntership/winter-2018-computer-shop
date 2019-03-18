@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Product;
 use App\Services\ProductService;
+use App\Services\CommentService;
 
 class PublicController extends Controller
 {
@@ -72,6 +73,78 @@ class PublicController extends Controller
     }
 
     /**
+     * Get product from keyword in search field
+     *
+     *@param request $request [request to get product]
+     *
+     * @return compare view
+     */
+    public function productSearch(Request $request)
+    {
+        if ($request->ajax()) {
+            $response = app(ProductService::class)->ajaxProductSearch($request->get('query'));
+            return response()->json($response);
+        } else {
+            $query = $request->get('query');
+            $search = app(ProductService::class)->productSearch($query);
+            return view('public.page.search', compact('search', 'query'));
+        }
+    }
+
+    /**
+     * Get product from keyword in filter field
+     *
+     *@param request $request [request to get product]
+     *
+     * @return mix view
+     */
+    public function productFilter(Request $request)
+    {
+        $value = $request->get('val');
+        $products = app(ProductService::class)->productFilter($request->get('query'), $request->get('parentId'), $value);
+        return view('public.page.filter', compact('products', 'value'));
+    }
+
+     /**
+     * Get product from keyword in filter field
+     *
+     *@param request $request [request to get product]
+     *
+     * @return mix view
+     */
+    public function productSort(Request $request)
+    {
+        $products = app(ProductService::class)->productSort($request->get('query'), $request->get('val'));
+        return view('public.page.filter', compact('products'));
+    }
+
+    /**
+     * Comment of user about a product
+     *
+     *@param request $request [request to get product]
+     *
+     * @return mix view
+     */
+    public function productComment(Request $request)
+    {
+        $response = app(CommentService::class)->comment($request->get('userId'), $request->get('productId'), $request->get('content'));
+        return response()->json($response);
+    }
+
+    /**
+     * Reply a comment
+     *
+     *@param request $request [request to get product]
+     *
+     * @return mix view
+     */
+    public function productReply(Request $request)
+    {
+        $response = app(CommentService::class)->reply($request->get('userId'), $request->get('productId'), $request->get('content'), $request->get('parentComment'));
+        return response()->json($response);
+    }
+
+    /*
      * Display page cart
      *
      * @return void
@@ -89,5 +162,10 @@ class PublicController extends Controller
     public function checkout()
     {
         return view('public.page.checkout');
+    }
+
+    public function inforOder()
+    {
+        return view('public.page.ordered');
     }
 }

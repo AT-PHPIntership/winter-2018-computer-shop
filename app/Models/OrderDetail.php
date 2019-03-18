@@ -13,13 +13,12 @@ class OrderDetail extends Model
         'quantity', 'price', 'order_id', 'product_id'
     ];
 
-
     /**
      * Relationshop with order
      *
      * @return void
      */
-    public function orders()
+    public function order()
     {
         return $this->belongsTo(Order::class);
     }

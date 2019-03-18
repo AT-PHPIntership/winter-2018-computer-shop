@@ -11,7 +11,6 @@
                 <div class="card">
                     <div class="card-header d-flex align-items-center">
                         <a href="{{route('categories.index')}}" class="btn btn-success rounded-circle mr-1"><i class="fa fa-arrow-left"></i></a>
-                        <a href="{{route('categories.create')}}" class="btn btn-primary">@lang('master.content.action.add', ['attribute' => 'Category'])</a>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">   
@@ -30,7 +29,11 @@
                                         <td>{{$category->name}}</td>
                                         <td>
                                             <a href="{{route('categories.edit', $category->id)}}" class="btn btn-warning btn-sm">@lang('master.content.action.edit', ['attribute' => 'Category'])</a>
-                                            <a href="" class="btn btn-danger btn-sm">@lang('master.content.action.delete', ['attribute' => 'Category'])</a>
+                                            <form action="{{route('categories.destroy', $category->id)}}" method="POST" class="d-inline" onsubmit="return confirmedDelete('category')">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger btn-sm">@lang('master.content.action.delete', ['attribute' => 'Category'])</button>
+                                            </form>                                        
                                         </td>
                                     </tr>
                                     @endforeach

@@ -17,12 +17,15 @@ class UserLogin
      */
     public function handle($request, Closure $next)
     {
-        if (Auth::check() && Auth::user()->is_actived != '1') {
-            Auth::logout();
-            session()->flash('warning', __('public.login.yet'));
-            return redirect()->route('public.login');
-        } else {
+        if (Auth::check()) {
+            if (Auth::user()->is_actived != '1') {
+                Auth::logout();
+                session()->flash('warning', __('public.login.yet'));
+                return redirect()->route('public.login');
+            }
             return $next($request);
+        } else {
+            return redirect()->route('public.login');
         }
     }
 }

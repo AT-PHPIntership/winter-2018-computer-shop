@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
-  <head>
+
+<head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>@lang('master.title')</title>
@@ -11,7 +12,7 @@
     <!-- Bootstrap CSS-->
     <link rel="stylesheet" href="admin_asset/vendor/bootstrap/css/bootstrap.min.css">
     <!-- Font Awesome CSS-->
-    <link rel="stylesheet" href="admin_asset/vendor/font-awesome/css/font-awesome.min.css"> 
+    <link rel="stylesheet" href="admin_asset/vendor/font-awesome/css/font-awesome.min.css">
     <!-- Datatable CSS-->
     <link rel="stylesheet" href="admin_asset/vendor/datatable/datatables.min.css">
     <!-- Lightbox CSS-->
@@ -28,23 +29,25 @@
     <link rel="stylesheet" href="admin_asset/css/custom.css">
     <!-- Favicon-->
     <link rel="shortcut icon" href="admin_asset/img/favicon.png">
-    <!-- Tweaks for older IEs--><!--[if lt IE 9]>
+    <!-- Tweaks for older IEs-->
+    <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
-  </head>
-  <body>
+</head>
+
+<body>
     <div class="page">
-      @include('admin.layout.header')
-      <div class="page-content d-flex align-items-stretch"> 
-        @include('admin.layout.sidebar')
-        <div class="content-inner">
-        @yield('content')
-        @include('admin.layout.footer')
+        @include('admin.layout.header')
+        <div class="page-content d-flex align-items-stretch">
+            @include('admin.layout.sidebar')
+            <div class="content-inner">
+                @yield('content')
+                @include('admin.layout.footer')
+            </div>
         </div>
-      </div>
     </div>
     <!-- JavaScript files-->
-    <script type='text/javascript'src="admin_asset/vendor/jquery/jquery.min.js"></script>
+    <script type='text/javascript' src="admin_asset/vendor/jquery/jquery.min.js"></script>
     <script src="admin_asset/vendor/ckeditor/ckeditor.js"> </script>
     <script src="admin_asset/vendor/lightbox/lightbox.js"> </script>
     <script src="admin_asset/vendor/datatable/datatables.min.js"> </script>
@@ -53,11 +56,12 @@
     <script src="admin_asset/vendor/bootstrap/js/bootstrap.min.js"></script>
     <script src="admin_asset/vendor/jquery.cookie/jquery.cookie.js"> </script>
     <script src="admin_asset/vendor/chart.js/Chart.min.js"></script>
-       <!-- Main File-->
+    <!-- Main File-->
     <script src="admin_asset/js/front.js"></script>
-     <!----Handle put php variable to js file--->
-     <script src="admin_asset/js/main.js"></script>
-     <!----Custom file--->
-     <script src="admin_asset/js/custom.js"></script>
-  </body>
-</html>
+    <!----Handle put php variable to js file--->
+    <script src="admin_asset/js/main.js"></script>
+    <!----Custom file--->
+    <script src="admin_asset/js/custom.js"></script>
+</body>
+
+</html> 

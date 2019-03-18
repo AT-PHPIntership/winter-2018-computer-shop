@@ -54,7 +54,7 @@ class AccessoryController extends Controller
     public function store(AccessoryRequest $request)
     {
         $this->accessoryService->create($request);
-        return redirect()->route('accessories.index')->with('message', Lang::get('master.content.message.create', ['attribute' => 'Accessory']));
+        return redirect()->route('accessories.index')->with('message', Lang::get('master.content.message.create', ['attribute' => Lang::get('master.content.attribute.accessory')]));
     }
 
     /**

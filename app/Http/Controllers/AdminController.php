@@ -4,12 +4,20 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Services\StatisticService;
-use Excel;
-use App\Exports\OrderExport;
-use Illuminate\Support\Carbon;
+use App\Services\OrderService;
 
 class AdminController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * The function return home of admin page
      *
@@ -28,7 +36,6 @@ class AdminController extends Controller
      */
     public function excel()
     {
-        $month= Carbon::now()->month;
-        return (new OrderExport($month))->download('month_'.$month.'_order.xlsx');
+        return app(OrderService::class)->orderExport();
     }
 }

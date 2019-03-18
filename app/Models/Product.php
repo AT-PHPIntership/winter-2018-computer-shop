@@ -8,34 +8,25 @@ use App\Models\OrderDetail;
 class Product extends Model
 {
     protected $table = 'products';
-     /**
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-         'name', 'description', 'quantity', 'unit_price', 'category_id', 'total_sold'
+        'name', 'description', 'quantity', 'unit_price', 'category_id', 'total_sold'
     ];
-
-    /**
-     * [orderDetails description]
-     *
-     * @return [type] [description] Dsdf
-     */
-    public function orderDetails()
-    {
-        return $this->hasMany(OrderDetail::class);
-    }
-
     /**
      * The function display relationship between category and product
      *
-     * @return array
+     * @return \App\Models\Role
      */
     public function category()
     {
         return $this->belongsTo('App\Models\Category');
     }
+
     /**
      * The function get unit price attribute
      *
@@ -47,6 +38,7 @@ class Product extends Model
     {
         return number_format($unitPrice, 0, ",", ",");
     }
+
     /**
      * The function display relationship between product and accessory
      *
@@ -68,12 +60,32 @@ class Product extends Model
     }
 
     /**
- * Desplay relationship between product and promotion
+     * The function display relationship between comment and product
+     *
+     * @return \App\Models\Role
+     */
+    public function comments()
+    {
+        return $this->hasMany('App\Models\Comment')->whereNull('parent_id');
+    }
+
+    /**
+     * Desplay relationship between product and promotion
      *
      * @return void
      */
     public function promotions()
     {
-        return $this->belongsToMany('App\Models\Promotion');
+        return $this->belongsToMany('App\Models\Promotion', 'product_promotion')->withTimestamps();
+    }
+
+    /**
+     * [orderDetails description]
+     *
+     * @return [type] [description] Dsdf
+     */
+    public function orderDetails()
+    {
+        return $this->hasMany(OrderDetail::class);
     }
 }

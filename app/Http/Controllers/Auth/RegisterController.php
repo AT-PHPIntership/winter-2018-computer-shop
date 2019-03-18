@@ -43,7 +43,7 @@ class RegisterController extends Controller
         $this->middleware('guest');
     }
 
-     /**
+    /**
      * Display form to register
      *
      * @return register view
@@ -66,7 +66,7 @@ class RegisterController extends Controller
         return redirect()->route('public.login');
     }
 
-     /**
+    /**
      * Handle user register and send email
      *
      *@param string $token [identify user]

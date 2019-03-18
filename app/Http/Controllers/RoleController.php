@@ -94,11 +94,7 @@ class RoleController extends Controller
      */
     public function destroy($id)
     {
-        $message = $this->roleService->delete($id);
-        if ($message === 1) {
-            return redirect()->route('roles.index')->with('message', Lang::get('master.content.message.delete', ['attribute' => trans('master.content.attribute.role')]));
-        } else {
-            return redirect()->route('roles.index')->with('message', Lang::get('master.content.message.error'));
-        }
+        $this->roleService->delete($id);
+        return redirect()->route('roles.index');
     }
 }

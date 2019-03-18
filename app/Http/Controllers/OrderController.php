@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\OrderRequest;
+use App\Http\Requests\OrderStatusRequest;
+use Illuminate\Http\Request;
 use App\Models\Order;
 use App\Models\OrderDetail;
 use App\Models\Product;
@@ -42,9 +44,8 @@ class OrderController extends Controller
      *
      * @return void
      */
-    public function create(OrderRequest $request)
+    public function createOrder(OrderRequest $request)
     {
-        
         // delete code applyed
         if (isset($request->codeId)) {
             $codeId = $request->codeId;
@@ -95,32 +96,20 @@ class OrderController extends Controller
 
             $product->update($quantityProduct);
         }
-        
+
         // Send mail to custommer
         $toName = $request->full_name;
         $toEmail = $request->email;
-        $data = array('name'=> $toName, "body" => "You Ordered Successfully");
-            
+        $data = array('name' => $toName, "body" => "You Ordered Successfully");
+
         \Mail::send('admin.orders.mail', $data, function ($message) use ($toName, $toEmail) {
             $message->to($toEmail, $toName)
-                    ->subject('Mail Order To Computer Shop');
-            $message->from('thanhnguyen11923112@gmail.com', 'ComputerShop Web');
+                ->subject('Mail Order To Computer Shop');
         });
         // Send mail to custommer
-        
-        return redirect()->route('public.home')->with('message', 'Order successful');
-    }
 
-    // /**
-    //  * Store a newly created resource in storage.
-    //  *
-    //  * @param  \Illuminate\Http\Request  $request
-    //  * @return \Illuminate\Http\Response
-    //  */
-    // public function store(Request $request)
-    // {
-    //     //
-    // }
+        return redirect()->route('public.page.ordered');
+    }
 
     /**
      * Display the specified resource.
@@ -135,9 +124,9 @@ class OrderController extends Controller
     }
 
     /**
-     * Eit order page
+     * Edit order page
      *
-     * @param Order $order [Object order
+     * @param Order $order [Models order]
      *
      * @return void
      */
@@ -146,17 +135,23 @@ class OrderController extends Controller
         return view('admin.orders.update', compact('order'));
     }
 
-    // /**
-    //  * Update the specified resource in storage.
-    //  *
-    //  * @param  \Illuminate\Http\Request  $request
-    //  * @param  int  $id
-    //  * @return \Illuminate\Http\Response
-    //  */
-    // public function update(Request $request, $id)
-    // {
-    //     //
-    // }
+    /**
+     * Update order
+     *
+     * @param OrderRequest $request [Request from form]
+     * @param [Int]        $id      [Id order]
+     *
+     * @return void
+     */
+    public function update(OrderStatusRequest $request, $id)
+    {
+        $message = $this->orderService->update($request, $id);
+        if ($message !== 0) {
+            return redirect()->route('orders.index')->with('message', Lang::get('master.content.message.update', ['attribute' => 'order']));
+        } else {
+            return redirect()->route('orders.index')->with('message', Lang::get('master.content.message.error'));
+        }
+    }
 
     /**
      * Delete order
@@ -169,7 +164,7 @@ class OrderController extends Controller
     {
         $message = $this->orderService->delete($id);
         if ($message === 1) {
-            return redirect()->route('orders.index')->with('message', Lang::get('master.content.message.delete', ['attribute' => 'Order']));
+            return redirect()->route('orders.index')->with('message', Lang::get('master.content.message.delete', ['attribute' => 'order']));
         } else {
             return redirect()->route('orders.index')->with('message', Lang::get('master.content.message.error'));
         }

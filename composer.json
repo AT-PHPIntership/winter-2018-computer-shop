@@ -15,7 +15,9 @@
         "laracasts/utilities": "^3.0",
         "laravel/framework": "5.7.*",
         "laravel/tinker": "^1.0",
-        "maatwebsite/excel": "^3.1",
+        "maatwebsite/excel": "~2.1.10",
+        "phpoffice/phpspreadsheet": "^1.6",
+        "proengsoft/laravel-jsvalidation": "^2.3",
         "yajra/laravel-datatables-oracle": "~8.0"
     },
     "require-dev": {
@@ -26,7 +28,7 @@
         "nunomaduro/collision": "^2.0",
         "phpunit/phpunit": "^7.0",
         "squizlabs/php_codesniffer": "2.*",
-        "phpmd/phpmd" : "@stable"
+        "phpmd/phpmd": "@stable"
     },
     "config": {
         "optimize-autoloader": true,

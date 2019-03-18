@@ -23,7 +23,7 @@
             <div class="form-group row">
               <label class="col-sm-3 form-control-label">@lang('master.content.form.name')</label>
               <div class="col-sm-9">
-                <input id="inputHorizontalWarning" type="text" name="name" placeholder="Role Name" class="form-control" value="{{ old('name') }}">
+                <input id="inputHorizontalWarning" type="text" name="name" placeholder="Role Name" class="form-control" value="{{ old('name') }}" required>
                 @if ($errors->has('name'))
                   <span class="help-block col-sm-12">
                       <strong class="col-xs-12 col-sm-12 text-danger">{{ $errors->first('name') }}</strong>
@@ -33,6 +33,7 @@
             </div>
             <div class="form-group row">       
               <div class="col-sm-9 offset-sm-3">
+                <a href="{{route('roles.index')}}" class="btn btn-danger">@lang('master.content.button.cancel')</a>
                 <input type="submit" value="@lang('master.content.button.create')" class="btn btn-primary">
               </div>
             </div>

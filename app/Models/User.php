@@ -20,7 +20,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-         'name', 'email', 'password', 'role_id', 'is_actived',
+        'name', 'email', 'password', 'role_id', 'is_actived',
     ];
 
     /**
@@ -61,7 +61,7 @@ class User extends Authenticatable
     {
         return $this->hasOne('App\Models\UserProfile');
     }
-    
+
     /**
      * The function help encrypt the password when user enter into
      *
@@ -75,16 +75,6 @@ class User extends Authenticatable
     }
 
     /**
-     * Relationship user - code
-     *
-     * @return void
-     */
-    public function codes()
-    {
-        return $this->belongsToMany(Code::class);
-    }
-    
-     /**
      * The function display relationship between user and social provider
      *
      * @return \App\Models\SocialProvider
@@ -92,5 +82,25 @@ class User extends Authenticatable
     public function socialProviders()
     {
         return $this->hasMany('App\Models\SocialProvider');
+    }
+
+    /**
+     * The function display relationship between comment and user
+     *
+     * @return \App\Models\Role
+     */
+    public function comments()
+    {
+        return $this->hasMany('App\Models\Comment');
+    }
+
+    /**
+     * Relationship user - code
+     *
+     * @return void
+     */
+    public function codes()
+    {
+        return $this->belongsToMany(Code::class, 'code_user')->whereNull('code_user.deleted_at')->withTimestamps();
     }
 }

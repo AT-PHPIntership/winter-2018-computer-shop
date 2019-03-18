@@ -6,22 +6,24 @@
                 <!-- Hero Slider Start -->
                 <div class="hero-slider hero-slider-one">
                     <!-- Hero Item Start -->
-                    @foreach($saleOff as $product)
+                    @foreach($saleOff->products as $key => $product)
+                    @if ($key <= config('constants.product.saleOff'))
                     <div class="hero-item">
                         <div class="row align-items-center justify-content-between">
                             <!-- Hero Content -->
                             <div class="hero-content col-6">
                                 <h3>@lang('public.slide.hurry')</h3>
                                 <h2 class="font-weight-bold"><span>{{$product->name}}</span></h2>
-                                <h2>@lang('public.slide.its') <span class="big font-weight-bold">29%</span> @lang('public.slide.off')</h2>
+                                <h2>@lang('public.slide.its') <span class="big font-weight-bold">{{$saleOff->percent . ' %'}}</span> @lang('public.slide.off')</h2>
                                 <a href="{{route('public.product', $product->id)}}">@lang('public.slide.get')</a>
                             </div>
                             <!-- Hero Image -->
                             <div class="hero-image col-6">
-                               <img src="storage/product/{{$product->images->pluck('name')->first()}}" alt="Hero Image">
+                                <img src="storage/product/{{$product->images->pluck('name')->first()}}" alt="Hero Image">
                             </div>
-                        </div>     
+                        </div>
                     </div><!-- Hero Item End -->
+                    @endif
                     @endforeach
 
                 </div><!-- Hero Slider End -->
@@ -43,4 +45,4 @@
             @endforeach
         </div>
     </div>
-</div><!-- Banner Section End -->
+</div><!-- Banner Section End --> 

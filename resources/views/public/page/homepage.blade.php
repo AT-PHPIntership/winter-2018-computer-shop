@@ -3,16 +3,27 @@
 @include('public.partials.slide')
 <!-- Feature Product Section Start -->
 <div class="product-section section mb-70">
+
     <div class="container">
+        @if(session('message'))
+        <div class="col-12 alert alert-success">
+            <button type="button" class="close" data-dismiss="alert">
+                <i class="ace-icon fa fa-times"></i>
+            </button>
+            {{ session('message') }}z
+        </div>
+        @endif
         <div class="row">
             <!-- Section Title Start -->
             <div class="col-12 mb-40">
-                <div class="section-title-one" data-title="@lang('public.content.featured')"><h1>@lang('public.content.featured')</h1></div>
+                <div class="section-title-one" data-title="@lang('public.content.featured')">
+                    <h1>@lang('public.content.featured')</h1>
+                </div>
             </div>
             <!-- Section Title End -->
             <!-- Product Tab Content Start -->
             <div class="col-12">
-                <div class="tab-content">  
+                <div class="tab-content">
                     <!-- Tab Pane Start -->
                     <div class="tab-pane fade show active" id="tab-one">
                         <!-- Product Slider Wrap Start -->
@@ -29,7 +40,7 @@
                                             <div class="wishlist-compare">
                                                 <a class="compare-page" data-product="{{$product->id}}" data-tooltip="Compare"><i class="ti-control-shuffle"></i></a>
                                             </div>
-                                            <a href="{{ route('public.cart') }}" id="{{ $product->id }}" data-name="{{ $product->name }}" data-price="{{ $product->unit_price }}" class="add-to-cart" ><i class="ti-shopping-cart"></i><span>@lang('public.content.addToCart')</span></a>
+                                            <a href="{{ route('public.cart') }}" id="{{ $product->id }}" data-name="{{ $product->name }}" data-quantity="{{ $product->quantity }}" data-price="{{ $product->unit_price }}" data-image="{{$product->images->pluck('name')->first()}}" class="add-to-cart"><i class="ti-shopping-cart"></i><span>@lang('public.content.addToCart')</span></a>
                                         </div>
                                         <!-- Content -->
                                         <div class="content">
@@ -47,10 +58,10 @@
                                 </div>
                                 @endforeach
                             </div><!-- Product Slider End -->
-                        </div><!-- Product Slider Wrap End --> 
-                    </div><!-- Tab Pane End -->        
+                        </div><!-- Product Slider Wrap End -->
+                    </div><!-- Tab Pane End -->
                 </div>
-            </div><!-- Product Tab Content End -->       
+            </div><!-- Product Tab Content End -->
         </div>
     </div>
 </div><!-- Feature Product Section End -->
@@ -58,12 +69,14 @@
 <div class="product-section section mb-60">
     <div class="container">
         <div class="row">
-            
+
             <!-- Section Title Start -->
             <div class="col-12 mb-40">
-                <div class="section-title-one" data-title="@lang('public.content.bestseller')"><h1>@lang('public.content.bestseller')</h1></div>
+                <div class="section-title-one" data-title="@lang('public.content.bestseller')">
+                    <h1>@lang('public.content.bestseller')</h1>
+                </div>
             </div><!-- Section Title End -->
-            
+
             <div class="col-12">
                 <div class="row">
                     @foreach($bestSeller as $product)
@@ -80,7 +93,7 @@
                                     <a class="compare-page" data-product="{{$product->id}}" data-tooltip="Compare"><i class="ti-control-shuffle"></i></a>
                                 </div>
 
-                                <a href="{{ route('public.cart') }}" id="{{ $product->id }}" data-name="{{ $product->name }}" data-price="{{ $product->unit_price }}" class="add-to-cart"><i class="ti-shopping-cart"></i><span>@lang('public.content.addToCart')</span></a>
+                                <a href="{{ route('public.cart') }}" id="{{ $product->id }}" data-name="{{ $product->name }}" data-quantity="{{ $product->quantity }}" data-price="{{ $product->unit_price }}" data-image="{{$product->images->pluck('name')->first()}}" class="add-to-cart"><i class="ti-shopping-cart"></i><span>@lang('public.content.addToCart')</span></a>
 
                             </div>
 
@@ -109,7 +122,7 @@
                     @endforeach
                 </div>
             </div>
-            
+
         </div>
     </div>
 </div><!-- Best Sell Product Section End -->
@@ -119,7 +132,9 @@
         <div class="row">
             <!-- Section Title Start -->
             <div class="col-12 mb-40">
-                <div class="section-title-one" data-title="@lang('public.content.newArrival')"><h1>@lang('public.content.newArrival')</h1></div>
+                <div class="section-title-one" data-title="@lang('public.content.newArrival')">
+                    <h1>@lang('public.content.newArrival')</h1>
+                </div>
             </div><!-- Section Title End -->
             <div class="col-12">
                 <div class="row">
@@ -133,7 +148,7 @@
                                 <div class="wishlist-compare">
                                     <a class="compare-page" data-product="{{$product->id}}" data-tooltip="Compare"><i class="ti-control-shuffle"></i></a>
                                 </div>
-                                <a href="{{ route('public.cart') }}" id="{{ $product->id }}" data-name="{{ $product->name }}" data-price="{{ $product->unit_price }}" class="add-to-cart"><i class="ti-shopping-cart"></i><span>@lang('public.content.addToCart')</span></a>
+                                <a href="{{ route('public.cart') }}" id="{{ $product->id }}" data-name="{{ $product->name }}" data-quantity="{{ $product->quantity }}" data-price="{{ $product->unit_price }}" data-image="{{$product->images->pluck('name')->first()}}" class="add-to-cart"><i class="ti-shopping-cart"></i><span>@lang('public.content.addToCart')</span></a>
                             </div>
                             <!-- Content -->
                             <div class="content">
@@ -155,4 +170,4 @@
         </div>
     </div>
 </div><!-- New Arrival Product Section End -->
-@endsection
+@endsection 
