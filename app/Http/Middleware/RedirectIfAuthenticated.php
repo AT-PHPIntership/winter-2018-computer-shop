@@ -11,7 +11,6 @@ class RedirectIfAuthenticated
      *
      * @param \Illuminate\Http\Request $request Request
      * @param \Closure                 $next    Closure
-     * @param string|null              $guard   guard
      *
      * @return mixed
      */
