@@ -42,11 +42,9 @@ class LoginController extends Controller
     /**
      * Log the user out of the application.
      *
-     * @param \Illuminate\Http\Request $request Request
-     *
      * @return \Illuminate\Http\Response
      */
-    public function logout(Request $request)
+    public function logout()
     {
         Auth::logout();
         return redirect()->route('public.login');
@@ -93,6 +91,4 @@ class LoginController extends Controller
             return redirect()->route('public.login');
         }
     }
-
-     
 }

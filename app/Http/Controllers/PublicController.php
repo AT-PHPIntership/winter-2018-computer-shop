@@ -144,7 +144,7 @@ class PublicController extends Controller
         return response()->json($response);
     }
 
-    /*
+    /**
      * Display page cart
      *
      * @return void

@@ -22,7 +22,7 @@ class LoginService
         if (Auth::attempt($data)) {
             if (Auth::user()->role->name == Role::ROLE_ADMIN) {
                 return redirect()->route('admin.home');
-            } elseif ($backup === 'login' || $backup === 'admin' || $backup === '' || $backup === 'activation') {
+            } elseif ($backup === 'login' || $backup === 'admin' || $backup === '' || $backup === 'activation' || $backup === 'register') {
                 return redirect()->route('user.profile');
             }
             return Redirect::to(Session::get('url.intended'));

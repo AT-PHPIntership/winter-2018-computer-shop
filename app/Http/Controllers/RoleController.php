@@ -58,11 +58,10 @@ class RoleController extends Controller
     /**
      * Show the form for editing the specified resource
      *
-     * @param [int] $id [id role]
+     * @param collection $role [route model binding]
      *
      * @return [view]     [update page]
      */
-    // public function edit($id)
     public function edit(Role $role)
     {
         // $role = $this->roleService->edit($id);

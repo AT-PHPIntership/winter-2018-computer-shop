@@ -46,10 +46,10 @@ class OrderController extends Controller
      */
     public function createOrder(OrderRequest $request)
     {
-        $codeIdInt = (int)($request->codeId);
+        $codeIdInt = (int) ($request->codeId);
         // delete code applyed
         if ($codeIdInt !== 0) {
-            $codeId = $codeIdInt;
+            // $codeId = $codeIdInt;
             $userId = $request->userId;
             $codeUser = UserCode::where('user_id', $userId)->Where('code_id', $codeIdInt)->first();
             $codeUserID = $codeUser->id;

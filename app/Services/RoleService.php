@@ -80,7 +80,7 @@ class RoleService
                 Role::where('id', $id)->delete();
                 session()->flash('message', __('master.content.message.delete', ['attribute' => trans('master.content.attribute.role')]));
             }
-        } catch (Exception $e) {
+        } catch (Exception $ex) {
             session()->flash('warning', __('master.content.message.error', ['attribute' => $ex->getMessage()]));
         }
     }

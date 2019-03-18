@@ -62,7 +62,7 @@ class OrderService
     }
 
     /**
-     * Export file collect order based on month 
+     * Export file collect order based on month
      *
      * @return file xlsx
      */

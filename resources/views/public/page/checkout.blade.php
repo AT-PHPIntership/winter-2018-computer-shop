@@ -1,7 +1,5 @@
 @extends('public.layout.master')
 @section('content')
-
-
 <!-- Checkout Page Start -->
 <div class="page-section section mt-90 mb-30">
 
@@ -132,7 +130,6 @@ if (isset($urlValue[3])) {
     console.log(amount);
 </script>
 <?php
-
 } else {
     ?>
 <script type="text/javascript">
@@ -141,7 +138,6 @@ if (isset($urlValue[3])) {
 </script>
 
 <?php
-
 }
 ?>
 

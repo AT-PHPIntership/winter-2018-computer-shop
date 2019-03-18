@@ -66,9 +66,9 @@ class ProductRequest extends FormRequest
     public function withValidator($validator)
     {
         $validator->after(function ($validator) {
-            if ((int)str_replace(',', '', $this->unit_price) < config('constants.unit_price.min')) {
+            if ((int) str_replace(',', '', $this->unit_price) < config('constants.unit_price.min')) {
                 $validator->errors()->add('unit_price', __('public.unit_price.min', ['min' => number_format(config('constants.unit_price.min'), 0, ",", ".") . ' vnđ']));
-            } elseif ((int)str_replace(',', '', $this->unit_price) > config('constants.unit_price.max')) {
+            } elseif ((int) str_replace(',', '', $this->unit_price) > config('constants.unit_price.max')) {
                 $validator->errors()->add('unit_price', __('public.unit_price.max', ['max' => number_format(config('constants.unit_price.max'), 0, ",", ".") . ' vnđ']));
             }
         });

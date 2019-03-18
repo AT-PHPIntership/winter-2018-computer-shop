@@ -71,7 +71,7 @@ Route::post('register', 'Auth\RegisterController@handleRegister')->name('public.
 Route::get('activation/{token}', 'Auth\RegisterController@activation');
 
 //Public login route
-Route::get('login', 'Auth\LoginController@login')->name('public.login');
+Route::get('login', 'Auth\LoginController@login')->name('public.login')->middleware('checkLogin');
 Route::post('login', 'Auth\LoginController@handleLogin')->name('public.login');
 Route::get('logout', 'Auth\LoginController@logout')->name('logout');
 
