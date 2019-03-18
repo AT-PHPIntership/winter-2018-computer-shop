@@ -29,10 +29,9 @@
                         <div class="table-responsive">
                             <table class="table table-striped table-hover text-center">
                                 <thead>
-                                    <tr>
+                                    <tr >
                                         <th>@lang('master.content.table.id')</th>
                                         <th>@lang('master.content.table.user')</th>
-                                        <th>@lang('master.content.table.address')</th>
                                         <th>@lang('master.content.table.phone')</th>
                                         <th>@lang('master.content.table.note')</th>
                                         <th>@lang('master.content.table.date_order')</th>
@@ -45,7 +44,6 @@
                                     <tr>
                                         <th>{{ $order->id }}</th>
                                         <td>{{ $order->user->name }}</td>
-                                        <td>{{ $order->address }}</td>
                                         <td>{{ $order->phone }}</td>
                                         <td>{{ $order->note }}</td>
                                         <td>{{ $order->date_order }}</td>
@@ -57,11 +55,13 @@
                                             <a href="{{ route('orders.edit', $order->id) }}">
                                                 <button type="button" class="btn-sm btn-success">@lang('master.content.action.product.edit')</button>
                                             </a>
+                                            @if($order->getCurrentStatusAttribute() == "Cancel")
                                             <form action="{{ route('orders.destroy', $order->id) }}" method="POST" class="d-inline" onsubmit="return confirmedDeleteOrder('delete')">
                                                 @csrf
                                                 @method('DELETE')
                                                 <input type="submit" value="@lang('master.content.action.product.delete')" class="btn btn-sm btn-danger">
                                             </form>
+                                            @endIf
                                         </td>
                                     </tr>
                                     @endforeach

@@ -46,15 +46,15 @@ class OrderController extends Controller
      */
     public function createOrder(OrderRequest $request)
     {
+        $codeIdInt = (int) ($request->codeId);
         // delete code applyed
-        if (isset($request->codeId)) {
-            $codeId = $request->codeId;
+        if ($codeIdInt !== 0) {
+            // $codeId = $codeIdInt;
             $userId = $request->userId;
-            $codeUser = UserCode::where('user_id', $userId)->Where('code_id', $codeId)->first();
+            $codeUser = UserCode::where('user_id', $userId)->Where('code_id', $codeIdInt)->first();
             $codeUserID = $codeUser->id;
             $codeUser->delete();
-
-            // create oder
+             // create oder
             $dataOrder = [
                 'user_id' => $request->userId,
                 'code_user_id' => $codeUserID,
@@ -86,29 +86,24 @@ class OrderController extends Controller
                 'order_id' => $order->id
             ];
             OrderDetail::create($dataProduct);
-
-            // update quantity, total-sold Product
+             // update quantity, total-sold Product
             $product = Product::find($productId);
             $quantityProduct = [
                 'quantity' => ($product->quantity - $request->quantity[$key]),
                 'total_sold' => ($product->total_sold + $request->quantity[$key])
             ];
-
-            $product->update($quantityProduct);
+             $product->update($quantityProduct);
         }
-
-        // Send mail to custommer
+         // Send mail to custommer
         $toName = $request->full_name;
         $toEmail = $request->email;
         $data = array('name' => $toName, "body" => "You Ordered Successfully");
-
-        \Mail::send('admin.orders.mail', $data, function ($message) use ($toName, $toEmail) {
+         \Mail::send('admin.orders.mail', $data, function ($message) use ($toName, $toEmail) {
             $message->to($toEmail, $toName)
                 ->subject('Mail Order To Computer Shop');
-        });
+         });
         // Send mail to custommer
-
-        return redirect()->route('public.page.ordered');
+         return redirect()->route('public.infor.order');
     }
 
     /**

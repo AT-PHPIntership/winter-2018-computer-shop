@@ -3,9 +3,12 @@
 <div class="page-section section pt-90 pb-50">
     <div class="container">
         <div class="row">
-            <h4 class="bg-danger">You have successfully ordered </h4>
+            <div class="col-3"></div>
+            <div class="col-6 ">
+                <h3 class="  text-success" id="delete-shopping-cart">Thank you! You have successfully ordered</h3>
+            </div>
+            <div class="col-3"></div>
         </div>
     </div>
 </div>
-
-@endsection
+@endsection  

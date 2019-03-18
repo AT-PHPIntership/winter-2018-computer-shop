@@ -33,15 +33,22 @@ $(".add-to-cart").click(function () {
     var name = $(this).attr("data-name"); // name của sản phẩm là thuộc tính data-name của button
     var price = Number($(this).attr("data-price").replace(/[^0-9\.-]+/g, ""));// price của sản phẩm là thuộc tính data-price của button
     // console.log(quantityValue);
+    var remainQuantity = $(this).data('quantity');
 
     if ($('#quantity-value').val() != undefined) {
-        var quantity = $('#quantity-value').val(); // Số lượng
+        var quantityOld = $('#quantity-value').val(); // Số lượng
+        if((quantityOld <= remainQuantity) && (quantityOld > 0)) {
+            quantity = quantityOld;
+        } else {
+            alert("Enter over quantity");
+            document.getElementById("quantity-value").value = 1;
+            return false;
+        }
     } else {
         quantity = 1;
     }
 
     var productImage = $(this).data('image');
-    var totalQuantity = $(this).data('quantity');
 
 
     var item = {
@@ -50,7 +57,7 @@ $(".add-to-cart").click(function () {
         price: price,
         quantity: quantity,
         image: productImage,
-        totalQuantity: totalQuantity
+        remainQuantity: remainQuantity
     };
 
     var exists = false;
@@ -78,15 +85,16 @@ $(".add-to-cart").click(function () {
 
 });
 
-// Xóa hết giỏ hàng shoppingCartItems
-$("#button-clear").click(function () {
+function deleteShoppingCart() {
     shoppingCartItems = [];
     localStorage["shopping-cart-items"] = JSON.stringify(shoppingCartItems);
-    $("#table-products > tbody").html("");
-});
+}
 
-
-
+$(document).ready(function () {
+    if (document.getElementById('delete-shopping-cart')) {
+        deleteShoppingCart();
+    }
+})
 
 // Hiển thị giỏ hàng ra table
 function displayShoppingCartItems() {
@@ -263,11 +271,10 @@ function modifyCart(e) {
     for (var i = 0; i < shoppingCartItems.length; i++) {
         // console.log(shoppingCartItems[i].quantity);s
         if (shoppingCartItems[i].id === idProduct) {
-            if (quantity > shoppingCartItems[i].totalQuantity) {
+            if (quantity > shoppingCartItems[i].remainQuantity) {
                 alert('The quantity you will buy bigger than total quantity available of this product!');
-                quantity = shoppingCartItems[i].quantity;
-            }
-            if (quantity > 0) {
+                // quantity = shoppingCartItems[i].quantity;
+            } else if(quantity > 0) {
                 shoppingCartItems[i].quantity = quantity;
                 localStorage.setItem("shopping-cart-items", JSON.stringify(shoppingCartItems));
             } else {
@@ -281,6 +288,5 @@ function modifyCart(e) {
     displayShoppingCartItems();
     displayMiniCart();
     deleteProduct();
-
 }
 

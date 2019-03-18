@@ -44,14 +44,14 @@
 
                         <div class="quantity-colors">
 
-                            <div class="quantity">
+                            <div class="quantity"  {{ ($products->quantity > 0) ? ' ' : 'hidden'}}> 
                                 <h5>@lang('public.product.quantity')</h5>
                                 <div class="pro-qty"><input id="quantity-value" type="number" value="1"></div>
                             </div>
 
                         </div>
 
-                        <div class="actions">
+                        <div class="actions" {{ ($products->quantity > 0) ? ' ' : 'hidden'}}>
 
                             <a href="{{ route('public.cart') }}" id="{{ $products->id }}" data-name="{{ $products->name }}" data-price="{{ $products->unit_price }}" data-quantity="{{ $products->quantity }}" data-image="{{$products->images->first()['name']}}" class="add-to-cart"><i class="ti-shopping-cart"></i><span>@lang('public.content.addToCart')</span></a>
 

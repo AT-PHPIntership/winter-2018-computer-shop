@@ -24,7 +24,7 @@ class OrderStatusRequest extends FormRequest
     public function rules()
     {
         return [
-            'status' => 'required|exists:orders,status'
+            'status' => 'required|min:0|max:4|integer'
         ];
     }
 

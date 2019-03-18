@@ -14,7 +14,9 @@ class Order extends Model
     const PENDING_STATUS = 'Pending';
     const APPROVE_STATUS = 'Approve';
     const CANCEL_STATUS = 'Cancel';
-
+    const SHIPPING_STATUS = 'Shipping';
+    const DELIVERED_STATUS = 'Delivered';
+    
     /**
      * The attributes that are mass assignable.
      *
@@ -58,6 +60,10 @@ class Order extends Model
                 return self::APPROVE_STATUS;
             case config('constants.order.status.cancel'):
                 return self::CANCEL_STATUS;
+            case config('constants.order.status.shipping'):
+                return self::SHIPPING_STATUS;
+            case config('constants.order.status.delivered'):
+                return self::DELIVERED_STATUS;
             default:
         }
     }

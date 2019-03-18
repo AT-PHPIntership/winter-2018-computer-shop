@@ -18,7 +18,7 @@ class OrderService
      */
     public function index()
     {
-        $orders = Order::with(['user', 'orderDetails.product'])->paginate(config('constants.order.number_paginate'));
+        $orders = Order::with(['user', 'orderDetails.product'])->orderBy('id', 'desc')->paginate(config('constants.order.number_paginate'));
         return $orders;
     }
 

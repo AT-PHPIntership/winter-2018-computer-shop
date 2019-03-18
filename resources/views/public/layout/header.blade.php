@@ -32,7 +32,7 @@
                         <a href="{{route('public.register')}}"><i class="icofont icofont-login d-none"></i> <span>@lang('public.header.register')</span></a>
                         @else
                         <a href="{{route('user.profile')}}"><i class="icofont icofont-user-alt-7"></i> <span>@lang('public.header.account')</span></a>
-                        <a href="{{route('logout')}}"><i class="icofont icofont-login d-none"></i> <span>@lang('public.header.logout')</span></a>
+                        <a href="{{route('logout')}}" onclick="deleteShoppingCart()"><i class="icofont icofont-login d-none" ></i> <span>@lang('public.header.logout')</span></a>
                         @endif
                     </div><!-- Header Account Links End -->
                 </div>
