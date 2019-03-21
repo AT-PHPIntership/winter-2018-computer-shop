@@ -131,14 +131,16 @@
                                                 @method('PUT')
                                                 <div class="tabbable">
                                                     <div class="form-group">
+                                                        @if (Auth::user()->password != "")
                                                         <label class="col-sm-3 control-label no-padding-right" for="form-field-facebook">@lang('master.content.form.current_pw')</label>
 
                                                         <div class="col-sm-9">
                                                             <span class="input-icon">
-                                                                <input type="password" value="" name='current_password'>
+                                                                <input type="password" value="" name='current_password' required>
                                                                 <i class="ace-icon fa  fa-key"></i>
                                                             </span>
                                                         </div>
+                                                        @endif
                                                         @include('admin.partials.error', ['err' => trans('master.content.attribute.current')])
                                                     </div>
                                                     <div class="form-group">

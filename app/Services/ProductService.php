@@ -13,7 +13,7 @@ use App\Models\Promotion;
 use App\Services\ImageService;
 use Excel;
 use App\Models\OrderDetail;
-
+use Illuminate\Support\Arr;
 class ProductService
 {
     /**
@@ -395,46 +395,50 @@ class ProductService
      *
      * @return collection
      */
-    public function productFilter($query, $parentId, $value)
+    public function productFilter($data)
     {
-        if (!is_numeric($query)) {
-            return Product::whereHas('accessories', function ($q) use ($query, $parentId, $value) {
-                $q->where('parent_id', intval($parentId))
-                    ->where('name', 'LIKE', '%' . str_replace('-', '%', $query) . '%');
-            })->paginate(config('constants.category.all'))->appends(['query' => $query, 'val' => $value, 'parentId' => $parentId]);
-        } elseif ($query == max(array_keys(config('constants.price')))) {
-            return Product::where('unit_price', '>', config("constants.price.{$query}"))->paginate(config('constants.category.all'))->appends(['query' => $query, 'val' => $value]);
-        } else {
-            $increase = $query + 1;
-            return Product::where([
-                ['unit_price', '<=', config("constants.price.{$increase}")],
-                ['unit_price', '>=', config("constants.price.{$query}")]
-            ])->paginate(config('constants.category.all'))->appends(['query' => $query, 'val' => $value]);
-        }
-    }
+        $accessories = collect();
+        $price = collect();
+        $sort = collect();
+        collect($data)->map(function($element) use($accessories,$price, $sort ) {
+            if ($element['type'] == 'Price') {
+                $price[] = $element['query'];
+            } else if ($element['type'] == 'Sort') {
+                $sort[] = $element['query'];
+            } else {
+                $accessories[] = $element['query'];
+            }
+        });
+        
+        $products = DB::table('products')
+                    ->select('products.id', 'products.name', 'products.unit_price', 'products.updated_at', 'accessories.id as accessory_id')
+                    ->join('accessory_product', 'accessory_product.product_id', '=', 'products.id')
+                    ->join('accessories', 'accessory_product.accessory_id', '=', 'accessories.id')
+                    ->get();
 
-    /**
-     * Get product based on filter field
-     *
-     * @param object $query [query get product]
-     * @param object $value [filter value]
-     *
-     * @return collection
-     */
-    public function productSort($query, $value)
-    {
-        switch ($query) {
-            case __('public.filter.bestseller'):
-                return $this->bestSeller();
-            case __('public.filter.latest'):
-                return $this->newArrival();
-            case __('public.filter.asc'):
-                $product = Product::orderBy('unit_price', __('public.filter.asc'));
-                break;
-            case __('public.filter.desc'):
-                $product = Product::orderBy('unit_price', __('public.filter.desc'));
-                break;
+        if ($accessories->isNotEmpty()) {
+            $count = $accessories->count();
+            $products->whereIn('accessory_id',  $accessories)->groupBy('id')->filter(function ($v) use($count) { return $v->count() > ($count - 1);})->flatten()->unique('id');
         }
-        return $product->paginate(config('constants.category.all'))->appends(['query' => $query, 'val' => $value]);
+        
+        if($price->isNotEmpty()) {
+            $smallCompare = $price->first();
+            $biggerCompare = intval($smallCompare) + 1;
+            if (is_null(config("constants.price." . $biggerCompare))) {
+                $products->where('unit_price', '>', config("constants.price." . $smallCompare))->unique('id');
+            } else {
+                $products->whereBetween('unit_price', [config("constants.price." . $smallCompare), config("constants.price." . $biggerCompare)])->unique('id');
+            }
+        }
+        if($sort->isNotEmpty()) {
+            if (($sort->first()) == 'latest') {
+               $result =  $products->sortByDesc('update_at')->unique('id')->all(); 
+            } elseif (($sort->first()) == 'asc') {
+                $result =  $products->sortBy('unit_price')->unique('id');
+            } else {
+                $result =  $products->sortByDesc('unit_price')->unique('id');
+            }
+        }
+        dd($result);
     }
 }

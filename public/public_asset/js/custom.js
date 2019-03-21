@@ -165,21 +165,19 @@ $(document).on('click', '.search-button', function () {
         return false;
     }
 });
-//Add to value filter when user choose filter
-var output = '<h4>' + filter('title') + '<span class="filter-value">' + GetURLParameter('val') + '</span>' + '</h4>';
-$('#filter-place').html(output);
 
-//Function to get param URL
-function GetURLParameter(sParam) {
-    var sPageURL = window.location.search.substring(1);
-    var sURLVariables = sPageURL.split('&');
-    for (var i = 0; i < sURLVariables.length; i++) {
-        var sParameterName = sURLVariables[i].split('=');
-        if (sParameterName[0] == sParam) {
-            return sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
-        }
-    }
-}
+
+// //Function to get param URL
+// function GetURLParameter(sParam) {
+//     var sPageURL = window.location.search.substring(1);
+//     var sURLVariables = sPageURL.split('&');
+//     for (var i = 0; i < sURLVariables.length; i++) {
+//         var sParameterName = sURLVariables[i].split('=');
+//         if (sParameterName[0] == sParam) {
+//             return sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
+//         }
+//     }
+// }
 
 //User comment product
 $(document).ready(function () {
@@ -306,3 +304,99 @@ $(document).on('click', '#reply-button', function () {
         location.href = 'login';
     }
 });
+
+//Multiple filter product 
+$(document).ready(function () {
+
+//Use ajax get data based on condition
+function filterProductFunction() {
+    var filterValue = JSON.parse(localStorage["filterProduct"].toString());
+    $.ajax({
+        url: 'product/filter',
+        method:"get",
+        dataType:"JSON",
+        data: {filterValue},
+        success: function(data){
+            console.log(data);
+        }
+    });
+
+}
+
+//Check filterProduct has in localStorage
+function removeFilterProductInLocal() {
+    if (localStorage.getItem('filterProduct') != null) {
+        localStorage.removeItem('filterProduct');
+    }
+}
+removeFilterProductInLocal();
+
+//Add condition to filter 
+$(document).on('click', '.filter-product', function () {
+      var type = $(this).data('type');
+      var query = $(this).data('query');
+      var name = $(this).text();
+      var condition = {'type' : type, 'query' : query, 'name': name};
+      if (localStorage.getItem('filterProduct') != null) {
+        var filterProduct = JSON.parse(localStorage["filterProduct"].toString());
+        var filterVal = filterProduct.find(function(element) {
+            return element['type'] == type;
+        });
+        if (filterVal == undefined) {
+            filterProduct.push(condition);
+        } else {
+            Object.assign(filterVal, condition);
+        }
+        localStorage["filterProduct"] = JSON.stringify(filterProduct);
+      } else {
+        localStorage.setItem("filterProduct", JSON.stringify([condition]));
+      }   
+        //Append condition to DOM
+        $('#filter-place li').remove();
+        var filterProduct = JSON.parse(localStorage["filterProduct"].toString());
+        var output = '';
+        $.each(filterProduct, function(key, element) {
+            if (element.type != 'Sort') {
+                output += '<li class="filter-list active-filter-item ml-10" data-type=' + element.type + '>' + element.name + ' ' + '<i class="fa fa-window-close remove-filter" aria-hidden="true"></i></li>';
+            }
+        })
+        $('#filter-place').append(output);
+        var deleteAll = '<li class="filter-list delete-all ml-10">Delete All <i class="fa fa-window-close" id="delete-all" aria-hidden="true"></i></li>';
+        if (type != 'Sort') {
+            $('#filter-place').append(deleteAll);
+        }
+
+        //Perform ajax get data
+        filterProductFunction();
+  });
+
+   //Remove condition to filter product
+    $(document).on('click', '.remove-filter', function () {
+        var removeType = $(this).parent().data('type');
+        $('li.filter-list[data-type=' + removeType + ']').remove();
+        var removeFilterInLocal = JSON.parse(localStorage["filterProduct"].toString());
+        var indexObject = removeFilterInLocal.findIndex(element => element.type == removeType);
+        removeFilterInLocal.splice(indexObject, 1);
+        localStorage["filterProduct"] = JSON.stringify(removeFilterInLocal);
+        var findHasOther = removeFilterInLocal.find(function(element) {
+            return element['type'] != 'Sort';
+        });
+        if (removeFilterInLocal.length == 0 || (findHasOther == undefined && removeFilterInLocal[0].type == 'Sort')) {
+            removeFilterProductInLocal();
+            $('li.delete-all').remove();
+        }
+
+        //Perform ajax get data
+        filterProductFunction();
+    });
+
+    //Remove all condition
+    $(document).on('click', '.delete-all', function () {
+        $('#filter-place li').remove();
+        $('li.delete-all').remove();
+        removeFilterProductInLocal();
+    });
+
+    
+});
+

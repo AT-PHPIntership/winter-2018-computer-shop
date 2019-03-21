@@ -11,6 +11,9 @@
                 <div class="row mb-50">
                     <div class="col">
                         @include('public.partials.filter')
+                        <div id="filter-place">
+                            <p class="filter-list">Filter by:</p>   
+                        </div>
                     </div>
                 </div>
                 <!-- Shop Product Wrap Start -->

@@ -100,22 +100,8 @@ class PublicController extends Controller
      */
     public function productFilter(Request $request)
     {
-        $value = $request->get('val');
-        $products = app(ProductService::class)->productFilter($request->get('query'), $request->get('parentId'), $value);
-        return view('public.page.filter', compact('products', 'value'));
-    }
-
-    /**
-     * Get product from keyword in filter field
-     *
-     *@param request $request [request to get product]
-     *
-     * @return mix view
-     */
-    public function productSort(Request $request)
-    {
-        $products = app(ProductService::class)->productSort($request->get('query'), $request->get('val'));
-        return view('public.page.filter', compact('products'));
+        $response = app(ProductService::class)->productFilter($request->get('filterValue'));
+        return response()->json($response);
     }
 
     /**

@@ -17,7 +17,6 @@ Route::post('product/comment', 'PublicController@productComment');
 Route::post('product/reply', 'PublicController@productReply');
 Route::get('product/search', 'PublicController@productSearch')->name('product.search');
 Route::get('product/filter', 'PublicController@productFilter')->name('product.filter');
-Route::get('product/sort', 'PublicController@productSort')->name('product.sort');
 Route::get('product/{product}', 'PublicController@getProduct')->name('public.product');
 Route::get('product/related/{category}', 'PublicController@getRelated');
 Route::get('compare/{first}/{second}', 'PublicController@compare');

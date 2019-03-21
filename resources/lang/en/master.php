@@ -106,6 +106,7 @@ return [
         'form' => [
             'password' => 'Password',
             'current_pw' => 'Current Password',
+            'hint' => 'Hint: You do not input the current password field',
             'new_pw' => 'New Password',
             'confirm_pw' => 'Confirm Password',
             'name' => 'Name',
