@@ -317,12 +317,48 @@ function filterProductFunction() {
         dataType:"JSON",
         data: {filterValue},
         success: function(data){
-            console.log(data);
+            if (data['products'].length) {
+                var result = template(data);
+                $('#filter-result').html(result);
+            } else {
+                var result = '<h3 class="text-danger no-product">No product found!</h3>';
+                $('#filter-result').html(result);
+            }
         }
     });
-
 }
 
+function template(data) {
+    var output = '';
+    $.each(data['products'], function (key, val) {
+        output += `<div class="col-xl-3 col-lg-4 col-md-6 col-12 pb-30 pt-10">
+        <!-- Product Start -->
+        <div class="ee-product">
+            <!-- Image -->
+            <div class="image">
+                <a href="product/${val.id}" class="img"><img src="storage/product/${val.image.name}" alt="Product Image"></a>
+                <div class="wishlist-compare">
+                    <a class="compare-page" data-product="${val.id}" data-tooltip="Compare"><i class="ti-control-shuffle"></i></a>
+                </div>
+                <a href="cart" id="${val.id}" data-name="${val.name}" data-price="${val.unit_price}" data-quantity="${val.quantity}" data-image="${val.image.name}" class="add-to-cart"><i class="ti-shopping-cart"></i><span>ADD TO CART</span></a>
+            </div>
+            <!-- Content -->
+            <div class="content">
+                <!-- Category & Title -->
+                <div class="category-title">
+                    <a href="category/${val.category_id}" class="cat">${val.category_name}</a>
+                    <h5 class="title"><a href="product/${val.id}">${val.name}</a></h5>
+                </div>
+                <!-- Price & Ratting -->
+                <div class="price-ratting">
+                    <h5 class="price">`+ val.unit_price + ' ' + '₫' + `</h5>
+                </div>
+            </div>
+        </div><!-- Product End -->
+        </div>`;
+    });
+    return output;
+}
 //Check filterProduct has in localStorage
 function removeFilterProductInLocal() {
     if (localStorage.getItem('filterProduct') != null) {
@@ -384,6 +420,7 @@ $(document).on('click', '.filter-product', function () {
         if (removeFilterInLocal.length == 0 || (findHasOther == undefined && removeFilterInLocal[0].type == 'Sort')) {
             removeFilterProductInLocal();
             $('li.delete-all').remove();
+            window.location.reload(true);
         }
 
         //Perform ajax get data
@@ -395,6 +432,7 @@ $(document).on('click', '.filter-product', function () {
         $('#filter-place li').remove();
         $('li.delete-all').remove();
         removeFilterProductInLocal();
+        window.location.reload(true);
     });
 
     

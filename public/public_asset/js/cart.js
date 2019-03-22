@@ -27,7 +27,7 @@ $(document).ready(function () {
 });
 
 // Sự kiện click các button có class=".add-to-cart"
-$(".add-to-cart").click(function () {
+$(document).on('click', '.add-to-cart', function () {
 
     var id = $(this).attr("id"); // id của sản phẩm là id của button
     var name = $(this).attr("data-name"); // name của sản phẩm là thuộc tính data-name của button

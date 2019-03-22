@@ -495,7 +495,7 @@ windows.resize(productTabFilterScreen);
 /*--
 	Add To Cart Animation
 ------------------------*/
-$('.add-to-cart').on('click', function(e){
+$(document).on('click', '.add-to-cart', function (e) {
     e.preventDefault();
     
     if($(this).hasClass('added')){
@@ -507,7 +507,7 @@ $('.add-to-cart').on('click', function(e){
 /*--
 	Wishlist & Compare
 ------------------------*/
-$('.wishlist-compare a').on('click', function(e){
+$(document).on('click', '.wishlist-compare a', function (e) {
     e.preventDefault();
     
     if($(this).hasClass('added')){

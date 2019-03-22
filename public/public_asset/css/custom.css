@@ -228,3 +228,7 @@ form input {
 .filter-list {
     display: inline;
 }
+.pagination {
+    margin: auto;
+    width: 50%;
+}

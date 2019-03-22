@@ -18,7 +18,7 @@
                 </div>
                 <!-- Shop Product Wrap Start -->
                 <!-- Shop Product Wrap Start -->
-                <div class="shop-product-wrap grid row">
+                <div class="shop-product-wrap grid row" id="filter-result">
                     @foreach($products as $product)
                     <div class="col-xl-3 col-lg-4 col-md-6 col-12 pb-30 pt-10">
                         <!-- Product Start -->
@@ -55,17 +55,14 @@
                         </div><!-- Product End -->
                     </div>
                     @endforeach
-                </div><!-- Shop Product Wrap End -->
-
-                <div class="row mt-30">
-                    <div class="col">
-
-                        <ul class="pagination">
+                    <div class="row mt-30 pagination" id="pagination">
+                        <div class="col">
                             {{ $products->links('public.partials.pagination', ['paginator' => $products]) }}
-                        </ul>
+                        </div>
                     </div>
-                </div>
-
+                </div><!-- Shop Product Wrap End -->
+            
+                
             </div>
 
         </div>

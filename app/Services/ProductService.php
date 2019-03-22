@@ -406,39 +406,52 @@ class ProductService
             } else if ($element['type'] == 'Sort') {
                 $sort[] = $element['query'];
             } else {
-                $accessories[] = $element['query'];
+                $accessories[] = intval($element['query']);
             }
         });
-        
-        $products = DB::table('products')
-                    ->select('products.id', 'products.name', 'products.unit_price', 'products.updated_at', 'accessories.id as accessory_id')
+        $products = Product::with('images')
+                    ->select('products.id', 'products.name', 'products.quantity', 'products.unit_price', DB::raw('COUNT(*) as count'), 'categories.id as category_id', 'categories.name as category_name')
                     ->join('accessory_product', 'accessory_product.product_id', '=', 'products.id')
                     ->join('accessories', 'accessory_product.accessory_id', '=', 'accessories.id')
-                    ->get();
-
+                    ->join('categories', 'categories.id', '=', 'products.category_id');
+                    
         if ($accessories->isNotEmpty()) {
             $count = $accessories->count();
-            $products->whereIn('accessory_id',  $accessories)->groupBy('id')->filter(function ($v) use($count) { return $v->count() > ($count - 1);})->flatten()->unique('id');
+            $products->whereIn('accessories.id',  ($accessories->toArray()))->groupBy('products.id')->having('count', '>', ($count - 1));
         }
         
         if($price->isNotEmpty()) {
             $smallCompare = $price->first();
             $biggerCompare = intval($smallCompare) + 1;
             if (is_null(config("constants.price." . $biggerCompare))) {
-                $products->where('unit_price', '>', config("constants.price." . $smallCompare))->unique('id');
+                $products->where('products.unit_price', '>', config("constants.price." . $smallCompare))->groupBy('products.id');
             } else {
-                $products->whereBetween('unit_price', [config("constants.price." . $smallCompare), config("constants.price." . $biggerCompare)])->unique('id');
+                $products->where([
+                    ['products.unit_price', '<=', config("constants.price.{$biggerCompare}")],
+                    ['products.unit_price', '>=', config("constants.price.{$smallCompare}")]])->groupBy('products.id');
             }
         }
         if($sort->isNotEmpty()) {
             if (($sort->first()) == 'latest') {
-               $result =  $products->sortByDesc('update_at')->unique('id')->all(); 
+                $products->orderBy('products.updated_at', 'desc')->groupBy('products.id'); 
             } elseif (($sort->first()) == 'asc') {
-                $result =  $products->sortBy('unit_price')->unique('id');
+                $products->orderBy('products.unit_price', 'asc')->groupBy('products.id');
             } else {
-                $result =  $products->sortByDesc('unit_price')->unique('id');
+                $products->orderBy('products.unit_price', 'desc')->groupBy('products.id');
             }
         }
-        dd($result);
+        $result = [];
+        $items = [];
+        foreach (($products->get()) as $key => $product) {
+            $items[$key]['id'] = $product->id;
+            $items[$key]['name'] = $product->name;
+            $items[$key]['unit_price'] = $product->unit_price;
+            $items[$key]['quantity'] = $product->quantity;
+            $items[$key]['image'] =  $product->images->first();
+            $items[$key]['category_id'] =  $product->category_id;
+            $items[$key]['category_name'] =  $product->category_name;
+        }
+        $result['products'] = $items;
+        return $result;
     }
 }
