@@ -4,7 +4,13 @@
     @if($parentAccessory->name != 'GPU')
         <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{$parentAccessory->name}}<span class="caret"></span></a>
    @endif
+    @if($parentAccessory->name == 'CPU')
+    <ul class="dropdown-menu filter-dropdown cpu" role="menu">
+    @elseif($parentAccessory->name == 'HDD')
+    <ul class="dropdown-menu filter-dropdown hdd" role="menu">
+    @else 
     <ul class="dropdown-menu filter-dropdown" role="menu">
+    @endif
         @foreach($accessories as $childrenAccessory)
             @if($childrenAccessory->parent_id ==  $parentAccessory->id)
                 <li><a class='filter-product' data-query={{$childrenAccessory->id}} data-type={{$parentAccessory->name}}>{{$childrenAccessory->name}}</a></li>

@@ -59,12 +59,9 @@
                         <div class="col">
                             {{ $products->links('public.partials.pagination', ['paginator' => $products]) }}
                         </div>
-                    </div>
-                </div><!-- Shop Product Wrap End -->
-            
-                
+                    </div><!-- Shop Product Wrap End -->
+                </div>
             </div>
-
         </div>
     </div>
 </div><!-- Feature Product Section End -->

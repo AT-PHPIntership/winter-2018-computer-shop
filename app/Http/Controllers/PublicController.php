@@ -113,7 +113,7 @@ class PublicController extends Controller
      */
     public function productComment(Request $request)
     {
-        $response = app(CommentService::class)->comment($request->get('userId'), $request->get('productId'), $request->get('content'));
+        $response = app(CommentService::class)->comment($request->get('userId'), $request->get('productId'), $request->get('content'), $request->get('rate'));
         return response()->json($response);
     }
 

@@ -166,19 +166,6 @@ $(document).on('click', '.search-button', function () {
     }
 });
 
-
-// //Function to get param URL
-// function GetURLParameter(sParam) {
-//     var sPageURL = window.location.search.substring(1);
-//     var sURLVariables = sPageURL.split('&');
-//     for (var i = 0; i < sURLVariables.length; i++) {
-//         var sParameterName = sURLVariables[i].split('=');
-//         if (sParameterName[0] == sParam) {
-//             return sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
-//         }
-//     }
-// }
-
 //User comment product
 $(document).ready(function () {
     $('#comment-button').on('click', function () {
@@ -186,9 +173,9 @@ $(document).ready(function () {
         var productId = $(this).data('product');
         var content = $('#comment-text').val();
         var token = $(this).data('token');
+        var rate = $('input[name=rating]:checked', '.star-rating').val();
         // debugger;
         if (userId != undefined) {
-            if (content !== '') {
                 $.ajax({
                     url: 'product/comment',
                     method: 'POST',
@@ -197,29 +184,86 @@ $(document).ready(function () {
                         userId: userId,
                         productId: productId,
                         content: content,
+                        rate: rate,
                         _token: token
                     },
                     success: function (data) {
-                        // console.log(data);
+                        // console.log(data['comment']);
                         var output = '';
-                        output += '<li class="comment-border" data-id=' + data.id + '>';
-                        output += '<article id=' + data.id + '>';
+                        output += '<li class="comment-border" data-id=' + data['comment'].id + '>';
+                        output += '<article id=' + data['comment'].id + '>';
                         output += '<div class="comment-des">';
                         output += '<div class="comment-by">';
                         output += '<p class="author"><strong>' + comment('author') + '<span class="comment-time">' + comment('time') + '</span></strong></p>';
-                        output += '<span class="reply"><a class="add-reply" id=' + data.id + '>' + comment('reply') + '</a></span>';
+                        output += '<span class="reply"><a class="add-reply" id=' + data['comment'].id + '>' + comment('reply') + '</a></span>';
+                        output += '<div class="star-rating star-result">';
+                        for( var i = 5; i > 0; i--) {
+                            if (data['comment'].star == i) {
+                                output += `<input id="star-${i}" type="radio" name="rating-${data['comment'].id}" value="${i}" checked>
+                                <label for="star-${i}" title="${i} stars">
+                                        <i class="active fa fa-star" aria-hidden="true"></i>
+                                </label>`;
+                            } else {
+                                output += `<input id="star-${i}" type="radio" name="rating-${data['comment'].id}" value="${i}">
+                                <label for="star-${i}" title="${i} stars">
+                                        <i class="active fa fa-star" aria-hidden="true"></i>
+                                </label>`;
+                            }
+                        }
+                        output += '</div>';
                         output += '</div>';
                         output += '<section>';
-                        output += '<p>' + data.content + '</p>';
+                        if (data['comment'].content == null) {
+                            output += '<p>' + ' ' + '</p>';
+                        } else {
+                            output += '<p>' + data['comment'].content + '</p>';
+                        }
                         output += '</section>';
                         output += '</div>';
                         output += '</article>';
                         output += '</li>';
                         $('#commentList').append(output);
                         $('#comment-text').val('');
+                        var avgInForm = '';
+                        avgInForm += `<div class="pro-avg-ratting">
+                                        <h4>${data['avgRate'].toFixed(2)}  <span>(Overall)</span></h4>
+                                            <span>Based on ${data['numberEachStar'].length} Comments</span>
+                                        </div>
+                                        <div class="ratting-list number-each-star">`;
+                                            for (var i = 5; i > 0; i--) {
+                                                avgInForm += '<div class="sin-list float-left">';
+                                                for (var j = 1; j <= 5; j++) {
+                                                    if (j <= i) {
+                                                        avgInForm += '<i class="fa fa-star"></i>'
+                                                    }
+                                                }
+                                                avgInForm += `<span>(${data['numberEachStar'].filter(ele => ele == i).length})</span>`;
+                                                avgInForm += '</div>';
+                                            }
+                        avgInForm +=  `</div>`;
+                        $('#avg-by-form ').html(avgInForm);
+                        var avgInProduct = '';
+                            for (var i = 1; i <= 5; i++) {
+                                if(data['avgRate'] % 1 !== 0) {
+                                    if ((parseInt(data['avgRate']) + 1) == i) {
+                                        avgInProduct += '<i class="fa fa-star-half-o"></i>';
+                                    } else if ((parseInt(data['avgRate']) + 2) <= i) {
+                                        avgInProduct += '<i class="fa fa-star-o"></i>';
+                                    } else {
+                                        avgInProduct += '<i class="fa fa-star"></i>';
+                                    }
+                                }  
+                                if (data['avgRate'] % 1 == 0) {
+                                    if (data['avgRate'] >= i) {
+                                        avgInProduct += '<i class="fa fa-star"></i>';
+                                    } else {
+                                        avgInProduct += '<i class="fa fa-star-o"></i>';
+                                    }
+                                }
+                            }
+                        $('#avg-in-product').html(avgInProduct);
                     }
                 });
-            }
         } else {
             location.href = 'login';
         }
@@ -317,7 +361,7 @@ function filterProductFunction() {
         dataType:"JSON",
         data: {filterValue},
         success: function(data){
-            if (data['products'].length) {
+            if (data['products'].length > 0) {
                 var result = template(data);
                 $('#filter-result').html(result);
             } else {
@@ -369,11 +413,11 @@ removeFilterProductInLocal();
 
 //Add condition to filter 
 $(document).on('click', '.filter-product', function () {
-      var type = $(this).data('type');
-      var query = $(this).data('query');
-      var name = $(this).text();
-      var condition = {'type' : type, 'query' : query, 'name': name};
-      if (localStorage.getItem('filterProduct') != null) {
+    var type = $(this).data('type');
+    var query = $(this).data('query');
+    var name = $(this).text();
+    var condition = {'type' : type, 'query' : query, 'name': name};
+    if (localStorage.getItem('filterProduct') != null) {
         var filterProduct = JSON.parse(localStorage["filterProduct"].toString());
         var filterVal = filterProduct.find(function(element) {
             return element['type'] == type;
@@ -384,9 +428,9 @@ $(document).on('click', '.filter-product', function () {
             Object.assign(filterVal, condition);
         }
         localStorage["filterProduct"] = JSON.stringify(filterProduct);
-      } else {
+    } else {
         localStorage.setItem("filterProduct", JSON.stringify([condition]));
-      }   
+    }   
         //Append condition to DOM
         $('#filter-place li').remove();
         var filterProduct = JSON.parse(localStorage["filterProduct"].toString());
@@ -398,7 +442,10 @@ $(document).on('click', '.filter-product', function () {
         })
         $('#filter-place').append(output);
         var deleteAll = '<li class="filter-list delete-all ml-10">Delete All <i class="fa fa-window-close" id="delete-all" aria-hidden="true"></i></li>';
-        if (type != 'Sort') {
+        var findHasOther = filterProduct.find(function(element) {
+            return element['type'] != 'Sort';
+        });
+        if (findHasOther != undefined) {
             $('#filter-place').append(deleteAll);
         }
 
@@ -417,7 +464,10 @@ $(document).on('click', '.filter-product', function () {
         var findHasOther = removeFilterInLocal.find(function(element) {
             return element['type'] != 'Sort';
         });
-        if (removeFilterInLocal.length == 0 || (findHasOther == undefined && removeFilterInLocal[0].type == 'Sort')) {
+        var findHasSort = removeFilterInLocal.find(function(element) {
+            return element['type'] == 'Sort';
+        });
+        if (removeFilterInLocal.id == 0 || (findHasOther == undefined && findHasSort != undefined)) {
             removeFilterProductInLocal();
             $('li.delete-all').remove();
             window.location.reload(true);

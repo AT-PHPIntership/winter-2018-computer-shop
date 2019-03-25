@@ -35,7 +35,29 @@
                     </div>
 
                     <div class="single-product-description">
-
+                        @php $avgRate = $products->comments->pluck('star')->avg(); @endphp 
+                        <div class="ratting" id='avg-in-product'>
+                        @if ($products->comments->count() > 0)
+                            @for ($i = 1; $i <= 5; $i++)
+                                @if(is_float($avgRate))   
+                                    @if ((intval($avgRate) + 1) == $i)
+                                        <i class="fa fa-star-half-o"></i>
+                                    @elseif ((intval($avgRate) + 2) <= $i)
+                                        <i class="fa fa-star-o"></i>
+                                    @else
+                                        <i class="fa fa-star"></i>
+                                    @endif
+                                @endif
+                                @if(!is_float($avgRate))
+                                    @if($avgRate >= $i)
+                                    <i class="fa fa-star"></i>
+                                    @else 
+                                    <i class="fa fa-star-o"></i>
+                                    @endif
+                                @endif
+                            @endfor
+                        @endif
+                        </div>
                         <div class="desc">
                             <p>{!!$products->description!!}</p>
                         </div>
@@ -103,11 +125,60 @@
                         <div class="product-ratting-wrap">
 
                             <div class="ratting-form-wrapper fix">
+                                <div id="avg-by-form">
+                                @if ($products->comments->count() > 0)
+                                    <div class="pro-avg-ratting">
+                                        <h4>{{number_format($products->comments->pluck('star')->avg(), 2, ',', ' ')}}  <span>(Overall)</span></h4>
+                                        <span>Based on {{count($products->comments)}} Comments</span>
+                                    </div>
+                                    <div class="ratting-list number-each-star">
+                                        @for ($i = 5; $i > 0; $i--)
+                                        <div class="sin-list float-left">
+                                            @for ($j = 1; $j <= 5; $j++)
+                                                @if ($j <= $i)
+                                                    <i class="fa fa-star"></i>
+                                                @endif
+                                            @endfor
+                                            <span>({{$products->comments->pluck('star')->filter(function($ele) use($i){
+                                                        return $ele == $i;
+                                                    })->count()}})
+                                            </span>
+                                        </div>
+                                        @endfor
+                                    </div>
+                                @endif
+                                </div>
                                 <h3>@lang('public.product.title')</h3>
                                 <div class="ratting-form row">
+                                        <div class="col-12 mb-15">
+											<h5>Rating:</h5>
+											<div class="star-rating">
+                                                <input id="star-5" type="radio" name="rating" value="5" checked>
+                                                <label for="star-5" title="5 stars">
+                                                        <i class="active fa fa-star" aria-hidden="true"></i>
+                                                </label>
+                                                <input id="star-4" type="radio" name="rating" value="4">
+                                                <label for="star-4" title="4 stars">
+                                                        <i class="active fa fa-star" aria-hidden="true"></i>
+                                                </label>
+                                                <input id="star-3" type="radio" name="rating" value="3">
+                                                <label for="star-3" title="3 stars">
+                                                        <i class="active fa fa-star" aria-hidden="true"></i>
+                                                </label>
+                                                <input id="star-2" type="radio" name="rating" value="2">
+                                                <label for="star-2" title="2 stars">
+                                                        <i class="active fa fa-star" aria-hidden="true"></i>
+                                                </label>
+                                                <input id="star-1" type="radio" name="rating" value="1">
+                                                <label for="star-1" title="1 star">
+                                                        <i class="active fa fa-star" aria-hidden="true"></i>
+                                                </label>
+                                            </div>
+										</div>
                                     <div class="col-12 mb-15">
                                         <textarea id='comment-text' name="review" placeholder="@lang('public.product.placeholder')"></textarea>
                                     </div>
+                                    
                                     <div class="col-12">
                                         <input id='comment-button' {{(Auth::user()) ? 'data-user=' .Auth::user()->id : ''}} data-product='{{$products->id}}' data-token="{{ csrf_token() }}" value="@lang('public.product.button')" type="submit">
                                     </div>
@@ -124,6 +195,21 @@
                                                     <p class="author"><strong>{{$comment->user->name}}<span class="comment-time">@lang('public.product.time.no')</span></strong></p>
                                                     @endif
                                                     <span class="reply"><a class="add-reply" id='{{$comment->id}}'>@lang('public.product.reply')</a></span>
+                                                    <div class="star-rating star-result">
+                                                    @for($i = 5; $i > 0; $i--) 
+                                                        @if ($comment->star == $i) 
+                                                            <input id="star-{{$i}}" type="radio" name="rating-{{$comment->id}}" value="{{$i}}" checked>
+                                                            <label for="star-{{$i}}" title="{{$i}} stars">
+                                                                    <i class="active fa fa-star" aria-hidden="true"></i>
+                                                            </label>
+                                                        @else 
+                                                            <input id="star-{{$i}}" type="radio" name="rating-{{$comment->id}}" value="{{$i}}">
+                                                            <label for="star-{{$i}}" title="{{$i}} stars">
+                                                                    <i class="active fa fa-star" aria-hidden="true"></i>
+                                                            </label>
+                                                        @endif
+                                                    @endfor
+                                                    </div>
                                                 </div>
                                                 <section>
                                                     <p>{{$comment->content}}</p>

@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Comment;
+use App\Models\Product;
 
 class CommentService
 {
@@ -16,16 +17,21 @@ class CommentService
     *
     * @return comment
     */
-    public function comment($userId, $productId, $content)
+    public function comment($userId, $productId, $content, $rate)
     {
-        return Comment::create([
+        $contents = strip_tags($content);
+        $comment = Comment::create([
             'user_id' => $userId,
             'product_id' => $productId,
-            'content' => $content,
+            'content' => $contents,
+            'star' => $rate,
         ]);
+        $avgRate = Product::findOrFail($productId)->comments->pluck('star')->avg();
+        $numberEachStar = Product::findOrFail($productId)->comments->pluck('star');
+        return ['comment' => $comment, 'avgRate' => $avgRate, 'numberEachStar' => $numberEachStar];
     }
 
-     /**
+    /**
     * Save reply of a cooment
     *
     * @param object $userId        [user comment product]
@@ -37,10 +43,11 @@ class CommentService
     */
     public function reply($userId, $productId, $content, $parentComment)
     {
+        $contents = strip_tags($content);
         return  Comment::create([
             'user_id' => $userId,
             'product_id' => $productId,
-            'content' => $content,
+            'content' => $contents,
             'parent_id' => $parentComment,
         ]);
     }
@@ -66,8 +73,7 @@ class CommentService
         try {
             $parent = Comment::find($id);
             if ($parent->parent_id === null) {
-                $message = Comment::where('id', $id)
-                                    ->orWhere('parent_id', $id)->delete();
+                $message = Comment::where('id', $id)->orWhere('parent_id', $id)->delete();
             } else {
                 $message = Comment::where('id', $id)->delete();
             }
