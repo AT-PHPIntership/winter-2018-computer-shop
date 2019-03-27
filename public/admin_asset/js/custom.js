@@ -118,7 +118,7 @@ $(document).ready(function () {
         if (imgProduct) {
             var imageId = $(this).data('image-id');
             $("#deleteImage").val(imageId);
-            $('#image-list .image-item[data-id^=' + imageId + ']').remove();
+            $('#image-list .image-item[data-id=' + imageId + ']').remove();
         }
     });
 });
@@ -138,7 +138,7 @@ $(document).ready(function () {
                 data: { image: imageId, _token: token },
                 success: function (data) {
                     // console.log(data);
-                    $('#image-list .image-item[data-id^=' + data.data.id + ']').remove();
+                    $('#image-list .image-item[data-id=' + data.data.id + ']').remove();
                 }
             });
         }
@@ -237,6 +237,9 @@ $(document).ready(function () {
 Dropzone.options.dropzone = {
     maxFiles: 10,
     addRemoveLinks: true,
+    dragend: function () {
+        confirm('Do you want to set these image to display homepage?');
+    },
     success: function (file, response) {
         setTimeout(function () {
             alert(response.message);
@@ -252,7 +255,7 @@ Dropzone.options.dropzone = {
 
 //Delete a photo
 $(document).ready(function () {
-    $('.delete-slide').on('click', function () {
+    $('.delete-banner').on('click', function () {
         var result = confirm(element('image'));
         if (result) {
             var imageId = $(this).data('image-id');
@@ -265,14 +268,40 @@ $(document).ready(function () {
                 data: { image: imageId, _token: token },
                 success: function (data) {
                     // console.log(data);
-                    $(
-                        '#image-list .image-item[data-id^=' + data.data.id + ']'
-                    ).remove();
+                    $('.display-banner[data-id=' + data.data.id + ']').remove();
                 }
             });
         }
     });
 });
+
+//Check to display banner
+$(document).ready(function () {
+    $('.check-to-display').on('click', function () {
+        var imageId = $(this).data('image-id');
+        var token = $(this).data('token');
+        if ($(this).prop("checked") == true) {
+            var flag = 1;
+        } else {
+            var flag = 0;
+        }
+        $.ajax({
+            url: 'admin/slides/flag',
+            type: 'PUT',
+            dataType: 'JSON',
+            data: { imageId: imageId, _token: token, flag:flag },
+            success: function (data) {
+                // console.log(data);
+                if (data.data == 1) {
+                    alert('Check to display successfully!');
+                } else {
+                    alert('Cancel to display successfully!');
+                }
+            }
+        });
+    });
+});
+
 
 /** HANDLE STATISTIC */
 $(function () {

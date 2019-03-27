@@ -495,4 +495,3 @@ $(document).on('click', '.filter-product', function () {
 
     
 });
-

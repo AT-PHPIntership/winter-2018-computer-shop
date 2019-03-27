@@ -69,6 +69,7 @@ return [
             'action' => 'Actions',
             'role' => 'Role',
             'id' => '#',
+            'display' => 'Display',
             'product' => 'Product',
             'productName' => 'Product Name',
             'order_date' => 'Order Date',

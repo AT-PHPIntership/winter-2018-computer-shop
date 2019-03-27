@@ -17,24 +17,35 @@
                             <table class="table table-striped table-sm text-center">
                                 <thead>
                                     <tr>
+                                        <th>@lang('master.content.table.id')</th>
                                         <th>@lang('master.content.form.image')</th>
+                                        <th>@lang('master.content.table.display')</th>
+                                        <th>@lang('master.content.table.action')</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <td>
-                                       <div class="form-group">
-                                        <div class="col-sm-12 image-list" id="image-list">
-                                            @foreach($slides as $slide)
+                                    @foreach($slides as $slide)
+                                    <tr class="display-banner" data-id="{{ $slide->id }}">
+                                        <th class="category-index">{{ $slide->id }}</th>
+                                        <td>
                                             <div class="image-item" data-id="{{$slide->id}}">
-                                              <a href="storage/slide/{{$slide->name}}" data-lightbox="product">
-                                                 <img src="storage/slide/{{$slide->name}}" width='125' height='60'>
-                                             </a>
-                                              <button type="button" class="btn btn-danger btn-sm fa fa-minus-circle delete-slide" value="{{$slide->name}}" data-token="{{ csrf_token() }}" data-image-id="{{$slide->id}}"></button>
+                                                <a href="storage/slide/{{$slide->name}}" data-lightbox="product">
+                                                    <img src="storage/slide/{{$slide->name}}" width='125' height='60'>
+                                                </a>
                                             </div>
-                                             @endforeach
-                                        </div>
-                                      </div>
-                                     </td>
+                                        </td>
+                                        <th class="category-index">                              
+                                            <label class="checkbox-inline">
+                                                <input class="check-to-display" type="checkbox" value="" data-image-id="{{ $slide->id }}" data-token="{{csrf_token()}}">
+                                            </label>
+                                        </th>
+                                        <th class="category-index">
+                                            <button type="button" class="btn btn-danger delete-banner" data-dismiss="alert" data-image-id="{{ $slide->id }}" data-token="{{csrf_token()}}">
+                                                <i class="ace-icon fa fa-trash"></i>
+                                            </button>
+                                        </th>
+                                    </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>

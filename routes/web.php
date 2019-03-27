@@ -52,6 +52,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'adminLogin'], function () {
     Route::resource('promotions', 'PromotionController');
     Route::resource('codes', 'CodeController');
     Route::delete('slides/image', 'SlideController@deleteImage');
+    Route::put('slides/flag', 'SlideController@setFlag');
     Route::resource('slides', 'SlideController');
     Route::resource('accessories', 'AccessoryController');
     Route::delete('slides/image', 'SlideController@deleteImage');

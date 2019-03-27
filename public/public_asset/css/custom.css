@@ -280,3 +280,7 @@ form input {
 .category-title h5{
     width: 505px !important;
 }
+
+.hero-image {
+    margin-bottom: 16px;
+}

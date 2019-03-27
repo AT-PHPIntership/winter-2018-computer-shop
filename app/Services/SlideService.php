@@ -26,7 +26,7 @@ class SlideService
     */
     public function homePage()
     {
-        return Slide::take(\Config::get('constants.banner.quantity'))->get();
+        return Slide::where('flag', 1)->get();
     }
 
    /**
@@ -57,7 +57,7 @@ class SlideService
     */
     public function deleteImage($imageId)
     {
-        $imageId = Slide::find($imageId);
+        $imageId = Slide::findOrFail(intval($imageId));
         $images = Slide::where('id', $imageId->id)->get();
         foreach ($images as $image) {
             if ($imageId->id == $image->id) {
@@ -66,5 +66,17 @@ class SlideService
                 return $imageId;
             }
         }
+    }
+
+    /**
+    * Set flag to display banner
+    *
+    * @return collection
+    */
+    public function setFlag($imageId, $flag)
+    {
+        $imageId = Slide::findOrFail(intval($imageId));
+        $imageId->update(['flag' => intval($flag)]);
+        return intval($flag);
     }
 }

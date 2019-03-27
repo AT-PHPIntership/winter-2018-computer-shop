@@ -11,7 +11,7 @@
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="public_asset/images/favicon.ico">
     <!-- CSS
-    	============================================ -->
+    ============================================ -->
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="public_asset/css/bootstrap.min.css">
     <!-- Lightbox CSS-->
@@ -53,8 +53,6 @@
     <script src="public_asset/js/custom.js"></script>
     <!-- Cart JS -->
     <script src="public_asset/js/cart.js"></script>
-    <!-- Laravel Javascript Validation -->
-
 </body>
 
 </html> 

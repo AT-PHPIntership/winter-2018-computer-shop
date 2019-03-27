@@ -50,8 +50,20 @@ class SlideController extends Controller
      */
     public function deleteImage(Request $request)
     {
-        $imageId = $request->image;
-        $response = ['data' => app(SlideService::class)->deleteImage($imageId),'message' => 'success!', 'result' => 200];
+        $response = ['data' => app(SlideService::class)->deleteImage($request->image),'message' => 'success!', 'result' => 200];
+        return response()->json($response);
+    }
+
+    /**
+     * Set Flag for banner
+     *
+     * @param object $request [request to create a new slie]
+     *
+     * @return json
+     */
+    public function setFlag(Request $request)
+    {
+        $response = ['data' => app(SlideService::class)->setFlag($request->imageId, $request->flag),'message' => 'success!', 'result' => 200];
         return response()->json($response);
     }
 }

@@ -14,11 +14,11 @@
         </div>
         <!-- Banner -->
         <div class="col-lg-4 col-md-6 col-12 order-lg-1">
-            <div class="banner"><a href="#"><img src="storage/slide/{{$banners->first()->name}}" alt="Banner"></a></div>
+            <div class="banner"><a href="#"><img src="storage/slide/{{$slides->first()->name}}" alt="Banner"></a></div>
         </div>
         <!-- Banner -->
         <div class="col-lg-4 col-md-6 col-12 order-lg-3">
-            <div class="banner"><a href="#"><img src="storage/slide/{{$banners->last()->name}}" alt="Banner"></a></div>
+            <div class="banner"><a href="#"><img src="storage/slide/{{$slides->last()->name}}" alt="Banner"></a></div>
         </div>
     </div>
 </div><!-- Page Banner Section End -->
