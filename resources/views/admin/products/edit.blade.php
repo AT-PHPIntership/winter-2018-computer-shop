@@ -68,156 +68,22 @@
                                 <div class="col-sm-12" id="child_category">
                                 </div>
                             </div>
+                            @foreach($parentAccessories as $key => $parentAccessory)
                             <div class="form-group row">
-                                <label class="col-sm-3 form-control-label">@lang('master.content.table.ram')</label>
-                                <div class="col-sm-9">
-                                    @if ($products->accessories->pluck('parent')->pluck("name")->contains(trans('master.content.table.ram')))
-                                    <select name="accessory_id[]" class="form-control mb-3">
-                                        @foreach($accessories->where('name', trans('master.content.table.ram')) as $rams)
-                                        @foreach($rams->childrens as $ram)
-                                        <option {{ $products->accessories->filter(function ($value) {
-                            return $value->parent->name == trans('master.content.table.ram');
-                          })->first()->id == $ram->id ? 'selected' : '' }} value="{{$ram->id}}">
-                                            {{$ram->name}}
-                                        </option>
-                                        @endforeach
-                                        @endforeach
-                                    </select>
-                                    @else
-                                    <select name="accessory_id[]" class="form-control mb-3">
-                                        <option value="" selected disabled hidden>@lang('master.content.select.choose')</option>
-                                        @foreach($accessories->where('name', trans('master.content.table.ram')) as $rams)
-                                        @foreach($rams->childrens as $ram)
-                                        <option value="{{$ram->id}}">
-                                            {{$ram->name}}
-                                        </option>
-                                        @endforeach
-                                        @endforeach
-                                    </select>
-                                    @endif
-                                    @include('admin.partials.error', ['err' => 'accessory_id.0'])
+                                <label class="col-sm-3 form-control-label">{{$parentAccessory->name}}</label>
+                                <div class="col-sm-9 replace-by-input" data-id="{{$parentAccessory->id}}">
+                                <select name="accessory_id[]" class="form-control mb-3">
+                                    <option value="" selected disabled hidden>@lang('master.content.select.choose')</option>
+                                    @foreach($accessories as $childrenAccessory)
+                                    @if($childrenAccessory->parent_id ==  $parentAccessory->id)
+                                        <option {{ ($products->accessories->pluck('id')->contains($childrenAccessory->id)) ? 'selected' : ''}} value="{{$childrenAccessory->id}}">{{$childrenAccessory->name}}</option>
+                                        @endif
+                                    @endforeach
+                                </select>
+                                    @include('admin.partials.error', ['err' => 'accessory_id.' . $key])
                                 </div>
                             </div>
-                            <div class="form-group row">
-                                <label class="col-sm-3 form-control-label">@lang('master.content.table.cpu')</label>
-                                <div class="col-sm-9">
-                                    @if ($products->accessories->pluck('parent')->pluck("name")->contains(trans('master.content.table.cpu')))
-                                    <select name="accessory_id[]" class="form-control mb-3">
-                                        @foreach($accessories->where('name', trans('master.content.table.cpu')) as $cpus)
-                                        @foreach($cpus->childrens as $cpu)
-                                        <option {{ $products->accessories->filter(function ($value) {
-                            return $value->parent->name == trans('master.content.table.cpu');
-                          })->first()->id == $cpu->id ? 'selected' : '' }} value="{{$cpu->id}}">
-                                            {{$cpu->name}}
-                                        </option>
-                                        @endforeach
-                                        @endforeach
-                                    </select>
-                                    @else
-                                    <select name="accessory_id[]" class="form-control mb-3">
-                                        <option value="" selected disabled hidden>@lang('master.content.select.choose')</option>
-                                        @foreach($accessories->where('name', trans('master.content.table.cpu')) as $cpus)
-                                        @foreach($cpus->childrens as $cpu)
-                                        <option value="{{$cpu->id}}">
-                                            {{$cpu->name}}
-                                        </option>
-                                        @endforeach
-                                        @endforeach
-                                    </select>
-                                    @endif
-                                    @include('admin.partials.error', ['err' => 'accessory_id.1'])
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-sm-3 form-control-label">@lang('master.content.table.hdd')</label>
-                                <div class="col-sm-9">
-                                    @if ($products->accessories->pluck('parent')->pluck("name")->contains(trans('master.content.table.hdd')))
-                                    <select name="accessory_id[]" class="form-control mb-3">
-                                        @foreach($accessories->where('name', trans('master.content.table.hdd')) as $hdds)
-                                        @foreach($hdds->childrens as $hdd)
-                                        <option {{ $products->accessories->filter(function ($value) {
-                            return $value->parent->name == trans('master.content.table.hdd');
-                          })->first()->id == $hdd->id ? 'selected' : '' }} value="{{$hdd->id}}">
-                                            {{$hdd->name}}
-                                        </option>
-                                        @endforeach
-                                        @endforeach
-                                    </select>
-                                    @else
-                                    <select name="accessory_id[]" class="form-control mb-3">
-                                        <option value="" selected disabled hidden>@lang('master.content.select.choose')</option>
-                                        @foreach($accessories->where('name', trans('master.content.table.hdd')) as $hdds)
-                                        @foreach($hdds->childrens as $hdd)
-                                        <option value="{{$hdd->id}}">
-                                            {{$hdd->name}}
-                                        </option>
-                                        @endforeach
-                                        @endforeach
-                                    </select>
-                                    @endif
-                                    @include('admin.partials.error', ['err' => 'accessory_id.2'])
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-sm-3 form-control-label">@lang('master.content.table.monitor')</label>
-                                <div class="col-sm-9">
-                                    @if ($products->accessories->pluck('parent')->pluck("name")->contains(trans('master.content.table.monitor')))
-                                    <select name="accessory_id[]" class="form-control mb-3">
-                                        @foreach($accessories->where('name', trans('master.content.table.monitor')) as $monitors)
-                                        @foreach($monitors->childrens as $monitor)
-                                        <option {{ $products->accessories->filter(function ($value) {
-                            return $value->parent->name == trans('master.content.table.monitor');
-                          })->first()->id == $monitor->id ? 'selected' : '' }} value="{{$monitor->id}}">
-                                            {{$monitor->name}}
-                                        </option>
-                                        @endforeach
-                                        @endforeach
-                                    </select>
-                                    @else
-                                    <select name="accessory_id[]" class="form-control mb-3">
-                                        <option value="" selected disabled hidden>@lang('master.content.select.choose')</option>
-                                        @foreach($accessories->where('name', trans('master.content.table.monitor')) as $monitors)
-                                        @foreach($monitors->childrens as $monitor)
-                                        <option value="{{$monitor->id}}">
-                                            {{$monitor->name}}
-                                        </option>
-                                        @endforeach
-                                        @endforeach
-                                    </select>
-                                    @endif
-                                    @include('admin.partials.error', ['err' => 'accessory_id.3'])
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-sm-3 form-control-label">@lang('master.content.table.gpu')</label>
-                                <div class="col-sm-9">
-                                    @if ($products->accessories->pluck('parent')->pluck("name")->contains(trans('master.content.table.gpu')))
-                                    <select name="accessory_id[]" class="form-control mb-3">
-                                        @foreach($accessories->where('name', trans('master.content.table.gpu')) as $gpus)
-                                        @foreach($gpus->childrens as $gpu)
-                                        <option {{ $products->accessories->filter(function ($value) {
-                            return $value->parent->name == trans('master.content.table.gpu');
-                          })->first()->id == $gpu->id ? 'selected' : '' }} value="{{$gpu->id}}">
-                                            {{$gpu->name}}
-                                        </option>
-                                        @endforeach
-                                        @endforeach
-                                    </select>
-                                    @else
-                                    <select name="accessory_id[]" class="form-control mb-3">
-                                        <option value="" selected disabled hidden>@lang('master.content.select.choose')</option>
-                                        @foreach($accessories->where('name', trans('master.content.table.gpu')) as $gpus)
-                                        @foreach($gpus->childrens as $gpu)
-                                        <option value="{{$gpu->id}}">
-                                            {{$gpu->name}}
-                                        </option>
-                                        @endforeach
-                                        @endforeach
-                                    </select>
-                                    @endif
-                                    @include('admin.partials.error', ['err' => 'accessory_id.4'])
-                                </div>
-                            </div>
+                            @endforeach
                             <input type="hidden" name="deleteImage" id="deleteImage" value="">
                             <div class="form-group">
                                 <a href="{{route('products.index')}}" class="btn btn-danger">@lang('master.content.button.cancel')</a>

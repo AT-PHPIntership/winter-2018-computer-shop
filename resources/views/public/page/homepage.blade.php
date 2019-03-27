@@ -51,7 +51,11 @@
                                             </div>
                                             <!-- Price & Ratting -->
                                             <div class="price-ratting">
-                                                <h5 class="price">{{$product->unit_price . ' đ'}}</h5>
+                                            @if ($product->promotions->count() > 0)
+                                                <h5 class="price"><span class="old">{{number_format($product->unit_price ,0,",",".") . ' đ'}}</span>{{number_format($product->unit_price - (($product->unit_price * $product->promotions->pluck('percent')->first())/100),0,",",".") . ' đ'}}</h5>&nbsp;<span class="label-sale">{{$product->promotions->pluck('percent')->first() . '%'}}</span>
+                                            @else 
+                                                <h5 class="price">{{number_format($product->unit_price ,0,",",".") . ' đ'}}</h5>
+                                            @endif
                                             </div>
                                         </div>
                                     </div><!-- Product End -->
@@ -111,7 +115,11 @@
                                 <!-- Price & Ratting -->
                                 <div class="price-ratting">
 
-                                    <h5 class="price">{{$product->unit_price . ' đ'}}</h5>
+                                    @if ($product->promotions->count() > 0)
+                                        <h5 class="price"><span class="old">{{number_format($product->unit_price ,0,",",".") . ' đ'}}</span>{{number_format($product->unit_price - (($product->unit_price * $product->promotions->pluck('percent')->first())/100),0,",",".") . ' đ'}}</h5>&nbsp;<span class="label-sale">{{$product->promotions->pluck('percent')->first() . '%'}}</span>
+                                    @else 
+                                        <h5 class="price">{{number_format($product->unit_price ,0,",",".") . ' đ'}}</h5>
+                                    @endif
 
                                 </div>
 
@@ -159,7 +167,11 @@
                                 </div>
                                 <!-- Price & Ratting -->
                                 <div class="price-ratting">
-                                    <h5 class="price">{{$product->unit_price . ' đ'}}</h5>
+                                    @if ($product->promotions->count() > 0)
+                                        <h5 class="price"><span class="old">{{number_format($product->unit_price ,0,",",".") . ' đ'}}</span>{{number_format($product->unit_price - (($product->unit_price * $product->promotions->pluck('percent')->first())/100),0,",",".") . ' đ'}}</h5>&nbsp;<span class="label-sale">{{$product->promotions->pluck('percent')->first() . '%'}}</span>
+                                    @else 
+                                        <h5 class="price">{{number_format($product->unit_price ,0,",",".") . ' đ'}}</h5>
+                                    @endif
                                 </div>
                             </div>
                         </div><!-- Product End -->

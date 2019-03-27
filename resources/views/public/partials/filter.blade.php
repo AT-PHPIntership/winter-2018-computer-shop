@@ -1,7 +1,7 @@
 
 @foreach($parentAccessories as $parentAccessory)
 <li class="dropdown">
-    @if($parentAccessory->name != 'GPU')
+    @if($parentAccessory->name == 'CPU'|| $parentAccessory->name == 'RAM' || $parentAccessory->name == 'HDD' ||$parentAccessory->name == 'Monitor')
         <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{$parentAccessory->name}}<span class="caret"></span></a>
    @endif
     @if($parentAccessory->name == 'CPU')

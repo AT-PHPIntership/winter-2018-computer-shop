@@ -118,6 +118,7 @@ return [
             'category' => 'Category',
             'description' => 'Description',
             'price' => 'Price(đ)',
+            'discount' => 'Discount(đ)',
             'quantity' => 'Quantity',
             'file' => 'File',
             'image' => 'Image',

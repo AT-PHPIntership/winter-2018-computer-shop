@@ -8,7 +8,6 @@ use App\Http\Requests\ImportRequest;
 use App\Services\ProductService;
 use App\Services\ImageService;
 use App\Models\Product;
-
 class ProductController extends Controller
 {
     /**
@@ -28,6 +27,7 @@ class ProductController extends Controller
      */
     public function getData()
     {
+        
         return app(ProductService::class)->dataTable();
     }
 

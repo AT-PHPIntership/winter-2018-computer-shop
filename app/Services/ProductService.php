@@ -13,7 +13,7 @@ use App\Models\Promotion;
 use App\Services\ImageService;
 use Excel;
 use App\Models\OrderDetail;
-use Illuminate\Support\Arr;
+use Carbon\Carbon;
 class ProductService
 {
     /**
@@ -27,6 +27,22 @@ class ProductService
         return Datatables::of($products)
             ->addColumn('category', function (Product $product) {
                 return $product->category->name;
+            })
+            ->addColumn('unit_price', function (Product $product) {
+                return number_format($product->unit_price,0,",",".");
+            })
+            ->addColumn('discount', function (Product $product) {
+                $validatePromotion = $product->promotions->filter(function ($value, $key) {
+                                        if (strpos(Carbon::parse($value->end_at)->diffForHumans(), 'ago') == false ) {
+                                            return $value;
+                                        }
+                                    });
+                $percentPromotion = $validatePromotion->pluck('percent')->first();
+                $unit_price = $product->unit_price;
+                if ($validatePromotion->count() > 0) {
+                    return number_format($unit_price - (($unit_price * $percentPromotion)/100),0,",",".") . ' ' . '(' . $percentPromotion . '%' . ')' ;
+                }
+                return number_format($unit_price - (($unit_price * $percentPromotion)/100),0,",",".");
             })
             ->addColumn('action', function ($data) {
                 return view('admin.products.action', ['id' => $data->id]);
@@ -227,9 +243,14 @@ class ProductService
     public function delete($product)
     {
         try {
-            $order = OrderDetail::where('product_id', $product->id)->get();
+            $orderDetail = OrderDetail::where('product_id', $product->id)->get();
+            $order = $orderDetail->filter(function ($value, $key) {
+                if ($value->order->status != config('constants.order.cancel')) {
+                    return $value;
+                }
+            });
             $comments = Comment::where('product_id', $product->id)->get();
-            if ($order->count() > 0) {
+            if ($order->count() != 0) {
                 session()->flash('warning', __('master.content.message.orderDetail'));
             } elseif ($comments->count() > 0) {
                 session()->flash('warning', __('master.content.message.commentProduct'));
@@ -270,7 +291,12 @@ class ProductService
      **/
     public function feature()
     {
-        return Product::take(config('constants.product.feature'))->get();
+        return Product::with(['promotions' => function ($query) {
+                            $query->where('start_at', '<=', Carbon::now())
+                                ->where('end_at', '>=', Carbon::now());
+                        }])
+                        ->take(config('constants.product.feature'))
+                        ->get();
     }
 
     /**
@@ -280,7 +306,13 @@ class ProductService
      **/
     public function bestSeller()
     {
-        return Product::orderBy('total_sold', 'desc')->groupBy('total_sold')->take(config('constants.product.bestSeller'))->get();
+        return Product::with(['promotions' => function ($query) {
+                                $query->where('start_at', '<=', Carbon::now())
+                                    ->where('end_at', '>=', Carbon::now());
+                                }])->orderBy('total_sold', 'desc')
+                                    ->groupBy('total_sold')
+                                    ->take(config('constants.product.bestSeller'))
+                                    ->get();
     }
 
     /**
@@ -290,7 +322,10 @@ class ProductService
      **/
     public function newArrival()
     {
-        return Product::latest()->take(config('constants.product.newArrival'))->get();
+        return Product::with(['promotions' => function ($query) {
+                        $query->where('start_at', '<=', Carbon::now())
+                            ->where('end_at', '>=', Carbon::now());
+        }])->latest()->take(config('constants.product.newArrival'))->get();
     }
 
     /**
@@ -300,7 +335,11 @@ class ProductService
      */
     public function allCategory()
     {
-        return Product::paginate(config('constants.category.all'));
+        return Product::with(['promotions' => function ($query) {
+                            $query->where('start_at', '<=', Carbon::now())
+                                ->where('end_at', '>=', Carbon::now());
+                        }])
+                        ->paginate(config('constants.category.all'));
     }
 
     /**
@@ -313,10 +352,14 @@ class ProductService
     public function publicPage($category)
     {
         $raw = $category->parent_id != null ? 'category_id = ?' : 'parent_id = ?';
-        return Product::join('categories', 'products.category_id', '=', 'categories.id')
-            ->select('products.*', 'categories.parent_id', 'categories.name as categoryName')
-            ->whereRaw($raw, $category->id)
-            ->paginate(config('constants.category.all'));
+        return Product::with(['promotions' => function ($query) {
+                            $query->where('start_at', '<=', Carbon::now())
+                                ->where('end_at', '>=', Carbon::now());
+                        }])
+                        ->join('categories', 'products.category_id', '=', 'categories.id')
+                        ->select('products.*', 'categories.parent_id', 'categories.name as categoryName')
+                        ->whereRaw($raw, $category->id)
+                        ->paginate(config('constants.category.all'));
     }
 
     /**
@@ -328,7 +371,10 @@ class ProductService
      */
     public function publicProduct($product)
     {
-        return $product->load('accessories', 'comments', 'comments.childrens');
+        return $product->load(['promotions' => function ($query) {
+                                $query->where('start_at', '<=', Carbon::now())
+                                    ->where('end_at', '>=', Carbon::now());
+                            }], 'accessories', 'comments', 'comments.childrens');
     }
 
     /**
@@ -340,11 +386,14 @@ class ProductService
      */
     public function getRelated($product)
     {
-        return Product::with(['images'])
-            ->join('categories', 'products.category_id', '=', 'categories.id')
-            ->select('products.name', 'products.id', 'products.unit_price', 'products.quantity', 'categories.parent_id', 'categories.id as categoryId', 'categories.name as categoryName')
-            ->where('parent_id', $product->category->parent_id)
-            ->get();
+        return Product::with(['images', 'promotions' => function ($query) {
+                                $query->where('start_at', '<=', Carbon::now())
+                                    ->where('end_at', '>=', Carbon::now());
+                            }])
+                            ->join('categories', 'products.category_id', '=', 'categories.id')
+                            ->select('products.name', 'products.id', 'products.unit_price', 'products.quantity', 'categories.parent_id', 'categories.id as categoryId', 'categories.name as categoryName')
+                            ->where('parent_id', $product->category->parent_id)
+                            ->get();
     }
 
     /**
@@ -409,11 +458,14 @@ class ProductService
                 $accessories[] = intval($element['query']);
             }
         });
-        $products = Product::with('images')
-                    ->select('products.id', 'products.name', 'products.quantity', 'products.unit_price', DB::raw('COUNT(*) as count'), 'categories.id as category_id', 'categories.name as category_name')
-                    ->join('accessory_product', 'accessory_product.product_id', '=', 'products.id')
-                    ->join('accessories', 'accessory_product.accessory_id', '=', 'accessories.id')
-                    ->join('categories', 'categories.id', '=', 'products.category_id');
+        $products = Product::with(['images', 'promotions' => function ($query) {
+                                $query->where('start_at', '<=', Carbon::now())
+                                    ->where('end_at', '>=', Carbon::now());
+                            }])
+                            ->select('products.id', 'products.name', 'products.quantity', 'products.unit_price', DB::raw('COUNT(*) as count'), 'categories.id as category_id', 'categories.name as category_name')
+                            ->join('accessory_product', 'accessory_product.product_id', '=', 'products.id')
+                            ->join('accessories', 'accessory_product.accessory_id', '=', 'accessories.id')
+                            ->join('categories', 'categories.id', '=', 'products.category_id');
                     
         if ($accessories->isNotEmpty()) {
             $count = $accessories->count();
@@ -448,6 +500,7 @@ class ProductService
             $items[$key]['unit_price'] = $product->unit_price;
             $items[$key]['quantity'] = $product->quantity;
             $items[$key]['image'] =  $product->images->first();
+            $items[$key]['promotion'] =  $product->promotions;
             $items[$key]['category_id'] =  $product->category_id;
             $items[$key]['category_name'] =  $product->category_name;
         }

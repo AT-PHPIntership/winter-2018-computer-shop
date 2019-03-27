@@ -274,3 +274,9 @@ form input {
     top: 4px;
     pointer-events: none;
 }
+.label-sale {
+    color: #ff0000;
+}
+.category-title h5{
+    width: 505px !important;
+}

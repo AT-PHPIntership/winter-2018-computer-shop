@@ -372,6 +372,10 @@ function filterProductFunction() {
     });
 }
 
+function formatCurrencyVN(price){
+    return new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'VND' }).format(price);
+}
+
 function template(data) {
     var output = '';
     $.each(data['products'], function (key, val) {
@@ -394,12 +398,16 @@ function template(data) {
                     <h5 class="title"><a href="product/${val.id}">${val.name}</a></h5>
                 </div>
                 <!-- Price & Ratting -->
-                <div class="price-ratting">
-                    <h5 class="price">`+ val.unit_price + ' ' + '₫' + `</h5>
-                </div>
-            </div>
-        </div><!-- Product End -->
-        </div>`;
+                <div class="price-ratting">`
+                if (val.promotion.length > 0) {
+                    output +=  '<h5 class="price"><span class="old">' + formatCurrencyVN(val.unit_price) + '</span>'+ formatCurrencyVN(val.unit_price - (val.unit_price * val.promotion[0].percent)/100) + '</h5>&nbsp;<span class="label-sale">' + val.promotion[0].percent + '%' + '</span>';
+                } else {
+                    output +=  '<h5 class="price">' + formatCurrencyVN(val.unit_price) + '</h5>';
+                }
+                output +=`</div>
+                        </div>
+                    </div><!-- Product End -->
+                    </div>`;
     });
     return output;
 }
@@ -451,7 +459,7 @@ $(document).on('click', '.filter-product', function () {
 
         //Perform ajax get data
         filterProductFunction();
-  });
+    });
 
    //Remove condition to filter product
     $(document).on('click', '.remove-filter', function () {
@@ -467,7 +475,7 @@ $(document).on('click', '.filter-product', function () {
         var findHasSort = removeFilterInLocal.find(function(element) {
             return element['type'] == 'Sort';
         });
-        if (removeFilterInLocal.id == 0 || (findHasOther == undefined && findHasSort != undefined)) {
+        if (removeFilterInLocal.length == 0 || (findHasOther == undefined && findHasSort != undefined)) {
             removeFilterProductInLocal();
             $('li.delete-all').remove();
             window.location.reload(true);

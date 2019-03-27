@@ -10,10 +10,10 @@
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-close">
-                      <div class="dropdown">
+                    <div class="dropdown">
                         <button class="btn btn-success btn-lg fa fa-upload" id="uploadFile">
                         </button>
-                      </div>
+                    </div>
                     </div>
                     <div class="card-header d-flex align-items-center">
                         <a href="{{route('products.create')}}" class="btn btn-primary">@lang('master.content.action.add', ['attribute' => trans('master.content.attribute.Product')])</a>
@@ -27,6 +27,7 @@
                                         <th>@lang('master.content.form.name')</th>
                                         <th>@lang('master.content.form.category')</th>
                                         <th>@lang('master.content.form.price')</th>
+                                        <th>@lang('master.content.form.discount')</th>
                                         <th>@lang('master.content.form.quantity')</th>
                                         <th>@lang('master.content.table.action')</th>
                                     </tr>

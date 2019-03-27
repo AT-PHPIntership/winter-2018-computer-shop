@@ -4,27 +4,30 @@ $(document).ready(function () {
     $('#parent_category').on('click', function () {
         var id = $(this).val();
         // console.log(id);
-        $.ajax({
-            url: 'admin/categories/sub-category/',
-            method: 'GET',
-            dataType: 'JSON',
-            data: { id: id },
-            success: function (data) {
-                // console.log(data);
-                if (data.length > 0) {
-                    var output =
-                        '<select name="category_id" class="form-control mb-3" id="localStorage">';
-                    $.each(data, function (key, val) {
-                        output += '<option value="' + val.id + '">' + val.name + '</option>';
-                    });
-                    output += '</select>';
-                    $('#child_category').html(output);
-                } else {
-                    output = '';
-                    $('#child_category').html(output);
+        if (id != null) {
+            $.ajax({
+                url: 'admin/categories/sub-category/',
+                method: 'GET',
+                dataType: 'JSON',
+                data: { id: id },
+                success: function (data) {
+                    // console.log(data);
+                    if (data.length > 0) {
+                        var output =
+                            '<select name="category_id" class="form-control mb-3 children-with-check" id="localStorage">';
+                        $.each(data, function (key, val) {
+                            output += '<option value="' + val.id + '">' + val.name + '</option>';
+                        });
+                        output += '</select>';
+                        $('#child_category').html(output);
+                    } else {
+                        output = '';
+                        $('#child_category').html(output);
+                        $('#parent_category').attr('name', 'category_id');
+                    }
                 }
-            }
-        });
+            });
+        }
     });
 });
 
@@ -100,6 +103,7 @@ $(document).ready(function () {
                     } else {
                         output = '';
                         $('#child_category').html(output);
+                        $('#parent_category').attr('name', 'category_id');
                     }
                 }
             });
@@ -119,6 +123,7 @@ $(document).ready(function () {
     });
 });
 
+/* Slider Section*/
 //Delete a banner 
 $(document).ready(function () {
     $('.button-image').on('click', function () {
@@ -158,6 +163,7 @@ $(function () {
             { data: 'name', name: 'name' },
             { data: 'category', name: 'category' },
             { data: 'unit_price', name: 'unit_price' },
+            { data: 'discount', name: 'discount' },
             { data: 'quantity', name: 'quantity' },
             { data: 'action', name: 'action' }
         ]

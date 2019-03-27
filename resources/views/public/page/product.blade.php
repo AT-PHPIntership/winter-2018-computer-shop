@@ -29,8 +29,13 @@
                             <a href="{{route('public.category',$products->category['id'])}}" class="cat">{{$products->category['name']}}</a>
                             <h5 class="title">{{$products->name}}</h5>
                         </div>
-
-                        <h5 class="price">{{$products->unit_price . ' đ'}}</h5>
+                        <div class="product-price">
+                            @if ($products->promotions->count() > 0)
+                                <h5 class="price"><span class="old">{{number_format($products->unit_price ,0,",",".") . ' đ'}}</span>{{number_format($products->unit_price - (($products->unit_price * $products->promotions->pluck('percent')->first())/100),0,",",".") . ' đ'}}</h5>&nbsp;<span class="label-sale">{{$products->promotions->pluck('percent')->first() . '%'}}</span>
+                            @else 
+                                <h5 class="price">{{number_format($products->unit_price ,0,",",".") . ' đ'}}</h5>
+                            @endif
+                        </div>
 
                     </div>
 
@@ -298,7 +303,11 @@
                                     <!-- Price & Ratting -->
                                     <div class="price-ratting">
 
-                                        <h5 class="price">{{$product->unit_price . ' đ'}}</h5>
+                                    @if ($product->promotions->count() > 0)
+                                        <h5 class="price"><span class="old">{{number_format($product->unit_price ,0,",",".") . ' đ'}}</span>{{number_format($product->unit_price - (($product->unit_price * $product->promotions->pluck('percent')->first())/100),0,",",".") . ' đ'}}</h5>&nbsp;<span class="label-sale">{{$product->promotions->pluck('percent')->first() . '%'}}</span>
+                                    @else 
+                                        <h5 class="price">{{number_format($product->unit_price ,0,",",".") . ' đ'}}</h5>
+                                    @endif
 
                                     </div>
 
