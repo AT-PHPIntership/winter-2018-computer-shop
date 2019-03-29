@@ -17,6 +17,7 @@ class Product extends Model
     protected $fillable = [
         'name', 'description', 'quantity', 'unit_price', 'category_id', 'total_sold'
     ];
+
     /**
      * The function display relationship between category and product
      *
@@ -27,22 +28,10 @@ class Product extends Model
         return $this->belongsTo('App\Models\Category');
     }
 
-    // /**
-    //  * The function get unit price attribute
-    //  *
-    //  * @param object $unitPrice [pass attribute to fucntion]
-    //  *
-    //  * @return array
-    //  */
-    // public function getUnitPriceAttribute($unitPrice)
-    // {
-    //     return number_format($unitPrice, 0, ",", ",");
-    // }
-
     /**
      * The function display relationship between product and accessory
      *
-     * @return \App\Models\Product
+     * @return \App\Models\Accessory
      */
     public function accessories()
     {

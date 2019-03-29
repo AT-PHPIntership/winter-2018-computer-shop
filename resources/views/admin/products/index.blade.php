@@ -28,7 +28,7 @@
                                         <th>@lang('master.content.form.category')</th>
                                         <th>@lang('master.content.form.price')</th>
                                         <th>@lang('master.content.form.discount')</th>
-                                        <th>@lang('master.content.form.quantity')</th>
+                                        <th>@lang('master.content.form.sold')</th>
                                         <th>@lang('master.content.table.action')</th>
                                     </tr>
                                 </thead>

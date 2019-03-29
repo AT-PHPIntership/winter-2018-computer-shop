@@ -22,10 +22,17 @@ class UserService
      */
     public function dataTable()
     {
+        
         $users = User::select(['id', 'name', 'email', 'role_id']);
         return Datatables::of($users)
             ->addColumn('role', function (User $user) {
                 return $user->role->name;
+            })
+            ->addColumn('status', function (User $user) {
+                if ($user->isOnline()) {
+                    return 'Online';
+                } 
+                    return 'Offline';
             })
             ->addColumn('action', function ($data) {
                 return view('admin.users.action', ['id' => $data->id]);

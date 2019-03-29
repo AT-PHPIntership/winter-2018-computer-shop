@@ -15,7 +15,12 @@
     <ul class="list-unstyled">
         <li><a href="{{route('admin.home')}}"><i class="fa fa-home"></i>@lang('master.sidebar.home')</a></li>
         <li><a href="{{route('users.index')}}"><i class="fa fa-users"></i>@lang('master.sidebar.user')</a></li>
-        <li><a href="{{route('roles.index')}}"><i class="fa fa-universal-access"></i>@lang('master.sidebar.role')</a></li>
+        <li><a href="#exampledropdownDropdown" aria-expanded="false" data-toggle="collapse"> <i class="fa fa-universal-access"></i>@lang('master.sidebar.rolePermission')</a>
+            <ul id="exampledropdownDropdown" class="collapse list-unstyled ">
+                <li><a href="{{route('roles.index')}}"><i class="ace-icon fa fa-user-friends"></i>@lang('master.sidebar.role')</a></li>
+                <li><a href="{{route('permissions.index')}}"><i class=" ace-iconfa fa-user-check"></i>@lang('master.sidebar.permission')</a></li>
+            </ul>
+        </li>
         <li><a href="{{route('categories.index')}}"> <i class="fa fa-align-justify"></i>@lang('master.sidebar.category')</a></li>
         <li><a href="{{route('products.index')}}"> <i class="fa fa-industry"></i>@lang('master.sidebar.product')</a></li>
         <li><a href="{{route('slides.index')}}"> <i class="fa fa-image"></i>@lang('master.sidebar.slide')</a></li>

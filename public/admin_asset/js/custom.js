@@ -164,7 +164,7 @@ $(function () {
             { data: 'category', name: 'category' },
             { data: 'unit_price', name: 'unit_price' },
             { data: 'discount', name: 'discount' },
-            { data: 'quantity', name: 'quantity' },
+            { data: 'total_sold', name: 'total_sold' },
             { data: 'action', name: 'action' }
         ]
     });
@@ -212,9 +212,25 @@ $(function () {
             { data: 'email', name: 'email' },
             { data: 'name', name: 'name' },
             { data: 'role', name: 'role' },
+            {data: "status",
+                    "render": function (data) {
+                        if (data == 'Online') {
+                            return '<p class="status-online">' + data + '</p>';
+                        } else {
+                            return '<p>'+ data +'</p>';
+                        }
+                    }
+            },
             { data: 'action', name: 'action' }
         ]
     });
+});
+
+//Check user online and style 
+$(document).ajaxComplete(function () {
+    if ($('.check_online:contains("Online")').length > 0) {
+        $(".check_online").addClass("thisClass");
+    }
 });
 
 //Confirmed before delete

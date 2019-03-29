@@ -36,7 +36,11 @@
                                         </td>
                                         <th class="category-index">                              
                                             <label class="checkbox-inline">
-                                                <input class="check-to-display" type="checkbox" value="" data-image-id="{{ $slide->id }}" data-token="{{csrf_token()}}">
+                                                @if($slide->flag == 1)
+                                                    <input class="check-to-display" type="checkbox" value="" data-image-id="{{ $slide->id }}" data-token="{{csrf_token()}}" checked>
+                                                @else
+                                                    <input class="check-to-display" type="checkbox" value="" data-image-id="{{ $slide->id }}" data-token="{{csrf_token()}}">
+                                                @endif
                                             </label>
                                         </th>
                                         <th class="category-index">

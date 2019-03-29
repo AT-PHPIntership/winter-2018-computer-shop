@@ -20,7 +20,7 @@ class LoginService
     {
         $backup = explode("/", Session::get('url.intended'))[3];
         if (Auth::attempt($data)) {
-            if (Auth::user()->role->name == Role::ROLE_ADMIN) {
+            if (Auth::user()->role->name == Role::ROLE_ADMIN || Auth::user()->role->name == Role::ROLE_SUB_ADMIN) {
                 return redirect()->route('admin.home');
             } elseif ($backup === 'login' || $backup === 'admin' || $backup === '' || $backup === 'activation' || $backup === 'register') {
                 return redirect()->route('user.profile');

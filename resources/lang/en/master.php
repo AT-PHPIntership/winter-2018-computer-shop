@@ -21,7 +21,9 @@ return [
     'sidebar' => [
         'home' => 'Home',
         'user' => 'Users Management',
-        'role' => 'Roles Management',
+        'rolePermission' => 'Roles & Permissions',
+        'role' => 'Roles',
+        'permission' => 'Permissions',
         'category' => 'Categories Management',
         'product' => 'Products Management',
         'image' => 'Images Management',
@@ -102,7 +104,8 @@ return [
             'order_month' => 'Order in month',
             'all_user' => 'All user',
             'user_name' => 'User Name',
-            'content' => 'Content'
+            'content' => 'Content',
+            'save' => 'Save Permission'
         ],
         'form' => [
             'password' => 'Password',
@@ -111,6 +114,7 @@ return [
             'new_pw' => 'New Password',
             'confirm_pw' => 'Confirm Password',
             'name' => 'Name',
+            'sold' => 'Total Sold',
             'address' => 'Address',
             'phone' => 'Phone',
             'avatar' => 'Avatar',
@@ -118,10 +122,12 @@ return [
             'parent' => 'Parent Category',
             'category' => 'Category',
             'description' => 'Description',
+            'display' => 'Display Name',
             'price' => 'Price(đ)',
             'discount' => 'Discount(đ)',
             'quantity' => 'Quantity',
             'file' => 'File',
+            'status' => 'Status',
             'image' => 'Image',
         ],
         'message' => [
@@ -152,6 +158,8 @@ return [
             'phone' => 'phone',
             'role' => 'role',
             'User' => 'User',
+            'permission' => 'permission', 
+            'Permission' => 'Permission', 
             'category' => 'category',
             'Category' => 'Category',
             'avatar' => 'avatar',

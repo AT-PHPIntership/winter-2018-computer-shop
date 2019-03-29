@@ -23,7 +23,7 @@ class ProductService
      */
     public function dataTable()
     {
-        $products = Product::select(['id', 'name', 'quantity', 'unit_price', 'category_id']);
+        $products = Product::select(['id', 'name', 'total_sold', 'unit_price', 'category_id']);
         return Datatables::of($products)
             ->addColumn('category', function (Product $product) {
                 return $product->category->name;
@@ -42,7 +42,7 @@ class ProductService
                 if ($validatePromotion->count() > 0) {
                     return number_format($unit_price - (($unit_price * $percentPromotion)/100),0,",",".") . ' ' . '(' . $percentPromotion . '%' . ')' ;
                 }
-                return number_format($unit_price - (($unit_price * $percentPromotion)/100),0,",",".");
+                return number_format($unit_price,0,",",".");
             })
             ->addColumn('action', function ($data) {
                 return view('admin.products.action', ['id' => $data->id]);

@@ -18,7 +18,7 @@ class AdminLogin
      */
     public function handle($request, Closure $next)
     {
-        if (Auth::check() && Auth::user()->role->name == Role::ROLE_ADMIN) {
+        if (Auth::check() && (Auth::user()->role->name == Role::ROLE_ADMIN || Auth::user()->role->name == Role::ROLE_SUB_ADMIN)) {
             return $next($request);
         }
         return redirect()->route('public.login')->with('warning', __('common.warning_login'));

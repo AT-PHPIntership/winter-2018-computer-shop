@@ -9,7 +9,7 @@ class Role extends Model
 {
     const ROLE_ADMIN = 'Admin';
     const ROLE_NORMAL = 'Normal';
-    const ROLE_VIP = 'VIP';
+    const ROLE_SUB_ADMIN = 'Sub_Admin';
 
     protected $table = 'roles';
     /**
@@ -17,9 +17,7 @@ class Role extends Model
      *
      * @var array
      */
-    protected $fillable = [
-        'name'
-    ];
+    protected $fillable = ['name'];
 
     /**
      * Has many users
@@ -29,5 +27,15 @@ class Role extends Model
     public function users()
     {
         return $this->hasMany(User::class);
+    }
+
+    /**
+     * The function display relationship between permissions and roles
+     *
+     * @return \App\Models\Permission
+     */
+    public function permissions()
+    {
+        return $this->belongsToMany('App\Models\Permission')->withTimestamps();
     }
 }

@@ -7,7 +7,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Models\Order;
 use App\Models\Role;
 use App\Models\Code;
-
+use Cache;
 class User extends Authenticatable
 {
     use Notifiable;
@@ -103,4 +103,11 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Code::class, 'code_user')->whereNull('code_user.deleted_at')->withTimestamps();
     }
+
+    public function isOnline()
+    {
+        return Cache::has('user-is-online-' . $this->id);
+    }
+
+
 }

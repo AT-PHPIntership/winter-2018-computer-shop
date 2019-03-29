@@ -12,7 +12,13 @@
                         <h3 class="h4 ml-1">@lang('master.content.action.show', ['attribute' => $products->name])</h3>
                     </div>
                     <div class="card-body">
-                      <div class="form-group">
+                        <div class="form-group">
+                            <h3 class="form-control-label product-quantity">@lang('master.content.form.quantity'):</h3>
+                            <span>{{$products->quantity}}</span>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group">
                             <h3 class="form-control-label">@lang('master.content.form.image')</h3>
                             @if($products->images->count() > 0)
                             <div class="col-sm-12">
@@ -27,7 +33,7 @@
                                 <p>{{$products->name}} @lang('master.content.message.img', ['attribute' => trans('master.content.attribute.image')])</p>
                             </div>
                             @endif
-                      </div>
+                        </div>
                     </div>
                     <div class="card-body">
                         <h3 class="form-control-label">@lang('master.content.table.accessory')</h3>

@@ -21,6 +21,7 @@
                                         <th>@lang('master.content.table.email')</th>
                                         <th>@lang('master.content.form.name')</th>
                                         <th>@lang('master.content.table.role')</th>
+                                        <th>@lang('master.content.table.status')</th>
                                         <th>@lang('master.content.table.action')</th>
                                     </tr>
                                 </thead>

@@ -21,6 +21,7 @@ return [
       'accessory' => 'Are you sure want to delete this accessory?',
       'comment' => 'Are you sure want to delete this comment?',
       'reply' => 'Are you sure want to delete this reply?',
+      'permission' => 'Are you sure want to delete this permission?',
    ],
    'compare' => [
       'first' => 'You have one product to compare',

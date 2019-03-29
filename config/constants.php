@@ -64,4 +64,9 @@ return [
         'min' => 1000000,
         'max' => 500000000,
     ],
+    'role' => [
+        'admin' => 1,
+        'normal' => 2,
+        'sub-admin' => 3,
+    ],
 ];
