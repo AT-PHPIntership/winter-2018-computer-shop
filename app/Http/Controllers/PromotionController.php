@@ -6,7 +6,9 @@ use App\Models\Promotion;
 use Illuminate\Http\Request;
 use App\Services\PromotionService;
 use App\Http\Requests\PromotionRequest;
+use App\Http\Requests\PromotionSearchRequest;
 use Illuminate\Support\Facades\Lang;
+use App\Models\Product;
 
 class PromotionController extends Controller
 {
@@ -53,10 +55,51 @@ class PromotionController extends Controller
      */
     public function store(PromotionRequest $request)
     {
-        $this->promotionService->create($request);
+        // dd($request);
+        // dd($request->get('productsPromotion'));
+        app(PromotionService::class)->create($request);
         return redirect()->route('promotions.index')->with('message', Lang::get('master.content.message.create', [
             'attribute' => 'promotion']));
     }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param \Illuminate\Http\Request $request sdf
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function search(Request $request)
+    {
+        // $totalSold = $request->get('totalSold');
+        // $categoryId = $request->get('categoryId');
+        // $priceProduct = $request->get('priceProduct');
+        // $response = Product::where([['total_sold', '<', $totalSold],
+        //                 ['unit_price', '<', $priceProduct],
+        //                 ['category_id', $categoryId]])->get();
+        // return response()->json($response);
+
+        $validator = \Validator::make($request->all(), [
+            'totalSold' => 'required|integer|min:1|max:30',
+            'categoryId' => 'required|integer',
+            'priceProduct' => 'required|integer|min:10000000|max:30000000'
+        ]);
+
+
+        if ($validator->passes()) {
+            $totalSold = $request->get('totalSold');
+            $categoryId = $request->get('categoryId');
+            $priceProduct = $request->get('priceProduct');
+            $response = Product::where([['total_sold', '<', $totalSold],
+                            ['unit_price', '<', $priceProduct],
+                            ['category_id', $categoryId]])->get();
+            return response()->json($response);
+        }
+
+
+        return response()->json(['error'=>$validator->errors()->all()]);
+    }
+
 
     /**
      * Display the specified resource.

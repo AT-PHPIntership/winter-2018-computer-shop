@@ -1,3 +1,128 @@
+/** Ajax promotion **/
+$(document).ready(function () {
+    $('#search-product').on('click', function (e) {
+        e.preventDefault()
+        $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            })
+        var totalSold = $('.total_sold').val();
+        var categoryId = $('.category_id').val();
+        var priceProduct = $('.price_product').val();
+        // console.log(priceProduct);
+        $.ajax({
+
+            url: 'admin/promotions/search',
+            method: 'POST',
+            dataType: 'JSON',
+            data: { 
+                'totalSold' : totalSold,
+                'categoryId' : categoryId,
+                'priceProduct' : priceProduct
+            },
+            success: function (data) {
+                // console.log(data);
+                if (data.length > 0) {
+                    var output = '';
+                    $.each(data, function (key, val) {
+                        output += '<input class="checkbox-' + val.id + '" type="checkbox" value="' + val.id + 
+                        '" name="productsId[]">' + val.name + ' - Price: ' + val.unit_price + ' - Total sold: ' + 
+                        val.total_sold + '</input><br>';
+                    });
+                    // output += '</select>';
+                    $('#product-promotion').html(output);
+                } else if(data.length == 0) {
+                    $(".print-error-msg").html('');
+
+                    output = 'Not product';
+                    $('#product-promotion').html(output);
+
+                } else {
+                    $('#product-promotion').html('');
+
+                    $(".print-error-msg").find("ul").html('');
+                    $(".print-error-msg").css('display','block');
+                    $.each(data.error, function( key, value ) {
+                        $(".print-error-msg").find("ul").append('<li>'+value+'</li>');
+                    });
+                }
+            }
+        });
+    });
+});
+
+
+// $(document).ready(function () {
+//     $('#create-promotion').on('click', function (e) {
+//         e.preventDefault()
+//         $.ajaxSetup({
+//                 headers: {
+//                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+//                 }
+//             })
+//         var totalSold = $('.total_sold').val();
+//         var categoryId = $('.category_id').val();
+//         var priceProduct = $('.price_product').val();
+//         var namePromotion = $('.name-promotion').val();
+//         var percent = $('.percent').val();
+//         var startAt = $('.start_at').val();
+//         var endAt = $('.end_at').val();
+//         var productsPromotion = [];
+//             $.each($("input[name='products-promotion']:checked"), function(){
+//                 // productsPromotion.push($(this).val());
+//                 productsPromotion.push(4);
+//             console.log('productsPromotion');
+
+//             });
+//         // console.log(endAt + startAt + percent + namePromotion);
+//         console.log(productsPromotion);
+//         $.ajax({
+
+//             url: 'admin/promotions',
+//             method: 'POST',
+//             dataType: 'JSON',
+//             data: { 
+//                 'totalSold' : totalSold,
+//                 'categoryId' : categoryId,
+//                 'priceProduct' : priceProduct,
+//                 'namePromotion' : namePromotion,
+//                 'percent' : percent,
+//                 'startAt' : startAt,
+//                 'endAt' : endAt,
+//                 'productsPromotion' : productsPromotion,
+//             },
+//             success: function (data) {
+//                 console.log(data);
+//                 // if (data.length > 0) {
+//                 //     var output = '';
+//                 //     $.each(data, function (key, val) {
+//                 //         output += '<input class="checkbox-' + val.id + '" type="checkbox" value="' + val.id + 
+//                 //         '" name="products-promotion">' + val.name + ' - Price: ' + val.unit_price + ' - Total sold: ' + 
+//                 //         val.total_sold + '</input><br>';
+//                 //     });
+//                 //     // output += '</select>';
+//                 //     $('#product-promotion').html(output);
+//                 // } else {
+//                 //     output = 'Not product';
+//                 //     $('#product-promotion').html(output);
+//                 // }
+//             }
+//         });
+//     });
+// });
+
+
+
+
+
+
+
+/** Ajax promotion **/
+
+
+
+
 /****************Function for Product**************/
 //Display children category when choose parent category
 $(document).ready(function () {

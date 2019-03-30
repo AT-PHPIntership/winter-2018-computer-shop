@@ -14,7 +14,7 @@ class Promotion extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'percent', 'start_at', 'end_at', 'total_sold'
+        'name', 'percent', 'start_at', 'end_at', 'total_sold', 'price_product', 'category_id'
     ];
 
     /**

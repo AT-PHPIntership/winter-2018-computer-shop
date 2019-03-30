@@ -42,6 +42,16 @@ class CategoryService
     }
 
     /**
+     * Get parent category
+     *
+     * @return parent category
+     */
+    public function childrens()
+    {
+        return Category::whereNotNull('parent_id')->get();
+    }
+
+    /**
      * Handle add category to data
      *
      * @param object $request [request from form add category]
