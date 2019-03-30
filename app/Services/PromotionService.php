@@ -15,7 +15,7 @@ class PromotionService
      */
     public function index()
     {
-        $promotions = Promotion::paginate(config('constants.promotion.number_paginate'));
+        $promotions = Promotion::orderBy('id', 'desc')->paginate(config('constants.promotion.number_paginate'));
         return $promotions;
     }
 
@@ -28,9 +28,15 @@ class PromotionService
      */
     public function create($request)
     {
-        $promotion = Promotion::create($request->all());
-        $totalSold = $request->total_sold;
-        $productIds = Product::where('total_sold', '<', $totalSold)->pluck('id');
+        $promotion = Promotion::create($request->except('productsId'));
+        $productIds = $request->productsId;
+        // dd($productIds);
+        // $categoryId = $request->category_id;
+        // $priceProduct = $request->price_product;
+        // $ = Product::where([['total_sold', '<', $totalSold],
+        //                 ['unit_price', '<', $priceProduct],
+        //                 ['category_id', $categoryId]])
+        //                 ->pluck('id');
         $promotion->products()->sync($productIds);
     }
 
@@ -63,12 +69,16 @@ class PromotionService
                             'percent' => $request->percent,
                             'start_at' => $request->start_at,
                             'end_at' => $request->end_at,
-                            'total_sold' => $request->total_sold
+                            'total_sold' => $request->total_sold,
+                            'category_id' => $request->category_id,
+                            'price_product' => $request->price_product
                         ]);
 
             // update table product_promotion
-            $totalSold = $request->total_sold;
-            $productIds = Product::where('total_sold', '<', $totalSold)->pluck('id');
+            // $totalSold = $request->total_sold;
+            // $productIds = Product::where('total_sold', '<', $totalSold)->pluck('id');
+            $productIds = $request->productsId;
+
             Promotion::find($id)->products()->sync($productIds);
 
             return $message;

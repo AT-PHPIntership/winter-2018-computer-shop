@@ -8,26 +8,15 @@ use App\Services\AccessoryService;
 
 class AccessoryComposer
 {
-    protected $accessoryService;
-
     /**
-     * Function constructer
+     * Bind data to the view.
      *
-     * @param AccsessoryService $accessoryService ClassAccess
+     * @param View $view [view]
+     *
+     * @return void
      */
-    public function __construct(AccessoryService $accessoryService)
-    {
-        $this->accessoryService = $accessoryService;
-    }
-    /**
-    * Bind data to the view.
-    *
-    * @param View $view [view]
-    *
-    * @return void
-    */
     public function compose(View $view)
     {
-        $view->with('accessories', $this->accessoryService->getList());
+        $view->with(['accessories' => app(AccessoryService::class)->getChildren(), 'parentAccessories' => app(AccessoryService::class)->getParent()]);
     }
 }

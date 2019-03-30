@@ -14,9 +14,11 @@ class ViewServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        view()->composer(['admin.accessories.update','admin.accessories.create'], 'App\Http\ViewComposers\AccessoryComposer');
-        view()->composer(['admin.categories.create'], 'App\Http\ViewComposers\CategoryComposer');
-        view()->composer(['admin.users.create', 'admin.users.edit','admin.roles.index'], 'App\Http\ViewComposers\RoleComposer');
+        view()->composer(['admin.categories.create', 'admin.categories.edit', 'admin.products.create', 'admin.products.edit', 'public.layout.header', 'admin.promotions.create', 'admin.promotions.update', 'admin.promotions.index'], 'App\Http\ViewComposers\CategoryComposer');
+        view()->composer(['admin.accessories.update', 'admin.accessories.create', 'admin.products.create', 'admin.products.edit', 'public.partials.filter'], 'App\Http\ViewComposers\AccessoryComposer');
+        view()->composer(['admin.users.create', 'admin.users.edit', 'admin.roles.index', 'public.auth.register'], 'App\Http\ViewComposers\RoleComposer');
+        view()->composer(['admin.slides.index', 'public.partials.slide', 'public.partials.breadcrumb'], 'App\Http\ViewComposers\SlideComposer');
+        view()->composer(['public.partials.slide', 'public.page.homepage'], 'App\Http\ViewComposers\ProductComposer');
     }
 
     /**

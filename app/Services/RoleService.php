@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Role;
+use App\Models\User;
 use League\Flysystem\Exception;
 
 class RoleService
@@ -72,10 +73,15 @@ class RoleService
     public function delete($id)
     {
         try {
-            $message = Role::where('id', $id)->delete();
-            return $message;
-        } catch (Exception $e) {
-            return $message = $e->getMessage();
+            $users =  User::where('role_id', $id)->get();
+            if ($users->count() > 0) {
+                session()->flash('warning', __('master.content.message.user'));
+            } else {
+                Role::where('id', $id)->delete();
+                session()->flash('message', __('master.content.message.delete', ['attribute' => trans('master.content.attribute.role')]));
+            }
+        } catch (Exception $ex) {
+            session()->flash('warning', __('master.content.message.error', ['attribute' => $ex->getMessage()]));
         }
     }
 }

@@ -16,7 +16,7 @@ jobs:
         environment:
           MYSQL_ALLOW_EMPTY_PASSWORD: yes
           MYSQL_ROOT_PASSWORD: ''
-          MYSQL_DATABASE: circle_test
+          MYSQL_DATABASE: test
 
     working_directory: ~/computer_shop
 

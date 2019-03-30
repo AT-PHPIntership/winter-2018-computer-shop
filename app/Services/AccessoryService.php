@@ -7,6 +7,26 @@ use App\Models\Accessory;
 class AccessoryService
 {
     /**
+    * Get child accessoris
+    *
+    * @return void
+    */
+    public function getChildren()
+    {
+        return Accessory::with('childrens')->get();
+    }
+
+    /**
+    * Get parent accessoris
+    *
+    * @return void
+    */
+    public function getParent()
+    {
+        return Accessory::parents()->get();
+    }
+
+    /**
      * Index access
      *
      * @return void
@@ -17,16 +37,6 @@ class AccessoryService
         return $accessories;
     }
 
-    /**
-     * Get accessories has parent_id = null
-     *
-     * @return void
-     */
-    public function getList()
-    {
-        $accessories = Accessory::where('parent_id', null)->get();
-        return $accessories;
-    }
     /**
      * Create accessory
      *
@@ -77,6 +87,7 @@ class AccessoryService
             if ($request->parent_id === null) {
                 $message = Accessory::where('id', $id)->update([
                     'name' => $request->name,
+                    'parent_id' => null
                 ]);
             } else {
                 $message = Accessory::where('id', $id)->update([

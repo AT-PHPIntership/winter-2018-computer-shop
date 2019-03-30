@@ -16,6 +16,7 @@ class AddTotalSoldToPromotionsTable extends Migration
         Schema::table('promotions', function (Blueprint $table) {
             $table->integer('total_sold')->after('end_at');
         });
+        
     }
 
     /**

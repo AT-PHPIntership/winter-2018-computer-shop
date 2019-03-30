@@ -40,7 +40,9 @@
                      <th>@lang('master.content.table.percent')</th>
                      <th>@lang('master.content.table.start_at')</th>
                      <th>@lang('master.content.table.end_at')</th>
+                     <th>Category</th>
                      <th>@lang('master.content.table.total_sold')</th>
+                     <th>Price Product (<)</th>
                      <th>@lang('master.content.table.action')</th>
                    </tr>
                  </thead>
@@ -53,15 +55,20 @@
                      <td>{{ $promotion->percent }}</td>
                      <td>{{ $promotion->start_at }}</td>
                      <td>{{ $promotion->end_at }}</td>
+                     @php foreach($categoriesChildren as $category) {
+                            if($category->id === $promotion->category_id) {
+                     @endphp
+                        <td>{{ $category->name }}</td>
+                     @php }}@endphp
                      <td>{{ $promotion->total_sold }}</td>
+                     <td>{{ $promotion->price_product }}</td>
                      <td>
                        <a href="{{ route('promotions.edit', $promotion->id) }}" class="btn btn-sm btn-warning">
-                       @lang('master.content.action.edit', ['attribute' => 'Promotion'])
-                       </a>
-                       <form action="{{ route('promotions.destroy', $promotion->id) }}" method="POST" class="d-inline">
+                       Edit</a>
+                       <form action="{{ route('promotions.destroy', $promotion->id) }}" method="POST" class="d-inline" onsubmit="return confirmedDelete('promotion')">
                           @csrf
                           @method('DELETE')
-                          <input type="submit" value="@lang('master.content.action.delete', ['attribute' => 'Promotion'])" class="btn btn-sm btn-danger">
+                          <input type="submit" value="Delete" class="btn btn-sm btn-danger">
                         </form> 
                        </a>
                      </td>
