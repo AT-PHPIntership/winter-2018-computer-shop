@@ -1,29 +1,27 @@
-@extends('public.layout.master')
-@section('content')
-@include('public.partials.breadcrumb', ['attribute' => trans('public.profile.title')])
-<div class="page-wrap">
-    <div class="ps-section--hero"><img src="frontend/images/hero/01.jpg" alt="">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
-                    <div class="ps-blog-detail pt-80 pb-80">
-                        <div class="ps-post">
-                            @include('admin.partials.message')
-                            @include('admin.partials.warning')
-                            <ul class="single-product-tab-list nav">
-                                <li><a href="#user_profile" class="active" data-toggle="tab">@lang('public.profile.list.profile')</a></li>
-                                <li><a href="#user_password" data-toggle="tab" class='user_password'>@lang('public.profile.list.password')</a></li>
-                                <li><a href="#user_code" data-toggle="tab" class='user_order'>@lang('public.profile.list.code')</a></li>
-                                <li><a href="#user_order" data-toggle="tab" class='user_order'>@lang('public.profile.list.order')</a></li>
-                            </ul>
-                            <div class="single-product-tab-content tab-content">
-                                <div class="tab-pane fade show active" id="user_profile">
-                                    <div class="row">
-                                        <div class="single-product-description-content col-lg-8 col-12">
-                                            <form class="form-horizontal" method="POST" action="{{route('user.update.profile', Auth::user()->id)}}" enctype="multipart/form-data">
-                                                @method('PUT')
-                                                @csrf
-                                                <div class="tabbable">
+@extends('public.layout.master') @section('content')
+@include('public.partials.breadcrumb', ['attribute' =>
+trans('public.profile.title')]) <div class="page-wrap"> <div
+class="ps-section--hero"><img src="frontend/images/hero/01.jpg"
+alt=""> <div class="container"> <div class="row"> <div
+class="col-lg-12 col-md-12 col-sm-12 col-xs-12 "> <div
+class="ps-blog-detail pt-80 pb-80"> <div class="ps-post">
+@include('admin.partials.message') @include('admin.partials.warning')
+<ul class="single-product-tab-list nav"> <li><a href="#user_profile"
+class="active"
+data-toggle="tab">@lang('public.profile.list.profile')</a></li> <li><a
+href="#user_password" data-toggle="tab"
+class='user_password'>@lang('public.profile.list.password')</a></li>
+<li><a href="#user_code" data-toggle="tab"
+class='user_order'>@lang('public.profile.list.code')</a></li> <li><a
+href="#user_order" data-toggle="tab"
+class='user_order'>@lang('public.profile.list.order')</a></li> </ul>
+<div class="single-product-tab-content tab-content"> <div
+class="tab-pane fade show active" id="user_profile"> <div class="row">
+<div class="single-product-description-content col-lg-8 col-12"> <form
+class="form-horizontal" method="POST"
+action="{{route('user.update.profile', Auth::user()->id)}}"
+enctype="multipart/form-data"> @method('PUT') @csrf <div
+class="tabbable">
 
                                                     <div class="tab-content profile-edit-tab-content">
                                                         <div id="edit-basic" class="tab-pane in active">

@@ -38,4 +38,9 @@ class Role extends Model
     {
         return $this->belongsToMany('App\Models\Permission')->withTimestamps();
     }
+
+    public function givePermissionTo(Permission $permission)
+    {
+        return $this->permissions()->save($permission);
+    }
 }

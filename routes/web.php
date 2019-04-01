@@ -40,6 +40,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'adminLogin'], function () {
     Route::get('/home/excel', 'AdminController@excel')->name('admin.excel');
     Route::get('users/data', 'UserController@getData');
     Route::resource('roles', 'RoleController');
+    Route::post('permissions/save', 'PermissionController@savePermissionForRole');
     Route::resource('permissions', 'PermissionController');
     Route::resource('users', 'UserController');
     Route::get('categories/sub-category', 'CategoryController@getChildren');

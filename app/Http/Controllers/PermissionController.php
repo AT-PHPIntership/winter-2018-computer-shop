@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\PermissionRequest;
+use App\Http\Requests\SavePermissionRequest;
 use App\Services\PermissionService;
 use App\Models\Permission;
 
@@ -37,7 +38,7 @@ class PermissionController extends Controller
      *
      * @return user.index
      */
-    public function store(PermissionRequest $request)
+    public function store(Request $request)
     {
         app(PermissionService::class)->store($request->except(['_token']));
         return redirect()->route('permissions.index');
@@ -92,5 +93,18 @@ class PermissionController extends Controller
     {
         app(PermissionService::class)->delete($permission);
         return redirect()->route('permissions.index');
+    }
+
+    /**
+     * Save Permission For Role
+     *
+     * @param object $user [request to delete the user]
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function savePermissionForRole(SavePermissionRequest $request)
+    {
+        $response = app(PermissionService::class)->savePermissionForRole($request->permission);
+        return response()->json($response);
     }
 }

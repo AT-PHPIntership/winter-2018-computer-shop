@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Permission;
+use DB;
 
 class PermissionService
 {
@@ -25,8 +26,20 @@ class PermissionService
      */
     public function store($request)
     {
+        // dd($request['permission_action']);
         try {
-            Permission::create($request);
+            $action = json_encode($request['permission_action']);
+            $permission = Permission::create([
+                'name' => $request['name'],
+                'display_name' => $request['display_name'],
+                'actions' => $action
+                ]);
+            // foreach ($request['permission_action'] as $value) {
+            //     $permission->childrens()->create([
+            //         'name' => $permission->name . '_' .$value,
+            //         'display_name' => $permission->display_name . ' ' . ucfirst($value)
+            //     ]);
+            // }
             session()->flash('message', __('master.content.message.create', ['attribute' => trans('master.content.attribute.permission')]));
         } catch (Exception $ex) {
             session()->flash('warning', __('master.content.message.error', ['attribute' => $ex->getMessage()]));
@@ -45,11 +58,39 @@ class PermissionService
     public function update($request, $permission)
     {
         try {
-            $permission->update($request);
+            $action = json_encode($request['permission_action']);
+            $permission->update([
+                'name' => $request['name'],
+                'display_name' => $request['display_name'],
+                'actions' => $action
+                ]);
             session()->flash('message', __('master.content.message.update', ['attribute' => trans('master.content.attribute.permission')]));
         } catch (Exception $ex) {
             session()->flash('warning', __('master.content.message.error', ['attribute' => $ex->getMessage()]));
             return redirect()->back();
         }
+    }
+
+    /**
+     * Save Permission For Role
+     *
+     * @param object $request  [request from form add category]
+     * @param object $category [model category]
+     *
+     * @return void
+     */
+    public function savePermissionForRole($permission)
+    {
+        DB::beginTransaction();
+        foreach ($permission as $key => $value) {
+             $permission = Permission::findOrFail(intval($value['id']));
+             if (isset($value['role'])) {
+                $permission->roles()->sync($value['role']);
+             } else {
+                $permission->roles()->detach();
+             }
+        }
+        DB::commit();
+        return true;
     }
 }

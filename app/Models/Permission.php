@@ -13,7 +13,7 @@ class Permission extends Model
      *
      * @var array
      */
-    protected $fillable = ['name', 'display_name', 'description'];
+    protected $fillable = ['name', 'display_name', 'description', 'parent_id', 'actions'];
 
     /**
      * The function display relationship between permissions and roles
@@ -23,5 +23,29 @@ class Permission extends Model
     public function roles()
     {
         return $this->belongsToMany('App\Models\Role')->withTimestamps();
+    }
+
+     /**
+     * The function to take all parent category
+     *
+     * @param Builder $builder help take all parent category
+     *
+     * @return \App\Models\User
+     */
+    public function scopeParents(Builder $builder)
+    {
+        $builder->whereNull('parent_id');
+    }
+    
+    /**
+     * The function display relationship between parent category
+     *
+     * @var array
+     *
+     * @return \App\Models\User
+     */
+    public function childrens()
+    {
+        return $this->hasMany('App\Models\Permission', 'parent_id', 'id');
     }
 }

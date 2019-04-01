@@ -109,5 +109,12 @@ class User extends Authenticatable
         return Cache::has('user-is-online-' . $this->id);
     }
 
+    public function hasRole($roles)
+    {
+        if (is_string($roles)) {
+            return $this->role->contains('name', $roles);
+        }
+        return $roles->id == $this->role->id;
 
+    }
 }
