@@ -28,7 +28,7 @@ class RoleRequest extends FormRequest
                 $id = '';
                 break;
             case 'PUT':
-                $id = $this->role;
+                $id = $this->role->id;
                 break;
         }
         return [

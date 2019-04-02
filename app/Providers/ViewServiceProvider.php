@@ -19,7 +19,7 @@ class ViewServiceProvider extends ServiceProvider
         view()->composer(['admin.users.create', 'admin.users.edit', 'admin.roles.index', 'public.auth.register', 'admin.permissions.index'], 'App\Http\ViewComposers\RoleComposer');
         view()->composer(['admin.slides.index', 'public.partials.slide', 'public.partials.breadcrumb'], 'App\Http\ViewComposers\SlideComposer');
         view()->composer(['public.partials.slide', 'public.page.homepage'], 'App\Http\ViewComposers\ProductComposer');
-        view()->composer(['admin.permissions.index'], 'App\Http\ViewComposers\PermissionComposer');
+        view()->composer(['admin.permissions.index', 'admin.roles.create', 'admin.roles.update', 'admin.roles.index'], 'App\Http\ViewComposers\PermissionComposer');
     }
 
     /**

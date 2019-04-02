@@ -20,7 +20,7 @@
         <div class="card-body">
           <form class="form-horizontal" method="POST" action="{{ route('roles.update', $role->id) }}">
             @csrf
-            @method('put')
+            @method('PUT')
             <div class="form-group row">
               <label class="col-sm-3 form-control-label">@lang('master.content.form.name')</label>
               <div class="col-sm-9">
@@ -31,6 +31,45 @@
                   </span>
                 @endif
               </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-3 form-control-label">@lang('master.content.attribute.Permission')</label>
+                <div class="col-sm-9 replace-by-input">
+                  @foreach($permissions as $key => $permission)
+                  @if (count($role->permissions) > 0)
+                    @if (count($role->permissions->where('id', $permission->id)) > 0 )
+                      @php $value = $role->permissions->where('id', $permission->id)->first()->pivot->action_pivot @endphp
+                    @else 
+                      @php $value = '' @endphp
+                    @endif
+                  <div class="choose-permission">
+                    <input name="permission-{{$permission->id}}" class="permission-{{$key}} checkAll" type="checkbox" data-permission-id={{$permission->id}} {{($role->permissions->pluck('id')->contains($permission->id)) ? "checked=checked value=$value " : ''}}>
+                    <a href="" data-toggle="collapse" data-target="#collapse-{{$key}}" aria-expanded="false" aria-controls="collapseExample">{{$permission->display_name}}</a>
+                  </div>
+                  <div class="detail-permission">
+                    @foreach(json_decode($permission->actions) as $action)
+                    <div class="collapse" id="collapse-{{$key}}" data-count-action='{{count(json_decode($permission->actions))}}' data-permission-id="{{$permission->id}}" >
+                      <input class="check-{{$permission->id}} uncheckAll" type="checkbox" data-key="{{$key}}" data-value="{{$action}}" {{($value != '') ? ((in_array($action ,json_decode($value))) ? 'checked=checked ' : '') : '' }}>    
+                      <span>{{ucfirst($action)}}</span>
+                    </div>
+                    @endforeach
+                  </div>
+                  @else
+                  <div class="choose-permission">
+                    <input name="permission-{{$permission->id}}" class="permission-{{$key}} checkAll" type="checkbox" data-permission-id={{$permission->id}}>
+                    <a href="" data-toggle="collapse" data-target="#collapse-{{$key}}" aria-expanded="false" aria-controls="collapseExample">{{$permission->display_name}}</a>
+                  </div>
+                  <div class="detail-permission">
+                    @foreach(json_decode($permission->actions) as $action)
+                    <div class="collapse" id="collapse-{{$key}}" data-count-action='{{count(json_decode($permission->actions))}}' data-permission-id="{{$permission->id}}" >
+                      <input class="check-{{$permission->id}} uncheckAll" type="checkbox" data-key="{{$key}}" data-value="{{$action}}">    
+                      <span>{{ucfirst($action)}}</span>
+                    </div>
+                    @endforeach
+                  </div>
+                  @endif
+                  @endforeach
+                </div>
             </div>
             <div class="form-group row">       
               <div class="col-sm-9 offset-sm-3">

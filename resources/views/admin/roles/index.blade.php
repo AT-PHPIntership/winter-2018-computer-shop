@@ -49,22 +49,31 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($roles as $role)
+                                    @foreach($roles as $key => $role)
                                     <tr>
                                         <th>{{ $role->id }}</th>
-                                        <td>{{ $role->name }}</td>
+                                        <td><a href="" data-toggle="collapse" data-target="#collapse-{{$key}}" aria-expanded="false" aria-controls="collapseExample">{{ $role->name }}</a></td>
                                         <td>
                                             <a href="{{ route('roles.edit', $role->id) }}" class="btn btn-sm btn-warning">
                                                 @lang('master.content.action.edit', ['attribute' => 'Role'])
                                             </a>
+                                            @if ($role->name != 'Admin')
                                             <form action="{{ route('roles.destroy', $role->id) }}" method="POST" class="d-inline" onsubmit="return confirmedDelete('role')">
                                                 @csrf
                                                 @method('DELETE')
                                                 <input type="submit" value="@lang('master.content.action.delete', ['attribute' => 'Role'])" class="btn btn-sm btn-danger">
                                             </form>
-                                            </a>
+                                            @endif
                                         </td>
                                     </tr>
+                                    @foreach($role->permissions as $permission)
+                                    <tr class="collapse" id="collapse-{{$key}}" data-count-action='{{count(json_decode($permission->actions))}}' data-permission-id="{{$permission->id}}">
+                                        <td></td>
+                                        <td>{{$permission->display_name}}: @foreach(json_decode($permission->pivot->action_pivot) as $action) <span class="pivot-action">{{ucfirst($action)}}</span>@endforeach</td>
+                                        <td>
+                                        </td>
+                                    </tr>
+                                    @endforeach
                                     @endforeach
                                 </tbody>
                             </table>

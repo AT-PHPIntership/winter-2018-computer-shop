@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
-
 class Role extends Model
 {
     const ROLE_ADMIN = 'Admin';
@@ -36,11 +35,6 @@ class Role extends Model
      */
     public function permissions()
     {
-        return $this->belongsToMany('App\Models\Permission')->withTimestamps();
-    }
-
-    public function givePermissionTo(Permission $permission)
-    {
-        return $this->permissions()->save($permission);
+        return $this->belongsToMany('App\Models\Permission')->withPivot('action_pivot')->withTimestamps();
     }
 }

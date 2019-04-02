@@ -39,3 +39,18 @@
 .status-online {
   color: chartreuse;
 }
+
+.choose-permission {
+  padding-bottom: 8px;
+}
+
+.detail-permission {
+  margin-left: 16px;
+}
+
+.pivot-action:not(:first-child):before {
+  content: " | ";
+}
+.pivot-action {
+  margin-right: 4px;
+}

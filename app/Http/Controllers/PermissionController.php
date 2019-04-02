@@ -38,23 +38,23 @@ class PermissionController extends Controller
      *
      * @return user.index
      */
-    public function store(Request $request)
+    public function store(PermissionRequest $request)
     {
         app(PermissionService::class)->store($request->except(['_token']));
         return redirect()->route('permissions.index');
     }
 
-    // /**
-    //  * View detail the user
-    //  *
-    //  * @param object $user [binding user]
-    //  *
-    //  * @return View user show
-    //  */
-    // public function show(Permission $permission)
-    // {
-    //     return view('admin.users.show', compact('permission'));
-    // }
+    /**
+     * View detail the user
+     *
+     * @param object $user [binding user]
+     *
+     * @return View user show
+     */
+    public function show(Permission $permission)
+    {
+        // return view('admin.users.show', compact('permission'));
+    }
 
     /**
      * Display a form to edit new user
@@ -104,7 +104,7 @@ class PermissionController extends Controller
      */
     public function savePermissionForRole(SavePermissionRequest $request)
     {
-        $response = app(PermissionService::class)->savePermissionForRole($request->permission);
+        $response = app(PermissionService::class)->savePermissionForRole($request->permissions);
         return response()->json($response);
     }
 }

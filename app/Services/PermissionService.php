@@ -71,26 +71,26 @@ class PermissionService
         }
     }
 
-    /**
-     * Save Permission For Role
-     *
-     * @param object $request  [request from form add category]
-     * @param object $category [model category]
-     *
-     * @return void
-     */
-    public function savePermissionForRole($permission)
-    {
-        DB::beginTransaction();
-        foreach ($permission as $key => $value) {
-             $permission = Permission::findOrFail(intval($value['id']));
-             if (isset($value['role'])) {
-                $permission->roles()->sync($value['role']);
-             } else {
-                $permission->roles()->detach();
-             }
-        }
-        DB::commit();
-        return true;
-    }
+    // /**
+    //  * Save Permission For Role
+    //  *
+    //  * @param object $request  [request from form add category]
+    //  * @param object $category [model category]
+    //  *
+    //  * @return void
+    //  */
+    // public function savePermissionForRole($permission)
+    // {
+    //     DB::beginTransaction();
+    //     foreach ($permission as $key => $value) {
+    //         $permission = Permission::findOrFail(intval($value['id']));
+    //         $conditionSync = [];
+    //          foreach ($value['actions'] as $key => $action) {
+    //             $conditionSync[$value['role'][$key]] = ['actions' => json_encode($action)];
+    //          }
+    //          $permission->roles()->sync($conditionSync);
+    //     }
+    //     DB::commit();
+    //     return true;
+    // }
 }

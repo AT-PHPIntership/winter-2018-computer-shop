@@ -191,10 +191,10 @@ return [
             'upload' => 'Upload',
         ],
         'permissions' => [
-            'add' => 'Add',
-            'view' => 'View',
-            'edit' => 'Edit',
-            'delete' => 'Delete',
+            0 => 'Add',
+            1 => 'View',
+            2 => 'Edit',
+            3 => 'Delete',
         ],
     ],
     'footer' => [

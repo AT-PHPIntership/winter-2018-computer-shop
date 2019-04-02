@@ -64,9 +64,23 @@ return [
         'min' => 1000000,
         'max' => 500000000,
     ],
-    'role' => [
-        'admin' => 1,
-        'normal' => 2,
-        'sub-admin' => 3,
+    'permission-actions' => [
+        0 => 'add',
+        1 => 'view',
+        2 => 'edit',
+        3 => 'delete',
+    ],
+    'permissions' => [
+        '1' => 'users_manage',
+        '2' => 'roles_manage',
+        '3' => 'permissions_manage',
+        '4' => 'categories_manage',
+        '5' => 'products_manage',
+        '6' => 'slides_manage',
+        '7' => 'comments_manage',
+        '8' => 'orders_manage',
+        '9' => 'promotions_manage',
+        '10' => 'codes_manage',
+        '11' => 'accessories_manage',
     ],
 ];

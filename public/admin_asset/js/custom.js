@@ -370,72 +370,76 @@ $(function () {
 $(document).ready(function () {
 
     $('.checkAll').on('click', function () {
-        var key = $(this).data('key');
-        var permissionId = $('.permission-' + key).text();
-        var roleId = $(this).data('role-id');
-        $('input[type="checkbox"].check-' + roleId + '-' + permissionId).prop('checked', this.checked);
+        var actions = [];
+        var permissionId = $(this).data('permission-id');;
+        $('input[type="checkbox"].check-' + permissionId).prop('checked', this.checked);
+        $('.check-' + permissionId + ':checkbox:checked').each(function () {
+            actions.push($(this).data('value'));
+        });
+        if ($(this).is( ":checked") == true) {
+            $(this).attr('value', JSON.stringify(actions));
+        } else {
+            $(this).removeAttr('value')
+        }
     });
 
     $('.uncheckAll').on("click", function () {
         var actions = [];
         var key = $(this).data('key');
-        var roleId = $(this).data('role-id');
-        var countAction = $('#collapse-' + key).data('count-action');
+        // var countAction = $('#collapse-' + key).data('count-action');
         var permissionId = $('#collapse-' + key).data('permission-id');
-        var numberCheck = $('input[type="checkbox"].check-' + roleId + '-' + permissionId + ':checked').length;
-        $('.check-' + roleId + '-' + permissionId + ':checkbox:checked').each(function () {
+        // var numberCheck = $('input[type="checkbox"].check-' + permissionId + ':checked').length;
+        $('.check-' + permissionId + ':checkbox:checked').each(function () {
             actions.push($(this).data('value'));
         });
-        if (numberCheck == countAction) {
-            $('input[type="checkbox"].permission-' + key + '-' + roleId).prop( "checked", true);
-        } else {
-            $('input[type="checkbox"].permission-' + key + '-' + roleId).prop( "checked", false);
-        }
-         $('input[type="checkbox"].permission-' + key + '-' + roleId).attr('data-action-value', JSON.stringify(actions));
+        $('input[type="checkbox"].permission-' + key).prop( "checked", true);
+        // if (numberCheck == countAction) {
+        //     $('input[type="checkbox"].permission-' + key).prop( "checked", true);
+        // } else {
+        //     $('input[type="checkbox"].permission-' + key).prop( "checked", false);
+        // }
+        $('input[type="checkbox"].permission-' + key).attr('value', JSON.stringify(actions));
     });
 
-    //Save permission for roles
-    $('.save-permission').on('click', function () {
-        var permission = [];
-        var amountPermission = $(this).data('amount-permission');
-        var roleId = $(this).data('role-id');
-        var token = $(this).data('token');
+    // //Save permission for roles
+    // $('.save-permission').on('click', function () {
+    //     var permission = [];
+    //     var amountPermission = $(this).data('amount-permission');
+    //     var roleId = $(this).data('role-id');
+    //     var token = $(this).data('token');
 
-        for (var i = 0; i < amountPermission; i++) {
-            let role = [];
-            let actions = [];
-            $.each(roleId, function(key, val) {
-                $('.permission-'+ i + '-' + val + ':checkbox').each(function () {
-                    if ($(this).is(':checked') == true) {
-                        role.push($(this).data('role-id'));
-                        actions.push([]);
-                    } else if ($(this).data('action-value') != undefined) {
-                        role.push($(this).data('role-id'));
-                        actions.push($(this).data('action-value'));
-                    }
-                });
-            })
-            let permissionId = $('th.permission-' + i).text();
-            if (role.length > 0) {
-                let  result = {'role': role, 'id' : permissionId, 'actions': actions};
-                permission.push(result);
-            }
-        }
-        permission;
-        debugger;
-        $.ajax({
-            url: 'admin/permissions/save',
-            method: 'POST',
-            dataType: 'JSON',
-            data: { permission: permission, _token: token },
-            success: function (data) {
-                alert('Save permissions successfully!');
-            },
-            error: function (data) {
-                alert(data.responseJSON.errors.role[0]);
-                document.location.reload(true);
-            }
+    //     for (var i = 0; i < amountPermission; i++) {
+    //         $.each(roleId, function(key, val) {
+    //             let role = [];
+    //             var actions = [];
+    //             $('.permission-'+ i + '-' + val + ':checkbox').each(function () {
+    //                 if ($(this).is(':checked') == true || $(this).data('action-value') != undefined) {
+    //                     role.push($(this).data('role-id'));
+    //                     actions.push($(this).data('action-value'));
+    //                 }
+    //             });
+    //             let permissionId = $('th.permission-' + i).text();
+    //             if (role.length > 0) {
+    //                 let  result = {'role': role, 'id' : permissionId, 'actions': actions};
+    //                 permission.push(result);
+    //             }
+    //         })
+    //     }
+    //     permission;
+    //     debugger;
+    //     $.ajax({
+    //         url: 'admin/permissions/save',
+    //         method: 'POST',
+    //         dataType: 'JSON',
+    //         data: { 'permissions': permission, '_token': token },
+    //         success: function (data) {
+    //             alert('Save permissions successfully!');
+    //         },
+    //         error: function (data) {
+    //             alert(data.responseJSON.errors.role[0]);
+    //             document.location.reload(true);
+    //         }
 
-        });
-    });
+    //     });
+    // });
 });

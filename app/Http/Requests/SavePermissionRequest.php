@@ -42,7 +42,7 @@ class SavePermissionRequest extends FormRequest
     {
         $validator->after(function ($validator) {
             $role = Role::all()->pluck('id')->toArray();
-            foreach ($this->permission as $permission) {
+            foreach ($this->permissions as $permission) {
                 if (count(array_intersect($permission['role'], $role)) < count($permission['role'])) {
                 $validator->errors()->add('role', __('master.content.message.role', ['attribute' => $permission['id']]));
                 }

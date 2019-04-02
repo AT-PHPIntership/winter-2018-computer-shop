@@ -145,7 +145,7 @@ class UserController extends Controller
     }
 
     /**
-     * Delete a order based on request of a user
+     * Delete a order based on request of a users
      *
      * @param object $order [request to delete a order]
      *
