@@ -26,7 +26,6 @@ class PermissionService
      */
     public function store($request)
     {
-        // dd($request['permission_action']);
         try {
             $action = json_encode($request['permission_action']);
             $permission = Permission::create([
@@ -34,12 +33,6 @@ class PermissionService
                 'display_name' => $request['display_name'],
                 'actions' => $action
                 ]);
-            // foreach ($request['permission_action'] as $value) {
-            //     $permission->childrens()->create([
-            //         'name' => $permission->name . '_' .$value,
-            //         'display_name' => $permission->display_name . ' ' . ucfirst($value)
-            //     ]);
-            // }
             session()->flash('message', __('master.content.message.create', ['attribute' => trans('master.content.attribute.permission')]));
         } catch (Exception $ex) {
             session()->flash('warning', __('master.content.message.error', ['attribute' => $ex->getMessage()]));
@@ -71,26 +64,25 @@ class PermissionService
         }
     }
 
-    // /**
-    //  * Save Permission For Role
-    //  *
-    //  * @param object $request  [request from form add category]
-    //  * @param object $category [model category]
-    //  *
-    //  * @return void
-    //  */
-    // public function savePermissionForRole($permission)
-    // {
-    //     DB::beginTransaction();
-    //     foreach ($permission as $key => $value) {
-    //         $permission = Permission::findOrFail(intval($value['id']));
-    //         $conditionSync = [];
-    //          foreach ($value['actions'] as $key => $action) {
-    //             $conditionSync[$value['role'][$key]] = ['actions' => json_encode($action)];
-    //          }
-    //          $permission->roles()->sync($conditionSync);
-    //     }
-    //     DB::commit();
-    //     return true;
-    // }
+    /**
+     * Delete a permission
+     *
+     * @param object $permission [model permission]
+     *
+     * @return void
+     */
+    public function delete($permission)
+    {
+        try {
+            if ($permission->roles->count() > 0) {
+                session()->flash('warning', __('master.content.message.permission'));
+            } else {
+                $permission->delete();
+                session()->flash('message', __('master.content.message.delete', ['attribute' => trans('master.content.attribute.permission')]));
+            }
+        } catch (Exception $ex) {
+            session()->flash('warning', __('master.content.message.error', ['attribute' => $ex->getMessage()]));
+        }
+    }
+
 }

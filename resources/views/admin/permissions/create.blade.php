@@ -16,7 +16,7 @@
             <form action="{{route('permissions.store')}}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="form-group row">
-                <label class="form-control-label col-sm-12">@lang('master.content.form.name')</label>
+                <label class="form-control-label col-sm-12">@lang('master.content.form.name')<span class="ml-1 text-danger">*<span></label>
                 <div class="col-sm-12">
                   <select name="name" class="form-control mb-3">
                     <option value="" selected disabled hidden>@lang('master.content.select.choose')</option>
@@ -38,7 +38,7 @@
                 @include('admin.partials.error', ['err' => 'description'])
               </div>
               <div class="form-group">
-                <label class="form-control-label">@lang('master.content.action.product.details')</label>
+                <label class="form-control-label">@lang('master.content.action.product.details')<span class="ml-1 text-danger">*<span></label>
                 <div class="col-lg-6">
                   @foreach (config('constants.permission-actions') as $key => $action)
                   <div>

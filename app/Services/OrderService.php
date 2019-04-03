@@ -18,7 +18,7 @@ class OrderService
      */
     public function index()
     {
-        $orders = Order::with(['user', 'orderDetails.product'])->paginate(config('constants.order.number_paginate'));
+        $orders = Order::with(['user', 'orderDetails.product'])->orderBy('id', 'desc')->paginate(config('constants.order.number_paginate'));
         return $orders;
     }
 
@@ -68,9 +68,11 @@ class OrderService
      */
     public function orderExport()
     {
+        $lastMonth = Carbon::now()->subMonth()->month;
         $month = Carbon::now()->month;
-        $data = Order::whereMonth('date_order', $month)->get();
-        Excel::create('month_' . $month . '_order', function ($excel) use ($data) {
+        $data = Order::whereMonth('date_order', '>=', $lastMonth)
+                        ->get();
+        Excel::create('month_' . $lastMonth . '_' . $month . '_order', function ($excel) use ($data) {
             $excel->sheet('order', function ($sheet) use ($data) {
                 $sheet->loadView('admin.orders.export', compact('data'));
             });

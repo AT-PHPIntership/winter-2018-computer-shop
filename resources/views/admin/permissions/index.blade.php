@@ -9,9 +9,7 @@
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-header d-flex align-items-center">
-                        <a href="{{route('permissions.create')}}">
-                            <button type="button" class="btn btn-primary">@lang('master.content.action.add', ['attribute' => 'Permission'])</button>
-                        </a>
+                        @include('admin.partials.add_button', ['name' => config('constants.permissions.3'), 'action' => config('constants.permission-actions.0'), 'route' => trans('master.content.attribute.permission')])
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -22,7 +20,7 @@
                                         <th>@lang('master.content.form.name')</th>
                                         <th>@lang('master.content.form.display')</th>
                                         <th>@lang('master.content.action.product.details')</th>
-                                        <th>@lang('master.content.table.action')</th>
+                                        @include('admin.partials.action_form', ['name' => config('constants.permissions.3'), 'edit' => config('constants.permission-actions.2'), 'delete' => config('constants.permission-actions.3')])
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -37,14 +35,9 @@
                                             @endforeach
                                         </td>
                                         <td>
-                                            <button type="button" class="btn btn-warning btn-lg">
-                                                <a href="{{route('permissions.edit', $permission->id)}}"><i class="ace-icon fa fa-edit"></i></a>
-                                            </button>
-                                            <form action="{{route('permissions.destroy', $permission->id)}}" method="POST" class="d-inline" onsubmit="return confirmedDelete('permission')">
-                                                @csrf
-                                                @method('DELETE') 
-                                                <button type="submit" class="btn btn-danger btn-lg"><i class="ace-icon fa fa-trash"></i></button>
-                                            </form>
+                                            @include('admin.partials.edit_button', ['name' => config('constants.permissions.3'), 'action' => config('constants.permission-actions.2'), 'route' => trans('master.content.attribute.permission'), 'id' => $permission->id])
+
+                                            @include('admin.partials.delete_button', ['name' => config('constants.permissions.3'), 'action' => config('constants.permission-actions.3'), 'route' => trans('master.content.attribute.permission'), 'id' => $permission->id])
                                         </td>
                                     </tr>
                                     @endforeach

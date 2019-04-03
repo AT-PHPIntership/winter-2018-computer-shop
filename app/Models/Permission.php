@@ -22,7 +22,7 @@ class Permission extends Model
      */
     public function roles()
     {
-        return $this->belongsToMany('App\Models\Role')->withTimestamps();
+        return $this->belongsToMany('App\Models\Role')->withPivot('action_pivot')->withTimestamps();
     }
 
      /**

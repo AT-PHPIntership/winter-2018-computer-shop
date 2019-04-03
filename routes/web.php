@@ -40,7 +40,6 @@ Route::group(['prefix' => 'admin', 'middleware' => 'adminLogin'], function () {
     Route::get('/home/excel', 'AdminController@excel')->name('admin.excel');
     Route::get('users/data', 'UserController@getData');
     Route::resource('roles', 'RoleController');
-    Route::post('permissions/save', 'PermissionController@savePermissionForRole')->name('permissions.save');
     Route::resource('permissions', 'PermissionController');
     Route::resource('users', 'UserController');
     Route::get('categories/sub-category', 'CategoryController@getChildren');
@@ -52,6 +51,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'adminLogin'], function () {
     Route::delete('products/image', 'ProductController@deleteImage');
     Route::resource('products', 'ProductController');
     Route::resource('promotions', 'PromotionController');
+    Route::post('promotions/search', 'PromotionController@search');
     Route::resource('codes', 'CodeController');
     Route::delete('slides/image', 'SlideController@deleteImage');
     Route::put('slides/flag', 'SlideController@setFlag');

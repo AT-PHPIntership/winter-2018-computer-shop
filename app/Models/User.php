@@ -8,6 +8,7 @@ use App\Models\Order;
 use App\Models\Role;
 use App\Models\Code;
 use Cache;
+
 class User extends Authenticatable
 {
     use Notifiable;

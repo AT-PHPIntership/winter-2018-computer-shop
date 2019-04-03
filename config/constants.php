@@ -56,7 +56,9 @@ return [
         'status' => [
             'pending' => 2,
             'approve' => 1,
-            'cancel' => 0
+            'cancel' => 0,
+            'shipping' => 3,
+            'delivered' => 4
         ],
         'number_paginate' => '10'
     ],

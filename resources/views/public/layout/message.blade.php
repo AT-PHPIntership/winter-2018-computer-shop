@@ -19,8 +19,5 @@
 <!-- Your customer chat code -->
 <div class="fb-customerchat"
   attribution=setup_tool
-  page_id="1180538295456585"
-  theme_color="#0084ff"
-  logged_in_greeting="Xin chào! ComputerShop cho thể giúp gì cho bạn?"
-  logged_out_greeting="Xin chào! ComputerShop cho thể giúp gì cho bạn?">
+  page_id="1180538295456585">
 </div>

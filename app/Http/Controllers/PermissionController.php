@@ -94,17 +94,4 @@ class PermissionController extends Controller
         app(PermissionService::class)->delete($permission);
         return redirect()->route('permissions.index');
     }
-
-    /**
-     * Save Permission For Role
-     *
-     * @param object $user [request to delete the user]
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function savePermissionForRole(SavePermissionRequest $request)
-    {
-        $response = app(PermissionService::class)->savePermissionForRole($request->permissions);
-        return response()->json($response);
-    }
 }

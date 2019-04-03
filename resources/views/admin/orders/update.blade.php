@@ -26,8 +26,10 @@
                             <div class="col-sm-9">
                                 <select name="status" class="form-control mb-3">
                                     <option value="{{ config('constants.order.status.pending')}}" {{ $order->status === config('constants.order.status.pending') ? 'selected' : '' }}>{{ \App\Models\Order::PENDING_STATUS }}</option>
-                                    <option value="{{ config('constants.order.status.approve')}} " {{ $order->status === config('constants.order.status.approve') ? 'selected' : '' }}>{{ \App\Models\Order::APPROVE_STATUS }}</option>
-                                    <option value="{{ config('constants.order.status.cancel')  }}" {{ $order->status === config('constants.order.status.cancel') ? 'selected' : '' }}>{{ \App\Models\Order::CANCEL_STATUS }}</option>
+                                    <option value="{{ config('constants.order.status.approve') }}" {{ $order->status === config('constants.order.status.approve') ? 'selected' : '' }}>{{ \App\Models\Order::APPROVE_STATUS }}</option>
+                                    <option value="{{ config('constants.order.status.cancel') }}" {{ $order->status === config('constants.order.status.cancel') ? 'selected' : '' }}>{{ \App\Models\Order::CANCEL_STATUS }}</option>
+                                    <option value="{{ config('constants.order.status.delivered')  }}" {{ $order->status === config('constants.order.status.delivered') ? 'selected' : '' }}>{{ \App\Models\Order::DELIVERED_STATUS }}</option>
+                                    <option value="{{ config('constants.order.status.shipping')  }}" {{ $order->status === config('constants.order.status.shipping') ? 'selected' : '' }}>{{ \App\Models\Order::SHIPPING_STATUS }}</option>
                                 </select>
                                 @include('admin.partials.error', ['err' => 'status'])
                             </div>

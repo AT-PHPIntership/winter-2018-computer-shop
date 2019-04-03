@@ -14,7 +14,11 @@
                     {{ session('message') }}
                 </div>
                 @endif
-
+                @if (session('message'))
+                    <div class="alert alert-success">
+                        {{ session('message') }}
+                    </div>
+                @endif
                 <!-- Checkout Form s-->
                 <form id="checkout-form" action="{{ route('public.order') }}" method="POST" class="checkout-form">
                     @csrf
@@ -38,9 +42,8 @@
                                     <div class="col-md-6 col-12 mb-20">
                                         <label>Email Address</label>
                                         <input readonly type="email" name="email" placeholder="Email Address" value="{{ Auth::user()->email }}">
-
-                                        @php
-                                        $urlValue = explode('/', $_SERVER['REQUEST_URI']);
+                                        @php 
+                                            $urlValue = explode('/', $_SERVER['REQUEST_URI']);
                                         @endphp
                                         <input type="hidden" id="codeId" name="codeId" value="{{ $urlValue[4] }}">
                                     </div>

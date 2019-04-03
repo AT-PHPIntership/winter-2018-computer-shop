@@ -56,10 +56,10 @@
                                 <tr>
                                     <td class="first-column">@lang('public.compare.addToCart')</td>
                                     @foreach($firstProduct as $product)
-                                    <td class="pro-addtocart"><a href="{{ route('public.cart') }}" id="{{ $product->id }}" data-name="{{ $product->name }}" data-quantity="{{ $product->quantity }}" data-price="{{ $product->unit_price }}" data-image="{{$product->images->pluck('name')->first()}}" class="add-to-cart"><i class="ti-shopping-cart"></i><span>@lang('public.content.addToCart')</span></a></td>
+                                    <td class="pro-addtocart"><a href="{{ route('public.cart') }}" id="{{ $product->id }}" data-name="{{ $product->name }}" data-quantity="{{ $product->quantity }}" data-price="{{ $product->promotions->count() > 0 ? ($product->unit_price - ($product->unit_price * $product->promotions->pluck('percent')->first()/100))  : $product->unit_price }}" data-image="{{$product->images->pluck('name')->first()}}" class="add-to-cart"><i class="ti-shopping-cart"></i><span>@lang('public.content.addToCart')</span></a></td>
                                     @endforeach
                                     @foreach($secondProduct as $product)
-                                    <td class="pro-addtocart"><a href="{{ route('public.cart') }}" id="{{ $product->id }}" data-name="{{ $product->name }}" data-quantity="{{ $product->quantity }}" data-price="{{ $product->unit_price }}" data-image="{{$product->images->pluck('name')->first()}}" class="add-to-cart"><i class="ti-shopping-cart"></i><span>@lang('public.content.addToCart')</span></a></td>
+                                    <td class="pro-addtocart"><a href="{{ route('public.cart') }}" id="{{ $product->id }}" data-name="{{ $product->name }}" data-quantity="{{ $product->quantity }}" data-price="{{ $product->promotions->count() > 0 ? ($product->unit_price - ($product->unit_price * $product->promotions->pluck('percent')->first()/100))  : $product->unit_price }}" data-image="{{$product->images->pluck('name')->first()}}" class="add-to-cart"><i class="ti-shopping-cart"></i><span>@lang('public.content.addToCart')</span></a></td>
                                     @endforeach
 
                                 </tr>

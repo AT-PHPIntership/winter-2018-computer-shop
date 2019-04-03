@@ -103,6 +103,10 @@ class UserService
         try {
             $orders = Order::where('user_id', $user->id)->get();
             $comments = Comment::where('user_id', $user->id)->get();
+            if ($user->isOnline()) {
+                session()->flash('warning', __('master.content.message.online'));
+                return false;
+            }
             if ($user->role->name == Role::ROLE_ADMIN) {
                 session()->flash('warning', __('master.content.message.admin'));
             }

@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class OrderStatusRequest extends FormRequest
+class PromotionSearchRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,19 +24,9 @@ class OrderStatusRequest extends FormRequest
     public function rules()
     {
         return [
-            'status' => 'required|min:0|max:4|integer'
-        ];
-    }
-
-    /**
-     * Return message alongside with validation
-     *
-     * @return array
-     */
-    public function messages()
-    {
-        return [
-            'status.exists' => 'The status not found in orders table.',
+            'category_id' => 'required|integer',
+            'total_sold' => 'required|integer|max:20',
+            'price_product' => 'required|integer|max:30000000'
         ];
     }
 }
