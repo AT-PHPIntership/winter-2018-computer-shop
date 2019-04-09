@@ -12,7 +12,6 @@ $(document).ready(function () {
     displayMiniCart();
 });
 
-
 // reload page
 $(document).ready(function () {
     $('body').ready(function () {
@@ -32,15 +31,15 @@ $(document).on('click', '.add-to-cart', function () {
     var id = $(this).attr("id"); // id của sản phẩm là id của button
     var name = $(this).attr("data-name"); // name của sản phẩm là thuộc tính data-name của button
     var price = Number($(this).attr("data-price").replace(/[^0-9\.-]+/g, ""));// price của sản phẩm là thuộc tính data-price của button
-    // console.log(quantityValue);
     var remainQuantity = $(this).data('quantity');
 
     if ($('#quantity-value').val() != undefined) {
         var quantityOld = $('#quantity-value').val(); // Số lượng
         if((quantityOld <= remainQuantity) && (quantityOld > 0)) {
+            toastr.success('Added to Cart!').delay(2000).fadeOut(1000);
             quantity = quantityOld;
         } else {
-            alert("Enter over quantity");
+            toastr.warning('The quantity you will buy bigger than total quantity available of this product!').delay(2000).fadeOut(1000);
             document.getElementById("quantity-value").value = 1;
             return false;
         }
@@ -49,7 +48,6 @@ $(document).on('click', '.add-to-cart', function () {
     }
 
     var productImage = $(this).data('image');
-
 
     var item = {
         id: id,
@@ -66,6 +64,7 @@ $(document).on('click', '.add-to-cart', function () {
             // Nếu mặt hàng đã tồn tại trong giỏ hàng thì chỉ cần tăng số lượng mặt hàng đó trong giỏ hàng.
             if (value.id == item.id) {
                 exists = true;
+                value.quantity = parseInt(value.quantity) + parseInt(item.quantity);
                 return false;
             }
         });
@@ -109,15 +108,15 @@ function displayShoppingCartItems() {
             itemc++;
             totalPrice = item.price * item.quantity;
             var output =
-                `<tr>
-              <td class="pro-thumbnail"><a href="product/${item.id}"><img src="storage/product/${item.image}" alt="Product" width="90" height="60"></a></td>
-              <td class="pro-title"><a href="product/${item.id}">${item.name}</a></td>
-              <td class="pro-price">${item.price.toLocaleString('en-VN', { style: 'currency', currency: 'VND' })}</span></td>
-              <td class="pro-quantity"><div class="pro-qty"><input class="original-quantity" type='number' onchange="modifyCart(this)" id="data-value"
-                value="${item.quantity}"></div></td>
-              <td class="pro-subtotal"><span>${totalPrice.toLocaleString('en-VN', { style: 'currency', currency: 'VND' })}</span></td>
-              <td class=""><button type="button" class="delete-product text-danger" data-id="${item.id}"><i class="fa fa-trash-o"></i></button></td>
-              </tr>`;
+            `<tr>
+                <td class="pro-thumbnail"><a href="product/${item.id}"><img src="storage/product/${item.image}" alt="Product" width="90" height="60"></a></td>
+                <td class="pro-title"><a href="product/${item.id}">${item.name}</a></td>
+                <td class="pro-price">${item.price.toLocaleString('en-VN', { style: 'currency', currency: 'VND' })}</span></td>
+                <td class="pro-quantity"><div class="pro-qty"><input class="original-quantity" type='number' onchange="modifyCart(this)" id="data-value"
+                    value="${item.quantity}"></div></td>
+                <td class="pro-subtotal"><span>${totalPrice.toLocaleString('en-VN', { style: 'currency', currency: 'VND' })}</span></td>
+                <td class=""><button type="button" class="delete-product text-danger" data-id="${item.id}"><i class="fa fa-trash-o"></i></button></td>
+            </tr>`;
             $("#table-products > tbody:last").append(output);
 
         });
@@ -139,9 +138,9 @@ function displayCheckout() {
 
             let output =
                 `<li>${item.name} X ${item.quantity}<span>${totalPrice.toLocaleString('en-VN', { style: 'currency', currency: 'VND' })}</span></li>
-              <input type="hidden" name="productId[]" value="${item.id}"></<input>
-              <input type="hidden" name="quantity[]" value="${item.quantity}"></<input>
-              <input type="hidden" name="subprice[]" value="${totalPrice}"></<input>`;
+                <input type="hidden" name="productId[]" value="${item.id}"></<input>
+                <input type="hidden" name="quantity[]" value="${item.quantity}"></<input>
+                <input type="hidden" name="subprice[]" value="${totalPrice}"></<input>`;
             $("#table-checkout:last").append(output);
 
         });
@@ -160,13 +159,13 @@ function displayMiniCart() {
         $.each(shoppingCartItems, function (index, item) {
             let output =
                 `<li class="mini-cart-content">
-              <a class="image"><img src="storage/product/${item.image}" alt="Product" width="90" height="60"></a>
-              <div class="mini-cart-content">
-              <p class="title">${item.name}</p>
-              <span class="mini-cart-price">Price: ${item.price.toLocaleString('en-VN', { style: 'currency', currency: 'VND' })}</span>
-              <span class="mini-cart-qty">Qty: ${item.quantity}</span>
-              </div>
-              </li>`;
+                    <a class="image"><img src="storage/product/${item.image}" alt="Product" width="90" height="60"></a>
+                    <div class="mini-cart-content">
+                    <p class="title">${item.name}</p>
+                    <span class="mini-cart-price">Price: ${item.price.toLocaleString('en-VN', { style: 'currency', currency: 'VND' })}</span>
+                    <span class="mini-cart-qty">Qty: ${item.quantity}</span>
+                    </div>
+                </li>`;
             $(".mini-cart-products:last").append(output);
         });
     }
@@ -176,33 +175,18 @@ function displayMiniCart() {
 };
 
 var deleteProduct = function () {
-    // console.log(shoppingCartItems);
     $(".delete-product").click(function () {
-        // console.log('demo');
         if (confirm("Bạn có muốn xóa sản phẩm này ra khỏi giỏ hàng không?")) {
-            // console.log('length : ' + shoppingCartItems.length);
-            // if (shoppingCartItems.length === 1) {
-            //     shoppingCartItems = [];
-            // } else {    
             var item = $(this).attr('data-id');
-            // console.log('xoa id :' + item);
-            // shoppingCartItems.splice(item, 1);
             shoppingCartItems = shoppingCartItems.filter(function (elem) {
                 return elem.id != item;
             });
-            // console.log(shoppingCartItems);
-            // }
             localStorage.setItem('shopping-cart-items', JSON.stringify(shoppingCartItems));
             $('#total-price').text(getTotalPrice());
             $('.number').text(getTotalItem());
-            // $('#cart-popover').popover('hide');
-            // displayShoppingCartItems();
-            // displayShoppingCartItems();
-            // displayCheckout();
             displayMiniCart();
             $(this).parent().parent().remove();
-            // console.log($(this).parent().parent().html());
-            alert('Bạn đã xóa sản phẩm ra khỏi giỏ hàng');
+            toastr.success('You deleted the product out of the cart!').delay(2000).fadeOut(1000);
         }
     });
 }
@@ -272,7 +256,7 @@ function modifyCart(e) {
         // console.log(shoppingCartItems[i].quantity);s
         if (shoppingCartItems[i].id === idProduct) {
             if (quantity > shoppingCartItems[i].remainQuantity) {
-                alert('The quantity you will buy bigger than total quantity available of this product!');
+                toastr.warning('The quantity you will buy bigger than total quantity available of this product!').delay(2000).fadeOut(1000);
                 // quantity = shoppingCartItems[i].quantity;
             } else if(quantity > 0) {
                 shoppingCartItems[i].quantity = quantity;

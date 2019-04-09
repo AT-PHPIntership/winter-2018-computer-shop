@@ -10,7 +10,7 @@
             <button type="button" class="close" data-dismiss="alert">
                 <i class="ace-icon fa fa-times"></i>
             </button>
-            {{ session('message') }}z
+            {{ session('message') }}
         </div>
         @endif
         <div class="row">

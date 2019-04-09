@@ -492,6 +492,4 @@ $(document).on('click', '.filter-product', function () {
         removeFilterProductInLocal();
         window.location.reload(true);
     });
-
-    
 });

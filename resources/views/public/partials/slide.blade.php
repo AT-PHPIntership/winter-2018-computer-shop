@@ -8,7 +8,7 @@
                     <div class="hero-item">
                         <div class="row align-items-center justify-content-between">
                             <div class="hero-image col">
-                                <img src="storage/slide/{{$banner->name}}" alt="Hero Image" height="425">
+                                <img src="storage/slides/{{$banner->name}}" alt="Hero Image" height="425">
                             </div>
                         </div>     
                     </div>

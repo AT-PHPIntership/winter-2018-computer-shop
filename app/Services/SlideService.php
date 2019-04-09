@@ -61,7 +61,10 @@ class SlideService
         $images = Slide::where('id', $imageId->id)->get();
         foreach ($images as $image) {
             if ($imageId->id == $image->id) {
-                unlink('storage/slide/' . $image->name);
+                $slideImage = realpath('storage/slide/' . $image->name);
+                if (file_exists($slideImage)) {
+                    unlink('storage/slide/' . $image->name);
+                }
                 $image->delete();
                 return $imageId;
             }

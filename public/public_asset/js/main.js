@@ -493,25 +493,13 @@ productTabFilterScreen();
 windows.resize(productTabFilterScreen);
     
 /*--
-	Add To Cart Animation
-------------------------*/
-$(document).on('click', '.add-to-cart', function (e) {
-    e.preventDefault();
-    
-    if($(this).hasClass('added')){
-       $(this).removeClass('added').find('i').removeClass('ti-check').addClass('ti-shopping-cart').siblings('span').text('add to cart'); 
-    } else{
-        $(this).addClass('added').find('i').addClass('ti-check').removeClass('ti-shopping-cart').siblings('span').text('added'); 
-    }
-});
-/*--
 	Wishlist & Compare
 ------------------------*/
 $(document).on('click', '.wishlist-compare a', function (e) {
     e.preventDefault();
     
     if($(this).hasClass('added')){
-       $(this).removeClass('added');
+        $(this).removeClass('added');
     } else{
         $(this).addClass('added');
     }
@@ -577,14 +565,6 @@ counter.counterUp({
     time: 3000
 });
 
-/*--
-	Twitter Feed
------------------------------------*/
-$('.footer-tweet').twittie({
-    template: '<span class="author">{{screen_name}}</span>, {{tweet}}',
-    count: 2,
-    apiPath: 'assets/api/tweet.php',
-});
 
 /*--
     Scroll Up

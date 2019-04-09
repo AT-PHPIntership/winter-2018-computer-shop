@@ -109,6 +109,7 @@ class UserService
             }
             if ($user->role->name == Role::ROLE_ADMIN) {
                 session()->flash('warning', __('master.content.message.admin'));
+                return false;
             }
             if ($orders->count() > 0) {
                 session()->flash('warning', __('master.content.message.order'));

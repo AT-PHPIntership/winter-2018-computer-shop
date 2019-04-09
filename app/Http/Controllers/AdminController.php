@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Services\StatisticService;
 use App\Services\OrderService;
-
 class AdminController extends Controller
 {
     /**

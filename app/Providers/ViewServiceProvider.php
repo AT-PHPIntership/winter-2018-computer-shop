@@ -19,7 +19,7 @@ class ViewServiceProvider extends ServiceProvider
         view()->composer(['admin.users.create', 'admin.users.edit', 'admin.roles.index', 'public.auth.register', 'admin.permissions.index'], 'App\Http\ViewComposers\RoleComposer');
         view()->composer(['admin.slides.index', 'public.partials.slide', 'public.partials.breadcrumb'], 'App\Http\ViewComposers\SlideComposer');
         view()->composer(['public.partials.slide', 'public.page.homepage'], 'App\Http\ViewComposers\ProductComposer');
-        view()->composer(['admin.permissions.index', 'admin.roles.create', 'admin.roles.update', 'admin.roles.index', 'admin.users.index', 'admin.categories.index', 'admin.products.index', 'admin.slides.index', 'admin.comments.index', 'admin.orders.index', 'admin.promotions.index', 'admin.codes.index', 'admin.accessories.index'], 'App\Http\ViewComposers\PermissionComposer');
+        view()->composer(['admin.permissions.index', 'admin.roles.create', 'admin.roles.update', 'admin.roles.index', 'admin.users.index',  'admin.partials.edit_button', 'admin.partials.delete_button', 'admin.categories.index', 'admin.products.index', 'admin.slides.index', 'admin.comments.index', 'admin.orders.index', 'admin.promotions.index', 'admin.codes.index', 'admin.accessories.index'], 'App\Http\ViewComposers\PermissionComposer');
     }
 
     /**

@@ -80,7 +80,7 @@
 
                         <div class="actions" {{ ($products->quantity > 0) ? ' ' : 'hidden'}}>
 
-                            <a href="{{ route('public.cart') }}" id="{{ $products->id }}" data-name="{{ $products->name }}" data-price="{{ $products->promotions->count() > 0 ? ($products->unit_price - ($products->unit_price * $products->promotions->pluck('percent')->first()/100))  : $products->unit_price }}" data-quantity="{{ $products->quantity }}" data-image="{{$products->images->first()['name']}}" class="add-to-cart"><i class="ti-shopping-cart"></i><span>@lang('public.content.addToCart')</span></a>
+                            <a id="{{ $products->id }}" data-name="{{ $products->name }}" data-price="{{ $products->promotions->count() > 0 ? ($products->unit_price - ($products->unit_price * $products->promotions->pluck('percent')->first()/100))  : $products->unit_price }}" data-quantity="{{ $products->quantity }}" data-image="{{$products->images->first()['name']}}" class="add-to-cart"><i class="ti-shopping-cart"></i><span>@lang('public.content.addToCart')</span></a>
 
                             <div class="wishlist-compare">
                                 <a class="compare-page" data-product="{{$products->id}}" data-tooltip="@lang('public.profile.compare')"><i class="ti-control-shuffle"></i></a>
@@ -120,7 +120,7 @@
                         <div class="single-product-specification">
                             <ul>
                                 @foreach($products->accessories as $accessory)
-                                <li>{{$accessory->name}}</li>
+                                <li>{{$accessory->parent->name}}: {{$accessory->name}}</li>
                                 @endforeach
                             </ul>
                         </div>
@@ -158,26 +158,16 @@
                                         <div class="col-12 mb-15">
 											<h5>Rating:</h5>
 											<div class="star-rating">
-                                                <input id="star-5" type="radio" name="rating" value="5" checked>
-                                                <label for="star-5" title="5 stars">
-                                                        <i class="active fa fa-star" aria-hidden="true"></i>
-                                                </label>
-                                                <input id="star-4" type="radio" name="rating" value="4">
-                                                <label for="star-4" title="4 stars">
-                                                        <i class="active fa fa-star" aria-hidden="true"></i>
-                                                </label>
-                                                <input id="star-3" type="radio" name="rating" value="3">
-                                                <label for="star-3" title="3 stars">
-                                                        <i class="active fa fa-star" aria-hidden="true"></i>
-                                                </label>
-                                                <input id="star-2" type="radio" name="rating" value="2">
-                                                <label for="star-2" title="2 stars">
-                                                        <i class="active fa fa-star" aria-hidden="true"></i>
-                                                </label>
-                                                <input id="star-1" type="radio" name="rating" value="1">
-                                                <label for="star-1" title="1 star">
-                                                        <i class="active fa fa-star" aria-hidden="true"></i>
-                                                </label>
+                                            @for ($i = 5; $i > 0; $i--)
+                                                @if ($i === 5)
+                                                    <input id="star-{{$i}}" type="radio" name="rating" value="{{$i}}" checked>
+                                                @else
+                                                    <input id="star-{{$i}}" type="radio" name="rating" value="{{$i}}">
+                                                @endif
+                                                    <label for="star-{{$i}}" title="{{$i}} stars">
+                                                            <i class="active fa fa-star" aria-hidden="true"></i>
+                                                    </label>
+                                            @endfor
                                             </div>
 										</div>
                                     <div class="col-12 mb-15">
@@ -285,7 +275,7 @@
                                         <a class="compare-page" data-product="{{$product->id}}" data-tooltip="@lang('public.profile.compare')"><i class="ti-control-shuffle"></i></a>
                                     </div>
 
-                                    <a href="{{ route('public.cart') }}" id="{{ $product->id }}" data-name="{{ $product->name }}" data-price="{{ $product->unit_price }}" data-quantity="{{ $product->quantity }}" data-image="{{$product->images->first()['name']}}" class="add-to-cart"><i class="ti-shopping-cart"></i><span>@lang('public.content.addToCart')</span></a>
+                                    <a  id="{{ $product->id }}" data-name="{{ $product->name }}" data-price="{{ $product->unit_price }}" data-quantity="{{ $product->quantity }}" data-image="{{$product->images->first()['name']}}" class="add-to-cart"><i class="ti-shopping-cart"></i><span>@lang('public.content.addToCart')</span></a>
 
                                 </div>
 

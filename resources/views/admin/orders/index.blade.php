@@ -1,25 +1,8 @@
 @extends('admin.layout.master')
 @section('content')
-<header class="page-header">
-    <div class="container-fluid">
-        <h2 class="no-margin-bottom">@lang('master.sidebar.order')</h2>
-    </div>
-</header>
-<!-- Breadcrumb-->
-<div class="breadcrumb-holder container-fluid">
-    <ul class="breadcrumb">
-        <li class="breadcrumb-item"><a href="{{route('admin.home')}}">@lang('master.sidebar.home')</a></li>
-        <li class="breadcrumb-item active">@lang('master.sidebar.order')</li>
-    </ul>
-</div>
-@if(session('message'))
-<div class="alert alert-success">
-    <button type="button" class="close" data-dismiss="alert">
-        <i class="ace-icon fa fa-times"></i>
-    </button>
-    {{session('message')}}
-</div>
-@endif
+@include('admin.partials.header', ['title' => trans('master.sidebar.order')])
+@include('admin.partials.message')
+@include('admin.partials.warning')
 <section class="tables">
     <div class="container-fluid">
         <div class="row">
@@ -36,7 +19,7 @@
                                         <th>@lang('master.content.table.note')</th>
                                         <th>@lang('master.content.table.date_order')</th>
                                         <th>@lang('master.content.table.status')</th>
-                                        <th>@lang('master.content.table.action')</th>
+                                        @include('admin.partials.action_form', ['name' => config('constants.permissions.8'), 'edit' => config('constants.permission-actions.2'), 'delete' => config('constants.permission-actions.3')])
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -49,19 +32,11 @@
                                         <td>{{ $order->date_order }}</td>
                                         <td>{{ $order->getCurrentStatusAttribute() }}</td>
                                         <td>
-                                            <a href="{{ route('orders.show', $order->id) }}">
-                                                <button type="button" class="btn-sm btn-info">@lang('master.content.table.details')</button>
-                                            </a>
-                                            <a href="{{ route('orders.edit', $order->id) }}">
-                                                <button type="button" class="btn-sm btn-success">@lang('master.content.action.product.edit')</button>
-                                            </a>
-                                            @if($order->getCurrentStatusAttribute() == "Cancel")
-                                            <form action="{{ route('orders.destroy', $order->id) }}" method="POST" class="d-inline" onsubmit="return confirmedDeleteOrder('delete')">
-                                                @csrf
-                                                @method('DELETE')
-                                                <input type="submit" value="@lang('master.content.action.product.delete')" class="btn btn-sm btn-danger">
-                                            </form>
-                                            @endIf
+                                        @include('admin.partials.detail_button', ['route' => trans('master.content.attribute.order'), 'id' => $order->id])
+                                        @include('admin.partials.edit_button', ['name' => config('constants.permissions.8'), 'action' => config('constants.permission-actions.2'), 'route' => trans('master.content.attribute.order'), 'id' => $order->id])
+                                        @if($order->getCurrentStatusAttribute() == "Cancel")
+                                            @include('admin.partials.delete_button', ['name' => config('constants.permissions.8'), 'action' => config('constants.permission-actions.3'), 'route' => trans('master.content.attribute.order'), 'id' => $order->id])
+                                        @endIf
                                         </td>
                                     </tr>
                                     @endforeach

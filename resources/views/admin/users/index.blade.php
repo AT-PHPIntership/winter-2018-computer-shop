@@ -10,7 +10,7 @@
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-header d-flex align-items-center">
-                        <a href="{{route('users.create')}}" class="btn btn-primary">@lang('master.content.action.add', ['attribute' => trans('master.content.attribute.User')])</a>
+                        @include('admin.partials.add_button', ['name' => config('constants.permissions.1'), 'action' => config('constants.permission-actions.0'), 'route' => trans('master.content.attribute.user'), 'title' => trans('master.content.attribute.User')])
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">   

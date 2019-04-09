@@ -20,6 +20,8 @@
     <link rel="stylesheet" href="public_asset/css/icon-font.min.css">
     <!-- Plugins CSS -->
     <link rel="stylesheet" href="public_asset/css/plugins.css">
+    <!-- Toastr CSS -->
+    <link rel="stylesheet" href="public_asset/css/toastr.min.css">
     <!-- Main Style CSS -->
     <link rel="stylesheet" href="public_asset/css/style.css">
     <!-- Custom Style CSS -->
@@ -45,6 +47,8 @@
     <script src="public_asset/js/bootstrap.min.js"></script>
     <!-- Lightbox JS -->
     <script src="admin_asset/vendor/lightbox/lightbox.js"> </script>
+    <!-- Toastr JS -->
+    <script src="public_asset/js/toastr.min.js"> </script>
     <!-- Plugins JS -->
     <script src="public_asset/js/plugins.js"></script>
     <!-- Main JS -->

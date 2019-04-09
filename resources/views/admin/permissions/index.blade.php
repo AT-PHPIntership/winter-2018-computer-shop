@@ -9,7 +9,7 @@
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-header d-flex align-items-center">
-                        @include('admin.partials.add_button', ['name' => config('constants.permissions.3'), 'action' => config('constants.permission-actions.0'), 'route' => trans('master.content.attribute.permission')])
+                        @include('admin.partials.add_button', ['name' => config('constants.permissions.3'), 'action' => config('constants.permission-actions.0'), 'route' => trans('master.content.attribute.permission'), 'title' => trans('master.content.attribute.Permission')])
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">

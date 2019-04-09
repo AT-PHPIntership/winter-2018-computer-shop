@@ -1,6 +1,5 @@
 @extends('admin.layout.master')
 @section('content')
-<!-- Page Header-->
 @include('admin.partials.header', ['title' => trans('master.sidebar.product')])
 @include('admin.partials.message')
 @include('admin.partials.warning')
@@ -11,12 +10,11 @@
                 <div class="card">
                     <div class="card-close">
                     <div class="dropdown">
-                        <button class="btn btn-success btn-lg fa fa-upload" id="uploadFile">
-                        </button>
+                        <button class="btn btn-success btn-lg fa fa-upload" id="uploadFile"></button>
                     </div>
                     </div>
                     <div class="card-header d-flex align-items-center">
-                        <a href="{{route('products.create')}}" class="btn btn-primary">@lang('master.content.action.add', ['attribute' => trans('master.content.attribute.Product')])</a>
+                        @include('admin.partials.add_button', ['name' => config('constants.permissions.5'), 'action' => config('constants.permission-actions.0'), 'route' => trans('master.content.attribute.product'), 'title' => trans('master.content.attribute.Product')])
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">   

@@ -1,81 +1,54 @@
 @extends('admin.layout.master')
 @section('content')
-<header class="page-header">
-   <div class="container-fluid">
-       <h2 class="no-margin-bottom">@lang('master.sidebar.accessory')</h2>
-   </div>
-</header>
-<!-- Breadcrumb-->
-<div  class="breadcrumb-holder container-fluid">
-   <ul class="breadcrumb">
-       <li class="breadcrumb-item"><a href="{{route('admin.home')}}">@lang('master.sidebar.home')</a></li>
-       <li class="breadcrumb-item active">@lang('master.sidebar.accessory')</li>
-   </ul>
-</div>
-@if(session('message'))
-    <div class="alert alert-success">
-    <button type="button" class="close" data-dismiss="alert">
-        <i class="ace-icon fa fa-times"></i>
-    </button>
-        {{session('message')}}
-    </div>
-@endif
+@include('admin.partials.header', ['title' => trans('master.sidebar.accessory')])
+@include('admin.partials.message')
+@include('admin.partials.warning')
 <section class="tables">
-   <div class="container-fluid">
-       <div class="row">
-           <div class="col-lg-12">
-               <div class="card">
-                   <div class="card-header d-flex align-items-center">
-                       <a href="{{route('accessories.create')}}">
-                          <button type="button" class="btn btn-primary">@lang('master.content.action.add', ['attribute' => __('master.content.attribute.accessory')])</button>
-                        </a>
-                   </div>
-                   <div class="card-body">
-                       <div class="table-responsive">
-               <table class="table table-striped table-hover text-center">
-                 <thead>
-                    <tr>
-                      <th>@lang('master.content.table.id')</th>
-                      <th>@lang('master.content.form.name')</th>
-                      <th>@lang('master.content.table.action')</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                  @foreach($accessories as $accesory)
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-lg-12">
+              <div class="card">
+                  <div class="card-header d-flex align-items-center">
+                    @include('admin.partials.add_button', ['name' => config('constants.permissions.11'), 'action' => config('constants.permission-actions.0'), 'route' => trans('master.content.attribute.accessory'), 'title' => trans('master.content.attribute.Accessory')])
+                  </div>
+                  <div class="card-body">
+                      <div class="table-responsive">
+              <table class="table table-striped table-hover text-center">
+                <thead>
                   <tr>
-                      <th scope="row">{{ $accesory->id }}</th>
-                      <td>{{ $accesory->name }}</td>
-                      <td>
-                        @if(sizeof($accesory->children) > 0)
-                          <a href="{{ route('accessories.show', $accesory->id) }}" class="btn btn-sm btn-info">
-                          @lang('master.content.action.product.details')
-                          </a>
-                        @endif
-                          <a href="{{ route('accessories.edit', $accesory->id) }}" class="btn btn-sm btn-warning">
-                          @lang('master.content.action.product.edit')
-                          </a>
-                        @if(sizeof($accesory->children) == 0)
-                          <form action="{{ route('accessories.destroy', $accesory->id) }}" method="POST" class="d-inline" onsubmit="return confirmedDelete('accessory')">
-                            @csrf
-                            @method('DELETE')
-                            <input type="submit" value="@lang('master.content.action.product.delete')" class="btn btn-sm btn-danger">
-                          </form> 
-                        @endif
-                     </td>
-                   </tr>
-                   @endforeach
-                 </tbody>
-               </table>
-             </div>
-             <div class="row">
-                <div class="col-md-12">
-                {{$accessories->links()}}
-                </div>
+                    <th>@lang('master.content.table.id')</th>
+                    <th>@lang('master.content.form.name')</th>
+                    @include('admin.partials.action_form', ['name' => config('constants.permissions.11'), 'edit' => config('constants.permission-actions.2'), 'delete' => config('constants.permission-actions.3')])
+                  </tr>
+                </thead>
+                <tbody>
+                @foreach($accessories as $accessory)
+                <tr>
+                    <th scope="row">{{ $accessory->id }}</th>
+                    <td>{{ $accessory->name }}</td>
+                    <td>
+                      @if(sizeof($accessory->children) > 0)
+                        @include('admin.partials.detail_button', ['route' => trans('master.content.attribute.accessory'), 'id' => $accessory->id])
+                      @endif
+                        @include('admin.partials.edit_button', ['name' => config('constants.permissions.11'), 'action' => config('constants.permission-actions.2'), 'route' => trans('master.content.attribute.accessory'), 'id' => $accessory->id])
+                      @if(sizeof($accessory->children) == 0)
+                        @include('admin.partials.delete_button', ['name' => config('constants.permissions.11'), 'action' => config('constants.permission-actions.3'), 'route' => trans('master.content.attribute.accessory'), 'id' => $accessory->id])
+                      @endif
+                    </td>
+                  </tr>
+                  @endforeach
+                </tbody>
+              </table>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+              {{$accessories->links()}}
               </div>
-           </div>
-         </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
+  </div>
 </section>
 @endsection
