@@ -10,7 +10,7 @@
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-header d-flex align-items-center">
-                        <a href="{{route('categories.create')}}" class="btn btn-primary">@lang('master.content.action.add', ['attribute' => trans('master.content.attribute.Category')])</a>
+                        @include('admin.partials.add_button', ['name' => config('constants.permissions.4'), 'action' => config('constants.permission-actions.0'), 'route' => trans('master.content.attribute.category'), 'title' => trans('master.content.attribute.Category')])
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">   

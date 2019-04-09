@@ -23,8 +23,29 @@ class AccessoryRequest extends FormRequest
      */
     public function rules()
     {
+        switch ($this->method()) {
+            case 'POST':
+                $id = '';
+                break;
+            case 'PUT':
+                $id = $this->accessory;
+                break;
+        }
         return [
-            'name' => 'required|min:3',
+            'name' => 'required|min:3|max:255|unique:accessories,name,' . $id,
+            'parent_id' => 'nullable|exists:accessories,id',
+        ];
+    }
+
+    /**
+     * Return the validation messages that apply to the request.
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'parent_id.exists' => 'The accessory not found in accessories table',
         ];
     }
 }

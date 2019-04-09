@@ -4,6 +4,10 @@ namespace App\Models;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Models\Order;
+use App\Models\Role;
+use App\Models\Code;
+use Cache;
 
 class User extends Authenticatable
 {
@@ -17,7 +21,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-         'name', 'email', 'password', 'role_id'
+        'name', 'email', 'password', 'role_id', 'is_actived',
     ];
 
     /**
@@ -30,13 +34,23 @@ class User extends Authenticatable
     ];
 
     /**
-     * The function display relationship between role and user
+     * Get User Object
      *
-     * @return \App\Models\Role
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
+
+    /**
+     * Belongs to role
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function role()
     {
-        return $this->belongsTo('App\Models\Role');
+        return $this->belongsTo(Role::class);
     }
 
     /**
@@ -48,7 +62,7 @@ class User extends Authenticatable
     {
         return $this->hasOne('App\Models\UserProfile');
     }
-    
+
     /**
      * The function help encrypt the password when user enter into
      *
@@ -59,5 +73,49 @@ class User extends Authenticatable
     public function setPasswordAttribute($password)
     {
         $this->attributes['password'] = bcrypt($password);
+    }
+
+    /**
+     * The function display relationship between user and social provider
+     *
+     * @return \App\Models\SocialProvider
+     */
+    public function socialProviders()
+    {
+        return $this->hasMany('App\Models\SocialProvider');
+    }
+
+    /**
+     * The function display relationship between comment and user
+     *
+     * @return \App\Models\Role
+     */
+    public function comments()
+    {
+        return $this->hasMany('App\Models\Comment');
+    }
+
+    /**
+     * Relationship user - code
+     *
+     * @return void
+     */
+    public function codes()
+    {
+        return $this->belongsToMany(Code::class, 'code_user')->whereNull('code_user.deleted_at')->withTimestamps();
+    }
+
+    public function isOnline()
+    {
+        return Cache::has('user-is-online-' . $this->id);
+    }
+
+    public function hasRole($roles)
+    {
+        if (is_string($roles)) {
+            return $this->role->contains('name', $roles);
+        }
+        return $roles->id == $this->role->id;
+
     }
 }

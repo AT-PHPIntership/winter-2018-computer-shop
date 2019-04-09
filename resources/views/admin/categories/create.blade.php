@@ -17,7 +17,7 @@
             @csrf
               <div class="form-group">
                 <label class="form-control-label">@lang('master.content.form.name')<span class="ml-1 text-danger">*<span></label>
-                <input name="name" type="text" placeholder="Enter category name" class="form-control" value="{{ old('name') }}">
+                <input name="name" type="text" placeholder="Enter category name" class="form-control" value="{{ old('name') }}" required>
                 @include('admin.partials.error', ['err' => 'name'])
               </div>
               <div class="form-group row">

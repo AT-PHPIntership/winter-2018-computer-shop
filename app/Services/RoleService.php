@@ -3,8 +3,10 @@
 namespace App\Services;
 
 use App\Models\Role;
+use App\Models\User;
+use App\Models\Permission;
 use League\Flysystem\Exception;
-
+use DB;
 class RoleService
 {
     /**
@@ -24,24 +26,25 @@ class RoleService
      *
      * @return void
      */
-    public function create($request)
-    {
-        Role::create(
-            $request->all()
-        );
-    }
-
-    /**
-     * Get role have id = $id form roles table return role update page
-     *
-     * @param [int] $id [id role]
-     *
-     * @return [object]     [description]
-     */
-    public function edit($id)
-    {
-        $role = Role::where('id', $id)->first();
-        return $role;
+    public function store($request)
+    {   
+        DB::beginTransaction();
+        try {
+            $role = Role::create(['name' => $request['name']]);
+            $permissions = Permission::all();
+            foreach ($permissions->pluck('id') as $permission) {
+                if (isset($request['permission-' .  $permission])) {
+                    $sync[$permission] = ['action_pivot' => $request['permission-' .  $permission]];
+                }
+            }
+            $role->permissions()->sync($sync);
+            DB::commit();
+            session()->flash('message', __('master.content.message.create', ['attribute' => trans('master.content.attribute.role')]));
+        } catch (Exception $ex) {
+            DB::rollback();
+            session()->flash('warning', __('master.content.message.error', ['attribute' => $ex->getMessage()]));
+            return redirect()->back();
+        }
     }
 
     /**
@@ -52,13 +55,25 @@ class RoleService
      *
      * @return void
      */
-    public function update($id, $request)
+    public function update($role, $request)
     {
+        DB::beginTransaction();
         try {
-            $message = Role::where('id', $id)->update(['name' => $request->name]);
-            return $message;
-        } catch (Exception $e) {
-            return $message = $e->getMessage();
+            $role->update(['name' => $request['name']]);
+            $permissions = Permission::all();
+            $sync = [];
+            foreach ($permissions->pluck('id') as $permission) {
+                if (isset($request['permission-' .  $permission])) {
+                    $sync[$permission] = ['action_pivot' => $request['permission-' .  $permission]];
+                }
+            }
+            $role->permissions()->sync($sync);
+            DB::commit();
+            session()->flash('message', __('master.content.message.update', ['attribute' => trans('master.content.attribute.role')]));
+        } catch (Exception $ex) {
+            DB::rollback();
+            session()->flash('warning', __('master.content.message.error', ['attribute' => $ex->getMessage()]));
+            return redirect()->back();
         }
     }
 
@@ -72,10 +87,15 @@ class RoleService
     public function delete($id)
     {
         try {
-            $message = Role::where('id', $id)->delete();
-            return $message;
-        } catch (Exception $e) {
-            return $message = $e->getMessage();
+            $users =  User::where('role_id', $id)->get();
+            if ($users->count() > 0) {
+                session()->flash('warning', __('master.content.message.user'));
+            } else {
+                Role::where('id', $id)->delete();
+                session()->flash('message', __('master.content.message.delete', ['attribute' => trans('master.content.attribute.role')]));
+            }
+        } catch (Exception $ex) {
+            session()->flash('warning', __('master.content.message.error', ['attribute' => $ex->getMessage()]));
         }
     }
 }

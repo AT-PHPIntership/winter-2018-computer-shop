@@ -3,24 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Lang;
 use App\Services\RoleService;
 use App\Http\Requests\RoleRequest;
+use App\Models\Role;
 
 class RoleController extends Controller
 {
-    private $roleService;
-
-    /**
-     * Contructer RoleService
-     *
-     * @param RoleService $roleService [roleservice]
-     */
-    public function __construct(RoleService $roleService)
-    {
-        $this->roleService = $roleService;
-    }
-
     /**
      * The function return role index of admin page
      *
@@ -50,20 +38,19 @@ class RoleController extends Controller
      */
     public function store(RoleRequest $request)
     {
-        $this->roleService->create($request);
-        return redirect()->route('roles.index')->with('message', Lang::get('master.content.message.create', ['attribute' => trans('master.content.attribute.role')]));
+        app(RoleService::class)->store($request->all());
+        return redirect()->route('roles.index');
     }
 
     /**
      * Show the form for editing the specified resource
      *
-     * @param [int] $id [id role]
+     * @param collection $role [route model binding]
      *
      * @return [view]     [update page]
      */
-    public function edit($id)
+    public function edit(Role $role)
     {
-        $role = $this->roleService->edit($id);
         return view('admin.roles.update', compact('role'));
     }
 
@@ -75,14 +62,10 @@ class RoleController extends Controller
      *
      * @return [view]               [role index page]
      */
-    public function update($id, RoleRequest $request)
+    public function update(RoleRequest $request, Role $role)
     {
-        $message = $this->roleService->update($id, $request);
-        if ($message === 1) {
-            return redirect()->route('roles.index')->with('message', Lang::get('master.content.message.update', ['attribute' => trans('master.content.attribute.role')]));
-        } else {
-            return redirect()->route('roles.index')->with('message', Lang::get('master.content.message.error'));
-        }
+        app(RoleService::class)->update($role, $request->all());
+        return redirect()->route('roles.index');
     }
 
     /**
@@ -94,11 +77,7 @@ class RoleController extends Controller
      */
     public function destroy($id)
     {
-        $message = $this->roleService->delete($id);
-        if ($message === 1) {
-            return redirect()->route('roles.index')->with('message', Lang::get('master.content.message.delete', ['attribute' => trans('master.content.attribute.role')]));
-        } else {
-            return redirect()->route('roles.index')->with('message', Lang::get('master.content.message.error'));
-        }
+        app(RoleService::class)->delete($id);
+        return redirect()->route('roles.index');
     }
 }

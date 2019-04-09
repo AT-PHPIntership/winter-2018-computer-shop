@@ -3,9 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-
+use App\Models\User;
 class Role extends Model
 {
+    const ROLE_ADMIN = 'Admin';
+    const ROLE_NORMAL = 'Normal';
+    const ROLE_SUB_ADMIN = 'Sub_Admin';
 
     protected $table = 'roles';
     /**
@@ -13,18 +16,25 @@ class Role extends Model
      *
      * @var array
      */
-    protected $fillable = [
-        'name'
-    ];
+    protected $fillable = ['name'];
+
     /**
-     * The function display relationship between role and user
+     * Has many users
      *
-     * @var array
-     *
-     * @return \App\Models\User
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function users()
     {
-        return $this->hasMany('App\Models\User');
+        return $this->hasMany(User::class);
+    }
+
+    /**
+     * The function display relationship between permissions and roles
+     *
+     * @return \App\Models\Permission
+     */
+    public function permissions()
+    {
+        return $this->belongsToMany('App\Models\Permission')->withPivot('action_pivot')->withTimestamps();
     }
 }

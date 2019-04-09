@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateProductPromotionTable extends Migration
+class AddDefaultToTotalSoldColumnOfProductsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,8 @@ class CreateProductPromotionTable extends Migration
      */
     public function up()
     {
-        Schema::create('product_promotion', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('product_id')->unsigned();
-            $table->integer('promotion_id')->unsigned();
-            $table->timestamps();
+        Schema::table('products', function (Blueprint $table) {
+            $table->integer('total_sold')->default(0)->change();
         });
     }
 
@@ -28,6 +25,8 @@ class CreateProductPromotionTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('promotion_product');
+        Schema::table('products', function (Blueprint $table) {
+            $table->dropColumn('total_sold');
+        });
     }
 }

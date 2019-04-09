@@ -1,75 +1,59 @@
 @extends('admin.layout.master')
 @section('content')
-<header class="page-header">
-   <div class="container-fluid">
-       <h2 class="no-margin-bottom">@lang('master.sidebar.role')</h2>
-   </div>
-</header>
-<!-- Breadcrumb-->
-<div  class="breadcrumb-holder container-fluid">
-   <ul class="breadcrumb">
-       <li class="breadcrumb-item"><a href="{{route('admin.home')}}">@lang('master.sidebar.home')</a></li>
-       <li class="breadcrumb-item active">@lang('master.sidebar.role')</li>
-   </ul>
-</div>
-@if(session('message'))
-    <div class="alert alert-success">
-    <button type="button" class="close" data-dismiss="alert">
-        <i class="ace-icon fa fa-times"></i>
-    </button>
-        {{session('message')}}
-    </div>
-@endif
+@include('admin.partials.header', ['title' => trans('master.sidebar.role')])
+@include('admin.partials.message')
+@include('admin.partials.warning')
 <section class="tables">
-   <div class="container-fluid">
-       <div class="row">
-           <div class="col-lg-12">
-               <div class="card">
-                   <div class="card-header d-flex align-items-center">
-                       <a href="{{route('roles.create')}}">
-                          <button type="button" class="btn btn-primary">@lang('master.content.action.add', ['attribute' => 'Role'])</button>
-                        </a>
-                   </div>
-                   <div class="card-body">
-                       <div class="table-responsive">
-               <table class="table table-striped table-hover">
-                 <thead>
-                   <tr>
-                     <th>@lang('master.content.table.id')</th>
-                     <th>@lang('master.content.form.name')</th>
-                     <th>@lang('master.content.table.action')</th>
-                   </tr>
-                 </thead>
-                 <tbody>
-                  @foreach($roles as $role)
-                  <tr>
-                     <th scope="row">{{ $role->id }}</th>
-                     <td>{{ $role->name }}</td>
-                     <td>
-                       <a href="{{ route('roles.edit', $role->id) }}" class="btn btn-sm btn-warning">
-                       @lang('master.content.action.edit', ['attribute' => 'Role'])
-                       </a>
-                       <form action="{{ route('roles.destroy', $role->id) }}" method="POST" class="d-inline">
-                          @csrf
-                          @method('DELETE')
-                          <input type="submit" value="@lang('master.content.action.delete', ['attribute' => 'Role'])" class="btn btn-sm btn-danger">
-                        </form> 
-                       </a>
-                     </td>
-                   </tr>
-                   @endforeach
-                 </tbody>
-               </table>
-             </div>
-             <div class="row">
-                <div class="col-md-12">
-                {{$roles->links()}}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header d-flex align-items-center">
+                        @include('admin.partials.add_button', ['name' => config('constants.permissions.2'), 'action' => config('constants.permission-actions.0'), 'route' => trans('master.content.attribute.role'), 'title' => trans('master.content.attribute.Role')])
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-hover text-center">
+                                <thead>
+                                    <tr>
+                                        <th>@lang('master.content.table.id')</th>
+                                        <th>@lang('master.content.form.name')</th>
+                                        @include('admin.partials.action_form', ['name' => config('constants.permissions.2'), 'edit' => config('constants.permission-actions.2'), 'delete' => config('constants.permission-actions.3')])
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach($roles as $key => $role)
+                                    <tr>
+                                        <th>{{ $role->id }}</th>
+                                        <td><a href="" data-toggle="collapse" data-target="#collapse-{{$key}}" aria-expanded="false" aria-controls="collapseExample">{{ $role->name }}</a></td>
+                                        <td>
+                                            @include('admin.partials.edit_button', ['name' => config('constants.permissions.2'), 'action' => config('constants.permission-actions.2'), 'route' => trans('master.content.attribute.role'), 'id' => $role->id])
+                                            @if ($role->name != 'Admin')
+                                                @include('admin.partials.delete_button', ['name' => config('constants.permissions.2'), 'action' => config('constants.permission-actions.3'), 'route' => trans('master.content.attribute.role'), 'id' => $role->id])
+                                            @endif
+                                        </td>
+                                    </tr>
+                                    @foreach($role->permissions as $permission)
+                                    <tr class="collapse" id="collapse-{{$key}}" data-count-action='{{count(json_decode($permission->actions))}}' data-permission-id="{{$permission->id}}">
+                                        <td></td>
+                                        <td>{{$permission->display_name}}: @foreach(json_decode($permission->pivot->action_pivot) as $action) <span class="pivot-action">{{ucfirst($action)}}</span>@endforeach</td>
+                                        <td>
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                {{$roles->links()}}
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
-           </div>
-         </div>
+            </div>
         </div>
-      </div>
     </div>
 </section>
-@endsection
+@endsection 
